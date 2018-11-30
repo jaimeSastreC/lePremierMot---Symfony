@@ -55,7 +55,7 @@ class Spectacle
 
     /**
      * //lien many to one création clé étrangère
-     * @var string
+     * @var
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Salle", inversedBy="spectacle")
      */
@@ -66,6 +66,13 @@ class Spectacle
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="spectacle")
      */
     private $reservation;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectaclepectacle")
+     */
+    private $categorie;
+
 
     //***************************************Getter Setter*************************************************
     /**

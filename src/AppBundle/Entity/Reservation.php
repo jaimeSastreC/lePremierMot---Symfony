@@ -47,6 +47,12 @@ class Reservation
      */
     private $client;
 
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", inversedBy="reservation")
+     */
+    private $spectateur;
+
     //***************************************Getter Setter*************************************************
 
 
@@ -138,6 +144,22 @@ class Reservation
     public function setClient($client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpectateur()
+    {
+        return $this->spectateur;
+    }
+
+    /**
+     * @param mixed $spectateur
+     */
+    public function setSpectateur($spectateur)
+    {
+        $this->spectateur = $spectateur;
     }
 
 

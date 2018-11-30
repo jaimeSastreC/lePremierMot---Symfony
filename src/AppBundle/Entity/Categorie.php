@@ -28,7 +28,13 @@ class Categorie
      */
     private $libelle;
 
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectacle", inversedBy="categorie")
+     */
+    private $spectacle;
 
+    //***************************************Getter Setter*************************************************
     /**
      * Get id
      *
