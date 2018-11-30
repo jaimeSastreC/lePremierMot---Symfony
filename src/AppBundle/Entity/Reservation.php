@@ -124,6 +124,22 @@ class Reservation
         $this->spectacle = $spectacle;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param mixed $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
 
 
 }
