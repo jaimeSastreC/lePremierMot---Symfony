@@ -37,7 +37,7 @@ class Categorie
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif")
+     * @ORM\ManyToMany(targetEntity="tarif")
      */
     private $tarif;
 

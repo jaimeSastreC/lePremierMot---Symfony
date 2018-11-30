@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="tarif")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\tarifRepository")
  */
-class Tarif
+class tarif
 {
     /**
      * @var int

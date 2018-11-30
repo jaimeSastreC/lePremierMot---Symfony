@@ -17,7 +17,7 @@ class CategorieType extends AbstractType
         $builder
             ->add('libelle')
             ->add('tarif', EntityType::class, [
-                'class' => 'AppBundle\Entity\Tarif',
+                'class' => 'AppBundle\Entity\tarif',
                 'choice_label' => 'prix',
             ])
         ;
