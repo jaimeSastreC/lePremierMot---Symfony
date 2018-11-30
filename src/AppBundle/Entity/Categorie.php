@@ -37,7 +37,7 @@ class Categorie
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="tarif")
+     * @ORM\ManyToMany(targetEntity="Tarif")
      */
     private $tarif;
 

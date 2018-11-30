@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Tarif
  *
  * @ORM\Table(name="tarif")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\tarifRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TarifRepository")
  */
-class tarif
+class Tarif
 {
     /**
      * @var int
@@ -32,7 +32,6 @@ class tarif
 
     //***************************************Getter Setter*************************************************
 
-
     /**
      * Get id
      *
@@ -46,18 +45,17 @@ class tarif
     /**
      * @return int
      */
-    public function getPrix()
+    public function getPrixPlace()
     {
-        return $this->prix;
+        return $this->prix_place;
     }
 
     /**
-     * @param int $prix
+     * @param int $prix_place
      */
-    public function setPrix($prix)
+    public function setPrixPlace($prix_place)
     {
-        $this->prix = $prix;
+        $this->prix_place = $prix_place;
     }
-
 
 }
