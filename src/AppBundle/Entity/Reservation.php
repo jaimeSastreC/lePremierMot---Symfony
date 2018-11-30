@@ -35,6 +35,18 @@ class Reservation
      */
     private $montantReservation;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="reservation")
+     */
+    private $spectacle;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client", inversedBy="reservation")
+     */
+    private $client;
+
     //***************************************Getter Setter*************************************************
 
 
@@ -95,6 +107,24 @@ class Reservation
     {
         return $this->montantReservation;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSpectacle()
+    {
+        return $this->spectacle;
+    }
+
+    /**
+     * @param mixed $spectacle
+     */
+    public function setSpectacle($spectacle)
+    {
+        $this->spectacle = $spectacle;
+    }
+
+
 
 }
 
