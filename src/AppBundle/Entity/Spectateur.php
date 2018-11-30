@@ -25,7 +25,22 @@ class Spectateur
     /**
      * @var string
      *
+     * @ORM\Column(name="civilite_spectateur", type="string", length=3, nullable=true)
+     * @Assert\Choice({"Mlle", "Mme", "M"})
+     *
+     */
+    private $civiliteSpectateur;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="nom_spectateur", type="string", length=255)
+     * @Assert\Length(
+     *  min = 3,
+     *  max = 50,
+     * minMessage = "Votre nom doit avoir au moins {{ limit }} caractères",
+     * maxMessage = "Votre nom doit avoir au plus {{ limit }} caractères"
+     * )
      */
     private $nomSpectateur;
 
@@ -42,12 +57,6 @@ class Spectateur
      */
     private $categorie;
 
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateur")
-     */
-    private $reservation;
-
     //***************************************Getter Setter*************************************************
     /**
      * Get id
@@ -58,6 +67,23 @@ class Spectateur
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getCiviliteSpectateur()
+    {
+        return $this->civiliteSpectateur;
+    }
+
+    /**
+     * @param string $civiliteSpectateur
+     */
+    public function setCiviliteSpectateur($civiliteSpectateur)
+    {
+        $this->civiliteSpectateur = $civiliteSpectateur;
+    }
+
 
     /**
      * Set nomSpectateur
@@ -122,23 +148,6 @@ class Spectateur
     {
         $this->categorie = $categorie;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getReservation()
-    {
-        return $this->reservation;
-    }
-
-    /**
-     * @param mixed $reservation
-     */
-    public function setReservation($reservation)
-    {
-        $this->reservation = $reservation;
-    }
-
 
 }
 

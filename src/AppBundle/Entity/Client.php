@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -11,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="client")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ClientRepository")
+ * @UniqueEntity("mailClient", message="Ce email est déjà enregsitrer,
+ * veuillez vous connecter ou vous enregistrer avec un autre email, merci")
  */
 class Client
 {
@@ -26,7 +29,8 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="civilite_client", type="string", length=3, nullable=true)
+     * @ORM\Column(name="civilite_client", type="string", length=4, nullable=true)
+     * @Assert\Choice({"Mlle", "Mme", "M"})
      *
      */
     private $civiliteClient;
@@ -38,8 +42,8 @@ class Client
      * @Assert\Length(
      *  min = 3,
      *  max = 50,
-     * minMessage = "Your first name must be at least {{ limit }} characters long",
-     * maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * minMessage = "Votre nom doit avoir au moins {{ limit }} caractères",
+     * maxMessage = "Votre nom doit avoir au plus {{ limit }} caractères"
      * )
      */
     private $nomClient;
@@ -51,8 +55,8 @@ class Client
      * @Assert\Length(
      *  min = 3,
      *  max = 50,
-     * minMessage = "Your first name must be at least {{ limit }} characters long",
-     * maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * minMessage = "Votre prénom doit avoir au moins {{ limit }} caractères",
+     * maxMessage = "Votre prénom doit avoir au plus {{ limit }} caractères"
      * )
      */
     private $prenomClient;
@@ -67,7 +71,11 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="cp_client", type="string", length=15, nullable=true)
+     * @ORM\Column(name="cp_client", type="integer", length=15, nullable=true)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $cpClient;
 
@@ -75,6 +83,12 @@ class Client
      * @var string
      *
      * @ORM\Column(name="tel_client", type="string", length=15, nullable=true)
+     * @Assert\Length(
+     *  min = 8,
+     *  max = 15,
+     * minMessage = "Votre numéro de tel doit avoir au moins {{ limit }} chiffres",
+     * maxMessage = "Votre numéro de tel doit avoir au plus {{ limit }} chiffres"
+     * )
      */
     private $telClient;
 
@@ -82,12 +96,19 @@ class Client
      * @var string
      *
      * @ORM\Column(name="mail_client", type="string", length=255)
+     *
+     * @Assert\Email(
+     *     message = "l'email '{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
+     * TODO vérifier si mail contrôle marche
      */
     private $mailClient;
 
     /**
-     * @var
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="client")
+     *
      */
     private $reservation;
 
@@ -252,6 +273,8 @@ class Client
      * @param string $mailClient
      *
      * @return Client
+     *
+     *
      */
     public function setMailClient($mailClient)
     {

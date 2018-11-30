@@ -30,16 +30,16 @@ class Categorie
     private $libelle;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", inversedBy="categorie")
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="categorie")
      */
     private $spectateur;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif", inversedBy="caterorie")
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif")
      */
-    private $spectacle;
+    private $tarif;
 
     //***************************************Getter Setter*************************************************
     /**
@@ -79,17 +79,33 @@ class Categorie
     /**
      * @return mixed
      */
-    public function getSpectacle()
+    public function getSpectateur()
     {
-        return $this->spectacle;
+        return $this->spectateur;
     }
 
     /**
-     * @param mixed $spectacle
+     * @param mixed $spectateur
      */
-    public function setSpectacle($spectacle)
+    public function setSpectateur($spectateur)
     {
-        $this->spectacle = $spectacle;
+        $this->spectateur = $spectateur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
+    }
+
+    /**
+     * @param mixed $tarif
+     */
+    public function setTarif($tarif)
+    {
+        $this->tarif = $tarif;
     }
 
 

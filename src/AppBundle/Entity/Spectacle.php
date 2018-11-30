@@ -69,13 +69,7 @@ class Spectacle
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectacle")
-     */
-    private $categorie;
-
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif", inversedBy="spectacle")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif")
      */
     private $tarif;
 
@@ -230,17 +224,17 @@ class Spectacle
     /**
      * @return mixed
      */
-    public function getCategorie()
+    public function getTarif()
     {
-        return $this->categorie;
+        return $this->tarif;
     }
 
     /**
-     * @param mixed $categorie
+     * @param mixed $tarif
      */
-    public function setCategorie($categorie)
+    public function setTarif($tarif)
     {
-        $this->categorie = $categorie;
+        $this->tarif = $tarif;
     }
 
 

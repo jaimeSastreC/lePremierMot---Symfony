@@ -23,24 +23,12 @@ class Tarif
     private $id;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Sepctacle", inversedBy="tarif")
+     * @var int
+     *
+     * @ORM\Column(name="montant_place", type="decimal", precision=7, scale=2)
      */
-    private $spectacle;
+    private $prix;
 
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="tarif")
-     */
-    private $categorie;
-
-    /**
-     * @return mixed
-     */
-    public function getSpectacle()
-    {
-        return $this->spectacle;
-    }
 
     //***************************************Getter Setter*************************************************
 
@@ -54,31 +42,22 @@ class Tarif
     {
         return $this->id;
     }
+
     /**
-     * @param mixed $spectacle
+     * @return int
      */
-    public function setSpectacle($spectacle)
+    public function getPrix()
     {
-        $this->spectacle = $spectacle;
+        return $this->prix;
     }
 
     /**
-     * @return mixed
+     * @param int $prix
      */
-    public function getCategorie()
+    public function setPrix($prix)
     {
-        return $this->categorie;
+        $this->prix = $prix;
     }
-
-    /**
-     * @param mixed $categorie
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-    }
-
-
 
 
 }

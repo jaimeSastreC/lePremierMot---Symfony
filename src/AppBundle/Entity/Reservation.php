@@ -26,31 +26,32 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="date")
+     * TODO vérifier que date soit avant ou égal à spectacle @Assert\LessThanOrEqual("today")
      */
     private $dateReservation;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="montant_reservation", type="decimal", precision=7, scale=2)
      */
     private $montantReservation;
 
     /**
-     * @var
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="reservation")
      */
     private $spectacle;
 
     /**
-     * @var
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client", inversedBy="reservation")
      */
     private $client;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", inversedBy="reservation")
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", cascade={"persist"})
      */
     private $spectateur;
 
