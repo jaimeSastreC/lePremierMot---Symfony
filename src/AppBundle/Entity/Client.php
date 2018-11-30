@@ -26,21 +26,34 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="civilite_client", type="string", length=255, nullable=true)
+     * @ORM\Column(name="civilite_client", type="string", length=3, nullable=true)
+     *
      */
     private $civiliteClient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_client", type="string", length=255)
+     * @ORM\Column(name="nom_client", type="string", length=50)
+     * @Assert\Length(
+     *  min = 3,
+     *  max = 50,
+     * minMessage = "Your first name must be at least {{ limit }} characters long",
+     * maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $nomClient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom_client", type="string", length=255)
+     * @ORM\Column(name="prenom_client", type="string", length=50)
+     * @Assert\Length(
+     *  min = 3,
+     *  max = 50,
+     * minMessage = "Your first name must be at least {{ limit }} characters long",
+     * maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $prenomClient;
 
@@ -256,5 +269,23 @@ class Client
     {
         return $this->mailClient;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * @param mixed $reservation
+     */
+    public function setReservation($reservation)
+    {
+        $this->reservation = $reservation;
+    }
+
+
 }
 

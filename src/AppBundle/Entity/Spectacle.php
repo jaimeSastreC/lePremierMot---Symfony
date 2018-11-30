@@ -69,9 +69,15 @@ class Spectacle
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectaclepectacle")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectacle")
      */
     private $categorie;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif", inversedBy="spectacle")
+     */
+    private $tarif;
 
 
     //***************************************Getter Setter*************************************************
@@ -219,6 +225,22 @@ class Spectacle
     public function setReservation($reservation)
     {
         $this->reservation = $reservation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
     }
 
 

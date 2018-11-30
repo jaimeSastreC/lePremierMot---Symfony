@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Categorie
@@ -30,7 +31,13 @@ class Categorie
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectacle", inversedBy="categorie")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", inversedBy="categorie")
+     */
+    private $spectateur;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarif", inversedBy="caterorie")
      */
     private $spectacle;
 
@@ -68,5 +75,23 @@ class Categorie
     {
         return $this->libelle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSpectacle()
+    {
+        return $this->spectacle;
+    }
+
+    /**
+     * @param mixed $spectacle
+     */
+    public function setSpectacle($spectacle)
+    {
+        $this->spectacle = $spectacle;
+    }
+
+
 }
 
