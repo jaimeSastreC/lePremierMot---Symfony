@@ -25,9 +25,9 @@ class Tarif
     /**
      * @var int
      *
-     * @ORM\Column(name="montant_place", type="decimal", precision=7, scale=2)
+     * @ORM\Column(name="prix_place", type="decimal", precision=7, scale=2)
      */
-    private $prix;
+    private $prix_place;
 
 
     //***************************************Getter Setter*************************************************
