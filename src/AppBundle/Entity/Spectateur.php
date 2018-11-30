@@ -35,7 +35,7 @@ class Spectateur
      */
     private $prenomSpectateur;
 
-
+    //***************************************Getter Setter*************************************************
     /**
      * Get id
      *

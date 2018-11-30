@@ -70,7 +70,13 @@ class Client
      */
     private $mailClient;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="client")
+     */
+    private $reservation;
 
+    //***************************************Getter Setter*************************************************
     /**
      * Get id
      *

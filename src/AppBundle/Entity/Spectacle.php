@@ -31,7 +31,7 @@ class Spectacle
 
     /**
      * @Assert\Date
-     * @var \Date
+     * @var \DateTime
      *
      * @ORM\Column(name="date_spectacle", type="date", nullable=true)
      */
@@ -61,7 +61,13 @@ class Spectacle
      */
     private $salle;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="spectacle")
+     */
+    private $reservation;
 
+    //***************************************Getter Setter*************************************************
     /**
      * Get id
      *
@@ -191,5 +197,23 @@ class Spectacle
     {
         return $this->salle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * @param mixed $reservation
+     */
+    public function setReservation($reservation)
+    {
+        $this->reservation = $reservation;
+    }
+
+
 }
 
