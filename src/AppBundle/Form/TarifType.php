@@ -23,7 +23,6 @@ class TarifType extends AbstractType
             ); //fin du builder ;
         ;
 
-        ;
     }
 
 
