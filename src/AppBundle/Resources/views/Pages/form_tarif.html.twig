@@ -1,0 +1,27 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+
+
+{% block contenu %}
+
+    {{ dump(formtarif) }}
+
+    <div>
+        {{ form_start(formtarif, {'attr': {'class': 'form'}}) }}
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formtarif.prix_place) }}
+            {{ form_label(formtarif.prix_place, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formtarif.prix_place, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {{ form_widget(formtarif.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
+
+        {{ form_end(formtarif) }}
+    </div>
+
+{% endblock %}

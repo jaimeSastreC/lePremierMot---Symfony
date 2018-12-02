@@ -43,7 +43,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif")
      */
-    public function listAdminTarifAction($id){
+    public function AdminTarifAction($id){
 
         // cherche tous les tarifs avec instance de getDoctrine -> méthode get Repository
         // puis ->findAll  tous les tarifs
@@ -54,9 +54,9 @@ class AdministratorController extends Controller
         $tarif = $repository->find($id);
 
         //retourne la page html tarif en utiliasnt le twig auteur.html.twig
-        return $this->render("@App/Pages/tarif_admin.html.twig",
+        return $this->render("@App/Pages/form_tarif.html.twig",
             [
-                'tarif' => $tarif
+                'formtarif' => $tarif
             ]);
     }
 
