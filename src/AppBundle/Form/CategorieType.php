@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,12 @@ class CategorieType extends AbstractType
             ->add('tarif', EntityType::class, [
                 'class' => 'AppBundle\Entity\Tarif',
                 'choice_label' => 'prix_place',
-            ])
+            ]) // attention, prendre la méthode prix_place de l'Entity Tarif !!!
+
+            ->add('save', SubmitType::class, [
+                    'label' => 'Ajouter une Catégorie'
+                ]
+            ); //fin du builder ;
         ;
     }
 

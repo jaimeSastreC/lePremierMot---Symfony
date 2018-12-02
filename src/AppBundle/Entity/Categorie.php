@@ -37,9 +37,15 @@ class Categorie
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Tarif")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Tarif", inversedBy="categorie")
      */
     private $tarif;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="categorie")
+     */
+    private $spectacle;
 
     //***************************************Getter Setter*************************************************
     /**
@@ -106,6 +112,22 @@ class Categorie
     public function setTarif($tarif)
     {
         $this->tarif = $tarif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpectacle()
+    {
+        return $this->spectacle;
+    }
+
+    /**
+     * @param mixed $spectacle
+     */
+    public function setSpectacle($spectacle)
+    {
+        $this->spectacle = $spectacle;
     }
 
 

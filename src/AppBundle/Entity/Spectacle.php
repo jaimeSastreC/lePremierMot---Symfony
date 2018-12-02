@@ -73,6 +73,11 @@ class Spectacle
      */
     private $tarif;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Categorie", mappedBy="spectacle")
+     */
+    private $categorie;
+
 
     //***************************************Getter Setter*************************************************
     /**
@@ -235,6 +240,22 @@ class Spectacle
     public function setTarif($tarif)
     {
         $this->tarif = $tarif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
     }
 
 

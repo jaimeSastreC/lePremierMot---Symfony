@@ -29,6 +29,11 @@ class Tarif
      */
     private $prix_place;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Categorie", mappedBy="tarif")
+     */
+    private $categorie;
+
 
     //***************************************Getter Setter*************************************************
 
@@ -56,6 +61,22 @@ class Tarif
     public function setPrixPlace($prix_place)
     {
         $this->prix_place = $prix_place;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
     }
 
 }

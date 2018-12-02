@@ -34,7 +34,7 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécrité selon nécessités. TODO
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $categorie = $form->getData();

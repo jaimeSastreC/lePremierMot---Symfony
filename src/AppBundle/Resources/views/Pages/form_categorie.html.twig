@@ -1,15 +1,31 @@
+{% extends "@App/baseAdmin.html.twig" %}
 
 
 
 {% block contenu %}
+
+    {#{{ dump(formcategorie) }}#}
+
     <div>
         {{ form_start(formcategorie, {'attr': {'class': 'form'}}) }}
         <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formcategorie.libelle) }}
             {{ form_label(formcategorie.libelle, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>
             {{ form_widget(formcategorie.libelle, {'attr': {'class': 'form-control'}}) }}
         </p>
+        <p>
+            {{ form_errors(formcategorie.tarif) }}
+            {{ form_label(formcategorie.tarif, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {#prendre ma méthode tarif de Categorie#}
+            {{ form_widget(formcategorie.tarif, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        {#<p>
         {% for tarif in formcategorie.tarif %}
             <p>
                 {{ form_label(tarif.prix_place, null, {'label_attr':  {'class': 'form-label'}}) }}
@@ -17,7 +33,12 @@
             <p>
                 {{ form_widget(tarif.prix_place, {'attr': {'class': 'form-control'}}) }}
             </p>
+
         {% endfor %}
+        </p>#}
+        <p>
+            {{ form_widget(formcategorie.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
 
 
         {{ form_end(formcategorie) }}
