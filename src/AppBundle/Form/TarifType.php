@@ -20,7 +20,7 @@ class TarifType extends AbstractType
             ->add('prix_place')
 
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter un Tarif'
+                    'label' => 'Ajouter/Modifier un Tarif'
                 ]
             ); //fin du builder ;
 

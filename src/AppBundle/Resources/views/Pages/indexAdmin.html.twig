@@ -1,9 +1,12 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}Administrator
-<p>
-    <a href="{{ path('accueil')}}">Lien accueil</a>
-</p>
+    <p>
+        <a href="{{ path('accueil')}}">Lien accueil</a>
+    </p>
+    <p>
+        <a href="{{ path('admin_tarifs') }}">lien Tarifs</a>
+    </p>
 
 {% endblock %}
 

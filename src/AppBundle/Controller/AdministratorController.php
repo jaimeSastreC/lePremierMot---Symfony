@@ -39,7 +39,6 @@ class AdministratorController extends Controller
             ]);
     }
 
-
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif")
      */
@@ -54,9 +53,9 @@ class AdministratorController extends Controller
         $tarif = $repository->find($id);
 
         //retourne la page html tarif en utiliasnt le twig auteur.html.twig
-        return $this->render("@App/Pages/form_tarif.html.twig",
+        return $this->render("@App/Pages/tarif_admin.html.twig",
             [
-                'formtarif' => $tarif
+                'tarif' => $tarif
             ]);
     }
 

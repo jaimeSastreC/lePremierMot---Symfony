@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\TarifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,7 @@ class FormController extends Controller
     public function AdminTarifFormAction(Request $request)
     {
         // création Entité 'Tarif'
-        $form= $this->createForm(CategorieType::class, new Tarif());
+        $form= $this->createForm(TarifType::class, new Tarif());
 
         // les données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
@@ -86,13 +87,13 @@ class FormController extends Controller
                 // enregistre en BD
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin');
+                return $this->redirectToRoute('admin_tarifs');
             }
         }
 
         // replace this example code with whatever you need
         return $this->render(
-            "@App/Pages/form_tarif.html.twig",
+            "@App/Pages/form_admin_tarif.html.twig",
             [
                 'formtarif' => $form->createView()
             ]

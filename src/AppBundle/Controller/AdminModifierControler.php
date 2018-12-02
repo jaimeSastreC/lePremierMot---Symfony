@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Tarif;
+use AppBundle\Form\TarifType;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,26 +26,63 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/tarif_modifier/{id}", name="admin_modif_tarif")
      */
-    public function tarifModifAction($id)
+    public function tarifModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
         /** @var $repository TarifRepository */
         $repository = $this->getDoctrine()->getRepository(Tarif::class);
 
-        // je récupère l'entity manager de doctrine
-        $entityManager = $this->getDoctrine()->getManager();
-
         //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
         $tarif = $repository->find($id);
 
-        //TODO test, puis avec form
-        $tarif->setPrixPlace('1234');
-        // j'enregistre en base de donnée
-        $entityManager->flush();
+        //recherche entité TarifType abstraite pour créé la forme de Tarif avec pour objet parametre $tarif TODO
+        $form = $this->createForm(TarifType::class, $tarif);
 
-        // Important : redirige vers la route demandée, avec name = 'admin_tarifs'
-        return $this->redirectToRoute('admin_tarifs');
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
 
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Categorie
+                $tarif = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($tarif);
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($tarif);
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Tarif a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_tarifs'
+                return $this->redirectToRoute('admin_tarifs');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre Tarif n\'a pas été enregitré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_tarif.html.twig",
+            [
+                'formtarif' => $form->createView()
+            ]
+        );
     }
 }
