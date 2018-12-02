@@ -39,7 +39,7 @@ class CategorieType extends AbstractType
                     'label' => 'Ajouter une Catégorie'
                 ]
             ); //fin du builder ;
-        ;
+
     }
 
 

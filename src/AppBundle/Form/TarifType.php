@@ -21,7 +21,6 @@ class TarifType extends AbstractType
                     'label' => 'Ajouter un Tarif'
                 ]
             ); //fin du builder ;
-        ;
 
     }
 
