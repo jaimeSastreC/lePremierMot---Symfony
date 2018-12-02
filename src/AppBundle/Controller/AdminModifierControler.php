@@ -71,6 +71,7 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_tarifs'
                 return $this->redirectToRoute('admin_tarifs');
             } else {
+                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Tarif n\'a pas été enregitré, erreur!'

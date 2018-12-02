@@ -10,8 +10,10 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +29,10 @@ class FormController extends Controller
      */
     public function AdminCategieFormAction(Request $request)
     {
-       // création Entité 'Categorie
+       // création Entité  "Categorie"
         $form= $this->createForm(CategorieType::class, new Categorie);
 
-        //assie les données envoyées (éventuellement le client via le Formulaire
+        //saisie des données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
 
@@ -54,7 +56,7 @@ class FormController extends Controller
 
         // replace this example code with whatever you need
         return $this->render(
-            "@App/Pages/form_categorie.html.twig",
+            "@App/Pages/form_admin_categorie.html.twig",
                 [
                     'formcategorie' => $form->createView()
                 ]
@@ -66,10 +68,10 @@ class FormController extends Controller
      */
     public function AdminTarifFormAction(Request $request)
     {
-        // création Entité 'Tarif'
-        $form= $this->createForm(TarifType::class, new Tarif());
+        // création Entité "Tarif"
+        $form= $this->createForm(TarifType::class, new Tarif);
 
-        // les données envoyées (éventuellement) le client via le Formulaire
+        //saisie des données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
 
@@ -96,6 +98,47 @@ class FormController extends Controller
             "@App/Pages/form_admin_tarif.html.twig",
             [
                 'formtarif' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/form_spectateur", name="admin_form_spectateur")
+     */
+    public function AdminSpectateurFormAction(Request $request)
+    {
+        // création Entité "Spectateur"
+        $form= $this->createForm(SpectateurType::class, new Spectateur);
+
+
+        //saisie des données envoyées (éventuellement le client via le Formulaire
+        // à notre variable $form. Elle contient le $_POST.
+        $form->handleRequest($request);
+        //var_dump($form);die;
+
+        //controle si il y a bien un formulaire renvoyé en POST.
+        if ($form->isSubmitted()){
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            if ($form->isValid()){
+                // récupère données dans Objet/Entité Categorie
+                $spectateur = $form->getData();
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($spectateur);
+                // enregistre en BD
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_spectateurs');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            "@App/Pages/form_admin_spectateur.html.twig",
+            [
+                'formspectateur' => $form->createView()
             ]
         );
     }
