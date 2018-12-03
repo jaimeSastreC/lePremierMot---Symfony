@@ -6,7 +6,7 @@
         <a href="{{ path('accueil')}}">Lien accueil</a>
     </p>
     <p>
-        <a href="{{ path('admin_form_categorie') }}">Ajouter une categorie</a>
+        <a href="{{ path('admin_form_categorie') }}">Ajouter une catégorie</a>
     </p>
 
     <div class="text-align-center">
@@ -15,7 +15,7 @@
             {#{{ dump(categorie) }}#}
 
                 <p>
-                    categorie : {{ categorie.libelle }}
+                    catégorie : {{ categorie.libelle }}&nbsp{{ categorie.tarif.prixplace }}&nbsp{{ categorie.spectacle.nomspectacle }}
                 </p>
 
                 <a href="{{ path('admin_supp_categorie',  {'id': categorie.id}) }}">
@@ -28,7 +28,6 @@
 
         {% endfor %}
     </div>
-
 
 {% endblock %}
 

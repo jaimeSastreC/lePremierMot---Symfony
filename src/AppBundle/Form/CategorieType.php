@@ -19,10 +19,10 @@ class CategorieType extends AbstractType
         $builder
             ->add('libelle', ChoiceType::class, [
                     'choices' => [
-                        'Adulte'    => 'A',
-                        'Enfant'    => 'B',
-                        'Senior'    => 'C',
-                        'Réduit'    => 'D',
+                        'Adulte'    => 'Adulte',
+                        'Enfant'    => 'Enfant',
+                        'Senior'    => 'Senior',
+                        'Réduit'    => 'Réduit',
                     ]
                 ]
             )
