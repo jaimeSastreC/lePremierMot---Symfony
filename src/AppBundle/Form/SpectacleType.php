@@ -22,7 +22,7 @@ class SpectacleType extends AbstractType
             ->add('salle')
             ->add('tarif')
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter une Catégorie'
+                    'label' => 'Ajouter /Modifier un Spectacle'
                 ]
             ); //fin du builder ;
     }/**

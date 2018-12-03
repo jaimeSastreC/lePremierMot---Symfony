@@ -21,7 +21,7 @@ class ReservationType extends AbstractType
             ->add('client')
             ->add('spectateur')
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter une Catégorie'
+                    'label' => 'Ajouter/Modifier une Réservation'
                 ]
             ); //fin du builder ;
 

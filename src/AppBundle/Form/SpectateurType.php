@@ -36,7 +36,7 @@ class SpectateurType extends AbstractType
             ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
 
             ->add('save', SubmitType::class, [
-            'label' => 'Ajouter un Spectateur'
+            'label' => 'Ajouter/Modifier un Spectateur'
         ]
     ); //fin du builder ;
     }/**

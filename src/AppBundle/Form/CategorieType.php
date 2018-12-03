@@ -36,7 +36,7 @@ class CategorieType extends AbstractType
                 'choice_label' => 'nom_spectacle',
             ])
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter une Catégorie'
+                    'label' => 'Ajouter/Modifier une Catégorie'
                 ]
             ); //fin du builder ;
 

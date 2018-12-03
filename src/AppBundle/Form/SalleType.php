@@ -25,7 +25,7 @@ class SalleType extends AbstractType
                 ]
             )
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter une Catégorie'
+                    'label' => 'Ajouter/Modifier une Salle'
                 ]
             ); //fin du builder ;
 

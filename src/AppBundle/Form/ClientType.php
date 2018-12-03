@@ -23,7 +23,7 @@ class ClientType extends AbstractType
             ->add('telClient')
             ->add('mailClient')
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter une Catégorie'
+                    'label' => 'Ajouter/Modifier un Client'
                 ]
             ); //fin du builder ;
     }/**

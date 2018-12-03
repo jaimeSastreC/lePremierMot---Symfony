@@ -67,8 +67,6 @@ class AdminModifierControler extends Controller
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($tarif);
 
-                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
-                $entityManager->persist($tarif);
                 //mise à jour BD, envoy à bd
                 $entityManager->flush();
 
@@ -131,8 +129,6 @@ class AdminModifierControler extends Controller
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($categorie);
 
-                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
-                $entityManager->persist($categorie);
                 //mise à jour BD, envoy à bd
                 $entityManager->flush();
 
@@ -191,9 +187,6 @@ class AdminModifierControler extends Controller
 
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();
-
-                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
-                $entityManager->persist($spectateur);
 
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($spectateur);
@@ -259,8 +252,6 @@ class AdminModifierControler extends Controller
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($salle);
 
-                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
-                $entityManager->persist($salle);
                 //mise à jour BD, envoy à bd
                 $entityManager->flush();
 
