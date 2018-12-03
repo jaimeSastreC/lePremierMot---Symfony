@@ -22,7 +22,9 @@ class SpectateurType extends AbstractType
             ->add('prenomSpectateur')
             ->add('categorie',EntityType::class, [
                     'class' => 'AppBundle\Entity\Categorie',
-                    'choice_label' => 'libelle',
+                    'choice_label' => function($categorie) {
+                        return $categorie->getLibelle().': '.$categorie->getTarif()->getPrixPlace();
+                    },
                 ]
             ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
 
