@@ -69,7 +69,7 @@ class Spectacle
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="tarif")
+     * @ORM\ManyToMany(targetEntity="Tarif")
      */
     private $tarif;
 

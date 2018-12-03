@@ -1,0 +1,55 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+
+
+{% block contenu %}
+
+    {#{{ dump(formsalle) }}#}
+
+    <div>
+        {{ form_start(formsalle, {'attr': {'class': 'form'}}) }}
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formsalle.nomSalle) }}
+            {{ form_label(formsalle.nomSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formsalle.nomSalle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formsalle.villeSalle) }}
+            {{ form_label(formsalle.villeSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formsalle.villeSalle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formsalle.placesSalle) }}
+            {{ form_label(formsalle.placesSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formsalle.placesSalle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formsalle.spectacle) }}
+            {{ form_label(formsalle.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formsalle.spectacle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+
+        <p>
+            {{ form_widget(formsalle.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
+
+        {{ form_end(formsalle) }}
+    </div>
+
+{% endblock %}

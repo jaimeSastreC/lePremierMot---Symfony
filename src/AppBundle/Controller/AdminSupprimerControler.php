@@ -80,4 +80,27 @@ class AdminSupprimerControler extends Controller
         // Important : redirige vers la route demandée, avec name = 'admin_spectateur'
         return $this->redirectToRoute('admin_spectateurs');
     }
+
+    /**
+     * @Route("/admin/salle_supprimmer/{id}", name="admin_supp_salle")
+     */
+    public function salleSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository TarifRepository */
+        $repository = $this->getDoctrine()->getRepository(Salle::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $salle = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($salle);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_salle'
+        return $this->redirectToRoute('admin_salles');
+    }
 }

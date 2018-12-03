@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
-use AppBundle\Entity\Spectateur;
+use AppBundle\Entity\Salle;
 use AppBundle\Entity\Tarif;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +50,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $categorieRepository = $this->getDoctrine()->getRepository(Categorie::class);
 
-        //requete sur l'ensemble des spectateurs
+        //requete sur l'ensemble des catégories
         $categories = $categorieRepository->findAll();
 
         //retourne la page html spectacles en utiliasnt le twig categories
@@ -71,7 +71,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des spectateurs
         $spectateurs = $spectateurRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
+        //retourne la page html spectacles en utiliasnt le twig spectateurs
         return $this->render("@App/Pages/spectateurs_admin.html.twig",
             [
                 'spectateurs' => $spectateurs
@@ -84,12 +84,12 @@ class AdministratorController extends Controller
     public function listAdminSalleAction(){
 
         // je genère le Repository de Doctrine
-        $spectateurRepository = $this->getDoctrine()->getRepository(Spectateur::class);
+        $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
 
         //requete sur l'ensemble des salle
-        $salles = $spectateurRepository->findAll();
+        $salles = $salleRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
+        //retourne la page html spectacles en utiliasnt le twig salles
         return $this->render("@App/Pages/salles_admin.html.twig",
             [
                 'salles' => $salles
@@ -108,7 +108,7 @@ class AdministratorController extends Controller
         //requete sur Entity Tarif avec $id
         $tarif = $repository->find($id);
 
-        //retourne la page html tarif en utiliasnt le twig auteur.html.twig
+        //retourne la page html tarif en utiliasnt le twig tarif
         return $this->render("@App/Pages/tarif_admin.html.twig",
             [
                 'tarif' => $tarif
@@ -126,7 +126,7 @@ class AdministratorController extends Controller
         //requete sur Entity Tarif avec $id
         $categorie = $repository->find($id);
 
-        //retourne la page html categorie en utiliasnt le twig auteur.html.twig
+        //retourne la page html categorie en utiliasnt le twig categorie
         return $this->render("@App/Pages/categorie_admin.html.twig",
             [
                 'categorie' => $categorie
@@ -144,10 +144,28 @@ class AdministratorController extends Controller
         //requete sur Entity Tarif avec $id
         $spectateur = $repository->find($id);
 
-        //retourne la page html spectateur en utiliasnt le twig auteur.html.twig
+        //retourne la page html spectateur en utiliasnt le twig spectateur
         return $this->render("@App/Pages/spectateur_admin.html.twig",
             [
                 'spectateur' => $spectateur
+            ]);
+    }
+
+    /**
+     * @Route("/admin/salle/{id}" , name="admin_salle", defaults={"id"= 1 })
+     */
+    public function AdminSalleAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Salle::class);
+
+        //requete sur Entity Tarif avec $id
+        $salle = $repository->find($id);
+
+        //retourne la page html salle en utiliasnt le twig salle
+        return $this->render("@App/Pages/salle_admin.html.twig",
+            [
+                'salle' => $salle
             ]);
     }
 

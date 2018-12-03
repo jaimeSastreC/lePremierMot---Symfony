@@ -2,18 +2,12 @@
 
 {% block contenu %}Administrator
 
-{{ dump(salles) }}
     <p>
         <a href="{{ path('accueil')}}">Lien accueil</a>
     </p>
-    <p>
-        {#<a href="{{ path('form_admin_salle') }}">Ajouter une Salle</a>#}
-    </p>
 
     <div class="text-align-center">
-
-         {#Liste les salles avec une boucle for#}
-        {% for salle in salles %}
+        {% if salle %}
             <div>
                 <p>
                     Salle : {{ salle.nomSalle}}&nbsp
@@ -30,10 +24,8 @@
                 <hr>
 
             </div>
-
-        {% endfor %}
+        {% endif %}
     </div>
 
 
 {% endblock %}
-

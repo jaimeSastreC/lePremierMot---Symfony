@@ -5,12 +5,15 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\SalleType;
 use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use AppBundle\Repository\CategorieRepository;
+use AppBundle\Repository\SalleRepository;
 use AppBundle\Repository\SpectateurRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -218,6 +221,70 @@ class AdminModifierControler extends Controller
             "@App/Pages/form_admin_spectateur.html.twig",
             [
                 'formspectateur' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/salle_modifier/{id}", name="admin_modif_salle")
+     */
+    public function salleModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository SalleRepository*/
+        $repository = $this->getDoctrine()->getRepository(Salle::class);
+
+        //avec le repository je récupère dans la BD salle sous forme d'Identity (instance)
+        $salle = $repository->find($id);
+
+        //recherche entité SalleType abstraite pour créé la forme de Salle avec pour objet parametre $salle TODO
+        $form = $this->createForm(SalleType::class, $salle);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Salle
+                $salle = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($salle);
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($salle);
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Salle a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_salles'
+                return $this->redirectToRoute('admin_salles');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Salle n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_salle.html.twig",
+            [
+                'formsalle' => $form->createView()
             ]
         );
     }
