@@ -6,24 +6,24 @@
         <a href="{{ path('accueil')}}">Lien accueil</a>
     </p>
     <p>
-        <a href="{{ path('admin_form_spectateur') }}">Ajouter un Spectateur</a>
+        <a href="{{ path('admin_form_categorie') }}">Ajouter une categorie</a>
     </p>
 
     <div class="text-align-center">
         {# Liste les spectaurss avec une boucle for #}
-        {% for spectateur in spectateurs %}
-            {#{{ dump(spectateur) }}#}
+        {% for categorie in categories %}
+            {#{{ dump(categorie) }}#}
 
                 <p>
-                    spectateur : {{ spectateur.nomspectateur }}
+                    categorie : {{ categorie.libelle }}
                 </p>
 
-                {#<a href="{{ path('admin_supp_spectateur',  {'id': spectateur.id}) }}">
+                <a href="{{ path('admin_supp_categorie',  {'id': categorie.id}) }}">
                     <button class="supprimer" type="submit">Supprimer</button>
                 </a>
-                <a href="{{ path('admin_modif_spectateur',  {'id': spectateur.id}) }}">
+                <a href="{{ path('admin_modif_categorie',  {'id': categorie.id}) }}">
                     <button class="modifier" type="submit">Modifier</button>
-                </a>#}
+                </a>
                 <hr>
 
         {% endfor %}

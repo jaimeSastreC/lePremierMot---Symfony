@@ -5,11 +5,11 @@
 {% block contenu %}
 
 {{ form(formspectateur) }}
- {#   <div>
+    {#<div>
         {{ form_start(formspectateur, {'attr': {'class': 'form'}}) }}
         <p>
-            #}{#retourne message erreur si besoin après méthode isValid dans Controleur #}{#
-            {{ form_errors(formspectateur.prix_place) }}
+            retourne message erreur si besoin après méthode isValid dans Controleur
+            {{ form_errors(formspectateur.) }}
             {{ form_label(formspectateur.prix_place, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>

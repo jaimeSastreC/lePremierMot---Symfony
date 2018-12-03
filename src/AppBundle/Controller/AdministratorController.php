@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,6 +43,24 @@ class AdministratorController extends Controller
     }
 
     /**
+     * @Route("/admin/categories" , name="admin_categories")
+     */
+    public function listAdminCategoriesAction(){
+
+        // je genère le Repository de Doctrine
+        $categoriesRepository = $this->getDoctrine()->getRepository(Categorie::class);
+
+        //requete sur l'ensemble des spectateurs
+        $categories = $categoriesRepository->findAll();
+
+        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
+        return $this->render("@App/Pages/categories_admin.html.twig",
+            [
+                'categories' => $categories
+            ]);
+    }
+
+    /**
      * @Route("/admin/spectateurs" , name="admin_spectateurs")
      */
     public function listAdminSpectateursAction(){
@@ -52,7 +71,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des spectateurs
         $spectateurs = $spectateurRepository->findAll();
 
-        //retourne la page html tarifs en utiliasnt le twig tarifs.html.twig
+        //retourne la page html spectateur en utiliasnt le twig spectateur.html.twig
         return $this->render("@App/Pages/spectateurs_admin.html.twig",
             [
                 'spectateurs' => $spectateurs
@@ -75,6 +94,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/tarif_admin.html.twig",
             [
                 'tarif' => $tarif
+            ]);
+    }
+
+    /**
+     * @Route("/admin/categorie/{id}" , name="admin_categorie")
+     */
+    public function AdminCategorieAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Categorie::class);
+
+        //requete sur Entity Tarif avec $id
+        $categorie = $repository->find($id);
+
+        //retourne la page html categorie en utiliasnt le twig auteur.html.twig
+        return $this->render("@App/Pages/tarif_admin.html.twig",
+            [
+                'categorie' => $categorie
             ]);
     }
 

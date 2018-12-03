@@ -29,17 +29,6 @@
             {{ form_widget(formcategorie.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
-        {#<p>
-        {% for tarif in formcategorie.tarif %}
-            <p>
-                {{ form_label(tarif.prix_place, null, {'label_attr':  {'class': 'form-label'}}) }}
-            </p>
-            <p>
-                {{ form_widget(tarif.prix_place, {'attr': {'class': 'form-control'}}) }}
-            </p>
-
-        {% endfor %}
-        </p>#}
         <p>
             {{ form_widget(formcategorie.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>

@@ -25,7 +25,7 @@ class Spectateur
     /**
      * @var string
      *
-     * @ORM\Column(name="civilite_spectateur", type="string", length=3, nullable=true)
+     * @ORM\Column(name="civilite_spectateur", type="string", length=4, nullable=true)
      * @Assert\Choice({"Mlle", "Mme", "M"})
      *
      */

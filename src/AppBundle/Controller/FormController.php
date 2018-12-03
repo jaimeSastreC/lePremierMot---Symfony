@@ -25,7 +25,7 @@ class FormController extends Controller
 {
 
     /**
-     * @Route("/admin/form_catergorie", name="admin_form_catergorie")
+     * @Route("/admin/form_categorie", name="admin_form_categorie")
      */
     public function AdminCategieFormAction(Request $request)
     {

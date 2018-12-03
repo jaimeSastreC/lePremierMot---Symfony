@@ -17,7 +17,14 @@ class SpectateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('civiliteSpectateur')
+            ->add('civiliteSpectateur', ChoiceType::class, [
+                        'choices' => [
+                        'Mlle'    => 'Mlle',
+                        'Mme'    => 'Mme',
+                        'M'    => 'M',
+                    ]
+                ]
+            )
             ->add('nomSpectateur')
             ->add('prenomSpectateur')
             ->add('categorie',EntityType::class, [
@@ -28,14 +35,8 @@ class SpectateurType extends AbstractType
                 ]
             ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
 
-           /* ->add('categorie',EntityType::class, [
-                    'class' => 'AppBundle\Entity\Categorie',
-                    'choice_label' => 'tarif',
-                ]
-            )*/ // attention, prendre la méthode tarif de l'Entity Categorie !!!
-
             ->add('save', SubmitType::class, [
-            'label' => 'Ajouter une Catégorie'
+            'label' => 'Ajouter un Spectateur'
         ]
     ); //fin du builder ;
     }/**
