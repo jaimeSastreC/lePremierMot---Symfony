@@ -79,7 +79,7 @@ class AdministratorController extends Controller
     }
 
     /**
-     * @Route("/admin/salle" , name="admin_salle")
+     * @Route("/admin/salles" , name="admin_salles")
      */
     public function listAdminSalleAction(){
 
@@ -90,7 +90,7 @@ class AdministratorController extends Controller
         $salles = $spectateurRepository->findAll();
 
         //retourne la page html spectacles en utiliasnt le twig categories.html.twig
-        return $this->render("@App/Pages/salle_admin.html.twig",
+        return $this->render("@App/Pages/salles_admin.html.twig",
             [
                 'salles' => $salles
             ]);
