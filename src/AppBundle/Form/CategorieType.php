@@ -33,7 +33,7 @@ class CategorieType extends AbstractType
 
             ->add('spectacle', EntityType::class, [
                 'class' => 'AppBundle\Entity\Spectacle',
-                'choice_label' => 'nom_spectacle',
+                'choice_label' => 'nom_spectacle'
             ])
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Catégorie'

@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Salle;
+use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
@@ -248,6 +249,7 @@ class AdminModifierControler extends Controller
 
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();
+
 
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($salle);

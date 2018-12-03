@@ -19,7 +19,13 @@ class SpectacleType extends AbstractType
             ->add('dateSpectacle')
             ->add('heureDebutSpectacle')
             ->add('heureFinSpectacle')
-            ->add('salle')
+            ->add('salle', EntityType::class, [
+                    'class' => 'AppBundle\Entity\Salle',
+                    'choice_label' => function($salle) {
+                        return $salle->getLibelle().': '.$salle->getSalle()->getNomSalle();
+                    },
+                ]
+            )
             ->add('tarif')
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter /Modifier un Spectacle'

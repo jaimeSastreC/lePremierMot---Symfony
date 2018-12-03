@@ -10,9 +10,13 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\ReservationType;
+use AppBundle\Form\SalleType;
 use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -145,5 +149,85 @@ class FormController extends Controller
         );
     }
 
+    /**
+     * @Route("/admin/form_salle", name="admin_form_salle")
+     */
+    public function AdminSalleFormAction(Request $request)
+    {
+        // création Entité "Salle"
+        $form= $this->createForm(SalleType::class, new Salle);
 
+
+        //saisie des données envoyées (éventuellement le client via le Formulaire
+        // à notre variable $form. Elle contient le $_POST.
+        $form->handleRequest($request);
+        //var_dump($form);die;
+
+        //controle si il y a bien un formulaire renvoyé en POST.
+        if ($form->isSubmitted()){
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            if ($form->isValid()){
+                // récupère données dans Objet/Entité Categorie
+                $salle = $form->getData();
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($salle);
+                // enregistre en BD
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_salles');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            "@App/Pages/form_admin_salle.html.twig",
+            [
+                'formsalle' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/form_reservation", name="admin_form_reservation")
+     */
+    public function AdminReservationFormAction(Request $request)
+    {
+        // création Entité "Reservation"
+        $form= $this->createForm(ReservationType::class, new Reservation);
+
+
+        //saisie des données envoyées (éventuellement le client via le Formulaire
+        // à notre variable $form. Elle contient le $_POST.
+        $form->handleRequest($request);
+        //var_dump($form);die;
+
+        //controle si il y a bien un formulaire renvoyé en POST.
+        if ($form->isSubmitted()){
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            if ($form->isValid()){
+                // récupère données dans Objet/Entité Categorie
+                $reservation = $form->getData();
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($reservation);
+                // enregistre en BD
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_reservations');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            "@App/Pages/form_admin_reservation.html.twig",
+            [
+                'formreservation' => $form->createView()
+            ]
+        );
+    }
 }

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Salle;
+use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

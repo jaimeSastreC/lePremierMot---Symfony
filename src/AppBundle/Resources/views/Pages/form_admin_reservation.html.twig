@@ -1,0 +1,54 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+
+
+{% block contenu %}
+    {{   dump(formreservation) }}
+
+{{ form(formreservation) }}
+    {#<div>
+        {{ form_start(formspectateur, {'attr': {'class': 'form'}}) }}
+
+        <p>
+            #}{#retourne message erreur si besoin après méthode isValid dans Controleur#}{#
+            {{ form_errors(formspectateur.civiliteSpectateur) }}
+            {{ form_label(formspectateur.civiliteSpectateur, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.civiliteSpectateur, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            #}{#retourne message erreur si besoin après méthode isValid dans Controleur#}{#
+            {{ form_errors(formspectateur.nomSpectateur) }}
+            {{ form_label(formspectateur.nomSpectateur, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.nomSpectateur, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            #}{#retourne message erreur si besoin après méthode isValid dans Controleur#}{#
+            {{ form_errors(formspectateur.prenomSpectateur) }}
+            {{ form_label(formspectateur.prenomSpectateur, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.prenomSpectateur, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            #}{#retourne message erreur si besoin après méthode isValid dans Controleur#}{#
+            {{ form_errors(formspectateur.categorie) }}
+            {{ form_label(formspectateur.categorie, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.categorie, {'attr': {'class': 'form-control'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
+
+        {{ form_end(formspectateur) }}
+    </div>#}
+
+{% endblock %}

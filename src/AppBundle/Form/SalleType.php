@@ -19,11 +19,7 @@ class SalleType extends AbstractType
             ->add('nomSalle')
             ->add('villeSalle')
             ->add('placesSalle')
-            ->add('spectacle', EntityType::class, [
-                    'class' => 'AppBundle\Entity\Spectacle',
-                    'choice_label' => 'nom_spectacle',
-                ]
-            )
+
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Salle'
                 ]

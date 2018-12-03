@@ -63,6 +63,7 @@ class Tarif
         $this->prix_place = $prix_place;
     }
 
+    //**************************************** getter setter ************************************************
     /**
      * @return mixed
      */
