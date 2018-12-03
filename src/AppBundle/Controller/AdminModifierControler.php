@@ -5,10 +5,13 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use AppBundle\Repository\CategorieRepository;
+use AppBundle\Repository\SpectateurRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,14 +20,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminModifierControler extends Controller
 {
-    /**
+    /*/**
      * @Route("/admintest", name="admintest")
      */
-    public function indexAdminTestAction(Request $request)
+    /*public function indexAdminTestAction(Request $request)
     {
         // replace this example code with whatever you need
         return $this->render("@App/Pages/indexAdmin.html.twig");
-    }
+    }*/
+
 
     /**
      *@Route("/admin/tarif_modifier/{id}", name="admin_modif_tarif")
@@ -150,6 +154,70 @@ class AdminModifierControler extends Controller
             "@App/Pages/form_admin_categorie.html.twig",
             [
                 'formcategorie' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/spectateur_modifier/{id}", name="admin_modif_spectateur")
+     */
+    public function spectateurModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository SpectateurRepository */
+        $repository = $this->getDoctrine()->getRepository(Spectateur::class);
+
+        //avec le repository je récupère dans la BD spectateur sous forme d'Identity (instance)
+        $spectateur = $repository->find($id);
+
+        //recherche entité SpectateurType abstraite pour créé la forme de Spectateur avec pour objet parametre $spectateur TODO
+        $form = $this->createForm(SpectateurType::class, $spectateur);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Spectateur
+                $spectateur = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($spectateur);
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($spectateur);
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Spectateur a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_spectateurs'
+                return $this->redirectToRoute('admin_spectateurs');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Spectateur n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_spectateur.html.twig",
+            [
+                'formspectateur' => $form->createView()
             ]
         );
     }

@@ -57,4 +57,27 @@ class AdminSupprimerControler extends Controller
         // Important : redirige vers la route demandée, avec name = 'admin_categorie'
         return $this->redirectToRoute('admin_categories');
     }
+
+    /**
+     * @Route("/admin/spectateur_supprimmer/{id}", name="admin_supp_spectateur")
+     */
+    public function spectateurSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository TarifRepository */
+        $repository = $this->getDoctrine()->getRepository(Spectateur::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $spectateur = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($spectateur);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_spectateur'
+        return $this->redirectToRoute('admin_spectateurs');
+    }
 }

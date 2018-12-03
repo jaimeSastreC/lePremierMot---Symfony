@@ -48,12 +48,12 @@ class AdministratorController extends Controller
     public function listAdminCategoriesAction(){
 
         // je genère le Repository de Doctrine
-        $categoriesRepository = $this->getDoctrine()->getRepository(Categorie::class);
+        $categorieRepository = $this->getDoctrine()->getRepository(Categorie::class);
 
         //requete sur l'ensemble des spectateurs
-        $categories = $categoriesRepository->findAll();
+        $categories = $categorieRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
+        //retourne la page html spectacles en utiliasnt le twig categories
         return $this->render("@App/Pages/categories_admin.html.twig",
             [
                 'categories' => $categories
@@ -71,18 +71,36 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des spectateurs
         $spectateurs = $spectateurRepository->findAll();
 
-        //retourne la page html spectateur en utiliasnt le twig spectateur.html.twig
+        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
         return $this->render("@App/Pages/spectateurs_admin.html.twig",
             [
                 'spectateurs' => $spectateurs
             ]);
     }
 
+    /**
+     * @Route("/admin/salle" , name="admin_salle")
+     */
+    public function listAdminSalleAction(){
+
+        // je genère le Repository de Doctrine
+        $spectateurRepository = $this->getDoctrine()->getRepository(Spectateur::class);
+
+        //requete sur l'ensemble des salle
+        $salles = $spectateurRepository->findAll();
+
+        //retourne la page html spectacles en utiliasnt le twig categories.html.twig
+        return $this->render("@App/Pages/salle_admin.html.twig",
+            [
+                'salles' => $salles
+            ]);
+    }
+
 //**************************************** Unique ********************************************************
     /**
-     * @Route("/admin/tarif/{id}" , name="admin_tarif")
+     * @Route("/admin/tarif/{id}" , name="admin_tarif", defaults={"id"= 1 })
      */
-    public function AdminTarifAction($id){
+    public function AdminTarifAction($id=1){
 
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Tarif::class);
@@ -98,7 +116,7 @@ class AdministratorController extends Controller
     }
 
     /**
-     * @Route("/admin/categorie/{id}" , name="admin_categorie")
+     * @Route("/admin/categorie/{id}" , name="admin_categorie", defaults={"id"= 1 })
      */
     public function AdminCategorieAction($id){
 
@@ -109,9 +127,27 @@ class AdministratorController extends Controller
         $categorie = $repository->find($id);
 
         //retourne la page html categorie en utiliasnt le twig auteur.html.twig
-        return $this->render("@App/Pages/tarif_admin.html.twig",
+        return $this->render("@App/Pages/categorie_admin.html.twig",
             [
                 'categorie' => $categorie
+            ]);
+    }
+
+    /**
+     * @Route("/admin/spectateur/{id}" , name="admin_spectateur", defaults={"id"= 1 })
+     */
+    public function AdminSpectateurAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Spectateur::class);
+
+        //requete sur Entity Tarif avec $id
+        $spectateur = $repository->find($id);
+
+        //retourne la page html spectateur en utiliasnt le twig auteur.html.twig
+        return $this->render("@App/Pages/spectateur_admin.html.twig",
+            [
+                'spectateur' => $spectateur
             ]);
     }
 
