@@ -13,6 +13,7 @@ use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
+use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
@@ -20,6 +21,7 @@ use AppBundle\Form\ClientType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
+use AppBundle\Form\SpectacleType;
 use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -109,8 +111,6 @@ class FormController extends Controller
             );
     }
 
-
-
     /**
      * @Route("/admin/form_spectateur", name="admin_form_spectateur")
      */
@@ -148,6 +148,47 @@ class FormController extends Controller
             "@App/Pages/form_admin_spectateur.html.twig",
             [
                 'formspectateur' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/form_spectacle", name="admin_form_spectacle")
+     */
+    public function AdminSpectacleFormAction(Request $request)
+    {
+        // création Entité "Spectacle"
+        $form= $this->createForm(SpectacleType::class, new Spectacle);
+
+
+        //saisie des données envoyées (éventuellement le client via le Formulaire
+        // à notre variable $form. Elle contient le $_POST.
+        $form->handleRequest($request);
+        //var_dump($form);die;
+
+        //controle si il y a bien un formulaire renvoyé en POST.
+        if ($form->isSubmitted()){
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            if ($form->isValid()){
+                // récupère données dans Objet/Entité Categorie
+                $spectacle = $form->getData();
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($spectacle);
+                // enregistre en BD
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_spectacles');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            "@App/Pages/form_admin_spectacle.html.twig",
+            [
+                'formspectacle' => $form->createView()
             ]
         );
     }
@@ -227,7 +268,7 @@ class FormController extends Controller
 
         // replace this example code with whatever you need
         return $this->render(
-            "@App/Pages/form_reservation.html.twig",
+            "@App/Pages/form_admin_reservation.html.twig",
             [
                 'formreservation' => $form->createView(),
             ]

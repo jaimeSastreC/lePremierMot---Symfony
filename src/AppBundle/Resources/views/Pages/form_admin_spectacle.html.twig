@@ -1,0 +1,74 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+
+
+{% block contenu %}
+    {#{{   dump(formspectacle) }}#}
+
+{#{{ form(formspectacle) }}#}
+    <div>
+        {{ form_start(formspectacle, {'attr': {'class': 'form'}}) }}
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.nomSpectacle) }}
+            {{ form_label(formspectacle.nomSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.nomSpectacle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.dateSpectacle) }}
+            {{ form_label(formspectacle.dateSpectacle), null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.dateSpectacle), {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.heureDebutSpectacle) }}
+            {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.heureFinSpectacle) }}
+            {{ form_label(formspectacle.heureFinSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.reservation) }}
+            {{ form_label(formspectacle.reservation, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.reservation, {'attr': {'class': 'form-control'}}) }}
+        </p>
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.salle) }}
+            {{ form_label(formspectacle.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.salle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
+
+
+
+        {{ form_end(formspectacle) }}
+    </div>
+
+{% endblock %}
