@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
@@ -38,7 +39,7 @@ class AdministratorController extends Controller
         //appel de l'ensemble des auteurs
         $tarifs = $tarifRepository->findAll();
 
-        //retourne la page html tarifs en utiliasnt le twig tarifs.html.twig
+        //retourne la page html tarifs en utilisant le twig tarifs.html.twig
         return $this->render("@App/Pages/tarifs_admin.html.twig",
             [
                 'tarifs' => $tarifs
@@ -56,7 +57,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des catégories
         $categories = $categorieRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig categories
+        //retourne la page html spectacles en utilisant le twig categories
         return $this->render("@App/Pages/categories_admin.html.twig",
             [
                 'categories' => $categories
@@ -74,7 +75,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des spectateurs
         $spectateurs = $spectateurRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig spectateurs
+        //retourne la page html spectacles en utilisant le twig spectateurs
         return $this->render("@App/Pages/spectateurs_admin.html.twig",
             [
                 'spectateurs' => $spectateurs
@@ -92,7 +93,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des salle
         $salles = $salleRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig salles
+        //retourne la page html spectacles en utilisant le twig salles
         return $this->render("@App/Pages/salles_admin.html.twig",
             [
                 'salles' => $salles
@@ -110,7 +111,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des salle
         $reservations = $salleRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig reservations
+        //retourne la page html spectacles en utilisant le twig reservations
         return $this->render("@App/Pages/reservations_admin.html.twig",
             [
                 'reservations' => $reservations
@@ -128,10 +129,28 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des spectacles
         $spectacles = $spectacleRepository->findAll();
 
-        //retourne la page html spectacles en utiliasnt le twig spectacles
+        //retourne la page html spectacles en utilisant le twig spectacles
         return $this->render("@App/Pages/spectacles_admin.html.twig",
             [
                 'spectacles' => $spectacles
+            ]);
+    }
+
+    /**
+     * @Route("/admin/clients" , name="admin_clients")
+     */
+    public function listAdminClientsAction(){
+
+        // je genère le Repository de Doctrine
+        $spectacleRepository = $this->getDoctrine()->getRepository(Client::class);
+
+        //requete sur l'ensemble des clients
+        $clients = $spectacleRepository->findAll();
+
+        //retourne la page html clients en utilisant le twig clients
+        return $this->render("@App/Pages/clients_admin.html.twig",
+            [
+                'clients' => $clients
             ]);
     }
 

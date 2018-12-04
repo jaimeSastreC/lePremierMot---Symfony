@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Tarif;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -102,5 +103,74 @@ class AdminSupprimerControler extends Controller
 
         // Important : redirige vers la route demandée, avec name = 'admin_salle'
         return $this->redirectToRoute('admin_salles');
+    }
+
+    /**
+     * @Route("/admin/spectacle_supprimmer/{id}", name="admin_supp_spectacle")
+     */
+    public function spectacleSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository TarifRepository */
+        $repository = $this->getDoctrine()->getRepository(Spectacle::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $spectacle = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($spectacle);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_spectacle'
+        return $this->redirectToRoute('admin_spectacles');
+    }
+
+    /**
+     * @Route("/admin/reservation_supprimmer/{id}", name="admin_supp_reservation")
+     */
+    public function reservationSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository TarifRepository */
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $reservation = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($reservation);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_reservation'
+        return $this->redirectToRoute('admin_reservations');
+    }
+
+    /**
+     * @Route("/admin/client_supprimmer/{id}", name="admin_supp_client")
+     */
+    public function clientSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository TarifRepository */
+        $repository = $this->getDoctrine()->getRepository(Client::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $client = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($client);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_client'
+        return $this->redirectToRoute('admin_clients');
     }
 }

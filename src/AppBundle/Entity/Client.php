@@ -79,6 +79,13 @@ class Client
      */
     private $cpClient;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville_client", type="string", length=255, nullable=true)
+     */
+    private $villeClient;
+
 
 
     /**
@@ -256,6 +263,22 @@ class Client
         $this->telClient = $telClient;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVilleClient()
+    {
+        return $this->villeClient;
+    }
+
+    /**
+     * @param string $villeClient
+     */
+    public function setVilleClient($villeClient)
+    {
+        $this->villeClient = $villeClient;
     }
 
     /**
