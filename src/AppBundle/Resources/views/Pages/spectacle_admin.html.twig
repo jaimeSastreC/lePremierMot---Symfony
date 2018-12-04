@@ -12,10 +12,10 @@
     <div class="text-align-center">
 
         {# Liste les spectaurs avec une boucle for #}
-        {% for spectacle in spectacles %}
+        {% if spectacle %}
             <div>
                 <p>
-                    place pour : {{ spectacle.nomSpectacle}}&nbsp
+                    spectacle : {{ spectacle.nomSpectacle}}&nbsp
                     date : {{ spectacle.dateSpectacle|date("d/m/Y")}}&nbsp
                     début séance :{{ spectacle.heureDebutSpectacle|date('H:i:s')}}&nbsp
                     fin de séance{{ spectacle.heureFinSpectacle|date('H:i:s')}}&nbsp
@@ -31,7 +31,7 @@
 
             </div>
 
-        {% endfor %}
+        {% endif %}
     </div>
 
 

@@ -15,7 +15,7 @@
         {% for spectacle in spectacles %}
             <div>
                 <p>
-                    place pour : {{ spectacle.nomSpectacle}}&nbsp
+                    spectacle : {{ spectacle.nomSpectacle}}&nbsp
                     date : {{ spectacle.dateSpectacle|date("d/m/Y")}}&nbsp
                     début séance :{{ spectacle.heureDebutSpectacle|date('H:i:s')}}&nbsp
                     fin de séance{{ spectacle.heureFinSpectacle|date('H:i:s')}}&nbsp
