@@ -10,11 +10,13 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\ClientType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
 use AppBundle\Form\SpectateurType;
@@ -227,6 +229,47 @@ class FormController extends Controller
             "@App/Pages/form_admin_reservation.html.twig",
             [
                 'formreservation' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/form_client", name="admin_form_client")
+     */
+    public function AdminClientFormAction(Request $request)
+    {
+        // création Entité "Client"
+        $form= $this->createForm(ClientType::class, new Client);
+
+
+        //saisie des données envoyées (éventuellement le client via le Formulaire
+        // à notre variable $form. Elle contient le $_POST.
+        $form->handleRequest($request);
+        //var_dump($form);die;
+
+        //controle si il y a bien un formulaire renvoyé en POST.
+        if ($form->isSubmitted()){
+            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            if ($form->isValid()){
+                // récupère données dans Objet/Entité Categorie
+                $client = $form->getData();
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($client);
+                // enregistre en BD
+                $entityManager->flush();
+
+                return $this->redirectToRoute('admin_clients');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            "@App/Pages/form_admin_client.html.twig",
+            [
+                'formclient' => $form->createView()
             ]
         );
     }

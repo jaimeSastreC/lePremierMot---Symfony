@@ -99,9 +99,8 @@ class Client
      *
      * @Assert\Email(
      *     message = "l'email '{{ value }}' n'est pas un email valide.",
-     *     checkMX = true
+     *     checkHost = true
      * )
-     * TODO vérifier si mail contrôle marche
      */
     private $mailClient;
 

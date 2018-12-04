@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
@@ -82,7 +83,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/admin/salles" , name="admin_salles")
      */
-    public function listAdminSalleAction(){
+    public function listAdminSallesAction(){
 
         // je genère le Repository de Doctrine
         $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
@@ -94,6 +95,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/salles_admin.html.twig",
             [
                 'salles' => $salles
+            ]);
+    }
+
+    /**
+     * @Route("/admin/reservations" , name="admin_reservations")
+     */
+    public function listAdminReservationsAction(){
+
+        // je genère le Repository de Doctrine
+        $salleRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur l'ensemble des salle
+        $reservations = $salleRepository->findAll();
+
+        //retourne la page html spectacles en utiliasnt le twig reservations
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
             ]);
     }
 

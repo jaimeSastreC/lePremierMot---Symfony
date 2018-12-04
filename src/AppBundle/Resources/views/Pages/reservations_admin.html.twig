@@ -13,26 +13,31 @@
 
         {# Liste les spectaurs avec une boucle for #}
         {% for reservation in reservations %}
+            {{ dump(reservation) }}
             <div>
                 <p>
-                    place pour : {{ reservation.}}&nbsp
-                    date de reservation: {{ reservation.dateReservation|date("m/d/Y")  }} &nbsp
-                    {{ reservation.montantReservation}}&nbsp
-                    {{ reservation.spectacle}}
+                    n° de Réservation : {{ reservation.id}}<br>
+                    date de reservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
+                    montant total de reservation: {{ reservation.montantReservation}}}<br>
+                    spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
+                    {# TODO vérifier client #}
+                    {#client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>#}
                 </p>
-                <p>
-                    {{ reservation.client}}
+                <p> {#TODO verifier formule spectateurs#}
+                    {% for spectateur in reservation.spectateur%}
+                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}
+                    {% endfor %}
                 </p>
 
-                <a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
+                {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
                     <button class="supprimer" type="submit">Supprimer</button>
                 </a>
                 <a href="{{ path('admin_modif_reservation',  {'id': reservation.id}) }}">
                     <button class="modifier" type="submit">Modifier</button>
-                </a>
+                </a>#}
                 <hr>
-
-            </div>
+#}{#
+            </div>#}
 
         {% endfor %}
     </div>

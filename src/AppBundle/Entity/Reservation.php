@@ -26,7 +26,8 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="date")
-     * TODO vérifier que date soit avant ou égal à spectacle @Assert\LessThanOrEqual("today")
+     * @Assert\Date
+     *
      */
     private $dateReservation;
 
@@ -34,6 +35,7 @@ class Reservation
      * @var int
      *
      * @ORM\Column(name="montant_reservation", type="decimal", precision=7, scale=2)
+     *
      */
     private $montantReservation;
 
@@ -57,6 +59,11 @@ class Reservation
 
     //***************************************Getter Setter*************************************************
 
+
+    public function __construct()
+    {
+        $this->dateReservation = new \DateTime('now');
+    }
 
     /**
      * Get id

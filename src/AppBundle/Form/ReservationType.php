@@ -20,9 +20,10 @@ class ReservationType extends AbstractType
             ->add('dateReservation',DateType::class, [
         'widget' => 'single_text',
         'format' => 'yyyy-MM-dd'
-    ]
+    ]// $article->setDate(new \DateTime('now'));
             )
-            ->add('montantReservation') // TODO calcul automatique selon somme spectateurs
+
+
             ->add('spectacle',EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Spectacle',
@@ -32,16 +33,10 @@ class ReservationType extends AbstractType
             ->add('client', EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Client',
-                    'choice_label' => 'nomClient'
+                    'choice_label' => 'nomClient'   // TODO possible ajouter ? civilité prénom oui! idem spectateur
                 ]
             )
-            // TODO preciser liste spectateurs
-            /*->add('spectateur',EntityType::class,
-                [
-                    'class' => 'AppBundle\Entity\Spectateur',
-                    'choice_label' => 'nomSpectateur'
-                ]
-            )*/
+
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Réservation'
                 ]
