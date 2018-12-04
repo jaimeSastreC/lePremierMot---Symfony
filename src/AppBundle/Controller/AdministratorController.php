@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
+use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -116,6 +117,24 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/admin/spectacles" , name="admin_spectacles")
+     */
+    public function listAdminSpectaclesAction(){
+
+        // je genère le Repository de Doctrine
+        $spectacleRepository = $this->getDoctrine()->getRepository(Spectacle::class);
+
+        //requete sur l'ensemble des spectacles
+        $spectacles = $spectacleRepository->findAll();
+
+        //retourne la page html spectacles en utiliasnt le twig spectacles
+        return $this->render("@App/Pages/spectacles_admin.html.twig",
+            [
+                'spectacles' => $spectacles
+            ]);
+    }
+
 //**************************************** Unique ********************************************************
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif", defaults={"id"= 1 })
@@ -186,6 +205,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/salle_admin.html.twig",
             [
                 'salle' => $salle
+            ]);
+    }
+
+    /**
+     * @Route("/admin/spectacle/{id}" , name="admin_spectacle", defaults={"id"= 1 })
+     */
+    public function AdminSpectacleAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Spectacle::class);
+
+        //requete sur Entity Tarif avec $id
+        $spectacle = $repository->find($id);
+
+        //retourne la page html spectacle en utiliasnt le twig spectacle
+        return $this->render("@App/Pages/spectacle_admin.html.twig",
+            [
+                'spectacle' => $spectacle
             ]);
     }
 
