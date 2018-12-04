@@ -193,13 +193,12 @@ class FormController extends Controller
     }
 
     /**
-     * @Route("/admin/form_reservation", name="admin_form_reservation")
+     * @Route("/admin/form_reservation/{id}", name="admin_form_reservation")
      */
-    public function AdminReservationFormAction(Request $request)
+    public function AdminReservationFormAction(Request $request, $id)
     {
         // création Entité "Reservation"
         $form= $this->createForm(ReservationType::class, new Reservation);
-
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
@@ -212,6 +211,7 @@ class FormController extends Controller
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
+                var_dump($reservation);die;
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
 

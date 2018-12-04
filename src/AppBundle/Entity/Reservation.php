@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -63,6 +64,8 @@ class Reservation
     public function __construct()
     {
         $this->dateReservation = new \DateTime('now');
+
+        $this->spectateur = new ArrayCollection();
     }
 
     /**
@@ -168,8 +171,10 @@ class Reservation
      */
     public function setSpectateur($spectateur)
     {
-        $this->spectateur = $spectateur;
+        $this->spectateur[] = $spectateur;
     }
+
+
 
 
 

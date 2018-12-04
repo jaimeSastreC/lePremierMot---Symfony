@@ -79,6 +79,8 @@ class Client
      */
     private $cpClient;
 
+
+
     /**
      * @var string
      *
