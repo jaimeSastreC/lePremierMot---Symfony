@@ -5,16 +5,24 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Client;
+use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
+use AppBundle\Form\ClientType;
+use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
+use AppBundle\Form\SpectacleType;
 use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use AppBundle\Repository\CategorieRepository;
+use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ReservationRepository;
 use AppBundle\Repository\SalleRepository;
+use AppBundle\Repository\SpectacleRepository;
 use AppBundle\Repository\SpectateurRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -278,6 +286,195 @@ class AdminModifierControler extends Controller
             "@App/Pages/form_admin_salle.html.twig",
             [
                 'formsalle' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/spectacle_modifier/{id}", name="admin_modif_spectacle")
+     */
+    public function spectacleModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository SpectacleRepository*/
+        $repository = $this->getDoctrine()->getRepository(Spectacle::class);
+
+        //avec le repository je récupère dans la BD spectacle sous forme d'Identity (instance)
+        $spectacle = $repository->find($id);
+
+        //recherche entité SpectacleType abstraite pour créé la forme de Spectacle avec pour objet parametre $spectacle TODO
+        $form = $this->createForm(SpectacleType::class, $spectacle);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Spectacle
+                $spectacle = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($spectacle);
+
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Spectacle a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_spectacles'
+                return $this->redirectToRoute('admin_spectacles');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Spectacle n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_spectacle.html.twig",
+            [
+                'formspectacle' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/reservation_modifier/{id}", name="admin_modif_reservation")
+     */
+    public function reservationModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository ReservationRepository*/
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
+        $reservation = $repository->find($id);
+
+        //recherche entité ReservationType abstraite pour créé la forme de Reservation avec pour objet parametre $reservation TODO
+        $form = $this->createForm(ReservationType::class, $reservation);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Reservation
+                $reservation = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($reservation);
+
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Reservation a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_reservations'
+                return $this->redirectToRoute('admin_reservations');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Reservation n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_reservation.html.twig",
+            [
+                'formreservation' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/client_modifier/{id}", name="admin_modif_client")
+     */
+    public function clientModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository ClientRepository*/
+        $repository = $this->getDoctrine()->getRepository(Client::class);
+
+        //avec le repository je récupère dans la BD client sous forme d'Identity (instance)
+        $client = $repository->find($id);
+
+        //recherche entité ClientType abstraite pour créé la forme de Client avec pour objet parametre $client TODO
+        $form = $this->createForm(ClientType::class, $client);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Client
+                $client = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($client);
+
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Client a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_clients'
+                return $this->redirectToRoute('admin_clients');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Client n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_client.html.twig",
+            [
+                'formclient' => $form->createView()
             ]
         );
     }

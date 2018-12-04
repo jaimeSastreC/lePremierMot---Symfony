@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Tarif;
 use AppBundle\Repository\TarifRepository;

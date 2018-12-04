@@ -57,7 +57,7 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des catégories
         $categories = $categorieRepository->findAll();
 
-        //retourne la page html spectacles en utilisant le twig categories
+        //retourne la page html reservations en utilisant le twig categories
         return $this->render("@App/Pages/categories_admin.html.twig",
             [
                 'categories' => $categories
@@ -242,6 +242,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/spectacle_admin.html.twig",
             [
                 'spectacle' => $spectacle
+            ]);
+    }
+
+    /**
+     * @Route("/admin/reservation/{id}" , name="admin_reservation", defaults={"id"= 1 })
+     */
+    public function AdminReservationAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur Entity Tarif avec $id
+        $reservation = $repository->find($id);
+
+        //retourne la page html reservation en utiliasnt le twig reservation
+        return $this->render("@App/Pages/reservation_admin.html.twig",
+            [
+                'reservation' => $reservation
             ]);
     }
 
