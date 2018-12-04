@@ -57,6 +57,12 @@ class Spectateur
      */
     private $categorie;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateur")
+     */
+    private $reservation;
+
     //***************************************Getter Setter*************************************************
     /**
      * Get id
@@ -147,6 +153,22 @@ class Spectateur
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * @param mixed $reservation
+     */
+    public function setReservation($reservation)
+    {
+        $this->reservation = $reservation;
     }
 
 }

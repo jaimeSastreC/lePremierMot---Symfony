@@ -1,23 +1,33 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-    {{   dump(formreservation) }}
+    {#{{   dump(formreservation) }}#}
 
-{{ form(formreservation) }}
-    {#<div> //{{ "now"|date("m/d/Y") }}
+{#{{ form(formreservation) }}#}
+    <div> Date : {{ "now"|date("m/d/Y") }}
         {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
         <p>
-            #}{#retourne message erreur si besoin après méthode isValid dans Controleur#}{#
-            {{ form_errors(formreservation.) }}
-            {{ form_label(formreservation., null, {'label_attr':  {'class': 'form-label'}}) }}
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formreservation.spectacle) }}
+            {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>
-            {{ form_widget(formreservation., {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
+        {{ form_row(formreservation.spectateur) }}
+        {#<ul>
+            {% for spectateurField in formreservation.spectateur %}
+                <li>
+                    {{ form_errors(spectateurField) }}
+                    {{ form_label(spectateurField) }}
+                    {{ form_widget(spectateurField) }}
+                </li>
+            {% endfor %}
+        </ul>#}
 
         {{ form_end(formreservation) }}
-    </div>#}
+    </div>
 
 {% endblock %}

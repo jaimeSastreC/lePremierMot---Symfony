@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,12 +18,6 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateReservation',DateType::class, [
-        'widget' => 'single_text',
-        'format' => 'yyyy-MM-dd'
-    ]// $article->setDate(new \DateTime('now'));
-            )
-
 
             ->add('spectacle',EntityType::class,
                 [
@@ -30,10 +25,20 @@ class ReservationType extends AbstractType
                     'choice_label' => 'nomSpectacle'
                 ]
             )
+            // TODO hériter automatiquement de client dans formulaire client
             ->add('client', EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Client',
                     'choice_label' => 'nomClient'   // TODO possible ajouter ? civilité prénom oui! idem spectateur
+                ]
+            )
+
+            ->add('spectateur', CollectionType::class, [
+                    'entry_type' => SpectateurType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'by_reference' => false
                 ]
             )
 

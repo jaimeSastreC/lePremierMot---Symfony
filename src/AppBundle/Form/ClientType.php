@@ -15,7 +15,14 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('civiliteClient')
+            ->add('civiliteClient', ChoiceType::class, [
+                    'choices' => [
+                        'Mlle'    => 'Mlle',
+                        'Mme'    => 'Mme',
+                        'M'    => 'M',
+                    ]
+                ]
+            )
             ->add('nomClient')
             ->add('prenomClient')
             ->add('adresseClient')

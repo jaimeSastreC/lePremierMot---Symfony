@@ -53,7 +53,7 @@ class Reservation
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Spectateur", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="reservation")
      */
     private $spectateur;
 

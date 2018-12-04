@@ -35,6 +35,13 @@ class SpectateurType extends AbstractType
                 ]
             ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
 
+            ->add('reservation',EntityType::class,
+                [
+                    'class' => 'AppBundle\Entity\Reservation',
+                    'choice_label' => 'id'
+                ]
+            )
+
             ->add('save', SubmitType::class, [
             'label' => 'Ajouter/Modifier un Spectateur'
         ]

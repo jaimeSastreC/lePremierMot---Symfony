@@ -3,7 +3,7 @@
 
 
 {% block contenu %}
-    {{   dump(formspectateur) }}
+    {#{{   dump(formspectateur) }}#}
 
 {#{{ form(formspectateur) }}#}
     <div>
@@ -44,9 +44,21 @@
         <p>
             {{ form_widget(formspectateur.categorie, {'attr': {'class': 'form-control'}}) }}
         </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectateur.reservation) }}
+            {{ form_label(formspectateur.reservation, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectateur.reservation, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
         <p>
             {{ form_widget(formspectateur.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>
+
+
 
         {{ form_end(formspectateur) }}
     </div>
