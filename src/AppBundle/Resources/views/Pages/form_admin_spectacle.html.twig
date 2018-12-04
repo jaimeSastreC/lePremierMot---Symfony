@@ -21,10 +21,10 @@
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
             {{ form_errors(formspectacle.dateSpectacle) }}
-            {{ form_label(formspectacle.dateSpectacle), null, {'label_attr':  {'class': 'form-label'}}) }}
+            {{ form_label(formspectacle.dateSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>
-            {{ form_widget(formspectacle.dateSpectacle), {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(formspectacle.dateSpectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
         <p>
@@ -45,14 +45,6 @@
             {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.reservation) }}
-            {{ form_label(formspectacle.reservation, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.reservation, {'attr': {'class': 'form-control'}}) }}
-        </p>
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
             {{ form_errors(formspectacle.salle) }}

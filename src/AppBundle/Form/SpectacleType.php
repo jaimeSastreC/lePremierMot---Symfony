@@ -26,13 +26,13 @@ class SpectacleType extends AbstractType
             )
 
             ->add('heureDebutSpectacle', TimeType::class, [
-                    'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd'
+                    'input'  => 'datetime',
+                    'widget' => 'choice',
                 ]
             )
             ->add('heureFinSpectacle', TimeType::class, [
-                    'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd'
+                    'input'  => 'datetime',
+                    'widget' => 'choice',
                 ]
             )
             ->add('salle', EntityType::class, [
