@@ -16,25 +16,18 @@
             {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
-        <p>
-            <ul class="specateurs">
-                {% for spectateurField in formreservation.spectateur %}
-                    <li>
-                        {{ form_errors(spectateurField) }}
-                        {{ form_label(spectateurField) }}
-                        {{ form_widget(spectateurField) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </p>
 
+        <ul class="specateurs">
+            {% for spectateurField in formreservation.spectateur %}
+                <li>
+                    {{ form_errors(spectateurField) }}
+                    {{ form_label(spectateurField) }}
+                    {{ form_widget(spectateurField) }}
+                </li>
+            {% endfor %}
+        </ul>
 
         {{ form_widget(formreservation.client) }}
-
-        {#<button type="button"
-        class="add-another-collection-widget"
-        data-list="#email-fields-list">Add another email</button>#}
-
 
         {{ form_end(formreservation) }}
     </div>
@@ -50,8 +43,8 @@
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addTagButton = $('<button type="button" class="add_tag_link">Ajouter</button>');
-        var $newLinkLi = $('<li>Veuillez ajouter un Spectateur</li>').append($addTagButton);
+        var $addTagButton = $('<button type="button" class="add_tag_link">Add a spectateur</button>');
+        var $newLinkLi = $('<li></li>').append($addTagButton);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
@@ -74,9 +67,11 @@
 
         function addTagForm($collectionHolder, $newLinkLi) {
             // Get the data-prototype explained earlier
-            //console.log($collectionHolder);
+            console.log($collectionHolder);
             var prototype = $collectionHolder.data('prototype');
 
+
+            console
             // get the new index
             var index = $collectionHolder.data('index');
 
@@ -88,9 +83,7 @@
 
             // Replace '__name__' in the prototype's HTML to
             // instead be a number based on how many items we have
-            newForm = newForm.replace(/__name__/g,  index + "Spectateur/Place: " );
-
-
+            newForm = newForm.replace(/__name__/g, index);
 
             // increase the index with one for the next item
             $collectionHolder.data('index', index + 1);
@@ -100,7 +93,5 @@
             $newLinkLi.before($newFormLi);
         }
     </script>
-
-
 
 {% endblock %}

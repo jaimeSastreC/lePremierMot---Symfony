@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="spectateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SpectateurRepository")
  */
-class Spectateur
+class
+Spectateur
 {
     /**
      * @var int
@@ -169,6 +170,17 @@ class Spectateur
     public function setReservation($reservation)
     {
         $this->reservation = $reservation;
+    }
+
+    public function addReservation(Reservation $reservation)
+    {
+        $this->reservation->add($reservation);
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation)
+    {
+        $this->reservation->removeElement($reservation) ;
     }
 
 }

@@ -54,7 +54,7 @@ class Reservation
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="reservation")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="reservation", cascade={"persist"})
      */
     private $spectateur;
 
@@ -109,6 +109,7 @@ class Reservation
      *
      * @return Reservation
      */
+    //TODO fonction qui récupère total Entity Spectateur
     public function setMontantReservation($montantReservation)
     {
         $this->montantReservation = $montantReservation;
@@ -158,25 +159,33 @@ class Reservation
         $this->client = $client;
     }
 
+    public function addSpectacteur(Spectateur $spectateur)
+    {
+        $this->spectateur[] = $spectateur;
+        return $this;
+    }
+
+
+    public function removeSpectateur(Spectateur $spectateur)
+    {
+        $this->spectateur->removeElement($spectateur);
+    }
+
     /**
-     * @return mixed
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSpectateur()
     {
         return $this->spectateur;
     }
 
-    /**
-     * @param mixed $spectateur
-     */
-    public function setSpectateur($spectateur)
+
+    public function setSpectateur(ArrayCollection $spectateur)
     {
-        $this->spectateur[] = $spectateur;
+        $this->spectateur = $spectateur;
     }
-
-
-
-
 
 }
 
