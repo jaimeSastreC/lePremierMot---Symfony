@@ -25,11 +25,11 @@ class ReservationType extends AbstractType
                     'choice_label' => 'nomSpectacle'
                 ]
             )
-            // TODO hériter automatiquement de client dans formulaire client
+            //
             ->add('client', EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Client',
-                    'choice_label' => 'nomClient'   // TODO possible ajouter ? civilité prénom oui! idem spectateur
+                    'choice_label' => 'nomClient'   // TODO ajouter civilité prénom , idem spectateur
                 ]
             )
 

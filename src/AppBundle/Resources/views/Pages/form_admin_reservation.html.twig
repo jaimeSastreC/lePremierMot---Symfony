@@ -28,7 +28,13 @@
             </ul>
         </p>
 
+
         {{ form_widget(formreservation.client) }}
+
+        {#<button type="button"
+        class="add-another-collection-widget"
+        data-list="#email-fields-list">Add another email</button>#}
+
 
         {{ form_end(formreservation) }}
     </div>
@@ -82,7 +88,7 @@
 
             // Replace '__name__' in the prototype's HTML to
             // instead be a number based on how many items we have
-            newForm = newForm.replace(/__name__/g, "Spectateur/Place: " + index );
+            newForm = newForm.replace(/__name__/g,  index + "Spectateur/Place: " );
 
 
 
@@ -94,5 +100,7 @@
             $newLinkLi.before($newFormLi);
         }
     </script>
+
+
 
 {% endblock %}
