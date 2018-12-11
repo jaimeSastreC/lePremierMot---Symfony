@@ -4,7 +4,9 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,13 +31,16 @@ class ClientType extends AbstractType
             ->add('adresseClient')
             ->add('cpClient')
             ->add('villeClient')
-            ->add('telClient')
+            ->add('paysClient', CountryType::class)
+            ->add('telClient', TelType::class)
             ->add('mailClient')
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier un Client'
                 ]
             ); //fin du builder ;
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

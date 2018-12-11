@@ -58,7 +58,7 @@ class Reservation
      */
     private $spectateur;
 
-    //***************************************Getter Setter*************************************************
+    //***************************************Constructor*************************************************
 
 
     public function __construct()
@@ -66,7 +66,25 @@ class Reservation
         $this->dateReservation = new \DateTime('now');
 
         $this->spectateur = new ArrayCollection();
+        $this->calculMontant();
     }
+
+    //***************************************methode calcul montant total des réservations*************************************************
+
+    private function calculMontant(){
+        $spectateurs = $this->getSpectateur();
+        $PrixPlaces = 0;
+        foreach ($spectateurs as $spectateur){
+            $PrixPlace = $spectateur
+                ->getCategorie()
+                ->getTarif()
+                ->getPrixPlace();
+            $PrixPlaces += $PrixPlace;
+            //utilise getter pour ajouter le montant calculé à la $reservation
+            $this->setMontantReservation($PrixPlaces);
+        }
+    }
+    //***************************************Getter Setter*************************************************
 
     /**
      * Get id
@@ -103,29 +121,22 @@ class Reservation
     }
 
     /**
-     * Set montantReservation
-     *
-     * @param string $montantReservation
-     *
-     * @return Reservation
+     * @return int
      */
-    //TODO fonction qui récupère total Entity Spectateur
-    public function setMontantReservation($montantReservation)
-    {
-        $this->montantReservation = $montantReservation;
-
-        return $this;
-    }
-
-    /**
-     * Get montantReservation
-     *
-     * @return string
-     */
-    public function getMontantReservation()
+    public function getMontantReservation(): int
     {
         return $this->montantReservation;
     }
+
+    /**
+     * @param int $montantReservation
+     */
+    public function setMontantReservation(int $montantReservation): void
+    {
+        $this->montantReservation = $montantReservation;
+    }
+
+
 
     /**
      * @return mixed

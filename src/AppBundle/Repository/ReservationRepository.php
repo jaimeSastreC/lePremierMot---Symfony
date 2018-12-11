@@ -10,4 +10,22 @@ namespace AppBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * @param $client
+     * @return array
+     */
+    public function getReservationByClient($client){
+
+        //var_dump('hello genre'); die;
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        $query = $queryBuilder
+            ->select('r')
+            ->where('r.client =:client')
+            ->setParameter('client', $client)
+            ->getQuery();
+        $results = $query->getResult();
+        return $results;
+    }
 }

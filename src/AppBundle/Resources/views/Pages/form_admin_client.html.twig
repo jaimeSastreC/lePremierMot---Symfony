@@ -60,6 +60,14 @@
             {{ form_widget(formclient.villeClient, {'attr': {'class': 'form-control'}}) }}
         </p>
 
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formclient.paysClient) }}
+            {{ form_label(formclient.paysClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formclient.paysClient, {'attr': {'class': 'form-control'}}) }}
+        </p>
 
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur #}

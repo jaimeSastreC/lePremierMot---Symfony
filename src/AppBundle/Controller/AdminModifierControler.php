@@ -55,19 +55,19 @@ class AdminModifierControler extends Controller
         //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
         $tarif = $repository->find($id);
 
-        //recherche entité TarifType abstraite pour créé la forme de Tarif avec pour objet parametre $tarif TODO
+        //recherche entité TarifType abstraite pour créé la forme de Tarif avec pour objet parametre $tarif
         $form = $this->createForm(TarifType::class, $tarif);
 
         // associe les données envoyées (éventuellement) par le client via le formulaire
-        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
-        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi le $_POST
+        //handlerequest reremplit le formulaire, récupère les données et les reinjecte dans formulaire
         $form->handleRequest($request);
 
-        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide
         if ($form->isSubmitted()){
             if ($form->isValid()) {
 
-                // récupère données dans Objet/Entité Categorie
+                // récupère données dans Objet/Entité Tarif
                 $tarif = $form->getData();
 
                 // je récupère l'entity manager de doctrine
@@ -353,6 +353,7 @@ class AdminModifierControler extends Controller
         );
     }
 
+    //TODO vérifier méthode
     /**
      *@Route("/admin/reservation_modifier/{id}", name="admin_modif_reservation")
      */
@@ -377,9 +378,6 @@ class AdminModifierControler extends Controller
         //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
         if ($form->isSubmitted()){
             if ($form->isValid()) {
-
-                // récupère données dans Objet/Entité Reservation
-                $reservation = $form->getData();
 
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();

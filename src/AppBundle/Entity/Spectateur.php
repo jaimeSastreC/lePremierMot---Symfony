@@ -172,16 +172,5 @@ Spectateur
         $this->reservation = $reservation;
     }
 
-    public function addReservation(Reservation $reservation)
-    {
-        $this->reservation->add($reservation);
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation)
-    {
-        $this->reservation->removeElement($reservation) ;
-    }
-
 }
 

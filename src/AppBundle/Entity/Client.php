@@ -82,11 +82,15 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="ville_client", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ville_client", type="string", length=50, nullable=true)
      */
     private $villeClient;
 
-
+    /**
+     * @ORM\Column(name="pays_client", type="string", length=50, nullable=true)
+     *
+     */
+    private $paysClient;
 
     /**
      * @var string
@@ -279,6 +283,22 @@ class Client
     public function setVilleClient($villeClient)
     {
         $this->villeClient = $villeClient;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaysClient()
+    {
+        return $this->paysClient;
+    }
+
+    /**
+     * @param mixed $pays
+     */
+    public function setPaysClient($pays): void
+    {
+        $this->pays = $pays;
     }
 
     /**

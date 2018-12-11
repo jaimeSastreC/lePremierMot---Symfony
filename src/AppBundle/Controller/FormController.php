@@ -242,10 +242,9 @@ class FormController extends Controller
         // création Entité "Reservation"
         $form= $this->createForm(ReservationType::class, new Reservation);
 
-        //saisie des données envoyées (éventuellement le client via le Formulaire
+        //saisie des données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -253,6 +252,17 @@ class FormController extends Controller
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
+
+                $spectateurs = $reservation->getSpectateur();
+                $PrixPlaces = 0;
+                foreach ($spectateurs as $spectateur){
+                    $PrixPlace = $spectateur
+                        ->getCategorie()
+                        ->getTarif()
+                        ->getPrixPlace();
+                    $PrixPlaces += $PrixPlace;
+                }
+                $reservation->setMontantReservation($PrixPlaces);
 
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();

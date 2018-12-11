@@ -9,6 +9,7 @@ use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
+use AppBundle\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,10 +107,24 @@ class AdministratorController extends Controller
     public function listAdminReservationsAction(){
 
         // je genère le Repository de Doctrine
-        $salleRepository = $this->getDoctrine()->getRepository(Reservation::class);
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        //requete sur l'ensemble des salle
-        $reservations = $salleRepository->findAll();
+        //requete sur l'ensemble des reservation
+        $reservations = $reservationRepository->findAll();
+
+        //possibilité de mettre à jour les montants par méthode
+        foreach ($reservations as $reservation) {
+            $spectateurs = $reservation->getSpectateur();
+            $PrixPlaces = 0;
+            foreach ($spectateurs as $spectateur) {
+                $PrixPlace = $spectateur
+                    ->getCategorie()
+                    ->getTarif()
+                    ->getPrixPlace();
+                $PrixPlaces += $PrixPlace;
+            }
+            $reservation->setMontantReservation($PrixPlaces);
+        }
 
         //retourne la page html spectacles en utilisant le twig reservations
         return $this->render("@App/Pages/reservations_admin.html.twig",
@@ -117,6 +132,7 @@ class AdministratorController extends Controller
                 'reservations' => $reservations
             ]);
     }
+
 
     /**
      * @Route("/admin/spectacles" , name="admin_spectacles")
@@ -181,7 +197,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Categorie::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Categorie avec $id
         $categorie = $repository->find($id);
 
         //retourne la page html categorie en utiliasnt le twig categorie
@@ -217,7 +233,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Salle::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Salle avec $id
         $salle = $repository->find($id);
 
         //retourne la page html salle en utiliasnt le twig salle
@@ -235,7 +251,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Spectacle::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Spectacle avec $id
         $spectacle = $repository->find($id);
 
         //retourne la page html spectacle en utiliasnt le twig spectacle
@@ -253,13 +269,47 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Reservation avec $id
         $reservation = $repository->find($id);
+
+        // calcule le montant
+        $spectateurs = $reservation->getSpectateur();
+        $PrixPlaces = 0;
+        foreach ($spectateurs as $spectateur){
+            $PrixPlace = $spectateur
+                        ->getCategorie()
+                        ->getTarif()
+                        ->getPrixPlace();
+            $PrixPlaces += $PrixPlace;
+        }
+        $reservation->setMontantReservation($PrixPlaces);
 
         //retourne la page html reservation en utiliasnt le twig reservation
         return $this->render("@App/Pages/reservation_admin.html.twig",
             [
                 'reservation' => $reservation
+            ]);
+    }
+
+    //************************************** Requetes ciblées ********************************************
+
+    /**
+     * @Route("/admin/reservations/{client}", name="admin_reservations_client")
+     */
+    public function requeteReservationsAction($client){
+
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
+        /** @var $reservationRepository ReservationRepository */
+        $reservations = $reservationRepository->getReservationByClient($client);
+
+        //var_dump($reservations);die;
+        //retourne la page html auteurs en utiliasnt le twig auteur.html.twig
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
             ]);
     }
 
