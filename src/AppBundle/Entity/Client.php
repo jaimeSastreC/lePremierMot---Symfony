@@ -294,12 +294,13 @@ class Client
     }
 
     /**
-     * @param mixed $pays
+     * @param mixed $paysClient
      */
-    public function setPaysClient($pays): void
+    public function setPaysClient($paysClient): void
     {
-        $this->pays = $pays;
+        $this->paysClient = $paysClient;
     }
+
 
     /**
      * Get telClient

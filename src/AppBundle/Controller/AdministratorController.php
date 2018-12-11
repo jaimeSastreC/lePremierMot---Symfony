@@ -112,20 +112,6 @@ class AdministratorController extends Controller
         //requete sur l'ensemble des reservation
         $reservations = $reservationRepository->findAll();
 
-        //possibilité de mettre à jour les montants par méthode
-        foreach ($reservations as $reservation) {
-            $spectateurs = $reservation->getSpectateur();
-            $PrixPlaces = 0;
-            foreach ($spectateurs as $spectateur) {
-                $PrixPlace = $spectateur
-                    ->getCategorie()
-                    ->getTarif()
-                    ->getPrixPlace();
-                $PrixPlaces += $PrixPlace;
-            }
-            $reservation->setMontantReservation($PrixPlaces);
-        }
-
         //retourne la page html spectacles en utilisant le twig reservations
         return $this->render("@App/Pages/reservations_admin.html.twig",
             [
@@ -271,18 +257,6 @@ class AdministratorController extends Controller
 
         //requete sur Entity Reservation avec $id
         $reservation = $repository->find($id);
-
-        // calcule le montant
-        $spectateurs = $reservation->getSpectateur();
-        $PrixPlaces = 0;
-        foreach ($spectateurs as $spectateur){
-            $PrixPlace = $spectateur
-                        ->getCategorie()
-                        ->getTarif()
-                        ->getPrixPlace();
-            $PrixPlaces += $PrixPlace;
-        }
-        $reservation->setMontantReservation($PrixPlaces);
 
         //retourne la page html reservation en utiliasnt le twig reservation
         return $this->render("@App/Pages/reservation_admin.html.twig",

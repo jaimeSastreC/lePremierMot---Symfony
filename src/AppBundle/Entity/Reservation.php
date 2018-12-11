@@ -66,7 +66,7 @@ class Reservation
         $this->dateReservation = new \DateTime('now');
 
         $this->spectateur = new ArrayCollection();
-        $this->calculMontant();
+
     }
 
     //***************************************methode calcul montant total des réservations*************************************************
@@ -81,7 +81,7 @@ class Reservation
                 ->getPrixPlace();
             $PrixPlaces += $PrixPlace;
             //utilise getter pour ajouter le montant calculé à la $reservation
-            $this->setMontantReservation($PrixPlaces);
+            return $PrixPlaces;
         }
     }
     //***************************************Getter Setter*************************************************
@@ -129,11 +129,11 @@ class Reservation
     }
 
     /**
-     * @param int $montantReservation
+     * @return int
      */
-    public function setMontantReservation(int $montantReservation): void
+    public function setMontantReservation(): void
     {
-        $this->montantReservation = $montantReservation;
+        $this->montantReservation = $this->calculMontant();
     }
 
 
@@ -193,7 +193,7 @@ class Reservation
     }
 
 
-    public function setSpectateur(ArrayCollection $spectateur)
+    public function setSpectateur(\Doctrine\Common\Collections\Collection $spectateur)
     {
         $this->spectateur = $spectateur;
     }
