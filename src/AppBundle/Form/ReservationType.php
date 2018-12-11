@@ -26,10 +26,13 @@ class ReservationType extends AbstractType
                 ]
             )
             //
-            ->add('client', EntityType::class,
-                [
+
+
+            ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
-                    'choice_label' => 'nomClient'   // TODO ajouter civilité prénom , idem spectateur
+                    'choice_label' => function($client) {
+                        return $client->getCiviliteClient().' '.$client->getNomClient();
+                    },
                 ]
             )
 

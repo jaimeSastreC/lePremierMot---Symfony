@@ -82,7 +82,7 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="ville_client", type="string", length=50, nullable=true)
+     * @ORM\Column(name="ville_client", type="string", length=10, nullable=true)
      */
     private $villeClient;
 

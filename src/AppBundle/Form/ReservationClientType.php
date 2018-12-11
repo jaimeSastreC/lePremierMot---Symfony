@@ -26,12 +26,13 @@ class ReservationClientType extends AbstractType
                 ]
             )
             // TODO hériter automatiquement de client dans formulaire client
-            /*->add('client', EntityType::class,
-                [
+            ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
-                    'choice_label' => 'nomClient'   // TODO possible ajouter ? civilité prénom oui! idem spectateur
+                    'choice_label' => function($client) {
+                        return $client->getCiviliteClient().' '.$client->getNomClient();
+                    },
                 ]
-            )*/
+            )
 
             ->add('spectateur', CollectionType::class, [
                     'entry_type' => SpectateurType::class,
