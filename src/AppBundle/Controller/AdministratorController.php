@@ -109,7 +109,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        //requete sur l'ensemble des reservation
+        //requete sur l'ensemble des reservations
         $reservations = $reservationRepository->findAll();
 
         //retourne la page html spectacles en utilisant le twig reservations
@@ -279,7 +279,6 @@ class AdministratorController extends Controller
         /** @var $reservationRepository ReservationRepository */
         $reservations = $reservationRepository->getReservationByClient($client);
 
-        //var_dump($reservations);die;
         //retourne la page html auteurs en utiliasnt le twig auteur.html.twig
         return $this->render("@App/Pages/reservations_admin.html.twig",
             [

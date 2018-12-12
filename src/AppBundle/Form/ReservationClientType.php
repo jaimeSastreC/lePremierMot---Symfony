@@ -25,14 +25,6 @@ class ReservationClientType extends AbstractType
                     'choice_label' => 'nomSpectacle'
                 ]
             )
-            // TODO hériter automatiquement de client dans formulaire client
-            ->add('client',EntityType::class, [
-                    'class' => 'AppBundle\Entity\Client',
-                    'choice_label' => function($client) {
-                        return $client->getCiviliteClient().' '.$client->getNomClient();
-                    },
-                ]
-            )
 
             ->add('spectateur', CollectionType::class, [
                     'entry_type' => SpectateurType::class,

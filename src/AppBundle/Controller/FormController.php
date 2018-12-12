@@ -112,9 +112,9 @@ class FormController extends Controller
     }
 
     /**
-     * @Route("/admin/form_spectateur", name="admin_form_spectateur")
+     * @Route("/admin/form_spectateur/{reservation}", name="admin_form_spectateur")
      */
-    public function AdminSpectateurFormAction(Request $request)
+    public function AdminSpectateurFormAction(Request $request, $reservation)
     {
         // création Entité "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);
@@ -133,6 +133,8 @@ class FormController extends Controller
                 $spectateur = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
+
+                $spectateur->setReservation($reservation);
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($spectateur);
@@ -308,6 +310,9 @@ class FormController extends Controller
 
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
+
+                //set client
+                $reservation->setClient($id);
 
                 //$client = $this->get('security.context')->getToken()->getUser();
 

@@ -382,6 +382,17 @@ class AdminModifierControler extends Controller
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();
 
+                // mise à jour du montantReservation
+                $spectateurs = $reservation->getSpectateur();
+                $PrixPlaces = 0;
+                foreach ($spectateurs as $spectateur) {
+                    $PrixPlace = $spectateur
+                        ->getCategorie()
+                        ->getTarif()
+                        ->getPrixPlace();
+                    $PrixPlaces += $PrixPlace;
+                }
+                $reservation->setMontantReservation($PrixPlaces);
 
                 // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
                 $entityManager->persist($reservation);

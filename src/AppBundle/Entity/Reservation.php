@@ -60,13 +60,12 @@ class Reservation
 
     //***************************************Constructor*************************************************
 
-
     public function __construct()
     {
         $this->dateReservation = new \DateTime('now');
 
         $this->spectateur = new ArrayCollection();
-
+        $this->updateMontantReservation();
     }
 
     //***************************************methode calcul montant total des réservations*************************************************
@@ -131,7 +130,15 @@ class Reservation
     /**
      * @return int
      */
-    public function setMontantReservation(): void
+    public function setMontantReservation($montantReservation): void
+    {
+        $this->montantReservation = $montantReservation;
+    }
+
+    /**
+     * @return int
+     */
+    public function updateMontantReservation(): void
     {
         $this->montantReservation = $this->calculMontant();
     }

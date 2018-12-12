@@ -35,6 +35,8 @@ class SpectateurType extends AbstractType
                 ]
             ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
 
+
+            // TODO régler mise à jour id selon nouvel id
             ->add('reservation',EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Reservation',

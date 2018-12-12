@@ -21,7 +21,7 @@
                     montant total de reservation: {{ reservation.montantReservation}}<br>
                     spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
                     {# TODO vérifier client #}
-                    {#client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>#}
+                    client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>
                 </p>
                 <p> {#TODO verifier formule spectateurs#}
                     {% for spectateur in reservation.spectateur%}
