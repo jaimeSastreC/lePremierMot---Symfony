@@ -1,10 +1,7 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
+{% block contenu %}
     {#{{ dump(reservations) }}#}
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
     <p>
         <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
     </p>
@@ -17,15 +14,15 @@
             <div>
                 <p>
                     n° de réservation : {{ reservation.id}}<br>
-                    spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
+                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}"</strong></em><br>
                     date de réservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
-                    montant total de la réservation: {{ reservation.montantReservation}} &euro;<br>
+                    montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
 
-                    client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>
+                    client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
                 </p>
-                <p> {#TODO verifier formule spectateurs#}
+                <p>
                     {% for spectateur in reservation.spectateur%}
-                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}
+                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}<br>
                     {% endfor %}
                 </p>
 

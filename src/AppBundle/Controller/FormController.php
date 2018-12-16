@@ -112,9 +112,9 @@ class FormController extends Controller
     }
 
     /**
-     * @Route("/admin/form_spectateur/{reservation}", name="admin_form_spectateur")
+     * @Route("/admin/form_spectateur", name="admin_form_spectateur")
      */
-    public function AdminSpectateurFormAction(Request $request, $reservation)
+    public function AdminSpectateurFormAction(Request $request)
     {
         // création Entité "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);

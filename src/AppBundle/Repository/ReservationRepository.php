@@ -36,8 +36,9 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
         // utilisation du LIKE avec controle entrée setParameter;
         $query = $queryBuilder
             ->select('r')
-           /* ->leftJoin('AppBundle\Entity\Client', 'c')*/
+           /* jointure table client*/
             ->leftJoin('r.client', 'c')
+            /* requete ciblée sur nom client, avec Like qui permet de donner un nom qui inclut quelques lettres*/
             ->where('c.nomClient LIKE :nomClient')
             ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
             ->getQuery(); /// important ! à ajouter setParameter

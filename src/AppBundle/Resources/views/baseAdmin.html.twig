@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {#bootstrap#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">        {#lien feuille style assets#}
+    {#mon css#}
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <title>{% block title %}Admin Premier mOt{% endblock %}</title>
 </head>
@@ -25,7 +26,22 @@
                 <a href="{{ path('admin_reservations') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Réservations</a>
             </li >
             <li class="nav-item pr-3">
+                <a href="{{ path('admin_spectateurs') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Spectateurs</a>
+            </li >
+            <li class="nav-item pr-3">
+                <a href="{{ path('admin_spectacles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Spectacles</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a href="{{ path('admin_salles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Salles</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a href="{{ path('admin_categories') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Catégories</a>
+            </li>
+            <li class="nav-item pr-3">
                 <a href="{{ path('admin_tarifs') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Tarifs</a>
+            </li>
+            <li class="nav-item pr-3 ml-3">
+                <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-5" role="button" aria-pressed="true">Clients</a>
             </li>
         </ul>
     </nav>
@@ -48,12 +64,12 @@
             <div class="container flex-column">
             {% block sidebar %}
                 <aside>
-                    <nav class="nav">
+                    <nav >
                         <h2>Menu</h2>
-                        <ul >
+                        <ul class="nav">
                             <li class="nav-item">
                                 <form class="form-inline" method="get" action="{{ path('client_reservation_search_name') }}">
-                                    <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="searchName">
+                                    <input class="form-control " type="search" placeholder="reservation: nom Client" aria-label="Search" name="searchName">
                                     <button class="btn btn-outline-success " type="submit">Recherche</button>
                                 </form>
                             </li>

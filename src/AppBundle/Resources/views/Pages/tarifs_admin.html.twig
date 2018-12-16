@@ -1,10 +1,7 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
+{% block contenu %}
 
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
     <p>
         <a href="{{ path('admin_form_tarif') }}">Ajouter un Tarif</a>
     </p>
@@ -15,7 +12,7 @@
             {#{{ dump(tarif) }}#}
 
                 <p>
-                    tarif : {{ tarif.prixplace }}
+                    tarif : {{ tarif.prixplace }}&euro;
                 </p>
 
                 <a href="{{ path('admin_supp_tarif',  {'id': tarif.id}) }}">

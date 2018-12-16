@@ -1,10 +1,8 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
-    {{ dump(categories) }}
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
+{% block contenu %}
+{#    {{ dump(categories) }}#}
+
     <p>
         <a href="{{ path('admin_form_categorie') }}">Ajouter une Catégorie</a>
     </p>
@@ -15,9 +13,9 @@
         {% for categorie in categories %}
             <div>
                 <p>
-                    place pour : {{ categorie.libelle}}&nbsp
-                    {{ categorie.tarif.prixplace}}&nbsp
-                    {{ categorie.spectacle.nomSpectacle}}
+                    catégorie : <em>{{ categorie.libelle}}</em>&nbsp
+                    prix : {{ categorie.tarif.prixplace}}&euro;&nbsp
+                    spectacle : <em><strong>{{ categorie.spectacle.nomSpectacle}}</strong></em>
                 </p>
 
                 <a href="{{ path('admin_supp_categorie',  {'id': categorie.id}) }}">

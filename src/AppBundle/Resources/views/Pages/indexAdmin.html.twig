@@ -2,10 +2,44 @@
 
 {% block title %}Admin Premier mOt{% endblock %}
 
-{% block contenu %}Contenu
+{% block contenu %}
+    <div class="container">
+        <div class="row ">
+            <div class="col ">
+                <h2 >Espace Administration :</h2>
+                <p>
+                    Outils de gestion des "réservations" dans cet espace. <br>
 
-    <p>
-        <a href="{{ path('admin_tarifs') }}">lien Tarifs</a>
-    </p>
+                    Le menu du haut donne accès à toutes les catégories pour visualisatione et modification
+                    ou suppréssions des informations contenues dans chaque catégories.<br>
 
+                    Vous pouvez définir un nouveau "spectacle",
+                    choisir la "salle" si elle existe déjà ou en attribuer une nouvelle,
+                    et donner le nombre de places disponibles en salle. <br>
+
+                    Ensuite définissez les "tarifs" si ils ne sont pas existants.
+                    N'effacez des tarifs que en phase de création car sinon cela affecterait des réservations en cours.
+
+                    Définissez les "catégories" de spectateurs/places en choisissant le spectacle et le tarif de la place.
+
+                    Et voilà, à partir de là vous pouvez ouvrir les réservations.
+
+                    Le client qui veut réserver peut créer un profil client provisoire ou membre.
+                    Ensuite aller dans l'espace réservation, y choisir le spectacle,
+                    réserver pour des spectateurs selon la catégorie du spectateur,
+                    et valider sa réservation. Puis choisir pour le règlement de la réservation entre:
+                    Payement sur place si membre, <br>
+                    Payement par chèque envoyé par courrier, <br>
+                    ou payer en ligne par Paypal. ( ce moyen de payement sera mis en place
+                    avec un membre de l'association, avec création de compte)
+
+
+                </p>
+            </div>
+            <h1></h1>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
 {% endblock %}

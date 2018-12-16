@@ -1,10 +1,7 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
-    {#{{ dump(spectateurs) }}#}
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
+{% block contenu %}
+
     <p>
         <a href="{{ path('admin_form_spectateur') }}">Ajouter un Spectateur</a>
     </p>
@@ -16,8 +13,9 @@
             <div>
                 <p>
                     place pour : {{ spectateur.civilitespectateur}}&nbsp
-                    {{ spectateur.nomSpectateur}}&nbsp
-                    {{ spectateur.prenomSpectateur}}
+                    <strong>{{ spectateur.nomSpectateur}}</strong>&nbsp
+                    {{ spectateur.prenomSpectateur}}&nbsp &nbsp
+                    réservation n° : {{ spectateur.reservation.id }}
                 </p>
 
                 <a href="{{ path('admin_supp_spectateur',  {'id': spectateur.id}) }}">
@@ -32,7 +30,6 @@
 
         {% endfor %}
     </div>
-
 
 {% endblock %}
 
