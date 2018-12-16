@@ -27,7 +27,7 @@ class AdministratorController extends Controller
     }
 
 
-//****************************************Listes********************************************************
+//**************************************** Listes ********************************************************
 
     /**
      * @Route("/admin/tarifs" , name="admin_tarifs")
@@ -279,7 +279,32 @@ class AdministratorController extends Controller
         /** @var $reservationRepository ReservationRepository */
         $reservations = $reservationRepository->getReservationByClient($client);
 
-        //retourne la page html auteurs en utiliasnt le twig auteur.html.twig
+        //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
+    //méthode puissante qui fait une recherche à partir d'un mot clé sur Twig> Form > name -> requete get
+    /**
+     * @Route("/admin/client_reservations/searchName", name="client_reservation_search_name")
+     */
+    public function requeteReservationsClientAction(Request $request){
+        //Request $request crée l'objet, géré par Symfony
+        //récupère dans le Form le GET.
+
+        $name = $request->query->get('searchName');
+
+        //var_dump($name);die; //ok
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        // méthode crée puissante => voir repository!!
+        $reservations = $reservationRepository->getClientReservation($name);
+
+        //dump($reservations);die;
+        //retourne la page html reservations en utiliasnt le twig reservations.html.twig
         return $this->render("@App/Pages/reservations_admin.html.twig",
             [
                 'reservations' => $reservations

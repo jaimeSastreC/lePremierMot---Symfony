@@ -28,4 +28,20 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
         $results = $query->getResult();
         return $results;
     }
+
+    //recherche par nom client approximatif dans Client !!!!!!!!!!!!!!
+    public function getClientReservation($name){
+        //crée objet constructeur de requete sur table r
+        $queryBuilder = $this->createQueryBuilder('r');
+        // utilisation du LIKE avec controle entrée setParameter;
+        $query = $queryBuilder
+            ->select('r')
+           /* ->leftJoin('AppBundle\Entity\Client', 'c')*/
+            ->leftJoin('r.client', 'c')
+            ->where('c.nomClient LIKE :nomClient')
+            ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
+            ->getQuery(); /// important ! à ajouter setParameter
+        $results = $query->getResult();
+        return $results;
+    }
 }

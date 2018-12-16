@@ -9,18 +9,18 @@
         <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
     </p>
 
-    <div class="text-align-center">
+    <div class="">
 
         {# Liste les spectaurs avec une boucle for #}
         {% for reservation in reservations %}
 
             <div>
                 <p>
-                    n° de Réservation : {{ reservation.id}}<br>
-                    date de reservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
-                    montant total de reservation: {{ reservation.montantReservation}}<br>
+                    n° de réservation : {{ reservation.id}}<br>
                     spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
-                    {# TODO vérifier client #}
+                    date de réservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
+                    montant total de la réservation: {{ reservation.montantReservation}} &euro;<br>
+
                     client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>
                 </p>
                 <p> {#TODO verifier formule spectateurs#}

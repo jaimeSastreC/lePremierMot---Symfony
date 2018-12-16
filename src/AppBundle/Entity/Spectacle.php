@@ -70,7 +70,7 @@ class Spectacle
     /**
      * @var
      * @ORM\ManyToMany(targetEntity="Tarif")
-     */// TODO OPTION pour pouvoir avoir la liste des tarifs d'un spectacle
+     */// TODO OPTION pour pouvoir avoir la liste des tarifs d'un spectacle, pas de besoin pour le moment.
     private $tarif;
 
     /**
