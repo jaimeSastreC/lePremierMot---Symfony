@@ -16,17 +16,18 @@
             {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
+        <p>
+            <ul class="specateurs">
+                {% for spectateurField in formreservation.spectateur %}
+                    <li>
+                        {{ form_errors(spectateurField) }}
+                        {{ form_label(spectateurField) }}
+                        {{ form_widget(spectateurField) }}
 
-        <ul class="specateurs">
-            {% for spectateurField in formreservation.spectateur %}
-                <li>
-                    {{ form_errors(spectateurField) }}
-                    {{ form_label(spectateurField) }}
-                    {{ form_widget(spectateurField) }}
-
-                </li>
-            {% endfor %}
-        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </p>
         <p>
         {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
         </p>

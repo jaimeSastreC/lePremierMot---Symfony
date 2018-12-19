@@ -134,7 +134,7 @@ class FormController extends Controller
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
 
-                $spectateur->setReservation($reservation);
+                $spectateur->setReservation($spectateur);
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($spectateur);
@@ -295,6 +295,12 @@ class FormController extends Controller
     {
         // création Entité "Reservation"
         $form= $this->createForm(ReservationClientType::class, new Reservation);
+
+        $form->get('client')->setData($id);
+        //$form->setData(client)-> $id;
+
+        //dump($form);die;
+
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.

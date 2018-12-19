@@ -200,5 +200,10 @@ class Reservation
     }
 
 
+    public function setSpectateur(\Doctrine\Common\Collections\Collection $spectateur)
+    {
+        $this->spectateur = $spectateur;
+    }
+
 }
 

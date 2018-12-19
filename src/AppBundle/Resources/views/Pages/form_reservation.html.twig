@@ -27,8 +27,10 @@
                 {% endfor %}
             </ul>
         </p>
-
-        {#{{ form_widget(formreservation.client) }}#}
+        <p>
+            {{ form_widget(formreservation.client, {'attr': {'disabled':'disabled'}}) }}
+        </p>
+            {#{{ form_widget(formreservation.client) }}#}
         {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
         {{ form_rest(formreservation) }}
 
