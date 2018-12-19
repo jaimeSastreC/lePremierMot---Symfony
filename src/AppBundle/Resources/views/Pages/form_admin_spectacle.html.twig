@@ -6,13 +6,13 @@
     {#{{   dump(formspectacle) }}#}
 
 {#{{ form(formspectacle) }}#}
-    <div class="offset-1 col-6">
-        {{ form_start(formspectacle, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="offset-1 col-6 bg-light ">
+        {{ form_start(formspectacle, {'attr': {'class': 'form'}}) }}
 
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
             {{ form_errors(formspectacle.nomSpectacle) }}
-            {{ form_label(formspectacle.nomSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            {{ form_label(formspectacle.nomSpectacle, null, {'label_attr':  {'class': 'form-label mt-2' }}) }}
         </p>
         <p>
             {{ form_widget(formspectacle.nomSpectacle, {'attr': {'class': 'form-control'}}) }}
@@ -33,7 +33,7 @@
             {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label '}}) }}
         </p>
         <p>
-            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control border-0'}}) }}
+            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
         </p>
 
         <p>
@@ -42,7 +42,7 @@
             {{ form_label(formspectacle.heureFinSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>
-            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control border-0'}}) }}
+            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
         </p>
 
         <p>
@@ -55,10 +55,11 @@
         </p>
 
         <p>
-            {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary mb-4'}}) }}
         </p>
 
-
+        {# génération du champ CSRF - _token#  (Cross Site Reuest Forgeries en champ caché #}
+        {{ form_rest(formspectacle) }}
 
         {{ form_end(formspectacle) }}
     </div>

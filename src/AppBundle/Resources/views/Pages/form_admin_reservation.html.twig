@@ -27,12 +27,18 @@
                 </li>
             {% endfor %}
         </ul>
+        <p>
+        {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
 
-        {{ form_widget(formreservation.client) }}
+        {# génération du champ CSRF - _token#  (Cross Site Reuest Forgeries en champ caché #}
+        {{ form_rest(formreservation) }}
+        </p>
 
         {{ form_end(formreservation) }}
     </div>
 
+
+    {# Partie JavaScript #}
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -68,9 +74,8 @@
 
         function addTagForm($collectionHolder, $newLinkLi) {
             // Get the data-prototype explained earlier
-            console.log($collectionHolder);
+            //console.log($collectionHolder);
             var prototype = $collectionHolder.data('prototype');
-
 
             //console
             // get the new index
@@ -80,9 +85,9 @@
             // You need this only if you didn't set 'label' => false in your tags field in TaskType
             // Replace '__name__label__' in the prototype's HTML to
             // instead be a number based on how many items we have
-            // newForm = newForm.replace(/__name__label__/g, index);
+            newForm = newForm.replace(/__name__label__/g, 'Spectateur n° '+ index);
 
-            newForm = newForm.replace(/__name__/g, index);
+            //newForm = newForm.replace(/__name__/g, index);
 
             // increase the index with one for the next item
             $collectionHolder.data('index', index + 1 );

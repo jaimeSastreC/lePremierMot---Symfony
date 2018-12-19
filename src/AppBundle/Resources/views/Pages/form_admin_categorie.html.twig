@@ -33,6 +33,8 @@
             {{ form_widget(formcategorie.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>
 
+        {# génération du champ CSRF - _token#  (Cross Site Reuest Forgeries en champ caché #}
+        {{ form_rest(formcategorie) }}
 
         {{ form_end(formcategorie) }}
     </div>

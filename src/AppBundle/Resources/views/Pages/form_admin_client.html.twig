@@ -88,11 +88,12 @@
             {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
         </p>
 
-
-
         <p>
             {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>
+
+        {# génération du champ CSRF - _token#  (Cross Site Reuest Forgeries en champ caché #}
+        {{ form_rest(formclient) }}
 
         {{ form_end(formclient) }}
     </div>
