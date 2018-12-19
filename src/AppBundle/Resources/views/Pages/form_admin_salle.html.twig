@@ -35,13 +35,12 @@
             {{ form_widget(formsalle.placesSalle, {'attr': {'class': 'form-control'}}) }}
         </p>
 
-
-
         <p>
             {{ form_widget(formsalle.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>
 
-
+        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+        {{ form_rest(formsalle) }}
 
         {{ form_end(formsalle) }}
     </div>

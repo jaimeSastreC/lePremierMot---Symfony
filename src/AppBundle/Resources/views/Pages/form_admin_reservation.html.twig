@@ -29,10 +29,10 @@
         </ul>
         <p>
         {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
-
-        {# génération du champ CSRF - _token#  (Cross Site Reuest Forgeries en champ caché #}
-        {{ form_rest(formreservation) }}
         </p>
+
+        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+        {{ form_rest(formreservation) }}
 
         {{ form_end(formreservation) }}
     </div>

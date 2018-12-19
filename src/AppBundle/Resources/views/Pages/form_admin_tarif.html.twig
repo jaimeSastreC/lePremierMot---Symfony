@@ -21,6 +21,9 @@
             {{ form_widget(formtarif.save, {'attr': {'class': 'btn btn-primary'}}) }}
         </p>
 
+        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+        {{ form_rest(formtarif) }}
+
         {{ form_end(formtarif) }}
     </div>
 
