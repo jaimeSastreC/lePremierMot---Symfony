@@ -1,0 +1,29 @@
+//  Defines Fontfamily and font-weight in general.
+
+//source font files in fonts directory:  fonts/...
+@font-face {
+    font-family: "ModernSans-Light";
+    src: url('../../fonts/ModernSans-Light.otf');
+}
+
+@font-face {
+    font-family: "modern_sans_serif_7";
+    src: url('../../fonts/modern_sans_serif_7.ttf');
+}
+
+@font-face {
+    font-family: "norty";
+    src: url('../../fonts/norty.tff');
+}
+
+// header and decorative font are separated for more liberty in using it;
+// so header can be more classic or easely changed in case.
+$decorative_font: "norty", cursive;
+
+$modern_sans: "ModernSans-Light", sans-serif;
+$modern_sans7: "modern_sans_serif_7";
+$header_font: $decorative_font;
+
+$light_font: 400;
+$normal_font: 700;
+$bold_font: 800;

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -122,7 +123,15 @@ class Client
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="client")
      *
      */
-    private $reservation;
+    private $reservations;
+
+    //***************************************Constructor*************************************************
+
+    public function __construct()
+    {
+
+        $this->reservations = new ArrayCollection();
+    }
 
     //***************************************Getter Setter*************************************************
     /**
@@ -343,17 +352,16 @@ class Client
      */
     public function getReservation()
     {
-        return $this->reservation;
+        return $this->reservations;
     }
 
     /**
-     * @param mixed $reservation
+     * @param mixed $reservations
      */
-    public function setReservation($reservation)
+    public function addReservation(Reservation $reservation)
     {
-        $this->reservation = $reservation;
+        $this->reservations[] = $reservation;
     }
 
-
+    //option remove reservation, ne era pas utilisé pour raison de sécurité
 }
-

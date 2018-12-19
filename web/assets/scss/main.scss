@@ -1,0 +1,20 @@
+// imports all variables
+@import 'abstracts/variables';
+
+
+// Bring in Bootstrap
+@import 'vendor/bootstrap';
+
+// typo : body etc...
+@import 'base/typography';
+
+// Bring in components
+@import 'components/navigation';
+
+// pages : specifications for each page
+@import 'pages/gallerie';
+ 
+// pages : specifications for each page
+@import 'pages/home';
+
+

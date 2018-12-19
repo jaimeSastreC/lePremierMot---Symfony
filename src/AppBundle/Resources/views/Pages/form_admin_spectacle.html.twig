@@ -6,8 +6,8 @@
     {#{{   dump(formspectacle) }}#}
 
 {#{{ form(formspectacle) }}#}
-    <div>
-        {{ form_start(formspectacle, {'attr': {'class': 'form'}}) }}
+    <div class="offset-1 col-6">
+        {{ form_start(formspectacle, {'attr': {'class': 'form-horizontal'}}) }}
 
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
@@ -30,10 +30,10 @@
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
             {{ form_errors(formspectacle.heureDebutSpectacle) }}
-            {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label '}}) }}
         </p>
         <p>
-            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control border-0'}}) }}
         </p>
 
         <p>
@@ -42,7 +42,7 @@
             {{ form_label(formspectacle.heureFinSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>
         <p>
-            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control border-0'}}) }}
         </p>
 
         <p>
