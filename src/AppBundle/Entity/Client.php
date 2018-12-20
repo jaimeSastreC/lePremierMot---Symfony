@@ -19,6 +19,21 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Client
 {
     /**
+     * @return mixed
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * @param mixed $reservations
+     */
+    public function setReservations($reservations): void
+    {
+        $this->reservations = $reservations;
+    }
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -123,14 +138,14 @@ class Client
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="client")
      *
      */
-    private $reservations;
+    private $reservation;
 
     //***************************************Constructor*************************************************
 
     public function __construct()
     {
 
-        $this->reservations = new ArrayCollection();
+        $this->reservation = new ArrayCollection();
     }
 
     //***************************************Getter Setter*************************************************
@@ -352,16 +367,21 @@ class Client
      */
     public function getReservation()
     {
-        return $this->reservations;
+        return $this->reservation;
     }
 
     /**
-     * @param mixed $reservations
+     * @param mixed $reservation
      */
     public function addReservation(Reservation $reservation)
     {
-        $this->reservations[] = $reservation;
+        $this->reservation[] = $reservation;
     }
 
-    //option remove reservation, ne era pas utilisé pour raison de sécurité
+    //option remove reservation, ne sera pas utilisé pour raison de sécurité
+
+    public function setReservation(\Doctrine\Common\Collections\Collection $reservation)
+    {
+        $this->reservation = $reservation;
+    }
 }

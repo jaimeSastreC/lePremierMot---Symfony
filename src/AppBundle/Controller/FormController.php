@@ -119,11 +119,9 @@ class FormController extends Controller
         // création Entité "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);
 
-
         //saisie des données envoyées (éventuellement le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -133,8 +131,6 @@ class FormController extends Controller
                 $spectateur = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
-
-                $spectateur->setReservation($spectateur);
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($spectateur);
@@ -297,9 +293,9 @@ class FormController extends Controller
         $form= $this->createForm(ReservationClientType::class, new Reservation);
 
         $form->get('client')->setData($id);
-        //$form->setData(client)-> $id;
+        $form->setData(client)-> $id;
 
-        //dump($form);die;
+        dump($form);die;
 
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
@@ -362,12 +358,10 @@ class FormController extends Controller
             //controle contenu, sécurité selon nécessités. Définie dans Entity
             if ($form->isValid()){
 
-
                 // récupère données dans Objet/Entité Categorie
                 $client = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
-
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($client);

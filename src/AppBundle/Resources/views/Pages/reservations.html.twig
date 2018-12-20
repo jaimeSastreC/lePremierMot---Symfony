@@ -1,0 +1,45 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+    {#{{ dump(reservations) }}#}
+    <p>
+        <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
+    </p>
+
+    <div class="">
+
+        {# Liste les spectaurs avec une boucle for #}
+        {% for reservation in reservations %}
+
+            <div>
+                <p>
+                    n° de réservation : {{ reservation.id}}<br>
+                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}"</strong></em><br>
+                    date de réservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
+                    montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
+
+                    client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                </p>
+                <p>
+                    {% for spectateur in reservation.spectateur%}
+                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}<br>
+                    {% endfor %}
+                </p>
+                {#suppression pas accessible pour client qui devra demander à l'administrateur#}
+                {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>#}
+                {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
+                <a href="{{ path('admin_modif_reservation',  {'id': reservation.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+

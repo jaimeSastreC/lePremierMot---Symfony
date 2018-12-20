@@ -268,7 +268,7 @@ class AdministratorController extends Controller
     //************************************** Requetes ciblées ********************************************
 
     /**
-     * @Route("/admin/reservations/{client}", name="admin_reservations_client")
+     * @Route("/reservations/{client}", name="reservations_client")
      */
     public function requeteReservationsAction($client){
 
@@ -280,7 +280,7 @@ class AdministratorController extends Controller
         $reservations = $reservationRepository->getReservationByClient($client);
 
         //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
-        return $this->render("@App/Pages/reservations_admin.html.twig",
+        return $this->render("@App/Pages/reservations.html.twig",
             [
                 'reservations' => $reservations
             ]);

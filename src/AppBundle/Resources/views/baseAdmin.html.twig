@@ -12,50 +12,50 @@
     <title>{% block title %}Admin Premier mOt{% endblock %}</title>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-light bg-light nav-pills ">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('admin')}}">le premier mOt: Administration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('accueil')}}">Lien accueil</a>
-            </li>
+    <header>
+        <nav class="navbar navbar-light bg-light nav-pills ">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin')}}">le premier mOt: Administration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('accueil')}}">Lien accueil</a>
+                </li>
 
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_reservations') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Réservations</a>
-            </li >
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_spectateurs') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Spectateurs</a>
-            </li >
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_spectacles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Spectacles</a>
-            </li>
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_salles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Salles</a>
-            </li>
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_categories') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Catégories</a>
-            </li>
-            <li class="nav-item pr-3">
-                <a href="{{ path('admin_tarifs') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Tarifs</a>
-            </li>
-            <li class="nav-item pr-3 ml-3">
-                <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-5" role="button" aria-pressed="true">Clients</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="alert alert-info text-center" role="alert">
-        {# ...or you can read and display every flash message available #}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash-{{ label }}">
-                    {{ message }}
-                </div>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_reservations') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Réservations</a>
+                </li >
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_spectateurs') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Spectateurs</a>
+                </li >
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_spectacles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Spectacles</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_salles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Salles</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_categories') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Catégories</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_tarifs') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Tarifs</a>
+                </li>
+                <li class="nav-item pr-3 ml-3">
+                    <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-5" role="button" aria-pressed="true">Clients</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="alert alert-info text-center" role="alert">
+            {# ...or you can read and display every flash message available #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </div>
-</header>
+        </div>
+    </header>
 
 <div class="container-fluid">
     <div class="row">
