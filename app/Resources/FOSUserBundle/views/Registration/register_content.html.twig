@@ -1,0 +1,9 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="offset-1 col-6 bg-light py-2">
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register mt-2'}}) }}
+    {{ form_widget(form) }}
+
+        <input type="submit" value="{{ 'valider'|trans }}"  class="btn btn-primary mb-4"/>
+
+{{ form_end(form) }}
+</div>

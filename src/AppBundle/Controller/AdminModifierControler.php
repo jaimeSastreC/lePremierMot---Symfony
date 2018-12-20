@@ -45,7 +45,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/tarif_modifier/{id}", name="admin_modif_tarif")
      */
-    public function tarifModifAction(Request $request, $id)
+    public function tarifAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
@@ -107,7 +107,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/categorie_modifier/{id}", name="admin_modif_categorie")
      */
-    public function categorieModifAction(Request $request, $id)
+    public function categorieAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
@@ -169,7 +169,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/spectateur_modifier/{id}", name="admin_modif_spectateur")
      */
-    public function spectateurModifAction(Request $request, $id)
+    public function spectateurAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
@@ -230,7 +230,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/salle_modifier/{id}", name="admin_modif_salle")
      */
-    public function salleModifAction(Request $request, $id)
+    public function salleAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
@@ -293,7 +293,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/spectacle_modifier/{id}", name="admin_modif_spectacle")
      */
-    public function spectacleModifAction(Request $request, $id)
+    public function spectacleAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine
@@ -353,9 +353,79 @@ class AdminModifierControler extends Controller
         );
     }
 
-    //TODO vérifier méthode
     /**
      *@Route("/admin/reservation_modifier/{id}", name="admin_modif_reservation")
+     */
+    public function reservationAdminModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository ReservationRepository*/
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
+        $reservation = $repository->find($id);
+
+        //recherche entité ReservationType abstraite pour créé la forme de Reservation avec pour objet parametre $reservation TODO
+        $form = $this->createForm(ReservationType::class, $reservation);
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // mise à jour du montantReservation
+                $spectateurs = $reservation->getSpectateur();
+                $PrixPlaces = 0;
+                foreach ($spectateurs as $spectateur) {
+                    $PrixPlace = $spectateur
+                        ->getCategorie()
+                        ->getTarif()
+                        ->getPrixPlace();
+                    $PrixPlaces += $PrixPlace;
+                }
+                $reservation->setMontantReservation($PrixPlaces);
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($reservation);
+
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Reservation a bien été ajouté!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_reservations'
+                return $this->redirectToRoute('admin_reservations');
+            } else {
+                //TODO afficher le Flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Reservation n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_admin_reservation.html.twig",
+            [
+                'formreservation' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/reservation_modifier/{id}", name="modif_reservation")
      */
     public function reservationModifAction(Request $request, $id)
     {
@@ -428,7 +498,7 @@ class AdminModifierControler extends Controller
     /**
      *@Route("/admin/client_modifier/{id}", name="admin_modif_client")
      */
-    public function clientModifAction(Request $request, $id)
+    public function clientAdminModifAction(Request $request, $id)
     {
         //var_dump($id);die;
         // je genère le Repository de Doctrine

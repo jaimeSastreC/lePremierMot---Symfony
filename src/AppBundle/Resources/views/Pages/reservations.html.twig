@@ -6,7 +6,7 @@
         <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
     </p>
 
-    <div class="">
+    <div >
 
         {# Liste les spectaurs avec une boucle for #}
         {% for reservation in reservations %}
@@ -30,7 +30,7 @@
                     <button class="supprimer" type="submit">Supprimer</button>
                 </a>#}
                 {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
-                <a href="{{ path('admin_modif_reservation',  {'id': reservation.id}) }}">
+                <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">
                     <button class="modifier" type="submit">Modifier</button>
                 </a>
                 <hr>
