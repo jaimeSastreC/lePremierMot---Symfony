@@ -8,7 +8,7 @@
     <meta name="description" content=" la Compagnie du premier mOt, encore une troupe de comédiens amateurs?, oui! sans prétention, c'est ce que nous sommes.
 du plaisir, c'est ce que nous recherchons. du plaisir à prendre. du plaisir à donner. du plaisir à partager. on vous invite simplement à venir en prendre en notre compagnie... ">
     <meta name="keywords" content="théâtre, theater, le premier mot, spectacle, troupe, lederniermOt est affilié à l'XXX, Association  des Compagnies Dramatiques, et à la XXX, Fédération Nationale des Compagnies Dramatiques.">
-    <meta name=robots content=all>
+    <meta name=robots content="index, follow">
     <!--   JQuery complet incluant hover -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {% block head_js %}
@@ -63,6 +63,33 @@ du plaisir, c'est ce que nous recherchons. du plaisir à prendre. du plaisir à 
 {% block contenu %}
     <!-- Contenu Page -->
 {% endblock %}
+
+<!--        footer de la page -->
+
+<footer>
+    <div class="container-fluid bg-dark d-flex flex-column flex-md-row d-lg-block justify-content-between align-items-end">
+        <div class="row  footer ">
+            <div class="col-12 col-md-4 order-3 order-md-1  m-0 m-md-0 text-center">
+                <p class="p-3 mx-lg-5">© copyright 2018 <br>le premier mot par JSC</p>
+            </div>
+
+            <div class="col-12 order-1 col-md-4 order-md-2 text-center m-0">
+                <p class="p-3 mx-lg-5 m-0">
+                    <a href="#">mentions légales</a>
+                    <a href="#"><br>Devenir membre</a>
+                </p>
+
+            </div>
+            <div class="col-12 col-md-4 order-2 order-md-3 mt-3 d-flex justify-content-center align-items-center">
+                <p><a href="https://www.facebook.com" target="_blank">
+                        <img src={{ asset("img/FB.png")}} alt="FB" class="img-fluid pr-3"></a></p>
+                <p><a href="https://twitter.com/" target="_blank"><img src={{ asset("img/TW.png")}} alt="TW" class="img-fluid pr-3"></a></p>
+                <p><a href="https://www.instagram.com" target="_blank"><img src={{ asset("img/INST.png")}} alt="IN" class="img-fluid pr-3"></a></p>
+                <p><a href="https://www.youtube.com" target="_blank"><img src={{ asset("img/YOUT.png")}} alt="YOUT" class="img-fluid "></a></p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- Optional JavaScript -->
 {% block foot_js %}
