@@ -4,13 +4,23 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Jaime Sastre">
+    <meta name="description" content=" la Compagnie du premier mOt, encore une troupe de comédiens amateurs?, oui! sans prétention, c'est ce que nous sommes.
+du plaisir, c'est ce que nous recherchons. du plaisir à prendre. du plaisir à donner. du plaisir à partager. on vous invite simplement à venir en prendre en notre compagnie... ">
+    <meta name="keywords" content="théâtre, theater, le premier mot, spectacle, troupe, lederniermOt est affilié à l'XXX, Association  des Compagnies Dramatiques, et à la XXX, Fédération Nationale des Compagnies Dramatiques.">
+    <meta name=robots content=all>
     <!--   JQuery complet incluant hover -->
-    {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% block head_js %}
+        <!-- à implémenter selon besoin -->
+    {% endblock %}
     <!--        fonts -->
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/scss/main.css') }}">
+    {% block head_css %}
+        <!-- à ajouter selon besoin -->
+    {% endblock %}
 
     <title>Le premier mOt</title>
 </head>
@@ -48,15 +58,16 @@
         </ul>
     </div>
 </nav>
+
 <!--    main  :  contenu principal de la page - W3C « The main element represents the main content of the body of a document-->
 {% block contenu %}
-
-
+    <!-- Contenu Page -->
 {% endblock %}
 
 <!-- Optional JavaScript -->
-
-
+{% block foot_js %}
+    <!-- à implémenter selon besoin -->
+{% endblock %}
 <!-- Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
