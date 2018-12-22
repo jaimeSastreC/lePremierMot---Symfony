@@ -26,4 +26,13 @@ class PublicController extends Controller
         // replace this example code with whatever you need
         return $this->render("@App/Pages/gallerie.html.twig");
     }
+
+    /**
+     * @Route("/spectacles", name="spectacles")
+     */
+    public function spectaclesAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render("@App/Pages/spectacles.html.twig");
+    }
 }
