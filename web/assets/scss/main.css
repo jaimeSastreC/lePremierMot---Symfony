@@ -5317,13 +5317,15 @@ h3 {
   font-size: 1.2em;
   letter-spacing: .2em; }
 
+.main {
+  margin-top: 71px; }
+
 .spectacle {
   background-image: url(../../img/couverture2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
   background-height: auto;
-  padding: 7vmin 0;
   height: auto; }
   .spectacle h1 {
     padding: 3vmax;

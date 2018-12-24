@@ -9,6 +9,7 @@ use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
+use AppBundle\Repository\ClientRepository;
 use AppBundle\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,6 +112,7 @@ class AdministratorController extends Controller
 
         //requete sur l'ensemble des reservations
         $reservations = $reservationRepository->findAll();
+
 
         //retourne la page html spectacles en utilisant le twig reservations
         return $this->render("@App/Pages/reservations_admin.html.twig",
@@ -268,21 +270,27 @@ class AdministratorController extends Controller
     //************************************** Requetes ciblées ********************************************
 
     /**
-     * @Route("/reservations/{client}", name="reservations_client")
+     * @Route("/reservations/{client_id}", name="reservations_client")
      */
-    public function requeteReservationsAction($client){
+    public function requeteReservationsAction($client_id){
 
         /** @var $reservationRepository ReservationRepository */
         $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 
         /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
-        /** @var $reservationRepository ReservationRepository */
-        $reservations = $reservationRepository->getReservationByClient($client);
+        $reservations = $reservationRepository->getReservationByClient($client_id);
+
+        /** @var $clientRepository ClientRepository */
+        $clientRepository = $this->getDoctrine()->getRepository(Client::class);
+
+        /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
+        $client = $clientRepository->find($client_id);
 
         //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
         return $this->render("@App/Pages/reservations.html.twig",
             [
-                'reservations' => $reservations
+                'reservations' => $reservations,
+                'client' => $client_id,
             ]);
     }
 
@@ -296,7 +304,6 @@ class AdministratorController extends Controller
 
         $name = $request->query->get('searchName');
 
-        //var_dump($name);die; //ok
         /** @var $reservationRepository ReservationRepository */
         $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 

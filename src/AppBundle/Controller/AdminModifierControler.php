@@ -429,7 +429,6 @@ class AdminModifierControler extends Controller
      */
     public function reservationModifAction(Request $request, $id)
     {
-        //var_dump($id);die;
         // je genère le Repository de Doctrine
         /** @var $repository ReservationRepository*/
         $repository = $this->getDoctrine()->getRepository(Reservation::class);

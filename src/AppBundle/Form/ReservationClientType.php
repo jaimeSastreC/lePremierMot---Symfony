@@ -2,6 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Reservation;
+use AppBundle\Repository\ReservationRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -17,6 +20,7 @@ class ReservationClientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
 
             ->add('spectacle',EntityType::class,
@@ -29,7 +33,7 @@ class ReservationClientType extends AbstractType
             ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
                     'choice_label' => function($client) {
-                        return $client->getCiviliteClient().' '.$client->getNomClient();
+                    return $client->getCiviliteClient().' '.$client->getNomClient();
                     },
                 ]
             )

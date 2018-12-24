@@ -285,25 +285,25 @@ class FormController extends Controller
 
 
     /**
-     * @Route("/form_reservation/{id}", name="form_reservation")
+     * @Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0})
      */
-    public function ReservationFormAction(Request $request, $id)
+    public function ReservationFormAction(Request $request, $id=0)
     {
         // création Entité "Reservation"
-        $form= $this->createForm(ReservationClientType::class, new Reservation);
+        $form = $this->createForm(ReservationClientType::class, new Reservation);
+        // si la requête contient d'id du client
 
-        $form->get('client')->setData($id);
-        $form->setData(client)-> $id;
-
-        dump($form);die;
-
-
-        //saisie des données envoyées (éventuellement le client via le Formulaire
+        //saisie et traitement des données envoyées (éventuellement par le client via le Formulaire)
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
-        //controle si il y a bien un formulaire renvoyé en POST.
+        if (!$id==0 or empty($id)) {
+            $form->get('client')->setData($id);
+
+            //dump($form->get('client'));die;
+        }
+
+        //contrôle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
             //controle contenu, sécurité selon nécessités. Définie dans Entity
             if ($form->isValid()){
@@ -329,7 +329,7 @@ class FormController extends Controller
             }
         }
 
-        // replace this example code with whatever you need
+        // sinon renvoie le formulaire pour le remplir
         return $this->render(
             "@App/Pages/form_reservation.html.twig",
             [

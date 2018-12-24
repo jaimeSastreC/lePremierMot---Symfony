@@ -14,12 +14,15 @@
             <div>
                 <p>
                     n° de réservation : {{ reservation.id}}<br>
-                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}"</strong></em><br>
-                    date de réservation: {{ reservation.dateReservation|date("m/d/Y")  }}<br>
+                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
+                    date de réservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
                     montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
 
-                    client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                     {% if reservation.client %}
+                            client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                     {% endif %}
                 </p>
+
                 <p>
                     {% for spectateur in reservation.spectateur%}
                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}<br>

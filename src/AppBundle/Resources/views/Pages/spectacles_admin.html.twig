@@ -12,9 +12,9 @@
             <div>
                 <p>
                     spectacle : {{ spectacle.nomSpectacle}}&nbsp
-                    date : {{ spectacle.dateSpectacle|date("d/m/Y")}}&nbsp
-                    début séance :{{ spectacle.heureDebutSpectacle|date('H:i:s')}}&nbsp
-                    fin de séance{{ spectacle.heureFinSpectacle|date('H:i:s')}}&nbsp
+                    date : {{ spectacle.dateSpectacle|date("d/m/Y")}}<br>
+                    début séance {{ spectacle.heureDebutSpectacle|date('H:i')}}&nbsp
+                    fin de séance {{ spectacle.heureFinSpectacle|date('H:i')}}&nbsp
                 </p>
 
                 <a href="{{ path('admin_supp_spectacle',  {'id': spectacle.id}) }}">

@@ -17,6 +17,7 @@
         </p>
 
         <p>
+        {# boucle sur les spectateurs. Grace à la fonction javascript on peut ajouter des spectateurs #}
             <ul class="spectateurs">
                 {% for spectateurField in formreservation.spectateur %}
                     <li>
@@ -30,12 +31,16 @@
         <p>
             {{ form_widget(formreservation.client, {'attr': {'disabled':'disabled'}}) }}
         </p>
-            {#{{ form_widget(formreservation.client) }}#}
-        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {{ form_rest(formreservation) }}
+
+
+
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formreservation) }}
 
         {{ form_end(formreservation) }}
+
     </div>
+
 
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
