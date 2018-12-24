@@ -26,14 +26,26 @@ class ReservationClientType extends AbstractType
             ->add('spectacle',EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Spectacle',
-                    'choice_label' => 'nomSpectacle'
+                    /*'choice_label' => 'nomSpectacle'*/   //version simple
+
+                    /*affichage précis du spectacle */
+                    'choice_label' => function($spectacle) {
+                        //conversion date et heure du spectacle
+                        $newDate = $spectacle->getDateSpectacle();
+                        $newDate = $newDate->format('d/m/Y');
+                        $newTime = $spectacle->getHeureDebutSpectacle();
+                        $newTime = $newTime->format('H:i');
+                        return $spectacle->getNomSpectacle().' '.$newDate. ' '.$newTime;
+                    },
                 ]
             )
 
             ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
                     'choice_label' => function($client) {
-                    return $client->getCiviliteClient().' '.$client->getNomClient();
+                    if ($client->getId() == 5) {
+                        return $client->getCiviliteClient() . ' ' . $client->getNomClient();
+                        }
                     },
                 ]
             )

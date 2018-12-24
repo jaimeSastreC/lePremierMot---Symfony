@@ -36,8 +36,6 @@ class ReservationType extends AbstractType
                     },
                 ]
             )
-            //
-
 
             ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',

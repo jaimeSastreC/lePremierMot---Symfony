@@ -299,7 +299,6 @@ class FormController extends Controller
 
         if (!$id==0 or empty($id)) {
             $form->get('client')->setData($id);
-
             //dump($form->get('client'));die;
         }
 

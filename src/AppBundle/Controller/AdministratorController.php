@@ -280,12 +280,6 @@ class AdministratorController extends Controller
         /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
         $reservations = $reservationRepository->getReservationByClient($client_id);
 
-        /** @var $clientRepository ClientRepository */
-        $clientRepository = $this->getDoctrine()->getRepository(Client::class);
-
-        /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
-        $client = $clientRepository->find($client_id);
-
         //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
         return $this->render("@App/Pages/reservations.html.twig",
             [
