@@ -4,7 +4,7 @@
     {#{{   dump(formreservation) }}#}
 
 {#{{ form(formreservation) }}#}
-    <div> Date : {{ "now"|date("m/d/Y") }} &nbsp ref Client: {{ id }}
+    <div> Date : {{ "now"|date("m/d/Y") }} &nbsp {#ref Client: {{ id }} facultatif pour client#}
         {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
         <p>
@@ -29,8 +29,8 @@
             </ul>
         </p>
         <p>
-            {{ form_widget(formreservation.client, {'attr': {'disabled':'disabled'}}) }}
-            {#{{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}#}
+            {#{{ form_widget(formreservation.client, {'attr': {'disabled':'disabled'}}) }}#}
+            {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
         </p>
 
 

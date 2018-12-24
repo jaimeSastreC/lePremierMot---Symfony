@@ -46,8 +46,8 @@ class SpectateurType extends AbstractType
 
             ->add('save', SubmitType::class, [
             'label' => 'Ajouter/Modifier un Spectateur'
-        ]
-    ); //fin du builder ;
+            ]
+            ); //fin du builder ;
     }/**
      * {@inheritdoc}
      */

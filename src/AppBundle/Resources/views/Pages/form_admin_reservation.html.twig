@@ -10,14 +10,20 @@
         <p>
             {#retourne message erreur si besoin après méthode isValid dans Controleur#}
             {{ form_errors(formreservation.spectacle) }}
-            {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }} :
+
+            {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
         <p>
-            {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formreservation.client) }}
+            {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
+
+            {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
         </p>
 
         <p>
-            <ul class="specateurs">
+            <ul class="specteurs">
                 {% for spectateurField in formreservation.spectateur %}
                     <li>
                         {{ form_errors(spectateurField) }}
@@ -29,11 +35,11 @@
             </ul>
         </p>
         <p>
-        {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
+
         </p>
 
         {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {{ form_rest(formreservation) }}
+        {#{{ form_rest(formreservation) }}#}
 
         {{ form_end(formreservation) }}
     </div>
@@ -51,7 +57,7 @@
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addTagButton = $('<button type="button" class="add_tag_link">Add a spectateur</button>');
+        var $addTagButton = $('<button type="button" class="add_tag_link">Ajoutez un spectateur</button>');
         var $newLinkLi = $('<li></li>').append($addTagButton);
 
         jQuery(document).ready(function() {

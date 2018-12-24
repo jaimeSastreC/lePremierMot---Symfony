@@ -250,7 +250,8 @@ class FormController extends Controller
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
-
+                
+                //calcul de contrôle du montant des réservations
                 $spectateurs = $reservation->getSpectateur();
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur){
@@ -289,18 +290,13 @@ class FormController extends Controller
      */
     public function ReservationFormAction(Request $request, $id=0)
     {
-        // création Entité "Reservation"
-        $form = $this->createForm(ReservationClientType::class, new Reservation);
+        // création Form de l'Entité "Reservation"
+        $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$id]);
         // si la requête contient d'id du client
 
         //saisie et traitement des données envoyées (éventuellement par le client via le Formulaire)
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-
-        if (!$id==0 or empty($id)) {
-            $form->get('client')->setData($id);
-            //dump($form->get('client'));die;
-        }
 
         //contrôle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -309,22 +305,29 @@ class FormController extends Controller
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
 
+                $spectateurs = $reservation->getSpectateur();
+                $PrixPlaces = 0;
+                foreach ($spectateurs as $spectateur){
+                    $PrixPlace = $spectateur
+                        ->getCategorie()
+                        ->getTarif()
+                        ->getPrixPlace();
+                    $PrixPlaces += $PrixPlace;
+                }
+                $reservation->setMontantReservation($PrixPlaces);
+
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
-
-                //set client
-                $reservation->setClient($id);
-
-                //$client = $this->get('security.context')->getToken()->getUser();
-
-                //$reservation->setClient($client);
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($reservation);
                 // enregistre en BD
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin_reservations');
+                return $this->redirectToRoute('reservations_client',
+                    [
+                    'client_id' => $id,
+                    ]);
             }
         }
 

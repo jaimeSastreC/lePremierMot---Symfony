@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationClientType extends AbstractType
@@ -20,15 +22,16 @@ class ReservationClientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        //récupération de l'entité client
+        $this->id = $options['id_client'];
 
         $builder
-
             ->add('spectacle',EntityType::class,
                 [
                     'class' => 'AppBundle\Entity\Spectacle',
                     /*'choice_label' => 'nomSpectacle'*/   //version simple
 
-                    /*affichage précis du spectacle */
+                    /* affichage précis du spectacle avec date et heure */
                     'choice_label' => function($spectacle) {
                         //conversion date et heure du spectacle
                         $newDate = $spectacle->getDateSpectacle();
@@ -42,10 +45,14 @@ class ReservationClientType extends AbstractType
 
             ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->where('c.id =:id')
+                            ->setParameter('id', $this->id)
+                            ->orderBy('c.nomClient', 'ASC');
+                    },
                     'choice_label' => function($client) {
-                    if ($client->getId() == 5) {
                         return $client->getCiviliteClient() . ' ' . $client->getNomClient();
-                        }
                     },
                 ]
             )
@@ -70,7 +77,9 @@ class ReservationClientType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Reservation'
+            'data_class' => 'AppBundle\Entity\Reservation',
+            //création de l'attribut id_client
+            'id_client'         => null,
         ));
     }
 
@@ -84,3 +93,28 @@ class ReservationClientType extends AbstractType
 
 
 }
+
+
+
+
+
+
+
+
+
+
+/* Test divers de recherche par critères:
+->add('client',EntityType::class, [
+                    'class' => 'AppBundle\Entity\Client',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.nomClient', 'ASC');
+                    },
+                    'choice_label' => function($client) {
+                    if ($client->getId() > 5) {
+                        return $client->getCiviliteClient() . ' ' . $client->getNomClient();
+                        }
+                    },
+                ]
+            )
+*/

@@ -24,6 +24,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->select('r')
             ->where('r.client =:client')
             ->setParameter('client', $client)
+            ->orderBy('r.dateReservation', 'DESC')
             ->getQuery();
         $results = $query->getResult();
         return $results;
@@ -41,6 +42,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             /* requete ciblée sur nom client, avec Like qui permet de donner un nom qui inclut quelques lettres*/
             ->where('c.nomClient LIKE :nomClient')
             ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
+            ->orderBy('r.dateReservation', 'DESC')
             ->getQuery(); /// important ! à ajouter setParameter
         $results = $query->getResult();
         return $results;
