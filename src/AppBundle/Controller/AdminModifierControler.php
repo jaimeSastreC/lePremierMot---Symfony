@@ -435,6 +435,7 @@ class AdminModifierControler extends Controller
 
         //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
         $reservation = $repository->find($id);
+        $client = $reservation->getClient()->getId();
 
         //recherche entité ReservationType abstraite pour créé la forme de Reservation avec pour objet parametre $reservation TODO
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -453,6 +454,8 @@ class AdminModifierControler extends Controller
 
                 // mise à jour du montantReservation
                 $spectateurs = $reservation->getSpectateur();
+                /*dump($reservation);die;*/
+
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur) {
                     $PrixPlace = $spectateur
@@ -472,11 +475,16 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Reservation a bien été ajouté!'
+                    'Votre Reservation a bien été ajouté/modifiée!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_reservations'
-                return $this->redirectToRoute('admin_reservations');
+                return $this->render("@App/Pages/reservation.html.twig",
+                    [
+                        'reservation' => $reservation,
+                        'id' => $id,
+                        'client' => $client,
+                    ]);
             } else {
                 //TODO afficher le Flash
                 $this->addFlash(
@@ -487,7 +495,7 @@ class AdminModifierControler extends Controller
         }
 
         return $this->render(
-            "@App/Pages/form_admin_reservation.html.twig",
+            "@App/Pages/form_reservation.html.twig",
             [
                 'formreservation' => $form->createView()
             ]

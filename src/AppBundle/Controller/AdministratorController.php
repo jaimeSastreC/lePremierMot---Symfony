@@ -28,7 +28,7 @@ class AdministratorController extends Controller
     }
 
 
-//**************************************** Listes ********************************************************
+//**************************************** Requetes Listes ********************************************************
 
     /**
      * @Route("/admin/tarifs" , name="admin_tarifs")
@@ -158,7 +158,7 @@ class AdministratorController extends Controller
             ]);
     }
 
-//**************************************** Unique ********************************************************
+//**************************************** Requete Unique ********************************************************
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif", defaults={"id"= 1 })
      */
@@ -267,7 +267,27 @@ class AdministratorController extends Controller
             ]);
     }
 
-    //************************************** Requetes ciblées ********************************************
+    //************************************** Requetes ciblées ex: nom client , id reservation ********************************************
+    /**
+     * @Route("/reservation/{id}" , name="reservation", defaults={"id"= 1 })
+     */
+    public function ReservationAction($id){
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur Entity Reservation avec $id
+        $reservation = $repository->find($id);
+        $client = $reservation->getClient()->getId();
+
+        //retourne la page html reservation en utiliasnt le twig reservation
+        return $this->render("@App/Pages/reservation.html.twig",
+            [
+                'reservation' => $reservation,
+                'id' => $id,
+                'client' => $client,
+            ]);
+    }
 
     /**
      * @Route("/reservations/{client_id}", name="reservations_client")

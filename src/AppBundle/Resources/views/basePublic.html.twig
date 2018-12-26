@@ -61,6 +61,16 @@
         </ul>
     </div>
 </nav>
+<div class="alert alert-info text-center" role="alert">
+    {# ...or you can read and display every flash message available #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
 
 <!--    main  :  contenu principal de la page - W3C « The main element represents the main content of the body of a document-->
 {% block contenu %}

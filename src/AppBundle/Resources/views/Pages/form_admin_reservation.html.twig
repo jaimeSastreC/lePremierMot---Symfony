@@ -14,16 +14,10 @@
 
             {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
         </p>
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formreservation.client) }}
-            {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
-
-            {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
-        </p>
 
         <p>
-            <ul class="specteurs">
+        >
+            <ul class="spectateurs" data-prototype="{{ form_widget(formreservation.spectateur.vars.prototype)|e('html_attr') }}">
                 {% for spectateurField in formreservation.spectateur %}
                     <li>
                         {{ form_errors(spectateurField) }}
@@ -35,11 +29,16 @@
             </ul>
         </p>
         <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formreservation.client) }}
+            {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
 
+            {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
         </p>
 
+
         {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {#{{ form_rest(formreservation) }}#}
+        {{ form_rest(formreservation) }}
 
         {{ form_end(formreservation) }}
     </div>
@@ -62,7 +61,8 @@
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
-            $collectionHolder = $('#appbundle_reservation_spectateur');
+           /* $collectionHolder = $('#appbundle_reservation_spectateurs');*/
+            $collectionHolder = $('ul.spectateurs');
 
 
             // add the "add a tag" anchor and li to the tags ul

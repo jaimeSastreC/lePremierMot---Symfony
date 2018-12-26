@@ -25,6 +25,7 @@ class SpectateurType extends AbstractType
                     ]
                 ]
             )
+
             ->add('nomSpectateur')
             ->add('prenomSpectateur')
             ->add('categorie',EntityType::class, [
@@ -33,22 +34,23 @@ class SpectateurType extends AbstractType
                         return $categorie->getLibelle().': '.$categorie->getTarif()->getPrixPlace();
                     },
                 ]
-            ) // attention, prendre la méthode libelle de l'Entity Categorie !!!
-
+            )
 
             // TODO régler mise à jour id selon nouvel id
-            ->add('reservation',EntityType::class,
-                [
+            ->add('reservation',EntityType::class, [
                     'class' => 'AppBundle\Entity\Reservation',
                     'choice_label' => 'id'
                 ]
             )
 
             ->add('save', SubmitType::class, [
-            'label' => 'Ajouter/Modifier un Spectateur'
-            ]
-            ); //fin du builder ;
-    }/**
+                    'label' => 'Ajouter/Modifier un Spectateur'
+                ]
+            );
+        //fin du builder ;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

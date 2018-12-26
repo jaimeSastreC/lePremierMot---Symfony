@@ -250,7 +250,7 @@ class FormController extends Controller
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
-                
+
                 //calcul de contrôle du montant des réservations
                 $spectateurs = $reservation->getSpectateur();
                 $PrixPlaces = 0;
@@ -306,6 +306,7 @@ class FormController extends Controller
                 $reservation = $form->getData();
 
                 $spectateurs = $reservation->getSpectateur();
+                /*dump($reservation);die;*/
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur){
                     $PrixPlace = $spectateur

@@ -1,0 +1,42 @@
+{% extends "@App/basePublic.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('form_reservation', {'id': client}) }}">Ajouter une Reservation</a>
+    </p>
+    <p>
+        <a href="{{ path('form_reservation', {'id': client}) }}">liste de toutes les réservations</a>
+    </p>
+
+
+    <div class="text-align-center">
+
+        {# Liste les spectaurs avec une boucle for #}
+        {% if reservation %}
+
+            <div>
+                <p>
+                    n° de Réservation : {{ reservation.id}}<br>
+                    date de reservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
+                    montant total de reservation: {{ reservation.montantReservation}} €<br> {#TODO calcul montant#}
+                    spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
+                </p>
+                <p> {#TODO verifier formule spectateurs#}
+                    {% for spectateur in reservation.spectateur%}
+                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet{{ spectateur.id}}
+                    {% endfor %}
+                </p>
+
+                <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+
+            </div>
+
+        {% endif %}
+    </div>
+
+
+{% endblock %}
+
