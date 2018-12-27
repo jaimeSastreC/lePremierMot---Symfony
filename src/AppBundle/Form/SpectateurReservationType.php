@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SpectateurType extends AbstractType
+class SpectateurReservationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -41,12 +41,8 @@ class SpectateurType extends AbstractType
                     'class' => 'AppBundle\Entity\Reservation',
                     'choice_label' => 'id'
                 ]
-            )
-
-            ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter/Modifier un Spectateur'
-                ]
             );
+
         //fin du builder ;
     }
 

@@ -17,7 +17,7 @@
 
         <p>
         >
-            <ul class="spectateurs" data-prototype="{{ form_widget(formreservation.spectateur.vars.prototype)|e('html_attr') }}">
+            <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateur.vars.prototype)|e('html_attr') }}">
                 {% for spectateurField in formreservation.spectateur %}
                     <li>
                         {{ form_errors(spectateurField) }}
@@ -25,6 +25,7 @@
                         {{ form_widget(spectateurField) }}
 
                     </li>
+                    {{   dump(formreservation) }}
                 {% endfor %}
             </ul>
         </p>
@@ -35,7 +36,6 @@
 
             {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
         </p>
-
 
         {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
         {{ form_rest(formreservation) }}
@@ -61,8 +61,7 @@
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
-           /* $collectionHolder = $('#appbundle_reservation_spectateurs');*/
-            $collectionHolder = $('ul.spectateurs');
+            $collectionHolder = $('ul.spectateur');
 
 
             // add the "add a tag" anchor and li to the tags ul
