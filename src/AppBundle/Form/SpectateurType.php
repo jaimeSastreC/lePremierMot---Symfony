@@ -39,7 +39,7 @@ class SpectateurType extends AbstractType
             // TODO régler mise à jour id selon nouvel id
             ->add('reservation',EntityType::class, [
                     'class' => 'AppBundle\Entity\Reservation',
-                    'choice_label' => 'id'
+                    //'choice_label' => 'id'
                 ]
             )
 

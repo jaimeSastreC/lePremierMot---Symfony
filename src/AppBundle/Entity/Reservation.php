@@ -179,7 +179,8 @@ class Reservation
 
     public function addSpectacteur(Spectateur $spectateur)
     {
-        $this->spectateur[] = $spectateur;
+        //$this->spectateur[] = $spectateur;
+        $this->spectateur->add($spectateur);
         return $this;
     }
 

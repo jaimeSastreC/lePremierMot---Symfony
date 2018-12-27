@@ -47,6 +47,7 @@ class ReservationType extends AbstractType
 
             ->add('spectateur', CollectionType::class, [
                     'entry_type' => SpectateurType::class,
+                    'entry_options' => array('label' => false),
                     'allow_add' => true,
                     'allow_delete' => true,
                     'prototype' => true,
