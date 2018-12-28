@@ -2,17 +2,12 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Reservation;
-use AppBundle\Repository\ReservationRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationClientType extends AbstractType
@@ -58,7 +53,8 @@ class ReservationClientType extends AbstractType
             )
 
             ->add('spectateur', CollectionType::class, [
-                    'entry_type' => SpectateurType::class,
+                    'entry_type' => SpectateurReservationType::class,
+                    'entry_options' => array('label' => false),
                     'allow_add' => true,
                     'allow_delete' => true,
                     'prototype' => true,

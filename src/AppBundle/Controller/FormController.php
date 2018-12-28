@@ -237,8 +237,16 @@ class FormController extends Controller
      */
     public function AdminReservationFormAction(Request $request)
     {
+        $reservation = new Reservation();
+        /*$spec1 = new Spectateur();
+        $spec2 = new Spectateur();
+        $spec1->setNomSpectateur('AAA');
+        $spec2->setNomSpectateur('BBB');
+        $reservation->getSpectateur()->add($spec1);
+        $reservation->getSpectateur()->add($spec2);*/
+
         // création Entité "Reservation"
-        $form= $this->createForm(ReservationType::class, new Reservation);
+        $form= $this->createForm(ReservationType::class, $reservation);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.

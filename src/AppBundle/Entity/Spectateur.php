@@ -172,5 +172,12 @@ Spectateur
         $this->reservation = $reservation;
     }
 
+    public function addReservation(Reservation $reservation)
+    {
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation->add($reservation);
+        }
+    }
+
 }
 

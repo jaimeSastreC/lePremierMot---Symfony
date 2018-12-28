@@ -4,7 +4,8 @@
     {#{{   dump(formreservation) }}#}
 
 {#{{ form(formreservation) }}#}
-    <div> Date : {{ "now"|date("m/d/Y") }} &nbsp {#ref Client: {{ id }} facultatif pour client#}
+    <div class="main">
+        Date : {{ "now"|date("d/m/Y") }} &nbsp {#ref Client: {{ id }} facultatif pour client#}
         {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
         <p>

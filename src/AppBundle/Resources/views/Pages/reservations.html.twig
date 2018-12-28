@@ -2,45 +2,47 @@
 
 {% block contenu %}
     {#{{ dump(reservations) }}#}
+    <div class="main offset-3">
+
     <p>
         <a href="{{ path('form_reservation', {'id': client}) }}">Ajouter une Réservation</a>
     </p>
 
-    <div >
+        <div >
 
-        {# Liste les spectaurs avec une boucle for #}
-        {% for reservation in reservations %}
+            {# Liste les spectaurs avec une boucle for #}
+            {% for reservation in reservations %}
 
-            <div>
-                <p>
-                    n° de réservation : {{ reservation.id}}<br>
-                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
-                    date de réservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
-                    montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
+                <div>
+                    <p>
+                        n° de réservation : {{ reservation.id}}<br>
+                        spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
+                        date de réservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
+                        montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
 
-                    client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
-                </p>
-                <p>
-                    {% for spectateur in reservation.spectateur%}
-                        nom : {{ spectateur.nomSpectateur}}&nbsp n° billet: {{ spectateur.id}}<br>
-                    {% endfor %}
-                </p>
-                {#suppression pas accessible pour client qui devra demander à l'administrateur#}
-                {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
+                        client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                    </p>
+                    <p>
+                        {% for spectateur in reservation.spectateur%}
+                            nom : {{ spectateur.nomSpectateur}}&nbsp n° billet: {{ spectateur.id}}<br>
+                        {% endfor %}
+                    </p>
+                    {#suppression pas accessible pour client qui devra demander à l'administrateur#}
+                    {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
                     <button class="supprimer" type="submit">Supprimer</button>
                 </a>#}
 
-                {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
-                <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">
-                    <button class="modifier" type="submit">Modifier</button>
-                </a>
-                <hr>
+                    {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
+                    <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">
+                        <button class="modifier" type="submit">Modifier</button>
+                    </a>
+                    <hr>
 
-            </div>
+                </div>
 
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-
 
 {% endblock %}
 
