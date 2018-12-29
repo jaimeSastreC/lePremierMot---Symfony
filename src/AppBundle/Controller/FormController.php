@@ -238,12 +238,14 @@ class FormController extends Controller
     public function AdminReservationFormAction(Request $request)
     {
         $reservation = new Reservation();
-        /*$spec1 = new Spectateur();
+        $spec1 = new Spectateur();
         $spec2 = new Spectateur();
-        $spec1->setNomSpectateur('AAA');
-        $spec2->setNomSpectateur('BBB');
-        $reservation->getSpectateur()->add($spec1);
-        $reservation->getSpectateur()->add($spec2);*/
+        $spec3 = new Spectateur();
+        //$spec1->setNomSpectateur('AAA');
+        //$spec2->setNomSpectateur('BBB');
+        $reservation->getSpectateurs()->add($spec1);
+        $reservation->getSpectateurs()->add($spec2);
+        $reservation->getSpectateurs()->add($spec3);
 
         // création Entité "Reservation"
         $form= $this->createForm(ReservationType::class, $reservation);
@@ -258,9 +260,9 @@ class FormController extends Controller
             if ($form->isValid()){
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
-                dump($reservation);die;
+                //dump($reservation);die;
                 //calcul de contrôle du montant des réservations
-                $spectateurs = $reservation->getSpectateur();
+                $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur){
                     $PrixPlace = $spectateur
@@ -313,8 +315,8 @@ class FormController extends Controller
                 // récupère données dans Objet/Entité Categorie
                 $reservation = $form->getData();
 
-                $spectateurs = $reservation->getSpectateur();
-                /*dump($reservation);die;*/
+                $spectateurs = $reservation->getSpectateurs();
+                //dump($reservation);die;
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur){
                     $PrixPlace = $spectateur

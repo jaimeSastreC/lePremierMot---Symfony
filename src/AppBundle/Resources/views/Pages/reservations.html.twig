@@ -3,10 +3,9 @@
 {% block contenu %}
     {#{{ dump(reservations) }}#}
     <div class="main offset-3">
-
-    <p>
-        <a href="{{ path('form_reservation', {'id': client}) }}">Ajouter une Réservation</a>
-    </p>
+        <p>
+            <a href="{{ path('form_reservation', {'id': client}) }}">Ajouter une Réservation</a>
+        </p>
 
         <div >
 
@@ -23,14 +22,14 @@
                         client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
                     </p>
                     <p>
-                        {% for spectateur in reservation.spectateur%}
+                        {% for spectateur in reservation.spectateurs%}
                             nom : {{ spectateur.nomSpectateur}}&nbsp n° billet: {{ spectateur.id}}<br>
                         {% endfor %}
                     </p>
                     {#suppression pas accessible pour client qui devra demander à l'administrateur#}
                     {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>#}
+                        <button class="supprimer" type="submit">Supprimer</button>
+                    </a>#}
 
                     {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
                     <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">

@@ -52,7 +52,7 @@ class ReservationClientType extends AbstractType
                 ]
             )
 
-            ->add('spectateur', CollectionType::class, [
+            ->add('spectateurs', CollectionType::class, [
                     'entry_type' => SpectateurReservationType::class,
                     'entry_options' => array('label' => false),
                     'allow_add' => true,

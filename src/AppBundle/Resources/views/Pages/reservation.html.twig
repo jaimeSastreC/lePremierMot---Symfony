@@ -47,7 +47,7 @@
                                     spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
                                 </p>
                                 <p>
-                                    {% for spectateur in reservation.spectateur%}
+                                    {% for spectateur in reservation.spectateurs%}
                                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet {{ spectateur.id}}
                                     {% endfor %}
                                 </p>

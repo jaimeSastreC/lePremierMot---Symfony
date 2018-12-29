@@ -24,7 +24,7 @@
                     {#client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>#}
                 </p>
                 <p> {#TODO verifier formule spectateurs#}
-                    {% for spectateur in reservation.spectateur%}
+                    {% for spectateur in reservation.spectateurs%}
                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet :{{ spectateur.id}}
                     {% endfor %}
                 </p>

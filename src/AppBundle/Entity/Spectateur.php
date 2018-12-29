@@ -54,13 +54,13 @@ Spectateur
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectateur")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectateurs")
      */
     private $categorie;
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateur")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateurs")
      */
     private $reservation;
 

@@ -1,45 +1,37 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-    {#{{   dump(formreservation) }}#}
 
-{#{{ form(formreservation) }}#}
-    <div> Date : {{ "now"|date("m/d/Y") }}
-        {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
-        {#{{   dump(formreservation) }}#}
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formreservation.spectacle) }}
-            {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }} :
+        <div>
+            Date : {{ "now"|date("d/m/Y") }}
+            {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
-            {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formreservation.spectacle) }}
+                {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }} :
 
-        <p>
-            <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateur.vars.prototype)|e('html_attr') }}">
-                {% for spectateurField in formreservation.spectateur %}
-                    <li>
-                        {{ form_errors(spectateurField) }}
-                        {{ form_label(spectateurField) }}
-                        {{ form_widget(spectateurField) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </p>
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formreservation.client) }}
-            {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
+                {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-            {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {{ form_label(formreservation.spectateurs, null, {'label_attr':  {'class': 'form-label'}}) }}
+                <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateurs.vars.prototype)|e('html_attr') }}">
+                </ul>
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formreservation.client) }}
+                {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
 
-        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {{ form_rest(formreservation) }}
+                {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        {{ form_end(formreservation) }}
-    </div>
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formreservation) }}
 
+            {{ form_end(formreservation) }}
+        </div>
 
     {# Partie JavaScript #}
     <script

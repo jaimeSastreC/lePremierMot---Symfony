@@ -2,16 +2,13 @@
 
 {% block contenu %}
     {#{{ dump(reservations) }}#}
-    <p>
-        <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
-    </p>
-
-    <div class="">
+        <p>
+            <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
+        </p>
 
         {# Liste les spectaurs avec une boucle for #}
         {% for reservation in reservations %}
 
-            <div>
                 <p>
                     n° de réservation : {{ reservation.id}}<br>
                     spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
@@ -24,7 +21,7 @@
                 </p>
 
                 <p>
-                    {% for spectateur in reservation.spectateur%}
+                    {% for spectateur in reservation.spectateurs%}
                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet {{ spectateur.id}}<br>
                     {% endfor %}
                 </p>
@@ -37,11 +34,7 @@
                 </a>
                 <hr>
 
-            </div>
-
         {% endfor %}
-    </div>
-
 
 {% endblock %}
 

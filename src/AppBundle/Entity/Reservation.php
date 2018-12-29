@@ -56,7 +56,7 @@ class Reservation
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="reservation", cascade={"persist"})
      */
-    private $spectateur;
+    private $spectateurs;
 
     //***************************************Constructor*************************************************
 
@@ -64,14 +64,14 @@ class Reservation
     {
         $this->dateReservation = new \DateTime('now');
 
-        $this->spectateur = new ArrayCollection();
+        $this->spectateurs = new ArrayCollection();
         $this->updateMontantReservation();
     }
 
     //***************************************methode calcul montant total des réservations*************************************************
 
     private function calculMontant(){
-        $spectateurs = $this->getSpectateur();
+        $spectateurs = $this->getSpectateurs();
         $PrixPlaces = 0;
         foreach ($spectateurs as $spectateur){
             $PrixPlace = $spectateur
@@ -181,13 +181,13 @@ class Reservation
     {
         //$this->spectateur[] = $spectateur;
         $spectateur->setReservation($this);
-        $this->spectateur->add($spectateur);
+        $this->spectateurs->add($spectateur);
     }
 
 
     public function removeSpectateur(Spectateur $spectateur)
     {
-        $this->spectateur->removeElement($spectateur);
+        $this->spectateurs->removeElement($spectateur);
     }
 
     /**
@@ -195,15 +195,15 @@ class Reservation
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSpectateur()
+    public function getSpectateurs()
     {
-        return $this->spectateur;
+        return $this->spectateurs;
     }
 
 
-    public function setSpectateur(\Doctrine\Common\Collections\Collection $spectateur)
+    public function setSpectateurs(\Doctrine\Common\Collections\Collection $spectateurs)
     {
-        $this->spectateur = $spectateur;
+        $this->spectateurs = $spectateurs;
     }
 
 }

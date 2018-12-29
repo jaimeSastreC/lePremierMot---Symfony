@@ -8,7 +8,7 @@
         size: cover;
         repeat: no-repeat;
         position: top center;
-        height: auto;
+        height: 100%;
     }
     
     height: auto;
@@ -120,7 +120,7 @@
             font-size: 1.6rem;
         }
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
     
         .us {
@@ -136,5 +136,8 @@
                 font-size: 0.8em;
             }
         }
+    }
+    .main {
+    margin-top: 0;
     }
 }

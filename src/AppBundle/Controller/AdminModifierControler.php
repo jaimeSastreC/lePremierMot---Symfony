@@ -382,7 +382,7 @@ class AdminModifierControler extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // mise à jour du montantReservation
-                $spectateurs = $reservation->getSpectateur();
+                $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur) {
                     $PrixPlace = $spectateur
@@ -453,7 +453,7 @@ class AdminModifierControler extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // mise à jour du montantReservation
-                $spectateurs = $reservation->getSpectateur();
+                $spectateurs = $reservation->getSpectateurs();
                 /*dump($reservation);die;*/
 
                 $PrixPlaces = 0;

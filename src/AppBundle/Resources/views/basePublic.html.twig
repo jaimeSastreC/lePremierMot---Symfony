@@ -9,6 +9,24 @@
     du plaisir, c'est ce que nous recherchons. du plaisir à prendre. du plaisir à donner. du plaisir à partager. on vous invite simplement à venir en prendre en notre compagnie... ">
     <meta name="keywords" content="théâtre, theater, le premier mot, spectacle, troupe, lederniermOt est affilié à l'XXX, Association  des Compagnies Dramatiques, et à la XXX, Fédération Nationale des Compagnies Dramatiques.">
     <meta name=robots content="index, follow">
+    {# FavIcon#}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicon/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicon/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('favicon/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('favicon/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('favicon/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('favicon/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('favicon/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ asset('favicon/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <!--   JQuery complet incluant hover -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {% block head_js %}
@@ -16,6 +34,7 @@
     {% endblock %}
     <!--        fonts -->
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/scss/main.css') }}">
     {% block head_css %}
@@ -34,7 +53,7 @@
 
 <!--Barre de menu en Bootstrap navigateur : bannière contenant le logo mais aussi navigateur: barre de navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-toggleable  navbar-dark bg-dark" role="banner search">
-    <a class="navbar-brand" href="#">le premier mOt</a>
+    <a class="navbar-brand" href="{{ path('accueil')}}">le premier m<img src="{{ asset('img/O.png')}}" alt="logo" width="40px">t</a>
     <!--    partie menu déroulant pour média query mobile        -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,20 +61,20 @@
     <!--     navigation aligné à droite : justify content end    -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" id="active-item" href={{ path('accueil')}}>Accueil <span class="sr-only">(current)</span></a>
+            <li class="nav-item {% block active1 %}{% endblock %}">
+                <a class="nav-link" href="{{ path('accueil')}}"><i class="fas fa-home"></i>Accueil </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('gallerie')}}">Galerie</a>
+            <li class="nav-item {% block active2 %}{% endblock %}">
+                <a class="nav-link"  href="{{ path('gallerie')}}"><i class="fas fa-image"></i>Galerie</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#">Spectacles</a>
+            <li class="nav-item {% block active3 %}{% endblock %}">
+                <a class="nav-link "  href="{{ path('spectacles')}}"><i class="fas fa-theater-masks"></i>Spectacles</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Réservation</a>
+            <li class="nav-item {% block active4 %}{% endblock %}">
+                <a class="nav-link"  href="{{ path('page_reservation')}}"><i class="far fa-calendar-check"></i>Réservation</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact/Info</a>
+            <li class="nav-item {% block active5 %}{% endblock %}">
+                <a class="nav-link"  href="{{ path('contact')}}"><i class="fas fa-edit"></i>Contact/Info</a>
                 <a href="{{ path('admin')}}"></a>
             </li>
         </ul>
@@ -94,11 +113,11 @@
 
             </div>
             <div class="col-12 col-md-4 order-2 order-md-3 mt-3 d-flex justify-content-center align-items-center">
-                <p><a href="https://www.facebook.com" target="_blank">
-                        <img src={{ asset("img/FB.png")}} alt="FB" class="img-fluid pr-3"></a></p>
-                <p><a href="https://twitter.com/" target="_blank"><img src={{ asset("img/TW.png")}} alt="TW" class="img-fluid pr-3"></a></p>
-                <p><a href="https://www.instagram.com" target="_blank"><img src={{ asset("img/INST.png")}} alt="IN" class="img-fluid pr-3"></a></p>
-                <p><a href="https://www.youtube.com" target="_blank"><img src={{ asset("img/YOUT.png")}} alt="YOUT" class="img-fluid "></a></p>
+                <p><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square pr-3"></i>
+                        </a></p>
+                <p><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter-square pr-3"></i></a></p>
+                <p><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram pr-3"></i></a></p>
+                <p><a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube pr-3"></i></a></p>
             </div>
         </div>
     </div>

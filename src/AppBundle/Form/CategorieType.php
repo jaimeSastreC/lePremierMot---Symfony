@@ -22,7 +22,8 @@ class CategorieType extends AbstractType
                         'Adulte'    => 'Adulte',
                         'Enfant'    => 'Enfant',
                         'Senior'    => 'Senior',
-                        'Réduit'    => 'Réduit',
+                        'Chômeur'    => 'Chômeur',
+                        'Tarif Réduit' => 'Tarif Réduit',
                     ]
                 ]
             )

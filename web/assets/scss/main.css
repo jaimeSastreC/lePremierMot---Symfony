@@ -5311,10 +5311,10 @@ h3 {
   font-size: 1.2rem;
   letter-spacing: .2em; }
 
-#active-item {
+.active {
   font-family: "modern_sans_serif_7";
   font-weight: 900;
-  font-size: 1.2em;
+  font-size: 0.9em;
   letter-spacing: .2em; }
 
 .main {
@@ -5325,7 +5325,7 @@ h3 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
-  background-height: auto;
+  background-height: 100%;
   height: auto; }
   .spectacle h1 {
     padding: 3vmax;
@@ -5396,13 +5396,16 @@ h3 {
     body h2 {
       font-size: 1.6rem; }
     body p {
-      font-size: 1.2rem; }
+      font-size: 1.1rem; }
     body .us {
       background-color: #1b636f;
       height: auto; }
     body .about {
       height: auto; }
     body .footer p {
-      font-size: 0.8em; } }
+      font-size: 0.8em; }
+
+  .main {
+    margin-top: 0; } }
 
 /*# sourceMappingURL=main.css.map */
