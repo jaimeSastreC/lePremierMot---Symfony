@@ -10,6 +10,11 @@ use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
+use AppBundle\Repository\CategorieRepository;
+use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ReservationRepository;
+use AppBundle\Repository\SalleRepository;
+use AppBundle\Repository\SpectacleRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,7 +49,7 @@ class AdminSupprimerControler extends Controller
      */
     public function categorieSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository CategorieRepository*/
         $repository = $this->getDoctrine()->getRepository(Categorie::class);
 
         // je récupère l'entity manager de doctrine
@@ -67,7 +72,7 @@ class AdminSupprimerControler extends Controller
      */
     public function spectateurSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SpectacleRepository */
         $repository = $this->getDoctrine()->getRepository(Spectateur::class);
 
         // je récupère l'entity manager de doctrine
@@ -90,7 +95,7 @@ class AdminSupprimerControler extends Controller
      */
     public function salleSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SalleRepository */
         $repository = $this->getDoctrine()->getRepository(Salle::class);
 
         // je récupère l'entity manager de doctrine
@@ -113,7 +118,7 @@ class AdminSupprimerControler extends Controller
      */
     public function spectacleSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SpectacleRepository */
         $repository = $this->getDoctrine()->getRepository(Spectacle::class);
 
         // je récupère l'entity manager de doctrine
@@ -136,7 +141,7 @@ class AdminSupprimerControler extends Controller
      */
     public function reservationSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository ReservationRepository */
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
         // je récupère l'entity manager de doctrine
@@ -159,7 +164,7 @@ class AdminSupprimerControler extends Controller
      */
     public function clientSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository ClientRepository */
         $repository = $this->getDoctrine()->getRepository(Client::class);
 
         // je récupère l'entity manager de doctrine

@@ -1,0 +1,38 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+
+    {#{{ dump(formclient) }}#}
+
+    <div>
+        {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formclient.nomClient) }}
+            {{ form_label(formclient.nomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formclient.nomClient, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+            {{ form_errors(formclient.mailClient) }}
+            {{ form_label(formclient.mailClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
+        </p>
+
+        <p>
+            {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </p>
+
+        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+        {{ form_rest(formclient) }}
+
+        {{ form_end(formclient) }}
+    </div>
+
+{% endblock %}

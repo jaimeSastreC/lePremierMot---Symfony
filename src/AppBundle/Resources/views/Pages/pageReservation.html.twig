@@ -1,31 +1,46 @@
 {% extends "@App/basePublic.html.twig" %}
 {% block active4 %}active{% endblock %}
 
-{% block head_js %}
-    <!-- liens/link js pour gallerie -->
-{% endblock %}
-{% block head_css %}
-    <!-- css pour gallerie -->
-{% endblock %}
+{% block head_js %}{% endblock %}
 
 {% block contenu %}
-    <aside>
-
-    </aside>
-    <main class="main">
-        <section class="premiere">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-5">
-                        gauche
-                    </div>
-                    <div class="col-7">
-                        Réservation
-                    </div>
-                </div>
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col-3 border-right">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <ol>
+                        <li>inscription ou identification</li>
+                        <li>création d'une réservation</li>
+                        <li>création des places de spectateur</li>
+                        <li>Règlement de la Réservation</li>
+                        <li>validation de la Réservation</li>
+                    </ol>
+                </aside>
             </div>
-        </section>
-    </main>
+            <div class="col-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
+                            <div class="offset-lg-1 col">
+                                <header >
+                                    <h2 class="m-3">Espace Réservation :</h2>
+                                </header>
+                                <p><em>Bienvenue dans l'espace de Réservation. <br>
+                                        Veuillez vous <a href="{{ path('form_login_client')}}">identifier</a><br>
+                                        ou vous <a href="{{ path('form_client')}}">inscrire.</a></em>
+                                </p>
+                            </div>
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="row image d-block">
+        </div>
+    </div>
 
 {% endblock %}
 

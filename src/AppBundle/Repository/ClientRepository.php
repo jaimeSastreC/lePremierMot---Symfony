@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ClientRepository extends \Doctrine\ORM\EntityRepository
 {
+    //recherche par nom client approximatif dans Client !!!!!!!!!!!!!!
+    public function getClientEmail($email){
+        //crée objet constructeur de requete sur table c
+        $queryBuilder = $this->createQueryBuilder('c');
+        // utilisation du LIKE avec controle entrée setParameter;
+        $query = $queryBuilder
+            ->select('c')
+            ->where('c.emailClient LIKE :emailClient')
+            ->setParameter('emailClient', '%'.$email.'%') // sécurité injection !!!
+            ->getQuery(); /// important ! à ajouter setParameter pour sécuriser requête
+        $results = $query->getResult();
+        return $results;
+    }
 }
