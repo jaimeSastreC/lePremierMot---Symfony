@@ -27,21 +27,11 @@ use AppBundle\Repository\SpectateurRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminModifierControler extends Controller
 {
-    /*/**
-     * @Route("/admintest", name="admintest")
-     */
-    /*public function indexAdminTestAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render("@App/Pages/indexAdmin.html.twig");
-    }*/
-
-
     /**
      *@Route("/admin/tarif_modifier/{id}", name="admin_modif_tarif")
      */
@@ -88,7 +78,7 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_tarifs'
                 return $this->redirectToRoute('admin_tarifs');
             } else {
-                //TODO afficher le Flash
+                //affiche le message flash
                 $this->addFlash(
                     'notice',
                     'Votre Tarif n\'a pas été enregitré, erreur!'
@@ -150,7 +140,6 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_categories'
                 return $this->redirectToRoute('admin_categories');
             } else {
-                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Categorie n\'a pas été enregistré, erreur!'
@@ -211,7 +200,6 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_spectateurs'
                 return $this->redirectToRoute('admin_spectateurs');
             } else {
-                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Spectateur n\'a pas été enregistré, erreur!'
@@ -274,7 +262,6 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_salles'
                 return $this->redirectToRoute('admin_salles');
             } else {
-                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Salle n\'a pas été enregistré, erreur!'
@@ -337,7 +324,6 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_spectacles'
                 return $this->redirectToRoute('admin_spectacles');
             } else {
-                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Spectacle n\'a pas été enregistré, erreur!'
@@ -408,7 +394,7 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_reservations'
                 return $this->redirectToRoute('admin_reservations');
             } else {
-                //TODO afficher le Flash
+
                 $this->addFlash(
                     'notice',
                     'Votre Reservation n\'a pas été enregistré, erreur!'
@@ -486,7 +472,7 @@ class AdminModifierControler extends Controller
                         'client' => $client,
                     ]);
             } else {
-                //TODO afficher le Flash
+
                 $this->addFlash(
                     'notice',
                     'Votre Reservation n\'a pas été enregistré, erreur!'
@@ -549,7 +535,6 @@ class AdminModifierControler extends Controller
                 // Important : redirige vers la route demandée, avec name = 'admin_clients'
                 return $this->redirectToRoute('admin_clients');
             } else {
-                //TODO afficher le Flash
                 $this->addFlash(
                     'notice',
                     'Votre Client n\'a pas été enregistré, erreur!'

@@ -2485,6 +2485,99 @@ input[type="button"].btn-block {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent; }
+
+.alert-heading {
+  color: inherit; }
+
+.alert-link {
+  font-weight: 700; }
+
+.alert-dismissible {
+  padding-right: 4.15rem; }
+  .alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    color: inherit; }
+
+.alert-primary {
+  color: #842a0f;
+  background-color: #f9d6cc;
+  border-color: #f7c6b8; }
+  .alert-primary hr {
+    border-top-color: #f4b4a1; }
+  .alert-primary .alert-link {
+    color: #561b0a; }
+
+.alert-secondary {
+  color: #1d4249;
+  background-color: #d1e0e2;
+  border-color: #bfd3d7; }
+  .alert-secondary hr {
+    border-top-color: #afc8cd; }
+  .alert-secondary .alert-link {
+    color: #0f2125; }
+
+.alert-success {
+  color: #246633;
+  background-color: #d4edda;
+  border-color: #c3e6cb; }
+  .alert-success hr {
+    border-top-color: #b1dfbb; }
+  .alert-success .alert-link {
+    color: #174020; }
+
+.alert-info {
+  color: #1b636f;
+  background-color: #d1ecf1;
+  border-color: #bee5eb; }
+  .alert-info hr {
+    border-top-color: #abdde5; }
+  .alert-info .alert-link {
+    color: #113e46; }
+
+.alert-warning {
+  color: #937313;
+  background-color: #fff3cd;
+  border-color: #ffeeba; }
+  .alert-warning hr {
+    border-top-color: #ffe8a1; }
+  .alert-warning .alert-link {
+    color: #66500d; }
+
+.alert-danger {
+  color: #842a0f;
+  background-color: #f9d6cc;
+  border-color: #f7c6b8; }
+  .alert-danger hr {
+    border-top-color: #f4b4a1; }
+  .alert-danger .alert-link {
+    color: #561b0a; }
+
+.alert-light {
+  color: #909091;
+  background-color: #fefefe;
+  border-color: #fdfdfe; }
+  .alert-light hr {
+    border-top-color: #ececf6; }
+  .alert-light .alert-link {
+    color: #767678; }
+
+.alert-dark {
+  color: #2a2d30;
+  background-color: #d6d8d9;
+  border-color: #c6c8ca; }
+  .alert-dark hr {
+    border-top-color: #b9bbbe; }
+  .alert-dark .alert-link {
+    color: #121415; }
+
 .list-group {
   display: flex;
   flex-direction: column;
@@ -5148,7 +5241,8 @@ h3 {
   letter-spacing: .2em; }
 
 .resa_body_font {
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  font-weight: 500; }
   .resa_body_font .title {
     color: #e23400;
     margin-top: 35px;

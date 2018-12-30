@@ -40,7 +40,7 @@ class FormController extends Controller
      */
     public function AdminTarifFormAction(Request $request)
     {
-        // création Entité "Tarif"
+        // création Forme "Tarif"
         $form= $this->createForm(TarifType::class, new Tarif);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
@@ -79,7 +79,7 @@ class FormController extends Controller
      */
     public function AdminCategieFormAction(Request $request)
     {
-       // création Entité  "Categorie"
+       // création Forme  "Categorie"
         $form= $this->createForm(CategorieType::class, new Categorie);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
@@ -118,7 +118,7 @@ class FormController extends Controller
      */
     public function AdminSpectateurFormAction(Request $request)
     {
-        // création Entité "Spectateur"
+        // création Forme "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
@@ -157,7 +157,7 @@ class FormController extends Controller
      */
     public function AdminSpectacleFormAction(Request $request)
     {
-        // création Entité "Spectacle"
+        // création Forme "Spectacle"
         $form= $this->createForm(SpectacleType::class, new Spectacle);
 
 
@@ -198,7 +198,7 @@ class FormController extends Controller
      */
     public function AdminSalleFormAction(Request $request)
     {
-        // création Entité "Salle"
+        // création Forme "Salle"
         $form= $this->createForm(SalleType::class, new Salle);
 
 
@@ -239,18 +239,9 @@ class FormController extends Controller
      */
     public function AdminReservationFormAction(Request $request)
     {
-        $reservation = new Reservation();
-        /*$spec1 = new Spectateur();
-        $spec2 = new Spectateur();
-        $spec3 = new Spectateur();
-        //$spec1->setNomSpectateur('AAA');
-        //$spec2->setNomSpectateur('BBB');
-        $reservation->getSpectateurs()->add($spec1);
-        $reservation->getSpectateurs()->add($spec2);
-        $reservation->getSpectateurs()->add($spec3);*/
 
-        // création Entité "Reservation"
-        $form= $this->createForm(ReservationType::class, $reservation);
+        // création Forme "Reservation"
+        $form= $this->createForm(ReservationType::class, new Reservation);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
@@ -460,15 +451,21 @@ class FormController extends Controller
             /** @var $clientRepository ClientRepository */
             $clientRepository = $this->getDoctrine()->getRepository(Client::class);
 
-            // méthode crée puissante => voir repository!!
+            // méthode crée dans repository! recherche par email
             $client = $clientRepository->getClientEmail($email);
 
+            //si le client existe dans la DB:
             if($client){
-                //dump($client);die;
-                $id = $client[id];
-                dump($id);die;
-
-                return $this->redirectToRoute('admin_clients');
+                $client_id = $client->getId();
+                //alors il peut réserver avec son id_client
+                return $this->redirectToRoute('reservations_client', ['client_id'=> $client_id]);
+            }
+            else {
+                /*renvoi message en cas d'absence de email dans la DB */
+                $this->addFlash(
+                    'notice',
+                    'Votre email n\'existe pas, veuillez vous inscrire, merci.'
+                );
             }
         }
 

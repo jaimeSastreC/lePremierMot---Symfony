@@ -24,7 +24,7 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
             ->where('c.mailClient LIKE :mailClient')
             ->setParameter('mailClient', '%'.$email.'%') // sécurité injection !!!
             ->getQuery(); /// important ! à ajouter setParameter pour sécuriser requête
-        $results = $query->getResult();
+        $results = $query->getOneOrNullResult();
         return $results;
     }
 }
