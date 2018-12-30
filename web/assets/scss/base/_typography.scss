@@ -3,15 +3,19 @@
 
 body {
     padding: 0; 
-    font-family: $modern_sans;
+    font-family: $Sansation_Regular;
     font-weight: $normal_font;
     margin: 0;
 }
 
 h1, h2, h3, h4, h5 {
-    font-family: $modern_sans7;
-    font-size: 1.8em;
+    font-family: $Sansation_Regular;
+    font-size: 1.7em;
 }
 h3 {
     font-size: 1em;
+}
+
+.form-control{
+    font-weight: $bold_font !important;
 }

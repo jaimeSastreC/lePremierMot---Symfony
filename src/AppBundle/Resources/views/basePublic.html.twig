@@ -40,16 +40,10 @@
     <title>Le premier mOt</title>
 </head>
 <body>
-{#todo à définir plus tard lien admin#}
-
-{#
-    <a href="{{ path('admin')}}">Lien vers Administrateur</a>
-#}
-
 
 <!--Barre de menu en Bootstrap navigateur : bannière contenant le logo mais aussi navigateur: barre de navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-toggleable  navbar-dark bg-dark" role="banner search">
-    <a class="navbar-brand" href="{{ path('accueil')}}">le premier m<img src="{{ asset('img/O.png')}}" alt="logo" width="40px">t</a>
+    <a class="navbar-brand" href="{{ path('accueil')}}">le premier m<img src="{{ asset('img/O.png')}}" alt="logo" width="30px">t</a>
     <!--    partie menu déroulant pour média query mobile        -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -70,13 +64,13 @@
                 <a class="nav-link"  href="{{ path('page_reservation')}}"><i class="far fa-calendar-check"></i>Réservation</a>
             </li>
             <li class="nav-item {% block active5 %}{% endblock %}">
-                <a class="nav-link"  href="{{ path('contact')}}"><i class="fas fa-edit"></i>Contact/Info</a>
-                <a href="{{ path('admin')}}"></a>
+                <a class="nav-link"  href="{{ path('contact')}}"><i class="fas fa-edit"></i>Contact</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="alert alert-info text-center" role="alert">
+
     {# ...or you can read and display every flash message available #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -103,8 +97,9 @@
 
             <div class="col-12 order-1 col-md-4 order-md-2 text-center m-0">
                 <p class="p-3 mx-lg-5 m-0">
-                    <a href="#">mentions légales</a>
-                    <a href="#"><br>Devenir membre</a>
+                    <a href="#">mentions légales</a><br>
+                    <a href="#">devenir membre</a><br>
+                    <a href="{{ path('admin')}}">administration</a>
                 </p>
 
             </div>

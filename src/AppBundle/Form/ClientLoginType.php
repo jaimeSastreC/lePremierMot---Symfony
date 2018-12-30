@@ -23,7 +23,7 @@ class ClientLoginType extends AbstractType
             ->add('nomClient',TextType::class )
             ->add('mailClient', EmailType::class)
             ->add('save', SubmitType::class, [
-                    'label' => 'Ajouter/Modifier un Client'
+                    'label' => 'Login'
                 ]
             ); //fin du builder ;
     }

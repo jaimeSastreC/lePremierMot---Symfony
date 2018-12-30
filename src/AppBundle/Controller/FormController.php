@@ -240,14 +240,14 @@ class FormController extends Controller
     public function AdminReservationFormAction(Request $request)
     {
         $reservation = new Reservation();
-        $spec1 = new Spectateur();
+        /*$spec1 = new Spectateur();
         $spec2 = new Spectateur();
         $spec3 = new Spectateur();
         //$spec1->setNomSpectateur('AAA');
         //$spec2->setNomSpectateur('BBB');
         $reservation->getSpectateurs()->add($spec1);
         $reservation->getSpectateurs()->add($spec2);
-        $reservation->getSpectateurs()->add($spec3);
+        $reservation->getSpectateurs()->add($spec3);*/
 
         // création Entité "Reservation"
         $form= $this->createForm(ReservationType::class, $reservation);
@@ -449,32 +449,24 @@ class FormController extends Controller
         //saisie des données envoyées (éventuellement le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
 
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
-            if ($form->isValid()){
+            // récupère données dans Objet/Entité
+            $client = $form->getData();
+            $email = $client->getMailClient();
 
-                // récupère données dans Objet/Entité
-                $client = $form->getData();
-                $email = $client->getEmail();
-                dump($email);die;
+            /** @var $clientRepository ClientRepository */
+            $clientRepository = $this->getDoctrine()->getRepository(Client::class);
 
-                /** @var $clientRepository ClientRepository */
-                $clientRepository = $this->getDoctrine()->getRepository(Client::class);
+            // méthode crée puissante => voir repository!!
+            $client = $clientRepository->getClientEmail($email);
 
-                // méthode crée puissante => voir repository!!
-                $reservations = $clientRepository->getClientReservation($email);
-
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
-                $entityManager = $this->getDoctrine()->getManager();
-
-                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
-                $entityManager->persist($client);
-                // enregistre en BD
-                $entityManager->flush();
+            if($client){
+                //dump($client);die;
+                $id = $client[id];
+                dump($id);die;
 
                 return $this->redirectToRoute('admin_clients');
             }

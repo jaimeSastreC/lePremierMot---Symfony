@@ -7,8 +7,8 @@
 }
 
 @font-face {
-    font-family: "modern_sans_serif_7";
-    src: url('../../fonts/modern_sans_serif_7.ttf');
+    font-family: "Sansation_Regular";
+    src: url('../../fonts/Sansation_Regular.ttf');
 }
 
 @font-face {
@@ -21,9 +21,10 @@
 $decorative_font: "norty", cursive;
 
 $modern_sans: "ModernSans-Light", sans-serif;
-$modern_sans7: "modern_sans_serif_7";
+$Sansation_Regular: "Sansation_Regular";
 $header_font: $decorative_font;
 
+//font weights !
 $light_font: 400;
-$normal_font: 700;
-$bold_font: 800;
+$normal_font: 500;
+$bold_font: 900;
