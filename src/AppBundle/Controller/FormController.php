@@ -31,9 +31,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Repository\CategorieRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class FormController extends Controller
 {
+    //Session Management - Symfony HttpFoundation component
+    private $session;
 
     /**
      * @Route("/admin/form_tarif", name="admin_form_tarif")
@@ -108,7 +112,7 @@ class FormController extends Controller
         return $this->render(
             "@App/Pages/form_admin_categorie.html.twig",
                 [
-                    'formcategorie' => $form->createView()
+                    'formcategorie' => $form->createView(),
                 ]
             );
     }
@@ -121,7 +125,7 @@ class FormController extends Controller
         // création Forme "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);
 
-        //saisie des données envoyées (éventuellement le client via le Formulaire
+        //saisie des données envoyées (éventuellement le spectateur via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
 
@@ -161,10 +165,9 @@ class FormController extends Controller
         $form= $this->createForm(SpectacleType::class, new Spectacle);
 
 
-        //saisie des données envoyées (éventuellement le client via le Formulaire
+        //saisie des données envoyées (éventuellement le spectacle via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -202,10 +205,9 @@ class FormController extends Controller
         $form= $this->createForm(SalleType::class, new Salle);
 
 
-        //saisie des données envoyées (éventuellement le client via le Formulaire
+        //saisie des données envoyées (éventuellement la salle via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -289,12 +291,22 @@ class FormController extends Controller
 
 
     /**
-     * @Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0})
+     * //Ancien Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0})
+     * @Route("/form_reservation", name="form_reservation")
      */
-    public function ReservationFormAction(Request $request, $id=0)
+    public function ReservationFormAction(Request $request)
     {
+        /* Méthode qui génère le Form de Réservation en fixant le paramètre client afin de sécuriser la requête.
+        le champ client du formulaire devient ainsi prérempli et inaccessible au client qui a déjà fourni son identifiant en s'identifiant.
+        Pour ce faire on ajoute un attribut au ReservationClientType */
+
+        //Session Management - Symfony HttpFoundation component
+        //Récupération de client_id de la session
+        $client_id = $this->get('session')->get('client_id');
+        dump($client_id);
+
         // création Form de l'Entité "Reservation"
-        $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$id]);
+        $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$client_id]);
         // si la requête contient d'id du client
 
         //saisie et traitement des données envoyées (éventuellement par le client via le Formulaire)
@@ -330,7 +342,7 @@ class FormController extends Controller
 
                 return $this->redirectToRoute('reservations_client',
                     [
-                    'client_id' => $id,
+                    'client_id' => $client_id,
                     ]);
             }
         }
@@ -340,7 +352,7 @@ class FormController extends Controller
             "@App/Pages/form_reservation.html.twig",
             [
                 'formreservation' => $form->createView(),
-                'id' => $id,
+                'id' => $client_id,
             ]
         );
     }
@@ -398,7 +410,6 @@ class FormController extends Controller
         //saisie des données envoyées (éventuellement le client via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
-        //var_dump($form);die;
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
@@ -434,6 +445,7 @@ class FormController extends Controller
      */
     public function ClientLoginFormAction(Request $request)
     {
+
         // création Entité "Client"
         $form= $this->createForm(ClientLoginType::class, new Client);
 
@@ -454,18 +466,18 @@ class FormController extends Controller
             // méthode crée dans repository! recherche par email
             $client = $clientRepository->getClientEmail($email);
 
-            //si le client existe dans la DB:
+            //si le client existe dans la DB, récupération de l'Id.
             if($client){
                 $client_id = $client->getId();
+
+                //Session Management - Symfony HttpFoundation component
+                $this->get('session')->set('client_id', $client_id);
+
                 //alors il peut réserver avec son id_client
-                return $this->redirectToRoute('reservations_client', ['client_id'=> $client_id]);
+                return $this->redirectToRoute('form_reservation');
             }
             else {
-                /*renvoi message en cas d'absence de email dans la DB */
-                $this->addFlash(
-                    'notice',
-                    'Votre email n\'existe pas, veuillez vous inscrire, merci.'
-                );
+                dump($form->getData());die;
             }
         }
 
@@ -473,7 +485,8 @@ class FormController extends Controller
         return $this->render(
             "@App/Pages/form_client_login.html.twig",
             [
-                'formclient' => $form->createView()
+                'formclient' => $form->createView(),
+                'client_id'=> '',
             ]
         );
     }

@@ -18,21 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Client
 {
-    /**
-     * @return mixed
-     */
-    public function getReservations()
-    {
-        return $this->reservations;
-    }
 
-    /**
-     * @param mixed $reservations
-     */
-    public function setReservations($reservations): void
-    {
-        $this->reservations = $reservations;
-    }
     /**
      * @var int
      *

@@ -65,6 +65,11 @@
 
                                 {{ form_end(formclient) }}
                             </div>
+                            <div class="col">
+                                {% if not client_id == false %}
+                                    {% dump(client_id) %}
+                                {% endif %}
+                            </div>
                         </div>
 
                     </div>
