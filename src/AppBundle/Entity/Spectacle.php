@@ -67,11 +67,6 @@ class Spectacle
      */
     private $reservation;
 
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Tarif")
-     */// TODO OPTION pour pouvoir avoir la liste des tarifs d'un spectacle, pas de besoin pour le moment.
-    private $tarif;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Categorie", mappedBy="spectacle")
@@ -224,22 +219,6 @@ class Spectacle
     public function setReservation($reservation)
     {
         $this->reservation = $reservation;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTarif()
-    {
-        return $this->tarif;
-    }
-
-    /**
-     * @param mixed $tarif
-     */
-    public function setTarif($tarif)
-    {
-        $this->tarif = $tarif;
     }
 
     /**

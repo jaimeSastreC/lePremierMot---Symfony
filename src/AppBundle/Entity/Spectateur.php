@@ -54,7 +54,7 @@ Spectateur
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectateurs")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="spectateur")
      */
     private $categorie;
 

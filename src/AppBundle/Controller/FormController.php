@@ -204,7 +204,6 @@ class FormController extends Controller
         // création Forme "Salle"
         $form= $this->createForm(SalleType::class, new Salle);
 
-
         //saisie des données envoyées (éventuellement la salle via le Formulaire
         // à notre variable $form. Elle contient le $_POST.
         $form->handleRequest($request);
@@ -291,11 +290,13 @@ class FormController extends Controller
 
 
     /**
-     * //Ancien Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0})
+     *
      * @Route("/form_reservation", name="form_reservation")
      */
     public function ReservationFormAction(Request $request)
     {
+        //Ancienne Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0}) ; mais pas sécurisé car on peut facilement changer le client
+
         /* Méthode qui génère le Form de Réservation en fixant le paramètre client afin de sécuriser la requête.
         le champ client du formulaire devient ainsi prérempli et inaccessible au client qui a déjà fourni son identifiant en s'identifiant.
         Pour ce faire on ajoute un attribut au ReservationClientType */
@@ -303,7 +304,6 @@ class FormController extends Controller
         //Session Management - Symfony HttpFoundation component
         //Récupération de client_id de la session
         $client_id = $this->get('session')->get('client_id');
-        dump($client_id);
 
         // création Form de l'Entité "Reservation"
         $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$client_id]);
@@ -445,6 +445,8 @@ class FormController extends Controller
      */
     public function ClientLoginFormAction(Request $request)
     {
+        // Session Management - Symfony HttpFoundation component !!!
+        $this->get('session')->set('client_id', -1);
 
         // création Entité "Client"
         $form= $this->createForm(ClientLoginType::class, new Client);
@@ -470,23 +472,31 @@ class FormController extends Controller
             if($client){
                 $client_id = $client->getId();
 
-                //Session Management - Symfony HttpFoundation component
+                // Session Management - Symfony HttpFoundation component !!!
                 $this->get('session')->set('client_id', $client_id);
 
                 //alors il peut réserver avec son id_client
                 return $this->redirectToRoute('form_reservation');
             }
             else {
-                dump($form->getData());die;
+                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative.
+                return $this->render(
+                    "@App/Pages/form_client_login.html.twig",
+                    [
+                        'formclient' => $form->createView(),
+                        'client_id'=> '',
+                    ]
+                );
             }
         }
 
+        $client_id = $this->get('session')->get('client_id');
         // replace this example code with whatever you need
         return $this->render(
             "@App/Pages/form_client_login.html.twig",
             [
                 'formclient' => $form->createView(),
-                'client_id'=> '',
+                'client_id'=> $client_id,
             ]
         );
     }

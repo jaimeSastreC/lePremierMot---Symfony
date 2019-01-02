@@ -29,6 +29,11 @@ class Categorie
      */
     private $libelle;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="categorie")
+     */
+    private $spectateur;
 
     /**
      *
@@ -77,6 +82,21 @@ class Categorie
         return $this->libelle;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSpectateur()
+    {
+        return $this->spectateur;
+    }
+
+    /**
+     * @param mixed $spectateur
+     */
+    public function setSpectateur($spectateur)
+    {
+        $this->spectateur = $spectateur;
+    }
 
     /**
      * @return mixed
