@@ -269,30 +269,38 @@ class AdministratorController extends Controller
 
     //************************************** Requetes ciblées ex: nom client , id reservation ********************************************
     /**
-     * @Route("/reservation/{id}" , name="reservation", defaults={"id"= 1 })
+     * @Route("/reservation" , name="reservation")
      */
-    public function ReservationAction($id){
+    //todo definir id reservation
+    public function ReservationAction(Request $request){
+
+        //Récupération de reservation_id de la session
+        $reservation_id = $this->get('session')->get('reservation_id');
 
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
         //requete sur Entity Reservation avec $id
-        $reservation = $repository->find($id);
-        $client = $reservation->getClient()->getId();
+        $reservation = $repository->find($reservation_id);
+        $client_id = $reservation->getClient()->getId();
 
         //retourne la page html reservation en utiliasnt le twig reservation
         return $this->render("@App/Pages/reservation.html.twig",
             [
                 'reservation' => $reservation,
-                'id' => $id,
-                'client' => $client,
-            ]);
+                'id' => $reservation_id,
+                'client' => $client_id,
+            ]
+        );
     }
 
     /**
-     * @Route("/reservations/{client_id}", name="reservations_client")
+     * @Route("/reservations", name="reservations_client")
      */
-    public function requeteReservationsAction($client_id){
+    public function requeteReservationsAction(Request $request){
+
+        //Récupération de client_id de la session
+        $client_id = $this->get('session')->get('client_id');
 
         /** @var $reservationRepository ReservationRepository */
         $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);

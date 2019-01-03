@@ -5271,6 +5271,8 @@ h3 {
       border: 1px dashed #fff;
       display: flex;
       justify-content: center; }
+  .resa_body_font .etape {
+    color: #1b636f; }
 
 .image {
   background-image: url(../../img/gallerie/mot_ensemble_fond.jpg);

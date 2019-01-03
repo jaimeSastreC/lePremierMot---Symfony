@@ -41,8 +41,14 @@ class PublicController extends Controller
      */
     public function reservationAction(Request $request)
     {
+
+        //Récupération de client_name de la session
+        $client_name = $this->get('session')->get('client_name');
         // replace this example code with whatever you need
-        return $this->render("@App/Pages/pageReservation.html.twig");
+        return $this->render("@App/Pages/pageReservation.html.twig",[
+                'client_name' => $client_name
+                ]
+            );
     }
 
     /**

@@ -24,12 +24,15 @@
                         <div class="row d-block">
                             <div class="offset-md-1 col">
                                 <header >
-                                    <h2 class="title">Espace Réservation</h2>
+                                    <h2 class="title">Espace Réservation</h2>{% if client_name %}<em>ref: {{ client_name }}</em>{% endif %}
                                 </header>
                                 <p><em>Bienvenue dans l'espace de Réservation. <br>
                                         Veuillez vous <a href="{{ path('form_login_client')}}">identifier</a><br>
                                         ou vous <a href="{{ path('form_client')}}">inscrire.</a></em>
                                 </p>
+                                {#<p>
+                                    {% if client_name %}<em><a href="{{ path('form_reservation') }}">Vous pouvez ajouter une Reservation</a></em>{% endif %}
+                                </p>#}
                             </div>
                             <div class="row">
                             </div>

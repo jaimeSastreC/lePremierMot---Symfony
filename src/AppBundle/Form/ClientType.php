@@ -33,7 +33,8 @@ class ClientType extends AbstractType
             ->add('adresseClient')
             ->add('cpClient')
             ->add('villeClient')
-            ->add('paysClient', CountryType::class)
+            ->add('paysClient', CountryType::class,[
+                'preferred_choices' => ['FR', 'France']])
             ->add('telClient', TelType::class)
             ->add('mailClient', EmailType::class)
             ->add('save', SubmitType::class, [

@@ -36,15 +36,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormController extends Controller
 {
-    //Session Management - Symfony HttpFoundation component
-    private $session;
 
     /**
      * @Route("/admin/form_tarif", name="admin_form_tarif")
      */
     public function AdminTarifFormAction(Request $request)
     {
-        // création Forme "Tarif"
+        // création Form "Tarif"
         $form= $this->createForm(TarifType::class, new Tarif);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
@@ -83,7 +81,7 @@ class FormController extends Controller
      */
     public function AdminCategieFormAction(Request $request)
     {
-       // création Forme  "Categorie"
+       // création Form  "Categorie"
         $form= $this->createForm(CategorieType::class, new Categorie);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
@@ -122,7 +120,7 @@ class FormController extends Controller
      */
     public function AdminSpectateurFormAction(Request $request)
     {
-        // création Forme "Spectateur"
+        // création Form "Spectateur"
         $form= $this->createForm(SpectateurType::class, new Spectateur);
 
         //saisie des données envoyées (éventuellement le spectateur via le Formulaire
@@ -161,7 +159,7 @@ class FormController extends Controller
      */
     public function AdminSpectacleFormAction(Request $request)
     {
-        // création Forme "Spectacle"
+        // création Form "Spectacle"
         $form= $this->createForm(SpectacleType::class, new Spectacle);
 
 
@@ -201,7 +199,7 @@ class FormController extends Controller
      */
     public function AdminSalleFormAction(Request $request)
     {
-        // création Forme "Salle"
+        // création Form "Salle"
         $form= $this->createForm(SalleType::class, new Salle);
 
         //saisie des données envoyées (éventuellement la salle via le Formulaire
@@ -240,8 +238,7 @@ class FormController extends Controller
      */
     public function AdminReservationFormAction(Request $request)
     {
-
-        // création Forme "Reservation"
+        // création Form "Reservation"
         $form= $this->createForm(ReservationType::class, new Reservation);
 
         //saisie des données envoyées (éventuellement) le client via le Formulaire
@@ -305,17 +302,16 @@ class FormController extends Controller
         //Récupération de client_id de la session
         $client_id = $this->get('session')->get('client_id');
 
-        // création Form de l'Entité "Reservation"
+        // création Form de l'Entité "Reservation" avec id_client comme argument.
         $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$client_id]);
-        // si la requête contient d'id du client
 
-        //saisie et traitement des données envoyées (éventuellement par le client via le Formulaire)
-        // à notre variable $form. Elle contient le $_POST.
+        //saisie et traitement des données envoyées/requete (éventuellement par le client via le Formulaire)
+        // à notre variable $form. Elle contiendra l'équivalent du $_POST.
         $form->handleRequest($request);
 
         //contrôle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Définies dans Entity
             if ($form->isValid()){
                 // récupère données dans Objet/Entité
                 $reservation = $form->getData();
@@ -340,10 +336,7 @@ class FormController extends Controller
                 // enregistre en BD
                 $entityManager->flush();
 
-                return $this->redirectToRoute('reservations_client',
-                    [
-                    'client_id' => $client_id,
-                    ]);
+                return $this->redirectToRoute('reservations_client');
             }
         }
 
@@ -352,7 +345,6 @@ class FormController extends Controller
             "@App/Pages/form_reservation.html.twig",
             [
                 'formreservation' => $form->createView(),
-                'id' => $client_id,
             ]
         );
     }
@@ -362,7 +354,7 @@ class FormController extends Controller
      */
     public function AdminClientFormAction(Request $request)
     {
-        // création Entité "Client"
+        // création Form "Client"
         $form= $this->createForm(ClientType::class, new Client);
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
@@ -378,7 +370,7 @@ class FormController extends Controller
 
                 // récupère données dans Objet/Entité
                 $client = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> DB
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
@@ -404,7 +396,7 @@ class FormController extends Controller
      */
     public function ClientFormAction(Request $request)
     {
-        // création Entité "Client"
+        // création Form "Client"
         $form= $this->createForm(ClientType::class, new Client);
 
         //saisie des données envoyées (éventuellement le client via le Formulaire
@@ -419,6 +411,7 @@ class FormController extends Controller
 
                 // récupère données dans Objet/Entité
                 $client = $form->getData();
+
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
 
@@ -427,17 +420,26 @@ class FormController extends Controller
                 // enregistre en BD
                 $entityManager->flush();
 
-                return $this->redirectToRoute('admin_clients');
+                //récupération de l'Id crée au flush()
+                $client_id = $client->getId();
+                $client_name = $client->getnomClient();
+
+                //enregistrement de l'id client créé en Session
+                $this->get('session')->set('client_id', $client_id);
+                $this->get('session')->set('client_name', $client_name);
+
+
+                return $this->redirectToRoute('page_reservation');
             }
         }
 
         // replace this example code with whatever you need
         return $this->render(
             "@App/Pages/form_client_inscription.html.twig",
-            [
-                'formclient' => $form->createView()
-            ]
-        );
+                [
+                    'formclient' => $form->createView()
+                ]
+            );
     }
 
     /**
@@ -445,7 +447,9 @@ class FormController extends Controller
      */
     public function ClientLoginFormAction(Request $request)
     {
-        // Session Management - Symfony HttpFoundation component !!!
+        //formulaire login Client
+        // Session Management - Symfony HttpFoundation component, on débute le formulaire en mettant client à -1;
+        //todo vérifier mise à jour
         $this->get('session')->set('client_id', -1);
 
         // création Entité "Client"
@@ -471,15 +475,18 @@ class FormController extends Controller
             //si le client existe dans la DB, récupération de l'Id.
             if($client){
                 $client_id = $client->getId();
+                $client_name = $client->getnomClient();
 
                 // Session Management - Symfony HttpFoundation component !!!
                 $this->get('session')->set('client_id', $client_id);
+                $this->get('session')->set('client_name', $client_name);
 
                 //alors il peut réserver avec son id_client
                 return $this->redirectToRoute('form_reservation');
             }
             else {
-                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative.
+                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative. avec client_id vide.
+
                 return $this->render(
                     "@App/Pages/form_client_login.html.twig",
                     [

@@ -25,6 +25,7 @@ class Client
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     private $id;
 
@@ -74,9 +75,10 @@ class Client
      * @var string
      *
      * @ORM\Column(name="cp_client", type="integer", length=15, nullable=true)
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
+     * min = 5,
+     *  max = 10,
+     * minMessage = "Votre code postal doit avoir au moins {{ limit }} caractères",
+     * maxMessage = "Votre code postal doit avoir au plus {{ limit }} caractères"
      * )
      */
     private $cpClient;
@@ -137,7 +139,7 @@ class Client
     //***************************************Getter Setter*************************************************
     /**
      * Get id
-     *
+     * @ORM\PostPersist
      * @return int
      */
     public function getId()

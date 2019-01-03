@@ -12,7 +12,7 @@
             <aside>
                 <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
                 <div class="counters">
-                    <p class="section ">inscription ou identification</p>
+                    <p class="section"><em>inscription ou identification</em></p>
                     <p class="section">création d'une réservation</p>
                     <p class="section">création des places de spectateur</p>
                     <p class="section">validation de la réservation </p>
@@ -66,11 +66,11 @@
                                 {{ form_end(formclient) }}
                             </div>
                             <div class="col">
+                                {# si email ne correspond pas à Base de donnée on lui signale #}
                                 {% if client_id == false %}
                                     <p>
                                         Votre email n'est pas enregistré! Veuillez vérifier.
                                     </p>
-                                    {% dump(client_id) %}
                                 {% endif %}
                             </div>
                         </div>
