@@ -30,12 +30,12 @@ class Client
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="civilite_client", type="string", length=4, nullable=true)
-     * @Assert\Choice({"Mlle", "Mme", "M"})
-     *
-     */
+ * @var string
+ *
+ * @ORM\Column(name="civilite_client", type="string", length=4, nullable=true)
+ * @Assert\Choice({"Mlle", "Mme", "M"})
+ *
+ */
     private $civiliteClient;
 
     /**

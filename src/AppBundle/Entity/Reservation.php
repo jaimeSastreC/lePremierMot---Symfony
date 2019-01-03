@@ -41,6 +41,15 @@ class Reservation
     private $montantReservation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="mode_payement_reservation", type="string", length=10)
+     * @Assert\Choice({"cheque", "sur place", "paypal"})
+     *
+     */
+    private $modePayementReservation;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="reservation")
      */
@@ -127,6 +136,8 @@ class Reservation
         return $this->montantReservation;
     }
 
+
+
     /**
      * @return int
      */
@@ -143,7 +154,23 @@ class Reservation
         $this->montantReservation = $this->calculMontant();
     }
 
+    /**
+     * @return string
+     */
+    public function getModePayementReservation()
+    {
+        return $this->modePayementReservation;
+    }
 
+    /**
+     * @param string $modePayementReservation
+     */
+    public function setModePayementReservation(string $modePayementReservation)
+    {
+        $this->modePayementReservation = $modePayementReservation;
+        return $this;
+
+    }
 
     /**
      * @return mixed
@@ -159,6 +186,7 @@ class Reservation
     public function setSpectacle($spectacle)
     {
         $this->spectacle = $spectacle;
+
     }
 
     /**

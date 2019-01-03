@@ -333,23 +333,22 @@ class FormController extends Controller
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($reservation);
-                // enregistre en BD
+                // premier enregistre en BD créant l'Id nécessaire aux spectateurs
                 $entityManager->flush();
 
-                //récupération de l'Id crée au flush()
-                $reservation_id = $reservation->getId();
-
-
+                // attribution de la réservation à chaque Entité Spectateur
                 foreach ($spectateurs as $spectateur){
                     $spectateur->setReservation($reservation);
                 }
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($reservation);
-                // enregistre en BD
+                // enregistre en BD avec prise en compte de l'id Reservation dans la table spectateur
                 $entityManager->flush();
 
-                return $this->redirectToRoute('reservations_client');
+                $this->get('session')->set('reservation_id', $reservation->getId());
+
+                return $this->redirectToRoute('reservation');
             }
         }
 

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,6 +60,15 @@ class ReservationClientType extends AbstractType
                     'allow_delete' => true,
                     'prototype' => true,
                     'by_reference' => false,
+                ]
+            )
+
+            ->add('mode_payement_reservation', ChoiceType::class, [
+                    'choices' => [
+                        'chèque'    => 'cheque',
+                        'sur place'    => 'sur place',
+                        'paypal'    => 'paypal',
+                    ]
                 ]
             )
 
