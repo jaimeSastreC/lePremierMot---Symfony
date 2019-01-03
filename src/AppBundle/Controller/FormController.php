@@ -317,8 +317,8 @@ class FormController extends Controller
                 $reservation = $form->getData();
 
                 $spectateurs = $reservation->getSpectateurs();
-                //dump($reservation);die;
                 $PrixPlaces = 0;
+
                 foreach ($spectateurs as $spectateur){
                     $PrixPlace = $spectateur
                         ->getCategorie()
@@ -330,6 +330,19 @@ class FormController extends Controller
 
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
+
+                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                $entityManager->persist($reservation);
+                // enregistre en BD
+                $entityManager->flush();
+
+                //récupération de l'Id crée au flush()
+                $reservation_id = $reservation->getId();
+
+
+                foreach ($spectateurs as $spectateur){
+                    $spectateur->setReservation($reservation);
+                }
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($reservation);

@@ -87,7 +87,7 @@ class Reservation
 
     /**
      * Get id
-     *
+     * @ORM\PostPersist
      * @return int
      */
     public function getId()

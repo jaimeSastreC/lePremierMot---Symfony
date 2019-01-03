@@ -34,15 +34,7 @@ class SpectateurReservationType extends AbstractType
                         return $categorie->getLibelle().': '.$categorie->getTarif()->getPrixPlace();
                     },
                 ]
-            )
-
-            // TODO régler mise à jour id selon nouvel id
-            ->add('reservation',EntityType::class, [
-                    'class' => 'AppBundle\Entity\Reservation',
-                    'choice_label' => 'id'
-                ]
             );
-
         //fin du builder ;
     }
 
