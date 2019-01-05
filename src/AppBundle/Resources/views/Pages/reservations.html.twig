@@ -1,47 +1,87 @@
 {% extends "@App/basePublic.html.twig" %}
+{#navbar sur Réservation#}
+{% block active4 %}active{% endblock %}
+
+{% block head_js %}{% endblock %}
 
 {% block contenu %}
-    {#{{ dump(reservations) }}#}
-    <div class="main offset-3">
-        <p>
-            <a href="{{ path('form_reservation') }}">Ajouter une Réservation</a>
-        </p>
 
-        <div >
+    {#{{ dump(formreservation) }}#}
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col-5 col-md-3 border-right counters">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <div class="counters">
+                        <p class="section"><em>inscription ou identification</em></p>
+                        <p class="section">création d'une réservation</p>
+                        <p class="section">création des places de spectateur</p>
+                        <p class="section">validation de la réservation </p>
+                        <p class="section">règlement de la réservation</p>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-5 col-md-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
 
-            {# Liste les spectaurs avec une boucle for #}
-            {% for reservation in reservations %}
+                            <div class="offset-md-1 col">
+                                <header >
+                                    <h2 class="title">Espace Réservation</h2>
+                                </header>
+                                <p><em>Veuillez effectuer votre réservation. <br></em>
+                                </p>
+                                <p>
+                                    <a href="{{ path('form_reservation') }}">Ajouter une Réservation</a>
+                                </p>
 
-                <div>
-                    <p>
-                        n° de réservation : {{ reservation.id}}<br>
-                        spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
-                        date de réservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
-                        montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
+                            </div>
+                            <div class="row">
 
-                        client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
-                    </p>
-                    <p>
-                        {% for spectateur in reservation.spectateurs%}
-                            nom : {{ spectateur.nomSpectateur}}&nbsp n° billet: {{ spectateur.id}}<br>
-                        {% endfor %}
-                    </p>
-                    {#suppression pas accessible pour client qui devra demander à l'administrateur#}
-                    {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
-                        <button class="supprimer" type="submit">Supprimer</button>
-                    </a>#}
 
-                    {# disponible pour le moment , à voir avec l'association si le client doit pouvoir avoir accès à modification #}
-                    <a href="{{ path('modif_reservation',  {'id': reservation.id}) }}">
-                        <button class="modifier" type="submit">Modifier</button>
-                    </a>
-                    <hr>
+                                <div class="offset-md-2 col-7 mt-3">
 
-                </div>
+                                    {# Liste les spectaurs avec une boucle for #}
+                                    {% for reservation in reservations %}
 
-            {% endfor %}
+                                        <div>
+                                            <p>
+                                                n° de réservation : {{ reservation.id}}<br>
+                                                spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br> date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
+                                                date de réservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
+                                                montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
+
+                                                client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                                            </p>
+                                            <p>
+                                                {% for spectateur in reservation.spectateurs%}
+                                                    nom : {{ spectateur.nomSpectateur}}&nbsp n° billet: {{ spectateur.id}}<br>
+                                                {% endfor %}
+                                            </p>
+                                            {#suppression pas accessible pour client qui devra demander à l'administrateur#}
+                                            {#<a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
+                                                <button class="supprimer" type="submit">Supprimer</button>
+                                            </a>#}
+
+                                            {# non disponible pour le moment pour des raisons de sécurité, à voir avec l'association si le client doit pouvoir avoir accès à modification #}
+                                            {#<a href="{{ path('modif_reservation')}}">
+                                                   <button class="modifier" type="submit">Modifier</button>
+                                            </a>#}
+                                            <hr>
+
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row image d-block">
         </div>
     </div>
 
 {% endblock %}
-

@@ -13,6 +13,7 @@ use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientType;
+use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
 use AppBundle\Form\SpectacleType;
@@ -344,7 +345,6 @@ class AdminModifierControler extends Controller
      */
     public function reservationAdminModifAction(Request $request, $id)
     {
-        //var_dump($id);die;
         // je genère le Repository de Doctrine
         /** @var $repository ReservationRepository*/
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
@@ -411,20 +411,26 @@ class AdminModifierControler extends Controller
     }
 
     /**
-     *@Route("/reservation_modifier/{id}", name="modif_reservation")
+     *@Route("/reservation_modifier", name="modif_reservation")
      */
-    public function reservationModifAction(Request $request, $id)
+    public function reservationModifAction(Request $request)
     {
         // je genère le Repository de Doctrine
         /** @var $repository ReservationRepository*/
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
+        //Session Management - Symfony HttpFoundation component
+        //Récupération de client_id et reservation_id de la session
+        $reservation_id = $this->get('session')->get('reservation_id');
+        $client_id = $this->get('session')->get('client_id');
+
         //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
-        $reservation = $repository->find($id);
-        $client = $reservation->getClient()->getId();
+        $reservation = $repository->find($reservation_id);
 
         //recherche entité ReservationType abstraite pour créé la forme de Reservation avec pour objet parametre $reservation TODO
-        $form = $this->createForm(ReservationType::class, $reservation);
+        $form = $this->createForm(ReservationClientType::class, $reservation, ['id_client'=>$client_id]);
+
+        //dump($form );die;
 
         // associe les données envoyées (éventuellement) par le client via le formulaire
         //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
@@ -468,8 +474,8 @@ class AdminModifierControler extends Controller
                 return $this->render("@App/Pages/reservation.html.twig",
                     [
                         'reservation' => $reservation,
-                        'id' => $id,
-                        'client' => $client,
+                        'id' => $reservation_id,
+                        'client' => $client_id,
                     ]);
             } else {
 

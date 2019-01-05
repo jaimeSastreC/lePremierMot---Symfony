@@ -18,12 +18,12 @@
                 <p>
                     n° de Réservation : {{ reservation.id}}<br>
                     date de reservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
-                    montant total de reservation: {{ reservation.montantReservation}} €<br> {#TODO calcul montant#}
+                    montant total de reservation: {{ reservation.montantReservation}} €<br>
                     spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
                     {# TODO vérifier client #}
-                    {#client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>#}
+                    client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>
                 </p>
-                <p> {#TODO verifier formule spectateurs#}
+                <p>
                     {% for spectateur in reservation.spectateurs%}
                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet :{{ spectateur.id}}
                     {% endfor %}

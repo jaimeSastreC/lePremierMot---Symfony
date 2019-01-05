@@ -207,7 +207,7 @@ class Reservation
 
     public function addSpectacteur(Spectateur $spectateur)
     {
-        //$this->spectateur[] = $spectateur;
+        //$this->spectateur[] = $spectateur; modifié car collection
         $spectateur->setReservation($this);
         $this->spectateurs->add($spectateur);
     }

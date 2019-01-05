@@ -28,10 +28,9 @@ use AppBundle\Form\TarifType;
 use AppBundle\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use AppBundle\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 
 class FormController extends Controller

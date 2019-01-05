@@ -15,7 +15,9 @@
                     place pour : {{ spectateur.civilitespectateur}}&nbsp
                     <strong>{{ spectateur.nomSpectateur}}</strong>&nbsp
                     {{ spectateur.prenomSpectateur}}&nbsp &nbsp
-                    réservation n° : {{ spectateur.reservation.id }}
+                    {% if spectateur.reservation %}
+                        réservation n° : {{ spectateur.reservation.id }}
+                    {% endif %}
                 </p>
 
                 <a href="{{ path('admin_supp_spectateur',  {'id': spectateur.id}) }}">

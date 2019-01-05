@@ -32,10 +32,21 @@ class CategorieType extends AbstractType
                 'choice_label' => 'prix_place',
             ]) // attention, prendre la méthode prix_place de l'Entity Tarif !!!
 
-            ->add('spectacle', EntityType::class, [
-                'class' => 'AppBundle\Entity\Spectacle',
-                'choice_label' => 'nom_spectacle'
-            ])
+            ->add('spectacle',EntityType::class,
+                [
+                    'class' => 'AppBundle\Entity\Spectacle',
+                    /* affichage précis du spectacle avec date et heure */
+                    'choice_label' => function($spectacle) {
+                        //conversion date et heure du spectacle
+                        $newDate = $spectacle->getDateSpectacle();
+                        $newDate = $newDate->format('d/m/Y');
+                        $newTime = $spectacle->getHeureDebutSpectacle();
+                        $newTime = $newTime->format('H:i');
+                        return $spectacle->getNomSpectacle().' '.$newDate. ' '.$newTime;
+                    },
+                ]
+            )
+
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Catégorie'
                 ]

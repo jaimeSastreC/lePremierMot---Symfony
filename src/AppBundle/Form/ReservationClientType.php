@@ -44,8 +44,7 @@ class ReservationClientType extends AbstractType
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->where('c.id =:id')
-                            ->setParameter('id', $this->id)
-                            ->orderBy('c.nomClient', 'ASC');
+                            ->setParameter('id', $this->id);
                     },
                     'choice_label' => function($client) {
                         return $client->getCiviliteClient() . ' ' . $client->getNomClient();
@@ -55,7 +54,7 @@ class ReservationClientType extends AbstractType
 
             ->add('spectateurs', CollectionType::class, [
                     'entry_type' => SpectateurReservationType::class,
-                    'entry_options' => array('label' => false),
+                    'entry_options' => ['label' => false],
                     'allow_add' => true,
                     'allow_delete' => true,
                     'prototype' => true,
