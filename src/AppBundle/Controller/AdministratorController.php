@@ -271,7 +271,6 @@ class AdministratorController extends Controller
     /**
      * @Route("/reservation" , name="reservation")
      */
-    //todo definir id reservation
     public function ReservationAction(Request $request){
 
         //Récupération de reservation_id de la session
@@ -340,5 +339,37 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/payement",name="payer_reservation")
+     */
+    public function payerReservationAction(Request $request){
+        /*méthode en construction , car doit être vue avec le client; Ici je valide automatiquement
+        pour montrer le changement de statut, mais il ne se fera que après contrôle de payement.*/
+
+        //récupération id réservation
+        $reservation_id = $this->get('session')->get('reservation_id');
+
+
+        // je genère le Repository de Doctrine
+        /** @var $repository ReservationRepository*/
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
+        $reservation = $repository->find($reservation_id);
+
+        //changement de statut de validation de payement
+        $reservation->setValideReservation('oui');
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+        $entityManager->persist($reservation);
+
+        //mise à jour BD, envoy à bd
+        $entityManager->flush();
+
+        return $this->render("@App/Pages/paypal.html.twig");
+    }
 
 }

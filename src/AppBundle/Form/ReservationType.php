@@ -65,6 +65,14 @@ class ReservationType extends AbstractType
                 ]
             )
 
+            ->add('valide_reservation', ChoiceType::class, [
+                    'choices' => [
+                        'oui'    => 'oui',
+                        'non'    => 'en attente',
+                    ]
+                ]
+            )
+
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Réservation'
                 ]

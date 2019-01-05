@@ -50,6 +50,15 @@ class Reservation
     private $modePayementReservation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="valide_reservation", type="string", length=10)
+     * @Assert\Choice({"oui", "en attente"})
+     *
+     */
+    private $valideReservation;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="reservation")
      */
@@ -171,6 +180,24 @@ class Reservation
         return $this;
 
     }
+
+    /**
+     * @return string
+     */
+    public function getValideReservation()
+    {
+        return $this->valideReservation;
+    }
+
+    /**
+     * @param string $valideReservation
+     */
+    public function setValideReservation(string $valideReservation)
+    {
+        $this->valideReservation = $valideReservation;
+    }
+
+
 
     /**
      * @return mixed
