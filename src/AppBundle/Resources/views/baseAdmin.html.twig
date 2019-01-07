@@ -59,7 +59,10 @@
                     <a href="{{ path('admin_tarifs') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Tarifs</a>
                 </li>
                 <li class="nav-item pr-3 ml-3">
-                    <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-5" role="button" aria-pressed="true">Clients</a>
+                    <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-3" role="button" aria-pressed="true">Clients</a>
+                </li>
+                <li class="nav-item pr-3 ml-3">
+                    <a href="{{ path('admin_pieces') }}" class="btn btn-primary active px-3" role="button" aria-pressed="true">Pièces</a>
                 </li>
             </ul>
         </nav>
@@ -97,7 +100,7 @@
             </div>
         </div>
 
-        <div class="col-4 offset-lg-1">
+        <div class="col-3 col-md-5 offset-lg-1">
             <main>
                 {% block contenu %}{% endblock %}
             </main>

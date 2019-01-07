@@ -4,8 +4,6 @@
 
 {% block contenu %}
 
-    {#{{ dump(formpiece) }}#}
-
     <div>
         {{ form_start(formpiece, {'attr': {'class': 'form'}}) }}
         <p>
@@ -15,6 +13,14 @@
         </p>
         <p>
             {{ form_widget(formpiece.titre, {'attr': {'class': 'form-control'}}) }}
+        </p>
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formpiece.accroche) }}
+            {{ form_label(formpiece.accroche, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formpiece.accroche, {'attr': {'class': 'form-control'}}) }}
         </p>
         <p>
             {{ form_errors(formpiece.auteur) }}
@@ -29,6 +35,13 @@
         </p>
         <p>
             {{ form_widget(formpiece.genre, {'attr': {'class': 'form-control'}}) }}
+        </p>
+        <p>
+            {{ form_errors(formpiece.participants) }}
+            {{ form_label(formpiece.participants, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formpiece.participants, {'attr': {'class': 'form-control'}}) }}
         </p>
         <p>
             {{ form_errors(formpiece.resume) }}

@@ -305,6 +305,24 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/admin/piece/{id}" , name="admin_piece", defaults={"id"= 1 })
+     */
+    public function listAdminPieceAction($id){
+
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $piece = $pieceRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/piece_admin.html.twig",
+            [
+                'piece' => $piece
+            ]);
+    }
+
     //************************************** Requetes ciblées ex: nom client , id reservation ********************************************
     /**
      * @Route("/reservation" , name="reservation")

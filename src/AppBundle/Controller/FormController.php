@@ -450,7 +450,7 @@ class FormController extends Controller
                 $this->get('session')->set('client_name', $client_name);
 
 
-                return $this->redirectToRoute('page_reservation');
+                return $this->redirectToRoute('form_reservation');
             }
         }
 
@@ -584,15 +584,16 @@ class FormController extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre pièce a bien été ajouté!'
+                    'Votre pièce a bien été ajoutée!'
                 );
-                die;
+
                 return $this->redirectToRoute('admin_pieces');
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre piece n\'a pas été enregitré, erreur!'
+                    'Votre pièce n\'a pas été enregitrée, erreur!'
                 );
+
             }
         }
 

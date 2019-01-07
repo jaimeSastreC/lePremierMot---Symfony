@@ -6,12 +6,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Repository\CategorieRepository;
 use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\PieceRepository;
 use AppBundle\Repository\ReservationRepository;
 use AppBundle\Repository\SalleRepository;
 use AppBundle\Repository\SpectacleRepository;
@@ -180,5 +182,28 @@ class AdminSupprimerControler extends Controller
 
         // Important : redirige vers la route demandée, avec name = 'admin_client'
         return $this->redirectToRoute('admin_clients');
+    }
+
+    /**
+     * @Route("/admin/piece_supprimmer/{id}", name="admin_supp_piece")
+     */
+    public function pieceSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository PieceRepository */
+        $repository = $this->getDoctrine()->getRepository(Piece::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $piece = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($piece);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_piece'
+        return $this->redirectToRoute('admin_pieces');
     }
 }

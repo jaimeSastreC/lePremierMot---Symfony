@@ -19,8 +19,10 @@ class PieceType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class )
+            ->add('accroche', TextType::class )
             ->add('auteur', TextType::class)
             ->add('genre', TextType::class)
+            ->add('participants', TextType::class)
             ->add('resume',TextareaType::class)
             ->add('dates',TextareaType::class)
             ->add('image', FileType::class, array(

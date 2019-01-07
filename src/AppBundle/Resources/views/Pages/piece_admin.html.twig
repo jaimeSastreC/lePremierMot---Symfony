@@ -1,0 +1,43 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('admin_form_ajout_piece') }}">Ajouter une Pièce</a>
+    </p>
+
+    <div class="text-align-center">
+
+         {#Liste les pieces avec une boucle for#}
+        {% if piece%}
+            <div>
+                <p>
+                    <h1><strong><em>Titre : </em>{{ piece.titre}}</strong></h1><br>
+                    <strong><em>Accroche : </em></strong>{{ piece.accroche }}<br>
+                    <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
+                    <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
+                    <strong><em>Dates : </em></strong>{{ piece.dates}}<br>
+                    <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
+                </p>
+                <p>
+                    <strong><em>Résumé : </em></strong>{{ piece.resume}}<br>
+                    {% if piece.image %}<br>
+                        <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}" height="auto" width="300">
+                    {% else %}
+                        emplacement image
+                    {% endif %}
+                </p>
+
+                <a href="{{ path('admin_supp_piece',  {'id': piece.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>
+                <a href="{{ path('admin_form_modif_piece',  {'id': piece.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

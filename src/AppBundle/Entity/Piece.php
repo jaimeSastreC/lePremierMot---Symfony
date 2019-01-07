@@ -31,6 +31,13 @@ class Piece
     /**
      * @var string
      *
+     * @ORM\Column(name="accroche", type="string", length=150)
+     */
+    private $accroche;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="auteur", type="string", length=255)
      */
     private $auteur;
@@ -41,6 +48,13 @@ class Piece
      * @ORM\Column(name="genre", type="string", length=255)
      */
     private $genre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="participants", type="string", length=255)
+     */
+    private $participants;
 
     /**
      * @var string
@@ -99,6 +113,22 @@ class Piece
     }
 
     /**
+     * @return string
+     */
+    public function getAccroche()
+    {
+        return $this->accroche;
+    }
+
+    /**
+     * @param string $accroche
+     */
+    public function setAccroche(string $accroche)
+    {
+        $this->accroche = $accroche;
+    }
+
+    /**
      * Set auteur
      *
      * @param string $auteur
@@ -144,6 +174,22 @@ class Piece
     public function getGenre()
     {
         return $this->genre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param string $participants
+     */
+    public function setParticipants(string $participants)
+    {
+        $this->participants = $participants;
     }
 
     /**

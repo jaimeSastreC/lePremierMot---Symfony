@@ -77,7 +77,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Tarif a bien été ajouté!'
+                    'Votre Tarif a bien été modifié!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_tarifs'
@@ -86,7 +86,7 @@ class AdminModifierControler extends Controller
                 //affiche le message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Tarif n\'a pas été enregitré, erreur!'
+                    'Votre Tarif n\'a pas été modifié, erreur!'
                 );
             }
         }
@@ -139,7 +139,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Catégorie a bien été ajouté!'
+                    'Votre Catégorie a bien été modifiée!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_categories'
@@ -147,7 +147,7 @@ class AdminModifierControler extends Controller
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre Categorie n\'a pas été enregistré, erreur!'
+                    'Votre Categorie n\'a pas été modifiée, erreur!'
                 );
             }
         }
@@ -199,7 +199,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Spectateur a bien été ajouté!'
+                    'Votre Spectateur a bien été modifié!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_spectateurs'
@@ -207,7 +207,7 @@ class AdminModifierControler extends Controller
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre Spectateur n\'a pas été enregistré, erreur!'
+                    'Votre Spectateur n\'a pas été modifié, erreur!'
                 );
             }
         }
@@ -261,7 +261,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Salle a bien été ajouté!'
+                    'Votre Salle a bien été modifiée!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_salles'
@@ -269,7 +269,7 @@ class AdminModifierControler extends Controller
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre Salle n\'a pas été enregistré, erreur!'
+                    'Votre Salle n\'a pas été modifiée, erreur!'
                 );
             }
         }
@@ -323,7 +323,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Spectacle a bien été ajouté!'
+                    'Votre Spectacle a bien été modifié!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_spectacles'
@@ -331,7 +331,7 @@ class AdminModifierControler extends Controller
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre Spectacle n\'a pas été enregistré, erreur!'
+                    'Votre Spectacle n\'a pas été modifié, erreur!'
                 );
             }
         }
@@ -392,7 +392,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Reservation a bien été ajouté!'
+                    'Votre Reservation a bien été modifiée!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_reservations'
@@ -401,7 +401,7 @@ class AdminModifierControler extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Votre Reservation n\'a pas été enregistré, erreur!'
+                    'Votre Reservation n\'a pas été modifiée, erreur!'
                 );
             }
         }
@@ -471,7 +471,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Reservation a bien été ajouté/modifiée!'
+                    'Votre Reservation a bien été modifiée!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_reservations'
@@ -485,7 +485,7 @@ class AdminModifierControler extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Votre Reservation n\'a pas été enregistré, erreur!'
+                    'Votre Reservation n\'a pas été modifiée, erreur!'
                 );
             }
         }
@@ -539,7 +539,7 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Client a bien été ajouté!'
+                    'Votre Client a bien été modifié!'
                 );
 
                 // Important : redirige vers la route demandée, avec name = 'admin_clients'
@@ -547,7 +547,7 @@ class AdminModifierControler extends Controller
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre Client n\'a pas été enregistré, erreur!'
+                    'Votre Client n\'a pas été modifié, erreur!'
                 );
             }
         }
@@ -642,14 +642,14 @@ class AdminModifierControler extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre piÈce a bien été ajouté!'
+                    'Votre pièce a bien été modifiée!'
                 );
 
                 return $this->redirectToRoute('admin_pieces');
             } else {
                 $this->addFlash(
                     'notice',
-                    'Votre pièce n\'a pas été enregitré, erreur!'
+                    'Votre pièce n\'a pas été modifiée, erreur!'
                 );
             }
         }
