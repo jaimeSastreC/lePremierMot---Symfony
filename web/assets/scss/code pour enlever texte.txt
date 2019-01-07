@@ -1,0 +1,18 @@
+/*code pour enlever texte:*/
+
+$(".biocache").hide();
+
+$(".lasuite").click(function(){
+	$(".biocache").toggle(2000);
+	$(".bi1").toggle();
+}
+)
+
+
+twig:
+
+div d-flex
+	div class=bi1 > "bio troquée ..."
+	div class=lasuite > lire la suite
+	div class=biocache> bio en entier
+	
