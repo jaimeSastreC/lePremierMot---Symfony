@@ -359,6 +359,7 @@ class AdministratorController extends Controller
 
         //changement de statut de validation de payement
         $reservation->setValideReservation('oui');
+        $reservation->setModePayementReservation('paypal');
 
         // je récupère l'entity manager de doctrine
         $entityManager = $this->getDoctrine()->getManager();
