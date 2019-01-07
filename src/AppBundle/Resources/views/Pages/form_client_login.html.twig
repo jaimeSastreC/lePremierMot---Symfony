@@ -34,6 +34,17 @@
                                     ou vous <a href="{{ path('form_client')}}">inscrire.</a></em>
                             </p>
                         </div>
+                        <div class="text-center offset-md-2 col-4" role="alert">
+
+                            {# ...or you can read and display every flash message available #}
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="flash-{{ label }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                         <div class="row">
                             <div class="offset-md-2 col-5 mt-3">
                                 {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
@@ -64,14 +75,6 @@
                                 {{ form_rest(formclient) }}
 
                                 {{ form_end(formclient) }}
-                            </div>
-                            <div class="col">
-                                {# si email ne correspond pas à Base de donnée on lui signale #}
-                                {% if client_id == false %}
-                                    <p>
-                                        Votre email n'est pas enregistré! Veuillez vérifier.
-                                    </p>
-                                {% endif %}
                             </div>
                         </div>
 

@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
@@ -13,6 +14,7 @@ use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientType;
+use AppBundle\Form\PieceType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
@@ -27,9 +29,11 @@ use AppBundle\Repository\SpectacleRepository;
 use AppBundle\Repository\SpectateurRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\File; // pour modifier image crée chemin
+
 
 class AdminModifierControler extends Controller
 {
@@ -552,6 +556,108 @@ class AdminModifierControler extends Controller
             "@App/Pages/form_admin_client.html.twig",
             [
                 'formclient' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/modifier_piece_form/{id}", name="admin_form_modif_piece")
+     */
+    public function modifierPieceFormatAction(Request $request, $id){
+
+        // cherche une piece avec instance de getDoctrine -> méthode get Repository
+        // puis ->find( piece )
+        $repository = $this->getDoctrine()->getRepository(Piece::class);
+        $piece = $repository->find($id);
+
+        $oldImageName = $piece->getImage();
+
+        // tester si image existe, alors récupère entité piece puis ajoute attribut Image qui est un string
+        if ($piece->getImage()) {
+            //redifinit Image
+            $piece->setImage(
+                new File($this->getParameter('img_directory').'/'.$piece->getImage())
+            );
+        }
+
+        //recherche entité piece existant, puis créé la forme
+        $form = $this->createForm(PieceType::class, $piece);
+
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard)
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()){
+
+                if ( $piece->getImage() !== NULL ) {
+
+                    $piece = $form->getData();
+
+                    // créé file avec getImage, récupère string chemin image
+
+                    $file = $piece->getImage();
+
+                    //génère nom unique pour le fichier image
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+
+                    try {
+                        $file->move(
+                            $this->getParameter('img_directory'),
+                            $fileName
+                        );
+
+                    } catch (FileException $e) {
+                        echo $e->getMessage();
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    // important alimente modificatio !!!!!! chemin vers image
+                    //$piece->setImage($fileName);
+
+                    $piece->setImage(
+                        $fileName
+                    );
+
+                } else {
+                    // si pas de changement on recupère l'ancien nom et setImage
+                    $piece->setImage($oldImageName);
+                }
+
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($piece);
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre piÈce a bien été ajouté!'
+                );
+
+                return $this->redirectToRoute('admin_pieces');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre pièce n\'a pas été enregitré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            '@App/Pages/form_admin_piece.html.twig',
+            [
+                'formpiece' => $form->createView()
             ]
         );
     }

@@ -27,4 +27,12 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
         $results = $query->getOneOrNullResult();
         return $results;
     }
+
+    /**
+     * @return array
+     */
+    public function findAll(){
+        //requête en alphabétique nom client
+        return $this->findBy(array(), array('nomClient' => 'ASC'));
+    }
 }

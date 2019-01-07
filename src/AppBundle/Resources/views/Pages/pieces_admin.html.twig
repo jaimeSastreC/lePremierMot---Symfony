@@ -1,0 +1,39 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('admin_form_ajout_piece') }}">Ajouter une Pièce</a>
+    </p>
+
+    <div class="text-align-center">
+
+         {#Liste les pieces avec une boucle for#}
+        {% for piece in pieces %}
+            <div>
+                <p>
+                    piece : {{ piece.titre}}&nbsp
+                    {{ piece.auteur}}&nbsp
+                    {{ piece.genre}}
+                    {{ piece.dates}}
+                    {{ piece.resume}}
+                    {% if piece.image %}
+                        <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}" height="auto" width="300">
+                    {% else %}
+                        emplacement image
+                    {% endif %}
+                </p>
+
+                {#<a href="{{ path('admin_supp_piece',  {'id': piece.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>#}
+                <a href="{{ path('admin_form_modif_piece',  {'id': piece.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

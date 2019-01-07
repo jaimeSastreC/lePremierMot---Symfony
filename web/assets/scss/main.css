@@ -5283,6 +5283,9 @@ h3 {
   height: 80vh;
   opacity: 0.5; }
 
+.alert {
+  z-index: 100; }
+
 .main {
   margin-top: 71px; }
 

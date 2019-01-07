@@ -30,11 +30,15 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
         return $results;
     }
 
-    //recherche par nom client approximatif dans Client !!!!!!!!!!!!!!
+    //recherche par nom client approximatif dans Client pour Administrateur !!!!!!!!!!!!!!
+    /**
+     * @param $name
+     * @return array
+     */
     public function getClientReservation($name){
         //crée objet constructeur de requete sur table r
         $queryBuilder = $this->createQueryBuilder('r');
-        // utilisation du LIKE avec controle entrée setParameter;
+        // utilisation du LIKE avec contrôle entrée setParameter;
         $query = $queryBuilder
             ->select('r')
            /* jointure table client*/
@@ -44,6 +48,32 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
             ->orderBy('r.dateReservation', 'DESC')
             ->getQuery(); /// important ! à ajouter setParameter
+        $results = $query->getResult();
+        return $results;
+    }
+
+    /**
+     * @return array
+     */
+    public function findAll(){
+    //requête en commençant par la dernière date de réservation
+        return $this->findBy(array(), array('dateReservation' => 'DESC'));
+    }
+
+    /**
+     * @param $client
+     * @return array
+     */
+    public function getReservationBySpectacle($spectacle){
+        //requête par spectacle , ordre par la dernière date de réservation
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        $query = $queryBuilder
+            ->select('r')
+            ->where('r.spectacle =:spectacle')
+            ->setParameter('spectacle', $spectacle)
+            ->orderBy('r.dateReservation', 'DESC')
+            ->getQuery();
         $results = $query->getResult();
         return $results;
     }

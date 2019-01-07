@@ -45,7 +45,7 @@ class Piece
     /**
      * @var string
      *
-     * @ORM\Column(name="resume", type="string", length=255)
+     * @ORM\Column(name="resume", type="string", length=3000)
      */
     private $resume;
 

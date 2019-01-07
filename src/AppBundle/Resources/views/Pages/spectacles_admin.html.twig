@@ -23,6 +23,9 @@
                 <a href="{{ path('admin_modif_spectacle',  {'id': spectacle.id}) }}">
                     <button class="modifier" type="submit">Modifier</button>
                 </a>
+                <a href="{{ path('admin_reservations_spectacle',  {'spectacle': spectacle.id}) }}">
+                    <button class="modifier" type="submit">Reservations par Spectacle</button>
+                </a>
                 <hr>
 
             </div>
@@ -30,6 +33,4 @@
         {% endfor %}
     </div>
 
-
 {% endblock %}
-

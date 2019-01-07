@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
@@ -19,6 +20,7 @@ use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientLoginType;
 use AppBundle\Form\ClientType;
+use AppBundle\Form\PieceType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Form\SalleType;
@@ -27,6 +29,7 @@ use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use AppBundle\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -284,6 +287,7 @@ class FormController extends Controller
         );
     }
 
+    /* ******************************* Forme Client *************************************** */
 
     /**
      *
@@ -344,6 +348,12 @@ class FormController extends Controller
                 $entityManager->persist($reservation);
                 // enregistre en BD avec prise en compte de l'id Reservation dans la table spectateur
                 $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Réservation a bien été ajouté!'
+                );
 
                 $this->get('session')->set('reservation_id', $reservation->getId());
 
@@ -460,7 +470,6 @@ class FormController extends Controller
     {
         //formulaire login Client
         // Session Management - Symfony HttpFoundation component, on débute le formulaire en mettant client à -1;
-        //todo vérifier mise à jour
         $this->get('session')->set('client_id', -1);
 
         // création Entité "Client"
@@ -492,12 +501,24 @@ class FormController extends Controller
                 $this->get('session')->set('client_id', $client_id);
                 $this->get('session')->set('client_name', $client_name);
 
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->get('session')->getFlashBag()->clear();
+                $this->addFlash(
+                    'notice',
+                    'Vous êtes bien logué!'
+                );
+
                 //alors il peut réserver avec son id_client
                 return $this->redirectToRoute('form_reservation');
             }
             else {
-                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative. avec client_id vide.
 
+                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative. avec client_id vide.
+                // Renvoi de Message non logué, mail non enregistré, flash
+                $this->addFlash(
+                    'notice',
+                    'Vous n\'êtes pas logué! Vérifiez votre email'
+                );
                 return $this->render(
                     "@App/Pages/form_client_login.html.twig",
                     [
@@ -509,12 +530,76 @@ class FormController extends Controller
         }
 
         $client_id = $this->get('session')->get('client_id');
-        // replace this example code with whatever you need
+
         return $this->render(
             "@App/Pages/form_client_login.html.twig",
             [
                 'formclient' => $form->createView(),
                 'client_id'=> $client_id,
+            ]
+        );
+    }
+
+    /* **************************** Form pour ajouter une pièce dans la page spectacles *************************** */
+
+    /**
+     * @Route("/admin/ajout_piece_form", name="admin_form_ajout_piece")
+     */
+    public function ajoutPieceFormatAction(Request $request){
+        //création entité PieceType
+        $form = $this->createForm(PieceType::class, new Piece());
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi le $_POST
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()){
+                //bien ajouter, getData implémente l'instance $piece
+                $piece = $form->getData();
+                //créé file image méthode getImage
+                $file = $piece->getImage();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('img_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    echo $e->getMessage();
+                    // ... handle exception if something happens during file upload
+                }
+                // important alimente nouveau nom fichier image
+                $piece->setImage($fileName);
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée
+                $entityManager->persist($piece);
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre pièce a bien été ajouté!'
+                );
+                die;
+                return $this->redirectToRoute('admin_pieces');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre piece n\'a pas été enregitré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            '@App/Pages/form_admin_piece.html.twig',
+            [
+                'formpiece' => $form->createView()
             ]
         );
     }

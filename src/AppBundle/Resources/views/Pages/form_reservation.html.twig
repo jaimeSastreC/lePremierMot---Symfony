@@ -33,6 +33,17 @@
                                 <p><em>Veuillez effectuer votre réservation. <br></em>
                                 </p>
                             </div>
+                            <div class="text-center offset-md-1 col-4" role="alert">
+
+                                {# ...or you can read and display every flash message available #}
+                                {% for label, messages in app.flashes %}
+                                    {% for message in messages %}
+                                        <div class="flash-{{ label }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
                             <div class="row">
                                 <div class="offset-md-2 col-7 mt-3">
                                     Date Réservation : {{ "now"|date("d/m/Y") }}

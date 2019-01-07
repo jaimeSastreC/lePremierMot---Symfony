@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
@@ -121,6 +122,25 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/admin/reservations_spectacle/{spectacle}" , name="admin_reservations_spectacle")
+     */
+    public function listAdminReservationsSpectacleAction($spectacle){
+
+        // je genère le Repository de Doctrine
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        /** @var $reservationRepository ReservationRepository */ // je génère une requête par spectacle
+        $reservations = $reservationRepository->getReservationBySpectacle($spectacle);
+
+
+        //retourne la page html spectacles en utilisant le twig reservations
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
 
     /**
      * @Route("/admin/spectacles" , name="admin_spectacles")
@@ -155,6 +175,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/clients_admin.html.twig",
             [
                 'clients' => $clients
+            ]);
+    }
+
+    /**
+     * @Route("/admin/pieces" , name="admin_pieces")
+     */
+    public function listAdminPiecesAction(){
+
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $pieces = $pieceRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/pieces_admin.html.twig",
+            [
+                'pieces' => $pieces
             ]);
     }
 
