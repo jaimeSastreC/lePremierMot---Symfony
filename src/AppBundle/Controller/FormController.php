@@ -449,8 +449,28 @@ class FormController extends Controller
                 $this->get('session')->set('client_id', $client_id);
                 $this->get('session')->set('client_name', $client_name);
 
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->get('session')->getFlashBag()->clear();
+                $this->addFlash(
+                    'notice',
+                    'Bienvenue ! Vous êtes bien enregistré! Bienvenue'
+                );
 
                 return $this->redirectToRoute('form_reservation');
+            }  else {
+
+                // si le client n'existe pas, on renvoie le formulaire pour une nouvelle tentative. avec client_id vide.
+                // Renvoi de Message non logué, mail non enregistré, flash
+                $this->addFlash(
+                    'notice',
+                    'Vous n\'êtes pas logué! Vérifiez votre email'
+                );
+                return $this->render(
+                    "@App/Pages/form_client_inscription.html.twig",
+                    [
+                        'formclient' => $form->createView(),
+                    ]
+                );
             }
         }
 
