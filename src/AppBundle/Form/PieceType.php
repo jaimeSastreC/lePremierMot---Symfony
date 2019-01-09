@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,6 +26,14 @@ class PieceType extends AbstractType
             ->add('participants', TextType::class)
             ->add('resume',TextareaType::class)
             ->add('dates',TextareaType::class)
+            ->add('salle', EntityType::class, [
+                    'class' => 'AppBundle\Entity\Salle',
+                    'choice_label' => function($salle) {
+                        return $salle->getnomSalle().': '.$salle->getVilleSalle();
+                    },
+                ]
+            )
+
             ->add('image', FileType::class, array(
                 'required' => false
             )) // chargement image

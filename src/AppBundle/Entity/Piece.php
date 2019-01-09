@@ -77,6 +77,14 @@ class Piece
      */
     private $image;
 
+    /**
+     * //lien many to one création clé étrangère
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Salle")
+     */
+    private $salle;
+
     //*************************************** Getter Setter *************************************************
     /**
      * Get id
@@ -264,5 +272,22 @@ class Piece
     {
         return $this->image;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSalle()
+    {
+        return $this->salle;
+    }
+
+    /**
+     * @param mixed $salle
+     */
+    public function setSalle($salle)
+    {
+        $this->salle = $salle;
+    }
+
 }
 

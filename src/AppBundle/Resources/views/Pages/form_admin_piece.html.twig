@@ -58,6 +58,13 @@
             {{ form_widget(formpiece.dates, {'attr': {'class': 'form-control'}}) }}
         </p>
         <p>
+            {{ form_errors(formpiece.salle) }}
+            {{ form_label(formpiece.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formpiece.salle, {'attr': {'class': 'form-control'}}) }}
+        </p>
+        <p>
             {{ form_errors(formpiece.image) }}
             {{ form_label(formpiece.image, null, {'label_attr':  {'class': 'form-label'}}) }}
         </p>

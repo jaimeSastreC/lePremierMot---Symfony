@@ -49,6 +49,20 @@ class Salle
      */
     private $spectacle;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="longitude_salle", type="smallint", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="latitude_salle", type="smallint", nullable=true)
+     */
+    private $latitude;
+
     //***************************************Getter Setter*************************************************
     /**
      * Get id
@@ -146,6 +160,38 @@ class Salle
     public function setSpectacle($spectacle)
     {
         $this->spectacle = $spectacle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param int $longitude
+     */
+    public function setLongitude(int $longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param int $latitude
+     */
+    public function setLatitude(int $latitude)
+    {
+        $this->latitude = $latitude;
     }
 
 

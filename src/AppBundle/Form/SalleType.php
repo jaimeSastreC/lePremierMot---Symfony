@@ -21,6 +21,8 @@ class SalleType extends AbstractType
             ->add('nomSalle')
             ->add('villeSalle',TextType::class )
             ->add('placesSalle',NumberType::class)
+            ->add('longitude',NumberType::class)
+            ->add('latitude',NumberType::class)
 
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Salle'

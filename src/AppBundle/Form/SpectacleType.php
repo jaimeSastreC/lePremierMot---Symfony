@@ -42,7 +42,7 @@ class SpectacleType extends AbstractType
                     },
                 ]
             )
-            // option
+            // option - pas nécessaire pour l'instant
             /*->add('tarif', EntityType::class, [
                 'class' => 'AppBundle\Entity\Tarif',
                 'choice_label' => 'prix_place'
