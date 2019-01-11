@@ -654,12 +654,13 @@ class FormController extends Controller
                     'notice',
                     'Votre mail a bien été envoyé!'
                 );
-                //envoi du message
-                $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('send@example.com')
-                    ->setTo('jaime.sastre@lapiscine.pro')
-                    ->setBody('You should see me from the profiler!')
+                //préparation du mail du message, utilisation Bibliothèque Swiftmailer
+                $message = (new \Swift_Message($contact->getSubject()))
+                    ->setFrom($contact->getEmail())
+                    ->setTo('lepremiermot@hotmail.fr')
+                    ->setBody($contact->getMessage())
                 ;
+                //envoi de mail avec Swiftmailer
                 $mailer->send($message);
 
                 return $this->redirectToRoute('contact');
