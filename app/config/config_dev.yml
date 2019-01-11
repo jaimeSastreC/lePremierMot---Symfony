@@ -38,4 +38,4 @@ monolog:
         #    level: info
 
 swiftmailer:
-    delivery_addresses: ['monadresse@lapiscine.pro']
+    delivery_addresses: ['monadresse@monsite.fr']
