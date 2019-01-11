@@ -4,31 +4,57 @@
 {% block head_js %}{% endblock %}
 
 {% block contenu %}
-    <aside>
-
-    </aside>
-    <main class="main">
-        <section class="premiere">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3 col-12 border-right">
-                        <h1>Une Question ?</h1>
-                        <h1>Une Sugestion ?</h1>
-                        <h1>Nous rencontrer ?</h1>
-                        <h2>Ecrivez-nous! </h2>
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col-5 col-md-3 border-right counters">
+                <aside>
+                    <div>
+                        <em><h1>Une Question ?</h1></em>
+                        <em><h1>Une Sugestion ?</h1></em>
+                        <em><h1>Nous rencontrer ?</h1></em>
+                        <em><h2>Ecrivez-nous! </h2></em>
                     </div>
-                    <div class="col-7">
-                        Formulaire contact
-                    </div>
-                </div>
+                </aside>
             </div>
-        </section>
-    </main>
+            <div class="col-5 col-md-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
+                            <div class="offset-md-1 col">
+                                <header >
+                                    <h2 class="title">Espace Contact</h2>
+                                </header>
+                                <div class="text-center offset-md-1 col-6" role="alert">
+
+                                    {# ... editer tout message Flash #}
+                                    {% for label, messages in app.flashes %}
+                                        {% for message in messages %}
+                                            <div class="flash-{{ label }}">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                                <p><em>n'hésitez pas à nous contacter, nos trois administrateurs, Coralie, Kai et Joël,<br>
+                                        vous répondront dès que possible.<br>
+                                    </em>
+                                </p>
+                                <div>
+                                    <a href="{{ path('mail_contact_form')}}"  class=" btn btn-primary ">cliquez ici pour un formulaire contact</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="row image_contact d-block">
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block foot_js %}
     <!-- js -->
 {% endblock %}
-
-{% block isasideBlock %}Asideblock{% endblock %}

@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
@@ -20,6 +21,7 @@ use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientLoginType;
 use AppBundle\Form\ClientType;
+use AppBundle\Form\ContactType;
 use AppBundle\Form\PieceType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
@@ -32,8 +34,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 
 class FormController extends Controller
@@ -621,6 +621,60 @@ class FormController extends Controller
             '@App/Pages/form_admin_piece.html.twig',
             [
                 'formpiece' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/mail_contact_form", name="mail_contact_form")
+     */
+    public function mailContactFormatAction(Request $request, \Swift_Mailer $mailer){
+        //création entité ContactType
+        $form = $this->createForm(ContactType::class, new Contact());
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi le $_POST
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()){
+                //bien ajouter, getData implémente l'instance $contact
+                $contact = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée
+                $entityManager->persist($contact);
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre mail a bien été envoyé!'
+                );
+                //envoi du message
+                $message = (new \Swift_Message('Hello Email'))
+                    ->setFrom('send@example.com')
+                    ->setTo('jaime.sastre@lapiscine.pro')
+                    ->setBody('You should see me from the profiler!')
+                ;
+                $mailer->send($message);
+
+                return $this->redirectToRoute('contact');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre mail n\'a pas été envoyé, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            '@App/Pages/form_mail_contact.html.twig',
+            [
+                'formcontact' => $form->createView()
             ]
         );
     }

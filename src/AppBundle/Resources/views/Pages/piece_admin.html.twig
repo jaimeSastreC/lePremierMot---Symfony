@@ -15,11 +15,11 @@
                     <strong><em>Accroche : </em></strong>{{ piece.accroche }}<br>
                     <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
                     <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
-                    <strong><em>Dates : </em></strong>{{ piece.dates}}<br>
+                    <strong><em>Dates :<br></em></strong>{{ piece.dates|nl2br}}<br>
                     <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
                 </p>
                 <p>
-                    <strong><em>Résumé : </em></strong>{{ piece.resume}}<br>
+                    <strong><em>Résumé : <br></em></strong>{{ piece.resume|nl2br}}<br>
                     {% if piece.image %}<br>
                         <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}" height="auto" width="300">
                     {% else %}

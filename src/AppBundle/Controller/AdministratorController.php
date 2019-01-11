@@ -93,7 +93,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
 
-        //requete sur l'ensemble des salle
+        //requete sur l'ensemble des salles
         $salles = $salleRepository->findAll();
 
         //retourne la page html spectacles en utilisant le twig salles
@@ -327,7 +327,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/reservation" , name="reservation")
      */
-    public function ReservationAction(Request $request){
+    public function ReservationAction(){
 
         //Récupération de reservation_id de la session
         $reservation_id = $this->get('session')->get('reservation_id');
@@ -352,7 +352,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/reservations", name="reservations_client")
      */
-    public function requeteReservationsAction(Request $request){
+    public function requeteReservationsAction(){
 
         //Récupération de client_id de la session
         $client_id = $this->get('session')->get('client_id');
@@ -360,7 +360,7 @@ class AdministratorController extends Controller
         /** @var $reservationRepository ReservationRepository */
         $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        /*création d'une méthode spcifique pour une requête ciblé sur le client -> voir Repository*/
+        /*création d'une méthode spécifique pour une requête ciblé sur le client -> voir Repository*/
         $reservations = $reservationRepository->getReservationByClient($client_id);
 
         //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
@@ -398,7 +398,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/payement",name="payer_reservation")
      */
-    public function payerReservationAction(Request $request){
+    public function payerReservationAction(){
         /*méthode en construction , car doit être vue avec le client; Ici je valide automatiquement
         pour montrer le changement de statut, mais il ne se fera que après contrôle de payement.*/
 

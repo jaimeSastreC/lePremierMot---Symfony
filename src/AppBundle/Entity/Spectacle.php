@@ -73,6 +73,8 @@ class Spectacle
      */
     private $categorie;
 
+//    TODO METHODE RESERVATION OUVERTE OU CLOSE
+
 
     //***************************************Getter Setter*************************************************
     /**

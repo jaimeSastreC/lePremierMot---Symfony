@@ -18,9 +18,18 @@ class SalleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomSalle')
-            ->add('villeSalle',TextType::class )
-            ->add('placesSalle',NumberType::class)
+            ->add('nomSalle', TextType::class, [
+                    'label' => 'Nom de la Salle*'
+                ]
+            )
+            ->add('villeSalle',TextType::class , [
+                    'label' => 'Adresse de la Salle*'
+                ]
+            )
+            ->add('placesSalle',NumberType::class, [
+                    'label' => 'Nombre de Places'
+                ]
+            )
             ->add('longitude',NumberType::class)
             ->add('latitude',NumberType::class)
 
@@ -28,8 +37,9 @@ class SalleType extends AbstractType
                     'label' => 'Ajouter/Modifier une Salle'
                 ]
             ); //fin du builder ;
+    }
 
-    }/**
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

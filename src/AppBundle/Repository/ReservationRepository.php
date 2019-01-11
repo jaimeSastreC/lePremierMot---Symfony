@@ -17,7 +17,6 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getReservationByClient($client){
 
-        //var_dump('hello genre'); die;
         $queryBuilder = $this->createQueryBuilder('r');
 
         $query = $queryBuilder

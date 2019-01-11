@@ -225,7 +225,6 @@ class AdminModifierControler extends Controller
      */
     public function salleAdminModifAction(Request $request, $id)
     {
-        //var_dump($id);die;
         // je genère le Repository de Doctrine
         /** @var $repository SalleRepository*/
         $repository = $this->getDoctrine()->getRepository(Salle::class);

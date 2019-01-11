@@ -40,7 +40,7 @@ class ClientType extends AbstractType
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier un Client'
                 ]
-            ); //fin du builder ;
+            ); //fin du builder
     }
 
     /**

@@ -30,11 +30,6 @@
                                         Veuillez vous <a href="{{ path('form_login_client')}}">identifier</a><br>
                                         ou vous <a href="{{ path('form_client')}}">inscrire.</a></em>
                                 </p>
-                                {#<p>
-                                    {% if client_name %}<em><a href="{{ path('form_reservation') }}">Vous pouvez ajouter une Reservation</a></em>{% endif %}
-                                </p>#}
-                            </div>
-                            <div class="row">
                             </div>
                         </div>
                     </div>
@@ -50,5 +45,3 @@
 {% block foot_js %}
     <!-- js -->
 {% endblock %}
-
-{% block isasideBlock %}Asideblock{% endblock %}
