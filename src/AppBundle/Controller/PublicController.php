@@ -12,7 +12,7 @@ class PublicController extends Controller
     /**
      * @Route("/", name="accueil")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         // replace this example code with whatever you need
         return $this->render("@App/Pages/index.html.twig");
@@ -21,7 +21,7 @@ class PublicController extends Controller
     /**
      * @Route("/gallerie", name="gallerie")
      */
-    public function gallerieAction(Request $request)
+    public function gallerieAction()
     {
         // replace this example code with whatever you need
         return $this->render("@App/Pages/pageGallerie.html.twig");
@@ -30,7 +30,7 @@ class PublicController extends Controller
     /**
      * @Route("/spectacles", name="spectacles")
      */
-    public function spectaclesAction(Request $request)
+    public function spectaclesAction()
     {
         // replace this example code with whatever you need
         return $this->render("@App/Pages/pageSpectacles.html.twig");
@@ -39,7 +39,7 @@ class PublicController extends Controller
     /**
      * @Route("/page_reservation", name="page_reservation")
      */
-    public function reservationAction(Request $request)
+    public function reservationAction()
     {
 
         //Récupération de client_name de la session
@@ -54,10 +54,18 @@ class PublicController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request)
+    public function contactAction()
     {
         // replace this example code with whatever you need
         return $this->render("@App/Pages/pageContact.html.twig");
     }
 
+    /**
+     * @Route("/mentions_legales", name="mentions_legales")
+     */
+    public function mentionsLegalesAction()
+    {
+        // replace this example code with whatever you need
+        return $this->render("@App/Pages/page_mentions_legales.html.twig");
+    }
 }

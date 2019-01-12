@@ -22,7 +22,7 @@ class AdministratorController extends Controller
     /**
      * @Route("/admin", name="admin")
      */
-    public function indexAdminAction(Request $request)
+    public function indexAdminAction()
     {
         // méthode retourant la page Index
         return $this->render("@App/Pages/indexAdmin.html.twig");
