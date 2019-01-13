@@ -296,7 +296,6 @@ class FormController extends Controller
     public function ReservationFormAction(Request $request)
     {
         //Ancienne Route("/form_reservation/{id}", name="form_reservation", defaults={"id"=0}) ; mais pas sécurisé car on peut facilement changer le client
-
         /* Méthode qui génère le Form de Réservation en fixant le paramètre client afin de sécuriser la requête.
         le champ client du formulaire devient ainsi prérempli et inaccessible au client qui a déjà fourni son identifiant en s'identifiant.
         Pour ce faire on ajoute un attribut au ReservationClientType */

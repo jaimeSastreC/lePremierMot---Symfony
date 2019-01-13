@@ -26,7 +26,7 @@
     {#bootstrap#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">        {#lien feuille style assets#}
     {#mon css#}
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/scss/admin.css') }}">
     <title>{% block title %}Admin Premier mOt{% endblock %}</title>
 </head>
 <body>
@@ -85,7 +85,7 @@
                 {% block sidebar %}
                     <aside>
                         <nav >
-                            <h2>Menu</h2>
+                            <h2 class="recherche">Recherche par Client</h2>
                             <ul class="nav">
                                 <li class="nav-item">
                                     <form class="form-inline" method="get" action="{{ path('client_reservation_search_name') }}">

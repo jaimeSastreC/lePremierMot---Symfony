@@ -1,29 +1,30 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
+{% block contenu %}
     {#{{ dump(reservations) }}#}
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
-    <p>
-        <a href="{{ path('admin_form_reservation') }}">Ajouter une Reservation</a>
-    </p>
-
+    <div class="row ">
+        <p>
+            <a href="{{ path('admin_form_reservation') }}"><strong>Ajouter une Reservation</strong></a>
+        </p>
+    </div>
     <div class="text-align-center">
 
         {# Liste les spectaurs avec une boucle for #}
         {% if reservation %}
 
             <div>
-                <p>
-                    n° de Réservation : {{ reservation.id}}<br>
-                    date de reservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
-                    montant total de reservation: {{ reservation.montantReservation}} €<br>
-                    spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
-
-                    client : {{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}<br>
+                <p>n° de réservation : {{ reservation.id}}<br>
+                    spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br>
+                        {% if reservation.client %}
+                            client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
+                        {% endif %}
+                        date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
+                    date de réservation : {{ reservation.dateReservation|date("d/m/Y")  }}<br>
+                    montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
+                    payement validé : {{ reservation.valideReservation }} <br>
                 </p>
                 <p>
+                    Spectateur/s: <br>
                     {% for spectateur in reservation.spectateurs%}
                         nom : {{ spectateur.nomSpectateur}}&nbsp n° billet :{{ spectateur.id}}
                     {% endfor %}

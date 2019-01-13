@@ -73,7 +73,13 @@ class Spectacle
      */
     private $categorie;
 
-//    TODO METHODE RESERVATION OUVERTE OU CLOSE
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ouverture_spectacle", type="boolean")
+     */
+    private $ouvertureSpectacle;
 
 
     //***************************************Getter Setter*************************************************
@@ -237,6 +243,22 @@ class Spectacle
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOuvertureSpectacle()
+    {
+        return $this->ouvertureSpectacle;
+    }
+
+    /**
+     * @param bool $ouvertureSpectacle
+     */
+    public function setOuvertureSpectacle(bool $ouvertureSpectacle)
+    {
+        $this->ouvertureSpectacle = $ouvertureSpectacle;
     }
 
 

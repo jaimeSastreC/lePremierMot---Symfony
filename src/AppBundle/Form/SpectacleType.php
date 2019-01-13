@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -42,6 +43,14 @@ class SpectacleType extends AbstractType
                     },
                 ]
             )
+            ->add('ouvertureSpectacle', ChoiceType::class, [
+                    'choices' => [
+                        'réservation ouverte'    => true,
+                        'réservation fermée'    => false,
+                    ]
+                ]
+            )
+
             // option - pas nécessaire pour l'instant
             /*->add('tarif', EntityType::class, [
                 'class' => 'AppBundle\Entity\Tarif',

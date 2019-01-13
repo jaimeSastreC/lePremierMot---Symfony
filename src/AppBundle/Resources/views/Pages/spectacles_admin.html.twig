@@ -1,22 +1,31 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-    <p>
-        <a href="{{ path('admin_form_spectacle') }}">Ajouter un Spectacle</a>
-    </p>
-
+    <div class="row ">
+        <p>
+            <a href="{{ path('admin_form_spectacle') }}"><strong>Ajouter un Spectacle</strong></a>
+        </p>
+    </div>
     <div class="text-align-center">
 
         {# Liste les spectaurs avec une boucle for #}
         {% for spectacle in spectacles %}
             <div>
-                <p>
-                    spectacle : {{ spectacle.nomSpectacle}}&nbsp
-                    date : {{ spectacle.dateSpectacle|date("d/m/Y")}}<br>
-                    début séance {{ spectacle.heureDebutSpectacle|date('H:i')}}&nbsp
-                    fin de séance {{ spectacle.heureFinSpectacle|date('H:i')}}&nbsp
-                </p>
-
+                <a href="{{ path('admin_spectacle',  {'id': spectacle.id}) }}">
+                    <p>
+                        spectacle : {{ spectacle.nomSpectacle}}&nbsp
+                        date : {{ spectacle.dateSpectacle|date("d/m/Y")}}<br>
+                        début séance : {{ spectacle.heureDebutSpectacle|date('H:i')}}&nbsp
+                        fin de séance : {{ spectacle.heureFinSpectacle|date('H:i')}}<br>
+                        salle : {{ spectacle.salle.nomSalle }}<br>
+                        réservations :
+                            {% if spectacle.ouvertureSpectacle == false %}
+                                ouvert aux réservations
+                            {% else %}
+                                fermé aux réservations
+                            {% endif %}
+                    </p>
+                </a>
                 <a href="{{ path('admin_supp_spectacle',  {'id': spectacle.id}) }}">
                     <button class="supprimer" type="submit">Supprimer</button>
                 </a>
@@ -29,7 +38,6 @@
                 <hr>
 
             </div>
-
         {% endfor %}
     </div>
 

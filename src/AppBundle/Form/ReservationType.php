@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,15 +18,19 @@ class ReservationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-
         $builder
 
-            ->add('spectacle',EntityType::class,
-                [
-                    'class' => 'AppBundle\Entity\Spectacle',
-                    /*'choice_label' => 'nomSpectacle'*/   //version simple
+            ->add('spectacle',EntityType::class,[
 
+                /*  méthode query_builder qui fait une requête sur Spectacles
+                dont l'ouverture est true  */
+                    'class' => 'AppBundle\Entity\Spectacle',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('s')
+                            ->andWhere('s.ouvertureSpectacle = true');
+                    },
+
+                    /*'choice_label' => 'nomSpectacle'*/   //version simple
                     /*affichage précis du spectacle */
                     'choice_label' => function($spectacle) {
                         //conversion date et heure du spectacle

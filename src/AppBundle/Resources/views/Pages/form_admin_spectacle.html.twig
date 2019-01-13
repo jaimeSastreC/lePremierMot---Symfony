@@ -51,7 +51,14 @@
         <p>
             {{ form_widget(formspectacle.salle, {'attr': {'class': 'form-control'}}) }}
         </p>
-
+        <p>
+            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+            {{ form_errors(formspectacle.ouvertureSpectacle) }}
+            {{ form_label(formspectacle.ouvertureSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+        </p>
+        <p>
+            {{ form_widget(formspectacle.ouvertureSpectacle, {'attr': {'class': 'form-control'}}) }}
+        </p>
         <p>
             {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary mb-4'}}) }}
         </p>
