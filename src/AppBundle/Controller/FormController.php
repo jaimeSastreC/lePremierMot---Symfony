@@ -654,13 +654,27 @@ class FormController extends Controller
                     'Votre mail a bien été envoyé!'
                 );
                 //préparation du mail du message, utilisation Bibliothèque Swiftmailer
-                $message = (new \Swift_Message($contact->getSubject()))
+                $messageAdmin = (new \Swift_Message($contact->getSubject()))
                     ->setFrom($contact->getEmail())
-                    ->setTo('lepremiermot@hotmail.fr')
+                    ->setTo('lepremiermot@gmail.com')
+                    ->setBody($contact->getMessage())
+                ;
+                $messageContact = (new \Swift_Message($contact->getSubject()))
+                    ->setFrom('lepremiermot@gmail.com')
+                    ->setTo($contact->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            '@App/Pages/email_reponse_contact.html.twig', [
+                                'contact' => $contact,
+                            ]
+                        ),
+                        'text/html'
+                    )
                     ->setBody($contact->getMessage())
                 ;
                 //envoi de mail avec Swiftmailer
-                $mailer->send($message);
+                $mailer->send($messageAdmin);
+                $mailer->send($messageContact);
 
                 return $this->redirectToRoute('contact');
             } else {

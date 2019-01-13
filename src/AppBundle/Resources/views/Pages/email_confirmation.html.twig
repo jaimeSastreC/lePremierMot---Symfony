@@ -1,0 +1,18 @@
+{% block subject %}
+    Confirmation d'enregistrement de réservation
+{% endblock %}
+
+{%  block body_text %}
+    {% autoescape false %}
+        Bonjour {{ client.nomClient}},<br>
+
+        Merci d'avoir fait votre réservation en ligne.<br>
+        Nous avons bien pris en compte votre réservation. <br>
+        Vous recevrez votre réservation et facture sous quelques jours.<br>
+        <br>
+        En vous souhaitant un bon spectacle,<br>
+        Cordialement,<br>
+
+        <em>Le Premier mOt</em>
+    {% endautoescape %}
+{% endblock %}

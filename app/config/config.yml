@@ -65,8 +65,10 @@ doctrine:
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
+    port: '%mailer_port%'
     username: '%mailer_user%'
     password: '%mailer_password%'
+    #encryption: '%mailer_encryption%'
     spool: { type: memory }
 
 sensio_framework_extra:
@@ -79,5 +81,12 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "moi@lapiscine.pro" #ajouté
-        sender_name: "moi@lapiscine.pro" #ajouté
+        address: "amdnistraeur@lgmail.com" #ajouté
+        sender_name: "administrateur" #ajouté
+    registration:
+        confirmation:
+            enabled: true    #ajouté
+            from_email:
+                address: administrateur@gmail.com    #ajouté
+                sender_name: Administrateur Le Premier Mot    #ajouté
+            template: 'App/email/registration.email.twig'    #ajouté, à compléter par twig
