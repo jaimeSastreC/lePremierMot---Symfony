@@ -4,25 +4,51 @@
 {% block head_js %}{% endblock %}
 
 {% block contenu %}
-
-    <aside>
-
-    </aside>
-    <main class="main">
-        <section class="premiere">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-5">
-                        gauche
+    <div class="container-fluid main resa_body_font ">
+        <div class="row image d-block">
+            <h1>Titre du spectacle</h1>
+        </div>
+        <div class="row">
+            <div class="col-5 col-md-3 border-right counters">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <div class="counters">
+                        <p class="section">inscription ou identification</p>
+                        <p class="section">création d'une réservation</p>
+                        <p class="section">création des places de spectateur</p>
+                        <p class="section">validation de la réservation </p>
+                        <p class="section">règlement de la réservation</p>
                     </div>
-                    <div class="col-7">
-                        Spectacle
-                    </div>
-                </div>
+                </aside>
             </div>
-        </section>
-    </main>
+            <div class="col-5 col-md-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
+                            <div class="offset-md-1 col">
+                                <header >
+                                    <h2 class="title">Espace Réservation</h2>
+                                </header>
+                                <p><em>un texte <br>
+                                        <a href="{{ path('page_reservation')}}">Reservez </a></em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
 
+    </div>
+{#********************************#}
+
+    <div style="width: 100%">
+        <iframe scrolling="no" width="100%" height="200" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=%7B%7B {#course.ville.nom#} }}&amp;q={#{{ course.adresseDepart }}#}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    </div><br />
+{#
+    <div style="width: 100%">
+        <iframe scrolling="no" width="100%" height="200" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=%7B%7B course.ville.nom }}&amp;q={{ course.adresseDepart }}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" marginheight="0" marginwidth="0"></iframe></div><br />
+#}
 {% endblock %}
 
 {% block foot_js %}

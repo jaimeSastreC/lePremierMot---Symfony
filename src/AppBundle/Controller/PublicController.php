@@ -37,6 +37,15 @@ class PublicController extends Controller
     }
 
     /**
+     * @Route("/spectacle/{id}", name="spectacle", defaults={"id"= 1 })
+     */
+    public function spectacleAction($id)
+    {
+        // replace this example code with whatever you need
+        return $this->render("@App/Pages/pageSpectacle.html.twig");
+    }
+
+    /**
      * @Route("/page_reservation", name="page_reservation")
      */
     public function reservationAction()
