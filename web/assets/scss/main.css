@@ -5350,10 +5350,11 @@ h3 {
   background-position: top center;
   background-height: 100%;
   height: 100%; }
-  .spectacle h1 {
+  .spectacle .titre_troupe {
     padding: 3vmax;
     font-family: "norty", cursive;
-    color: #e23400; }
+    color: #e23400;
+    font-size: 3em; }
   .spectacle h2, .spectacle .lead {
     text-shadow: 1px 1px 3px black, -1px -1px 2px black;
     color: #9ad7d7;
@@ -5396,6 +5397,8 @@ h3 {
         .administrateurs p:hover, .enCours p:hover {
           color: #1f1f1f;
           background-color: rgba(255, 255, 255, 0.5); } }
+  .administrateurs .bande, .enCours .bande {
+    background: rgba(0, 0, 0, 0.5); }
   @media (min-width: 768px) {
     .administrateurs, .enCours {
       transform: translate(0, -2vw); } }

@@ -38,6 +38,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormController extends Controller
 {
+    /* ******************************* Form Admin *************************************** */
 
     /**
      * @Route("/admin/form_tarif", name="admin_form_tarif")
@@ -287,7 +288,7 @@ class FormController extends Controller
         );
     }
 
-    /* ******************************* Forme Client *************************************** */
+    /* ******************************* Form visiteur *************************************** */
 
     /**
      *
@@ -351,9 +352,9 @@ class FormController extends Controller
                 // Renvoi de confirmation d'enregistrement Message flash
                 $this->addFlash(
                     'notice',
-                    'Votre Réservation a bien été ajouté!'
+                    'Votre Réservation a bien été ajouté! merci et bon spectacle.'
                 );
-
+                //récupération de l'id de la réservation en Session
                 $this->get('session')->set('reservation_id', $reservation->getId());
 
                 return $this->redirectToRoute('reservation');
@@ -559,7 +560,7 @@ class FormController extends Controller
         );
     }
 
-    /* **************************** Form pour ajouter une pièce dans la page spectacles *************************** */
+    /* **************************** Form pour ajouter une pièce dans la Page spectacles *************************** */
 
     /**
      * @Route("/admin/ajout_piece_form", name="admin_form_ajout_piece")
@@ -623,7 +624,7 @@ class FormController extends Controller
             ]
         );
     }
-
+    /* **************************** Form pour ajouter un message de la la Page Contact *************************** */
     /**
      * @Route("/mail_contact_form", name="mail_contact_form")
      */

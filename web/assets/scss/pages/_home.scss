@@ -12,10 +12,11 @@
     }
     height: 100%;
 
-    h1 {
+    .titre_troupe {
         padding: 3vmax;
         font-family: $header_font;
         color: $brand-primary;
+        font-size: 3em;
     }
     h2, .lead {
         text-shadow: 1px 1px 3px black,
@@ -77,6 +78,10 @@
                 background-color: rgba(255, 255, 255, 0.5);
             }
         }
+    }
+    
+    .bande {
+        background: rgba(0, 0, 0, 0.5);
     }
     // equivalent to : 
     //@media screen and (min-width: 768px) {
