@@ -319,16 +319,20 @@ class FormController extends Controller
                 // récupère données dans Objet/Entité
                 $reservation = $form->getData();
 
-                //statut de validation de payement à false
-                $reservation->setValideReservation('non');
+                //Test, Si le règlement n'est pas en paypal le paiement est en attente de validation
+                if(!($reservation->getModePayementReservation()== 'paypal')){
+                    //statut de validation de payement à en attente'
+                    $reservation->setValideReservation('en attente');
+                }
 
                 $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
+                //Test, si il n'y a pas de spectateurs => retour automatique au formulaire avec message
                 if (count($spectateurs)==0){
                     // Renvoi de confirmation d'enregistrement Message flash
                     $this->addFlash(
                         'notice',
-                        'Vous n\'avez pas inscrit de spectateurs. veuillez recommencer.'
+                        'Vous n\'avez pas inscrit de spectateurs. Veuillez recommencer.'
                     );
                 } else {
                     foreach ($spectateurs as $spectateur) {
