@@ -319,45 +319,55 @@ class FormController extends Controller
                 // récupère données dans Objet/Entité
                 $reservation = $form->getData();
 
+                //statut de validation de payement à false
+                $reservation->setValideReservation('non');
+
                 $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
+                if (count($spectateurs)==0){
+                    // Renvoi de confirmation d'enregistrement Message flash
+                    $this->addFlash(
+                        'notice',
+                        'Vous n\'avez pas inscrit de spectateurs. veuillez recommencer.'
+                    );
+                } else {
+                    foreach ($spectateurs as $spectateur) {
+                        $PrixPlace = $spectateur
+                            ->getCategorie()
+                            ->getTarif()
+                            ->getPrixPlace();
+                        $PrixPlaces += $PrixPlace;
+                    }
+                    $reservation->setMontantReservation($PrixPlaces);
 
-                foreach ($spectateurs as $spectateur){
-                    $PrixPlace = $spectateur
-                        ->getCategorie()
-                        ->getTarif()
-                        ->getPrixPlace();
-                    $PrixPlaces += $PrixPlace;
+                    // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                    $entityManager = $this->getDoctrine()->getManager();
+
+                    // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                    $entityManager->persist($reservation);
+                    // premier enregistre en BD créant l'Id nécessaire aux spectateurs
+                    $entityManager->flush();
+
+                    // attribution de la réservation à chaque Entité Spectateur
+                    foreach ($spectateurs as $spectateur) {
+                        $spectateur->setReservation($reservation);
+                    }
+
+                    // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
+                    $entityManager->persist($reservation);
+                    // enregistre en BD avec prise en compte de l'id Reservation dans la table spectateur
+                    $entityManager->flush();
+
+                    // Renvoi de confirmation d'enregistrement Message flash
+                    $this->addFlash(
+                        'notice',
+                        'Votre Réservation a bien été ajouté! merci et bon spectacle.'
+                    );
+                    //récupération de l'id de la réservation en Session
+                    $this->get('session')->set('reservation_id', $reservation->getId());
+
+                    return $this->redirectToRoute('reservation');
                 }
-                $reservation->setMontantReservation($PrixPlaces);
-
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
-                $entityManager = $this->getDoctrine()->getManager();
-
-                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
-                $entityManager->persist($reservation);
-                // premier enregistre en BD créant l'Id nécessaire aux spectateurs
-                $entityManager->flush();
-
-                // attribution de la réservation à chaque Entité Spectateur
-                foreach ($spectateurs as $spectateur){
-                    $spectateur->setReservation($reservation);
-                }
-
-                // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
-                $entityManager->persist($reservation);
-                // enregistre en BD avec prise en compte de l'id Reservation dans la table spectateur
-                $entityManager->flush();
-
-                // Renvoi de confirmation d'enregistrement Message flash
-                $this->addFlash(
-                    'notice',
-                    'Votre Réservation a bien été ajouté! merci et bon spectacle.'
-                );
-                //récupération de l'id de la réservation en Session
-                $this->get('session')->set('reservation_id', $reservation->getId());
-
-                return $this->redirectToRoute('reservation');
             }
         }
 
