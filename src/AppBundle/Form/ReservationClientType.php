@@ -47,6 +47,7 @@ class ReservationClientType extends AbstractType
 
             ->add('client',EntityType::class, [
                     'class' => 'AppBundle\Entity\Client',
+                    /*requête pour récupérer avec l'id le nom et  la civilité du client*/
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->where('c.id =:id')
@@ -82,7 +83,9 @@ class ReservationClientType extends AbstractType
                 ]
             ); //fin du builder ;
 
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -90,7 +93,7 @@ class ReservationClientType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Reservation',
             //création de l'attribut id_client
-            'id_client'         => null,
+            'id_client'  => null,
         ));
     }
 

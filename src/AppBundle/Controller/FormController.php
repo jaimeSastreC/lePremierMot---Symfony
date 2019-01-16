@@ -54,9 +54,9 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $tarif = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
@@ -93,9 +93,9 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $categorie = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
@@ -132,9 +132,9 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $spectateur = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
@@ -172,9 +172,9 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $spectacle = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
@@ -211,9 +211,9 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $salle = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
                 $entityManager = $this->getDoctrine()->getManager();
@@ -250,7 +250,7 @@ class FormController extends Controller
 
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
                 // récupère données dans Objet/Entité
                 $reservation = $form->getData();
@@ -305,6 +305,11 @@ class FormController extends Controller
         //Récupération de client_id de la session
         $client_id = $this->get('session')->get('client_id');
 
+        //si le client n'est pas identifié => retour page reservation
+        if(empty($client_id) or $client_id==-1){
+            return $this->redirectToRoute('page_reservation');
+        }
+
         // création Form de l'Entité "Reservation" avec id_client comme argument.
         $form = $this->createForm(ReservationClientType::class, new Reservation, ['id_client'=>$client_id]);
 
@@ -314,19 +319,23 @@ class FormController extends Controller
 
         //contrôle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
-            //controle contenu, sécurité selon nécessités. Définies dans Entity
+            //controle contenu, sécurité selon nécessités. Définis dans Entity
             if ($form->isValid()){
-                // récupère données dans Objet/Entité
+                //je récupère les données du form
                 $reservation = $form->getData();
 
                 //Test, Si le règlement n'est pas en paypal le paiement est en attente de validation
                 if(!($reservation->getModePayementReservation()== 'paypal')){
                     //statut de validation de payement à en attente'
                     $reservation->setValideReservation('en attente');
+                } else {
+                    $reservation->setValideReservation('en attente');
+                    return $this->redirectToRoute('payer_reservation');
                 }
 
                 $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
+
                 //Test, si il n'y a pas de spectateurs => retour automatique au formulaire avec message
                 if (count($spectateurs)==0){
                     // Renvoi de confirmation d'enregistrement Message flash
@@ -349,9 +358,10 @@ class FormController extends Controller
 
                     // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                     $entityManager->persist($reservation);
-                    // premier enregistre en BD créant l'Id nécessaire aux spectateurs
+                    // premier enregistrement en BD créant l'Id nécessaire aux spectateurs
                     $entityManager->flush();
 
+                    // l’id de la réservation vient d’être créé
                     // attribution de la réservation à chaque Entité Spectateur
                     foreach ($spectateurs as $spectateur) {
                         $spectateur->setReservation($reservation);
@@ -400,10 +410,10 @@ class FormController extends Controller
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
 
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
 
-                // récupère données dans Objet/Entité
+                //je récupère données du form
                 $client = $form->getData();
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> DB
                 $entityManager = $this->getDoctrine()->getManager();
@@ -431,6 +441,9 @@ class FormController extends Controller
      */
     public function ClientFormAction(Request $request)
     {
+        // Session Management - Symfony HttpFoundation component, on débute le formulaire en mettant client à -1;
+        $this->get('session')->set('client_id', -1);
+
         // création Form "Client"
         $form= $this->createForm(ClientType::class, new Client);
 
@@ -441,10 +454,10 @@ class FormController extends Controller
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
 
-            //controle contenu, sécurité selon nécessités. Définie dans Entity
+            //controle contenu, sécurité selon nécessités. Défini dans Entity
             if ($form->isValid()){
 
-                // récupère données dans Objet/Entité
+                // je récupère les données de l’instance Form
                 $client = $form->getData();
 
                 // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
@@ -516,7 +529,7 @@ class FormController extends Controller
         //controle si il y a bien un formulaire renvoyé en POST.
         if ($form->isSubmitted()){
 
-            // récupère données dans Objet/Entité
+            // je récupère les données de l’instance Form
             $client = $form->getData();
             $email = $client->getMailClient();
 
@@ -590,7 +603,7 @@ class FormController extends Controller
 
         if ($form->isSubmitted()){
             if ($form->isValid()){
-                //bien ajouter, getData implémente l'instance $piece
+                // je récupère les données de l’instance Form
                 $piece = $form->getData();
                 //créé file image méthode getImage
                 $file = $piece->getImage();
@@ -653,7 +666,7 @@ class FormController extends Controller
 
         if ($form->isSubmitted()){
             if ($form->isValid()){
-                //bien ajouter, getData implémente l'instance $contact
+                // je récupère les données de l’instance Form
                 $contact = $form->getData();
 
                 // je récupère l'entity manager de doctrine

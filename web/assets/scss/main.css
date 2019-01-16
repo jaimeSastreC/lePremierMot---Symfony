@@ -5340,6 +5340,10 @@ h3 {
 .alert {
   z-index: 100; }
 
+.lien {
+  font-size: 0.7em;
+  font-style: italic; }
+
 .main {
   margin-top: 71px; }
 

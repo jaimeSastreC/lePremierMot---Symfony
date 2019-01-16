@@ -16,7 +16,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      * @return array
      */
     public function getReservationByClient($client){
-
+        // recherche par client
         $queryBuilder = $this->createQueryBuilder('r');
 
         $query = $queryBuilder
@@ -29,12 +29,13 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
         return $results;
     }
 
-    //recherche par nom client approximatif dans Client pour Administrateur !!!!!!!!!!!!!!
+
     /**
      * @param $name
      * @return array
      */
     public function getClientReservation($name){
+        //recherche par nom client approximatif dans Client pour Administrateur !!!!!!!!!!!!!!
         //crée objet constructeur de requete sur table r
         $queryBuilder = $this->createQueryBuilder('r');
         // utilisation du LIKE avec contrôle entrée setParameter;
@@ -42,11 +43,12 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->select('r')
            /* jointure table client*/
             ->leftJoin('r.client', 'c')
-            /* requete ciblée sur nom client, avec Like qui permet de donner un nom qui inclut quelques lettres*/
+            /* requete ciblée sur nom client, avec Like qui permet de retourner une liste de réservations
+            à partir des premières lettres d'un nom de Client */
             ->where('c.nomClient LIKE :nomClient')
             ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
             ->orderBy('r.dateReservation', 'DESC')
-            ->getQuery(); /// important ! à ajouter setParameter
+            ->getQuery();
         $results = $query->getResult();
         return $results;
     }
@@ -60,11 +62,11 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * @param $client
+     * @param $spectacle
      * @return array
      */
     public function getReservationBySpectacle($spectacle){
-        //requête par spectacle , ordre par la dernière date de réservation
+        //requête par spectacle, ordre commence par la dernière date de réservation
         $queryBuilder = $this->createQueryBuilder('r');
 
         $query = $queryBuilder

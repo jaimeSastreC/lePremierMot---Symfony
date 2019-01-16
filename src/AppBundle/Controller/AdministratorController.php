@@ -413,7 +413,8 @@ class AdministratorController extends Controller
         //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
         $reservation = $repository->find($reservation_id);
 
-        //changement de statut de validation de payement
+        //changement de statut de validation de payement simplifié pour le moment
+        //IL doit faire l'objet d'un contrôle de Banque et un retour validé ou non de celle-ci
         $reservation->setValideReservation('oui');
         $reservation->setModePayementReservation('paypal');
 

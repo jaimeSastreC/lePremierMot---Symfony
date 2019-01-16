@@ -9,7 +9,7 @@
     {#{{ dump(formreservation) }}#}
     <div class="container-fluid main resa_body_font ">
         <div class="row">
-            <div class="col-5 col-md-3 border-right counters">
+            <div class="col-md-3 border-right counters">
                 <aside>
                     <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
                     <div class="counters">
@@ -21,16 +21,18 @@
                     </div>
                 </aside>
             </div>
-            <div class="col-5 col-md-7">
+            <div class="col-md-7">
                 <main>
                     <div class="container ">
                         <div class="row d-block">
 
                             <div class="offset-md-1 col">
                                 <header >
-                                    <h2 class="title">Espace Réservation</h2>
+                                    <h2 class="title">Espace Réservation &nbsp&nbsp&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('reservations_client') }}">Voir toutes vos Réservation</a></span></h2>
                                 </header>
                                 <p><em>Veuillez effectuer votre réservation. <br></em>
+
+                                    si le champ client est vide veuillez vous identifier
                                 </p>
                             </div>
                             <div class="text-center offset-md-1 col-4" role="alert">

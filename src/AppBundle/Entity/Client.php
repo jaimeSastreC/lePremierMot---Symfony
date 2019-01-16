@@ -308,7 +308,7 @@ class Client
     /**
      * @param mixed $paysClient
      */
-    public function setPaysClient($paysClient): void
+    public function setPaysClient($paysClient)
     {
         $this->paysClient = $paysClient;
     }

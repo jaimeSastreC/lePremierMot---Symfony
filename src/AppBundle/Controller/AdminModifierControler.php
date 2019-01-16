@@ -447,39 +447,58 @@ class AdminModifierControler extends Controller
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();
 
+                //Test, Si le règlement n'est pas en paypal le paiement est en attente de validation
+                if(!($reservation->getModePayementReservation()== 'paypal')){
+                    //statut de validation de payement à en attente'
+                    $reservation->setValideReservation('en attente');
+                } else {
+                    $reservation->setValideReservation('en attente');
+                    return $this->redirectToRoute('payer_reservation');
+                }
+
                 // mise à jour du montantReservation
                 $spectateurs = $reservation->getSpectateurs();
-                /*dump($reservation);die;*/
 
                 $PrixPlaces = 0;
-                foreach ($spectateurs as $spectateur) {
-                    $PrixPlace = $spectateur
-                        ->getCategorie()
-                        ->getTarif()
-                        ->getPrixPlace();
-                    $PrixPlaces += $PrixPlace;
+
+                //Test, si il n'y a pas de spectateurs => retour automatique au formulaire avec message
+                if (count($spectateurs)==0){
+                    // Renvoi de confirmation d'enregistrement Message flash
+                    $this->addFlash(
+                        'notice',
+                        'Vous n\'avez pas inscrit de spectateurs. Veuillez recommencer.'
+                    );
+                } else {
+                    foreach ($spectateurs as $spectateur) {
+                        $PrixPlace = $spectateur
+                            ->getCategorie()
+                            ->getTarif()
+                            ->getPrixPlace();
+                        $PrixPlaces += $PrixPlace;
+                    }
+
+                    $reservation->setMontantReservation($PrixPlaces);
+
+                    // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                    $entityManager->persist($reservation);
+
+                    //mise à jour BD, envoy à bd
+                    $entityManager->flush();
+
+                    // Renvoi de confirmation d'enregistrement Message flash
+                    $this->addFlash(
+                        'notice',
+                        'Votre Reservation a bien été modifiée!'
+                    );
+
+                    // Important : redirige vers la route demandée, avec name = 'admin_reservations'
+                    return $this->render("@App/Pages/reservation.html.twig",
+                        [
+                            'reservation' => $reservation,
+                            'id' => $reservation_id,
+                            'client' => $client_id,
+                        ]);
                 }
-                $reservation->setMontantReservation($PrixPlaces);
-
-                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
-                $entityManager->persist($reservation);
-
-                //mise à jour BD, envoy à bd
-                $entityManager->flush();
-
-                // Renvoi de confirmation d'enregistrement Message flash
-                $this->addFlash(
-                    'notice',
-                    'Votre Reservation a bien été modifiée!'
-                );
-
-                // Important : redirige vers la route demandée, avec name = 'admin_reservations'
-                return $this->render("@App/Pages/reservation.html.twig",
-                    [
-                        'reservation' => $reservation,
-                        'id' => $reservation_id,
-                        'client' => $client_id,
-                    ]);
             } else {
 
                 $this->addFlash(
@@ -487,6 +506,7 @@ class AdminModifierControler extends Controller
                     'Votre Reservation n\'a pas été modifiée, erreur!'
                 );
             }
+
         }
 
         return $this->render(
