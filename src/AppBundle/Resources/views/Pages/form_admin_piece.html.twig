@@ -3,82 +3,82 @@
 
 
 {% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formpiece, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formpiece.titre) }}
+                {{ form_label(formpiece.titre, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.titre, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formpiece.accroche) }}
+                {{ form_label(formpiece.accroche, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.accroche, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.auteur) }}
+                {{ form_label(formpiece.auteur, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.auteur, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.genre) }}
+                {{ form_label(formpiece.genre, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.genre, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.participants) }}
+                {{ form_label(formpiece.participants, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.participants, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.resume) }}
+                {{ form_label(formpiece.resume, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.resume, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.dates) }}
+                {{ form_label(formpiece.dates, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.dates, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.salle) }}
+                {{ form_label(formpiece.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.salle, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.image) }}
+                {{ form_label(formpiece.image, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.image, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </p>
 
-    <div>
-        {{ form_start(formpiece, {'attr': {'class': 'form'}}) }}
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formpiece.titre) }}
-            {{ form_label(formpiece.titre, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.titre, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formpiece.accroche) }}
-            {{ form_label(formpiece.accroche, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.accroche, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.auteur) }}
-            {{ form_label(formpiece.auteur, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.auteur, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.genre) }}
-            {{ form_label(formpiece.genre, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.genre, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.participants) }}
-            {{ form_label(formpiece.participants, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.participants, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.resume) }}
-            {{ form_label(formpiece.resume, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.resume, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.dates) }}
-            {{ form_label(formpiece.dates, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.dates, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.salle) }}
-            {{ form_label(formpiece.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.salle, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formpiece.image) }}
-            {{ form_label(formpiece.image, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.image, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formpiece.save, {'attr': {'class': 'btn btn-primary'}}) }}
-        </p>
+            {#génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché#}
+            {{ form_rest(formpiece) }}
 
-         {#génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché#}
-        {{ form_rest(formpiece) }}
-
-        {{ form_end(formpiece) }}
+            {{ form_end(formpiece) }}
+        </div>
     </div>
-
 {% endblock %}

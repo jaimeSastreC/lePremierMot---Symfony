@@ -3,70 +3,70 @@
 
 
 {% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formspectacle, {'attr': {'class': 'form'}}) }}
 
-    <div class="offset-1 col-6 bg-light ">
-        {{ form_start(formspectacle, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.nomSpectacle) }}
+                {{ form_label(formspectacle.nomSpectacle, null, {'label_attr':  {'class': 'form-label mt-2' }}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.nomSpectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.nomSpectacle) }}
-            {{ form_label(formspectacle.nomSpectacle, null, {'label_attr':  {'class': 'form-label mt-2' }}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.nomSpectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.dateSpectacle) }}
+                {{ form_label(formspectacle.dateSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.dateSpectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.dateSpectacle) }}
-            {{ form_label(formspectacle.dateSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.dateSpectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.heureDebutSpectacle) }}
+                {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label '}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.heureDebutSpectacle) }}
-            {{ form_label(formspectacle.heureDebutSpectacle, null, {'label_attr':  {'class': 'form-label '}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.heureDebutSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.heureFinSpectacle) }}
+                {{ form_label(formspectacle.heureFinSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.heureFinSpectacle) }}
-            {{ form_label(formspectacle.heureFinSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.heureFinSpectacle, {'attr': {'class': 'form-control border-0 bg-light'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.salle) }}
+                {{ form_label(formspectacle.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.salle, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formspectacle.ouvertureSpectacle) }}
+                {{ form_label(formspectacle.ouvertureSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.ouvertureSpectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary mb-4'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.salle) }}
-            {{ form_label(formspectacle.salle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.salle, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formspectacle.ouvertureSpectacle) }}
-            {{ form_label(formspectacle.ouvertureSpectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.ouvertureSpectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formspectacle.save, {'attr': {'class': 'btn btn-primary mb-4'}}) }}
-        </p>
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formspectacle) }}
 
-        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {{ form_rest(formspectacle) }}
-
-        {{ form_end(formspectacle) }}
+            {{ form_end(formspectacle) }}
+        </div>
     </div>
-
 {% endblock %}

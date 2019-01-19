@@ -1,8 +1,8 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-
-        <div class="col-5">
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
             Date : {{ "now"|date("d/m/Y") }}
             {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
@@ -16,8 +16,8 @@
 
             <p>
                 {{ form_label(formreservation.spectateurs, null, {'label_attr':  {'class': 'form-label'}}) }}
-                <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateurs.vars.prototype)|e('html_attr') }}">
-                </ul>
+            <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateurs.vars.prototype)|e('html_attr') }}">
+            </ul>
             </p>
             <p>
                 {#retourne message erreur si besoin après méthode isValid dans Controleur#}
@@ -32,7 +32,7 @@
 
             {{ form_end(formreservation) }}
         </div>
-
+    </div>
     {# Partie JavaScript #}
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
@@ -53,7 +53,7 @@
 
             // add a delete link to all of the existing tag form li elements
             //inutile pour le moment, ajoute un bouton qui créé la confusion
-           /* $collectionHolder.find('li').each(function() {
+            /* $collectionHolder.find('li').each(function() {
                 addTagFormDeleteLink($(this));
             });*/
 

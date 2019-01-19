@@ -1,32 +1,31 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-    <p>
-        <a href="{{ path('admin_form_salle') }}">Ajouter une Salle</a>
-    </p>
+    <div class="row">
+        <div class="offset-lg-1 col-lg-8 ">
+            <a href="{{ path('admin_form_salle') }}">Ajouter une Salle</a>
 
-    <div class="text-align-center">
+            <div class="text-align-center ">
 
-         {#Liste les salles avec une boucle for#}
-        {% for salle in salles %}
-            <div>
-                <p>
-                    Salle : {{ salle.nomSalle}}&nbsp
-                    {{ salle.villeSalle}}&nbsp
-                    {{ salle.placesSalle}}
-                </p>
+                {#Liste les salles avec une boucle for#}
+                {% for salle in salles %}
 
-                <a href="{{ path('admin_supp_salle',  {'id': salle.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>
-                <a href="{{ path('admin_modif_salle',  {'id': salle.id}) }}">
-                    <button class="modifier" type="submit">Modifier</button>
-                </a>
-                <hr>
+                        <p><a href="{{ path('admin_salle', {'id': salle.id}) }}">
+                            Salle : {{ salle.nomSalle}}<br>
+                            Ville : {{ salle.villeSalle|nl2br}}&nbsp
+                                Places : {{ salle.placesSalle}}</a>
+                        </p>
 
+                        <a href="{{ path('admin_supp_salle',  {'id': salle.id}) }}">
+                            <button class="supprimer" type="submit">Supprimer</button>
+                        </a>
+                        <a href="{{ path('admin_modif_salle',  {'id': salle.id}) }}">
+                            <button class="modifier" type="submit">Modifier</button>
+                        </a>
+                        <hr>
+
+                {% endfor %}
             </div>
-
-        {% endfor %}
+        </div>
     </div>
-
 {% endblock %}

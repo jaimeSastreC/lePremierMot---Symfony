@@ -78,6 +78,13 @@ class Piece
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image_thumbnail", type="string", length=255)
+     */
+    private $imageThumbnail;
+
+    /**
      * //lien many to one création clé étrangère
      * @var
      *
@@ -271,6 +278,22 @@ class Piece
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageThumbnail()
+    {
+        return $this->imageThumbnail;
+    }
+
+    /**
+     * @param string $imageThumbnail
+     */
+    public function setImageThumbnail(string $imageThumbnail)
+    {
+        $this->imageThumbnail = $imageThumbnail;
     }
 
     /**

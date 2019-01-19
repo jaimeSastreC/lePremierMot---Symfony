@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
@@ -196,6 +197,25 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/admin/contacts" , name="admin_contacts")
+     */
+    public function listAdminContactsAction(){
+
+        // je genère le Repository de Doctrine
+        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
+
+        //requete sur l'ensemble des catégories
+        $contacts = $contactRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig contacts
+        return $this->render("@App/Pages/contacts_admin.html.twig",
+            [
+                'contacts' => $contacts
+            ]);
+    }
+
+
 //**************************************** Requete Unique ********************************************************
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif", defaults={"id"= 1 })
@@ -320,6 +340,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/piece_admin.html.twig",
             [
                 'piece' => $piece
+            ]);
+    }
+
+    /**
+     * @Route("/admin/contact/{id}" , name="admin_contact", defaults={"id"= 1 })
+     */
+    public function listAdminContactAction($id){
+
+        // je genère le Repository de Doctrine
+        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
+
+        //requete sur l'ensemble des catégories
+        $contact = $contactRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig contacts
+        return $this->render("@App/Pages/contact_admin.html.twig",
+            [
+                'contact' => $contact
             ]);
     }
 

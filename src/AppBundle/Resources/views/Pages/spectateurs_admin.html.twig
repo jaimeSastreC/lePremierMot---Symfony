@@ -18,15 +18,16 @@
                     {% if spectateur.reservation %}
                         réservation n° : {{ spectateur.reservation.id }}
                     {% endif %}
-                </p>
 
-                <a href="{{ path('admin_supp_spectateur',  {'id': spectateur.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>
-                <a href="{{ path('admin_modif_spectateur',  {'id': spectateur.id}) }}">
-                    <button class="modifier" type="submit">Modifier</button>
-                </a>
+
+                    <a href="{{ path('admin_supp_spectateur',  {'id': spectateur.id}) }}">
+                        <button class="supprimer" type="submit">Supprimer</button>
+                    </a>
+                    <a href="{{ path('admin_modif_spectateur',  {'id': spectateur.id}) }}">
+                        <button class="modifier" type="submit">Modifier</button>
+                    </a>
                 <hr>
+                </p>
 
             </div>
 

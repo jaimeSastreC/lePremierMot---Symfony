@@ -1,99 +1,100 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.civiliteClient) }}
+                {{ form_label(formclient.civiliteClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.civiliteClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-    <div>
-        {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.civiliteClient) }}
-            {{ form_label(formclient.civiliteClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.civiliteClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.nomClient) }}
+                {{ form_label(formclient.nomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.nomClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.nomClient) }}
-            {{ form_label(formclient.nomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.nomClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.prenomClient) }}
+                {{ form_label(formclient.prenomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.prenomClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.prenomClient) }}
-            {{ form_label(formclient.prenomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.prenomClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.adresseClient) }}
+                {{ form_label(formclient.adresseClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.adresseClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.adresseClient) }}
-            {{ form_label(formclient.adresseClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.adresseClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.cpClient) }}
+                {{ form_label(formclient.cpClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.cpClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.cpClient) }}
-            {{ form_label(formclient.cpClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.cpClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.villeClient) }}
+                {{ form_label(formclient.villeClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.villeClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.villeClient) }}
-            {{ form_label(formclient.villeClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.villeClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.paysClient) }}
+                {{ form_label(formclient.paysClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.paysClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.paysClient) }}
-            {{ form_label(formclient.paysClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.paysClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
-
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.telClient) }}
-            {{ form_label(formclient.telClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.telClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.telClient) }}
+                {{ form_label(formclient.telClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.telClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formclient.mailClient) }}
-            {{ form_label(formclient.mailClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formclient.mailClient) }}
+                {{ form_label(formclient.mailClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
-        </p>
+            <p>
+                {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </p>
 
-        {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-        {{ form_rest(formclient) }}
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formclient) }}
 
-        {{ form_end(formclient) }}
+            {{ form_end(formclient) }}
+        </div>
     </div>
 
 {% endblock %}

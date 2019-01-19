@@ -1,0 +1,44 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg bg-light">
+
+            {#Liste les contacts avec une boucle for#}
+
+            <table class="table table-hover"
+                   data-toggle="table"
+                   data-url="data1.json"
+                   data-pagination="true"
+                   data-search="true">
+                <thead>
+                <tr>
+                    <th data-sortable="true" data-field="nom">nom</th>
+                    <th data-field="email">email</th>
+                    <th data-field="objet">objet</th>
+                    <th>supprimer</th>
+                    <th>modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td><a href="{{ path('admin_contact', {'id': contact.id}) }}">{{ contact.name}}</a></td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.subject}}</td>
+
+                        <td><a href="{{ path('admin_supp_contact',  {'id': contact.id}) }}">
+                                <button class="supprimer" type="submit">Supprimer</button>
+                            </a>
+                        <td>
+                            <a href="{{ path('admin_modif_contact',  {'id': contact.id}) }}">
+                                <button class="modifier" type="submit">Modifier</button>
+                            </a>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

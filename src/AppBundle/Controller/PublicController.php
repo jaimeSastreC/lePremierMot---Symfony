@@ -77,4 +77,5 @@ class PublicController extends Controller
         // replace this example code with whatever you need
         return $this->render("@App/Pages/page_mentions_legales.html.twig");
     }
+
 }

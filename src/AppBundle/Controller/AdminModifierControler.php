@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
@@ -14,6 +15,7 @@ use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientType;
+use AppBundle\Form\ContactType;
 use AppBundle\Form\PieceType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
@@ -23,6 +25,7 @@ use AppBundle\Form\SpectateurType;
 use AppBundle\Form\TarifType;
 use AppBundle\Repository\CategorieRepository;
 use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ContactRepository;
 use AppBundle\Repository\ReservationRepository;
 use AppBundle\Repository\SalleRepository;
 use AppBundle\Repository\SpectacleRepository;
@@ -294,7 +297,7 @@ class AdminModifierControler extends Controller
         //avec le repository je récupère dans la BD spectacle sous forme d'Identity (instance)
         $spectacle = $repository->find($id);
 
-        //recherche entité SpectacleType abstraite pour créé la forme de Spectacle avec pour objet parametre $spectacle TODO
+        //recherche entité SpectacleType abstraite pour créé la forme de Spectacle avec pour objet parametre $spectacle
         $form = $this->createForm(SpectacleType::class, $spectacle);
 
         // associe les données envoyées (éventuellement) par le client via le formulaire
@@ -575,6 +578,68 @@ class AdminModifierControler extends Controller
             "@App/Pages/form_admin_client.html.twig",
             [
                 'formclient' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     *@Route("/admin/contact_modifier/{id}", name="admin_modif_contact")
+     */
+    public function contactAdminModifAction(Request $request, $id)
+    {
+        //var_dump($id);die;
+        // je genère le Repository de Doctrine
+        /** @var $repository ContactRepository*/
+        $repository = $this->getDoctrine()->getRepository(Contact::class);
+
+        //avec le repository je récupère dans la BD contact sous forme d'Identity (instance)
+        $contact = $repository->find($id);
+
+        //recherche entité ContactType abstraite pour créé la forme de Contact avec pour objet parametre $contact TODO
+        $form = $this->createForm(ContactType::class, $contact);
+
+        // associe les données envoyées (éventuellement) par le contact via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi de $_POST
+        //handlerequest reremplit le formulaire, récupère données et les reinjecte dans formulaire
+        $form->handleRequest($request);
+
+        //isSubmitted vérifie si il y a bien un contenu form envoyé, puis on regarde si valide (à compléter plus tard
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+
+                // récupère données dans Objet/Entité Contact
+                $contact = $form->getData();
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+                $entityManager->persist($contact);
+
+                //mise à jour BD, envoy à bd
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre Contact a bien été modifié!'
+                );
+
+                // Important : redirige vers la route demandée, avec name = 'admin_contacts'
+                return $this->redirectToRoute('admin_contacts');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre Contact n\'a pas été modifié, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            "@App/Pages/form_mail_contact.html.twig",
+            [
+                'formcontact' => $form->createView()
             ]
         );
     }

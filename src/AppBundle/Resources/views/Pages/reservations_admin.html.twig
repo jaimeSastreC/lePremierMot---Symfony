@@ -3,14 +3,14 @@
 {% block contenu %}
 
         <div class="row ">
-            <p>
+            <div class="offset-1 col">
                 <a href="{{ path('admin_form_reservation') }}"><strong>Ajouter une Reservation</strong></a>
-            </p>
+            </div>
         </div>
         <div class="row ">
         {# Liste les reservations avec une boucle for #}
         {% for reservation in reservations %}
-            <div class="col">
+            <div class="offset-1 col_12">
                 <a href="{{ path('admin_reservation',  {'id': reservation.id}) }}">
                     <p>
                         n° de réservation : {{ reservation.id}}<br>
@@ -30,9 +30,7 @@
                             nom : {{ spectateur.nomSpectateur}}&nbsp n° billet {{ spectateur.id}}<br>
                         {% endfor %}
                     </p>
-                    <p>
 
-                    </p>
                 </a>
                 <a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
                     <button class="supprimer" type="submit">Supprimer</button>

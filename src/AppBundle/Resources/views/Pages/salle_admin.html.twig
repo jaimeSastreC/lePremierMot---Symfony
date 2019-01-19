@@ -1,31 +1,29 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
-
-    <p>
+{% block contenu %}
+<div class="row">
+    <div class="offset-lg-1 col-lg-8 ">
         <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
 
-    <div class="text-align-center">
-        {% if salle %}
-            <div>
-                <p>
-                    Salle : {{ salle.nomSalle}}&nbsp
-                    {{ salle.villeSalle}}&nbsp
-                    {{ salle.placesSalle}}
-                </p>
+        <div class="text-align-center bg-light">
+            {% if salle %}
+                <div>
+                    <p>
+                        Salle : {{ salle.nomSalle}}<br>
+                        Adresse : {{ salle.villeSalle|nl2br}}<br>
+                        Places : {{ salle.placesSalle}}
+                    </p>
 
-                <a href="{{ path('admin_supp_salle',  {'id': salle.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>
-                <a href="{{ path('admin_modif_salle',  {'id': salle.id}) }}">
-                    <button class="modifier" type="submit">Modifier</button>
-                </a>
-                <hr>
-
-            </div>
-        {% endif %}
+                    <a href="{{ path('admin_supp_salle',  {'id': salle.id}) }}">
+                        <button class="supprimer" type="submit">Supprimer</button>
+                    </a>
+                    <a href="{{ path('admin_modif_salle',  {'id': salle.id}) }}">
+                        <button class="modifier" type="submit">Modifier</button>
+                    </a>
+                    <hr>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
-
-{% endblock %}
+    {% endblock %}

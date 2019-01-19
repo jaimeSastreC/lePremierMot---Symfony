@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Spectacle;
@@ -13,6 +14,7 @@ use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
 use AppBundle\Repository\CategorieRepository;
 use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ContactRepository;
 use AppBundle\Repository\PieceRepository;
 use AppBundle\Repository\ReservationRepository;
 use AppBundle\Repository\SalleRepository;
@@ -205,5 +207,28 @@ class AdminSupprimerControler extends Controller
 
         // Important : redirige vers la route demandée, avec name = 'admin_piece'
         return $this->redirectToRoute('admin_pieces');
+    }
+
+    /**
+     * @Route("/admin/contact_supprimmer/{id}", name="admin_supp_contact")
+     */
+    public function contactSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository ContactRepository */
+        $repository = $this->getDoctrine()->getRepository(Contact::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $contact = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($contact);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_contact'
+        return $this->redirectToRoute('admin_contacts');
     }
 }
