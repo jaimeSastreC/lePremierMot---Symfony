@@ -7,6 +7,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\ImageGallerie;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Spectacle;
@@ -15,6 +16,7 @@ use AppBundle\Entity\Tarif;
 use AppBundle\Repository\CategorieRepository;
 use AppBundle\Repository\ClientRepository;
 use AppBundle\Repository\ContactRepository;
+use AppBundle\Repository\ImageGallerieRepository;
 use AppBundle\Repository\PieceRepository;
 use AppBundle\Repository\ReservationRepository;
 use AppBundle\Repository\SalleRepository;
@@ -207,6 +209,29 @@ class AdminSupprimerControler extends Controller
 
         // Important : redirige vers la route demandée, avec name = 'admin_piece'
         return $this->redirectToRoute('admin_pieces');
+    }
+
+    /**
+     * @Route("/admin/imageGallerie_supprimmer/{id}", name="admin_supp_imageGallerie")
+     */
+    public function imageGallerieSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository ImageGallerieRepository */
+        $repository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $imageGallerie = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($imageGallerie);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_imageGallerie'
+        return $this->redirectToRoute('admin_galleries');
     }
 
     /**

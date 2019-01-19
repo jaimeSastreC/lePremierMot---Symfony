@@ -5383,7 +5383,7 @@ h3 {
   height: 45vw; }
 
 .administrateurs, .enCours {
-  transform: translate(0, -6vw); }
+  transform: translate(0, -5vw); }
   .administrateurs h3, .enCours h3 {
     font-size: 1.2em;
     padding-top: 0.5em; }

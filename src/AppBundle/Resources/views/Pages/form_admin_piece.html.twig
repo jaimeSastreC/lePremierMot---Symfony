@@ -1,6 +1,4 @@
-{% extends "@App/baseAdmin.html.twig" %}
-
-
+{% extends "@App/baseAdminPages.html.twig" %}
 
 {% block contenu %}
     <div class="row">
@@ -70,6 +68,13 @@
             </p>
             <p>
                 {{ form_widget(formpiece.image, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formpiece.imageThumbnail) }}
+                {{ form_label(formpiece.imageThumbnail, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formpiece.imageThumbnail, {'attr': {'class': 'form-control'}}) }}
             </p>
             <p>
                 {{ form_widget(formpiece.save, {'attr': {'class': 'btn btn-primary'}}) }}

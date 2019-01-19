@@ -1,0 +1,43 @@
+{% extends "@App/baseAdminPages.html.twig" %}
+
+
+
+{% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formgallerie, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formgallerie.nomImage) }}
+                {{ form_label(formgallerie.nomImage, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formgallerie.nomImage, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formgallerie.altImage) }}
+                {{ form_label(formgallerie.altImage, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formgallerie.altImage, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formgallerie.legendeImage) }}
+                {{ form_label(formgallerie.legendeImage, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formgallerie.legendeImage, {'attr': {'class': 'form-control'}}) }}
+            </p>
+
+            <p>
+                {{ form_widget(formgallerie.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </p>
+
+            {#génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché#}
+            {{ form_rest(formgallerie) }}
+
+            {{ form_end(formgallerie) }}
+        </div>
+    </div>
+{% endblock %}

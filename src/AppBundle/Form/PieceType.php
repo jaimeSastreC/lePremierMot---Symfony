@@ -34,9 +34,12 @@ class PieceType extends AbstractType
                 ]
             )
 
-            ->add('image', FileType::class, array(
-                'required' => false
-            )) // chargement image
+            ->add('image', FileType::class, [
+                'required' => false ]
+            ) // chargement image
+            ->add('imageThumbnail', FileType::class, [
+                'required' => false ]
+            ) // chargement image vignette
             ->add('save', SubmitType::class, [
                 'label' => 'Ajouter/Modifier une pièce'
             ]

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\ImageGallerie;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
@@ -30,6 +31,14 @@ class AdministratorController extends Controller
     }
 
 
+    /**
+     * @Route("/admin_front", name="admin_front")
+     */
+    public function indexAdminFrontAction()
+    {
+        // méthode retourant la page Index
+        return $this->render("@App/Pages/indexAdminPages.html.twig");
+    }
 //**************************************** Requetes Listes ********************************************************
 
     /**
@@ -180,6 +189,24 @@ class AdministratorController extends Controller
     }
 
     /**
+     * @Route("/admin/galleries" , name="admin_galleries")
+     */
+    public function listAdminGalleriesAction(){
+
+        // je genère le Repository de Doctrine
+        $imageGallerieRepository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        //requete sur l'ensemble des catégories
+        $imageGalleries = $imageGallerieRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig gallerie
+        return $this->render("@App/Pages/galleries_admin.html.twig",
+            [
+                'imageGalleries' => $imageGalleries
+            ]);
+    }
+
+    /**
      * @Route("/admin/pieces" , name="admin_pieces")
      */
     public function listAdminPiecesAction(){
@@ -322,6 +349,24 @@ class AdministratorController extends Controller
         return $this->render("@App/Pages/reservation_admin.html.twig",
             [
                 'reservation' => $reservation
+            ]);
+    }
+
+    /**
+     * @Route("/admin/gallerie/{id}" , name="admin_gallerie", defaults={"id"= 1 })
+     */
+    public function listAdminGallerieAction($id){
+
+        // je genère le Repository de Doctrine
+        $imageGallerieRepository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        //requete sur l'ensemble des catégories
+        $imageGallerie = $imageGallerieRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig gallerie
+        return $this->render("@App/Pages/gallerie_admin.html.twig",
+            [
+                'imageGallerie' => $imageGallerie
             ]);
     }
 

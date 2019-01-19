@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\ImageGallerie;
 use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
@@ -22,6 +23,7 @@ use AppBundle\Form\CategorieType;
 use AppBundle\Form\ClientLoginType;
 use AppBundle\Form\ClientType;
 use AppBundle\Form\ContactType;
+use AppBundle\Form\ImageGallerieType;
 use AppBundle\Form\PieceType;
 use AppBundle\Form\ReservationClientType;
 use AppBundle\Form\ReservationType;
@@ -717,6 +719,72 @@ class FormController extends Controller
             '@App/Pages/form_mail_contact.html.twig',
             [
                 'formcontact' => $form->createView()
+            ]
+        );
+    }
+
+    /* **************************** Form pour ajouter une image en gallerie de la la Page Gallerie *************************** */
+    /**
+     * @Route("/gallerie_form", name="admin_gallerie_form")
+     */
+    public function gallerieFormatAction(Request $request){
+        //création entité GallerieType
+        $form = $this->createForm(ImageGallerieType::class, new ImageGallerie());
+
+        // associe les données envoyées (éventuellement) par le client via le formulaire
+        //à notre variable $form. Donc la variable $form contient maintenant aussi le $_POST
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()){
+                // je récupère les données de l’instance Form
+                $gallerie = $form->getData();
+                //créé file image méthode getImage
+                $file = $gallerie->getNomImage();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('img_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    echo $e->getMessage();
+                    // ... handle exception if something happens during file upload
+                }
+                // important alimente nouveau nom fichier image
+                $gallerie->setNomImage($fileName);
+
+
+                // je récupère l'entity manager de doctrine
+                $entityManager = $this->getDoctrine()->getManager();
+
+                // j'enregistre en base de donnée
+                $entityManager->persist($gallerie);
+                $entityManager->flush();
+
+                // Renvoi de confirmation d'enregistrement Message flash
+                $this->addFlash(
+                    'notice',
+                    'Votre image a bien été enregistré!'
+                );
+
+
+
+                return $this->redirectToRoute('admin_galleries');
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre image n\'a pas été enregistré, erreur!'
+                );
+            }
+        }
+
+        return $this->render(
+            '@App/Pages/form_admin_gallerie.html.twig',
+            [
+                'formgallerie' => $form->createView()
             ]
         );
     }
