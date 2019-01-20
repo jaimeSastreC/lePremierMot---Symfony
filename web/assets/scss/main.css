@@ -5218,13 +5218,13 @@ h3 {
   font-size: 1em; }
 
 .form-control {
-  font-weight: 900 !important; }
+  font-weight: 700 !important; }
 
 .navbar-brand {
-  font-family: "norty", cursive;
+  font-family: cursive, "norty";
   color: #e23400;
   font-size: 2rem;
-  font-weight: 400; }
+  font-weight: 300; }
 
 .navbar-default {
   color: green; }
@@ -5281,6 +5281,10 @@ h3 {
       height: 3px; }
   .client_body_font .etape {
     color: #1b636f; }
+
+@media (max-width: 991.98px) {
+  .contact-titre {
+    font-size: 1rem; } }
 
 .image_contact {
   background-image: url(../../img/gallerie/contact_fond.jpg);
@@ -5356,9 +5360,9 @@ h3 {
   height: 100%; }
   .spectacle .titre_troupe {
     padding: 3vmax;
-    font-family: "norty", cursive;
+    font-family: cursive, "norty";
     color: #e23400;
-    font-size: 3em; }
+    font-size: 5em; }
   .spectacle h2, .spectacle .lead {
     text-shadow: 1px 1px 3px black, -1px -1px 2px black;
     color: #9ad7d7;
@@ -5394,7 +5398,7 @@ h3 {
   .administrateurs p, .enCours p {
     font-size: 1em;
     color: aqua;
-    font-weight: 900; }
+    font-weight: 700; }
     @media (min-width: 768px) {
       .administrateurs p, .enCours p {
         font-size: 1em; }

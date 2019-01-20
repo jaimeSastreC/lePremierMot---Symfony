@@ -2,13 +2,12 @@
 {#navbar sur Réservation#}
 {% block active4 %}active{% endblock %}
 
-{% block head_js %}{% endblock %}
 
 {% block contenu %}
 
 <div class="container-fluid main resa_body_font ">
     <div class="row">
-        <div class="col-5 col-md-3 border-right counters">
+        <div class="col col-md-3 border-right counters">
             <aside>
                 <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
                 <div class="counters">
@@ -20,7 +19,7 @@
                 </div>
             </aside>
         </div>
-        <div class="col-5 col-md-7">
+        <div class="col col-md-7">
             <main>
                 <div class="container ">
                     <div class="row d-block">
@@ -43,48 +42,46 @@
                                 {% endfor %}
                             {% endfor %}
                         </div>
-                        <div class="row">
-                            <div class="offset-md-2 col-5 mt-3">
-                                {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
-
-                                <p>
-                                    {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-                                    {{ form_errors(formclient.nomClient) }}
-                                    {{ form_label(formclient.nomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                </p>
-                                <p>
-                                    {{ form_widget(formclient.nomClient, {'attr': {'class': 'form-control input-sm'}}) }}
-                                </p>
-
-                                <p>
-                                    {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-                                    {{ form_errors(formclient.mailClient) }}
-                                    {{ form_label(formclient.mailClient, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                </p>
-                                <p>
-                                    {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
-                                </p>
-
-                                <p>
-                                    {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
-                                </p>
-
-                                {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
-                                {{ form_rest(formclient) }}
-
-                                {{ form_end(formclient) }}
-                            </div>
-                        </div>
-
                     </div>
+                    <div class="row">
+                        <div class="offset-md-2 col mt-3">
+                            {{ form_start(formclient, {'attr': {'class': 'form'}}) }}
+
+                            <p>
+                                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                                {{ form_errors(formclient.nomClient) }}
+                                {{ form_label(formclient.nomClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+                            </p>
+                            <p>
+                                {{ form_widget(formclient.nomClient, {'attr': {'class': 'form-control input-sm'}}) }}
+                            </p>
+
+                            <p>
+                                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                                {{ form_errors(formclient.mailClient) }}
+                                {{ form_label(formclient.mailClient, null, {'label_attr':  {'class': 'form-label'}}) }}
+                            </p>
+                            <p>
+                                {{ form_widget(formclient.mailClient, {'attr': {'class': 'form-control'}}) }}
+                            </p>
+
+                            <p>
+                                {{ form_widget(formclient.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </p>
+
+                            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+                            {{ form_rest(formclient) }}
+
+                            {{ form_end(formclient) }}
+                        </div>
+                    </div>
+
                 </div>
-            </main>
-        </div>
+        </main>
     </div>
+</div>
     <div class="row image d-block">
     </div>
 </div>
 
 {% endblock %}
-
-{% block foot_js %}{#partie javascript#}{% endblock %}

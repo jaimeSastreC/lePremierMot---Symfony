@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PublicController extends Controller
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/index", name="accueil")
      */
     public function indexAction()
     {

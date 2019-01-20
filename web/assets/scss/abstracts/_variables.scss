@@ -18,13 +18,13 @@
 
 // header and decorative font are separated for more liberty in using it;
 // so header can be more classic or easely changed in case.
-$decorative_font: "norty", cursive;
+$decorative_font: cursive, "norty";
 
 $modern_sans: "ModernSans-Light", sans-serif;
 $Sansation_Regular: "Sansation_Regular";
 $header_font: $decorative_font;
 
 //font weights !
-$light_font: 400;
+$light_font: 300;
 $normal_font: 500;
-$bold_font: 900;
+$bold_font: 700;

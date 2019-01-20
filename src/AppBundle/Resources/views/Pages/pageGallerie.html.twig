@@ -3,7 +3,7 @@
 {% block active1 %}{% endblock %}
 {% block active2 %}active{% endblock %}
 
-{% block head_js %}
+{% block head_css %}
     <!-- liens/link js pour gallerie -->
     <link rel='stylesheet' href={{ asset('unitegallery/css/unite-gallery.css') }} type='text/css' />
     <link rel='stylesheet' href={{ asset('unitegallery/themes/default/ug-theme-default.css') }} type='text/css' />
@@ -12,10 +12,10 @@
 {% block contenu %}
     <main class="main">
         <section class="premiere">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-2">
-                        <h1 class="mt-md-5 mt-2">Gallerie </h1>
+                    <div class="col-12 col-md-2 mt-md-5">
+                        <h1>Gallerie </h1>
                     </div>
 
                     <div class="col">
