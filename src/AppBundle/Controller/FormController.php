@@ -611,10 +611,18 @@ class FormController extends Controller
                 $file = $piece->getImage();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
+                //créé file thumbnail image méthode getImage
+                $fileThumb = $piece->getImageThumbnail();
+                $fileNameThumb = md5(uniqid()).'.'.$fileThumb->guessExtension();
+
                 try {
                     $file->move(
                         $this->getParameter('img_directory'),
                         $fileName
+                    );
+                    $fileThumb->move(
+                        $this->getParameter('img_directory'),
+                        $fileNameThumb
                     );
                 } catch (FileException $e) {
                     echo $e->getMessage();

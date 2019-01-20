@@ -291,7 +291,7 @@ class Piece
     /**
      * @param string $imageThumbnail
      */
-    public function setImageThumbnail(string $imageThumbnail)
+    public function setImageThumbnail($imageThumbnail)
     {
         $this->imageThumbnail = $imageThumbnail;
     }
