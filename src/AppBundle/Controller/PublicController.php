@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ImageGallerie;
+use AppBundle\Entity\Piece;
 use AppBundle\Repository\ImageGallerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,9 +40,19 @@ class PublicController extends Controller
     /**
      * @Route("/spectacles", name="spectacles")
      */
-    public function spectaclesAction()
+    public function listSpectaclesAction()
     {
-        return $this->render("@App/Pages/pageSpectacles.html.twig");
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $pieces = $pieceRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/pageSpectacles.html.twig",
+            [
+                'pieces' => $pieces
+            ]);
     }
 
     /**
@@ -49,7 +60,18 @@ class PublicController extends Controller
      */
     public function spectacleAction($id)
     {
-        return $this->render("@App/Pages/pageSpectacle.html.twig");
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $piece = $pieceRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/pageSpectacle.html.twig",
+            [
+                'piece' => $piece,
+
+            ]);
     }
 
     /**

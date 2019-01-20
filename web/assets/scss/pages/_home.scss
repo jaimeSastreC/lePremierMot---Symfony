@@ -14,10 +14,16 @@
 
     .titre_troupe {
         padding: 3vmax;
-        font-family: $header_font;
+        font-family:$compagnie_font;
         color: $brand-primary;
         font-size: 5em;
     }
+    .titre {
+        font-family: $compagnie_font;
+        color: $brand-primary;
+        font-size: 3em;
+    }
+
     h2, .lead {
         text-shadow: 1px 1px 3px black,
             -1px -1px 2px black;
@@ -53,18 +59,12 @@
     height: 45vw;
 }
 
+
 .administrateurs, .enCours {
     transform: translate(0, -5vw);
     h3{
         font-size: 1.2em;
         padding-top: 0.5em;
-    }
-    .titre{
-        text-shadow: 1px 1px 3px black,
-            -1px -1px 2px black;
-        h3{
-            color:$secondary;
-        }
     }
     
     p {

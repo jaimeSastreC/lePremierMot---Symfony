@@ -224,6 +224,7 @@ class AdministratorController extends Controller
             ]);
     }
 
+
     /**
      * @Route("/admin/contacts" , name="admin_contacts")
      */
@@ -387,6 +388,8 @@ class AdministratorController extends Controller
                 'piece' => $piece
             ]);
     }
+
+
 
     /**
      * @Route("/admin/contact/{id}" , name="admin_contact", defaults={"id"= 1 })

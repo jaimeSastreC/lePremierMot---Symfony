@@ -7,7 +7,7 @@
     {#{{ dump(formcontact) }}#}
     <div class="container-fluid main resa_body_font ">
         <div class="row">
-            <div class="col-md-3 border-right counters">
+            <div class="col-12 col-md-3 border-right counters">
                 <aside>
                     <div>
                         <em><h1>Une Question ?</h1></em>
@@ -17,7 +17,7 @@
                     </div>
                 </aside>
             </div>
-            <div class="col-md-7">
+            <div class="col-12 col-md-7">
                 <main>
                     <div class="container ">
                         <div class="row d-block">
@@ -39,56 +39,55 @@
                                     {% endfor %}
                                 {% endfor %}
                             </div>
-                            <div class="row">
-                                <div class="offset-md-2 col-7 mt-3">
-                                    Date mail : {{ "now"|date("d/m/Y") }}
-                                    {{ form_start(formcontact, {'attr': {'class': 'form'}}) }}
+                        </div>
+                        <div class="row">
+                            <div class="offset-md-2 col mt-3">
+                                Date mail : {{ "now"|date("d/m/Y") }}
+                                {{ form_start(formcontact, {'attr': {'class': 'form'}}) }}
 
-                                    <p>
-                                        {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-                                        {{ form_errors(formcontact.name) }}
-                                        {{ form_label(formcontact.name, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                    </p>
-                                    <p>
-                                        {{ form_widget(formcontact.name, {'attr': {'class': 'form-control'}}) }}
-                                    </p>
-                                    <p>
-                                        {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-                                        {{ form_errors(formcontact.email) }}
-                                        {{ form_label(formcontact.email, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                    </p>
-                                    <p>
-                                        {{ form_widget(formcontact.email, {'attr': {'class': 'form-control'}}) }}
-                                    </p>
-                                    <p>
-                                        {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-                                        {{ form_errors(formcontact.subject) }}
-                                        {{ form_label(formcontact.subject, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                    </p>
-                                    <p>
-                                        {{ form_widget(formcontact.subject, {'attr': {'class': 'form-control'}}) }}
-                                    </p>
-                                    <p>
-                                        {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-                                        {{ form_errors(formcontact.message) }}
-                                        {{ form_label(formcontact.message, null, {'label_attr':  {'class': 'form-label'}}) }}
-                                    </p>
-                                    <p>
-                                        {{ form_widget(formcontact.message, {'attr': {'class': 'form-control'}}) }}
-                                    </p>
-                                    <p>
-                                        {{ form_widget(formcontact.save, {'attr': {'class': 'btn btn-primary'}}) }}
-                                    </p>
-                                    <p>
+                                <p>
+                                    {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                                    {{ form_errors(formcontact.name) }}
+                                    {{ form_label(formcontact.name, null, {'label_attr':  {'class': 'form-label'}}) }}
+                                </p>
+                                <p>
+                                    {{ form_widget(formcontact.name, {'attr': {'class': 'form-control'}}) }}
+                                </p>
+                                <p>
+                                    {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                                    {{ form_errors(formcontact.email) }}
+                                    {{ form_label(formcontact.email, null, {'label_attr':  {'class': 'form-label'}}) }}
+                                </p>
+                                <p>
+                                    {{ form_widget(formcontact.email, {'attr': {'class': 'form-control'}}) }}
+                                </p>
+                                <p>
+                                    {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                                    {{ form_errors(formcontact.subject) }}
+                                    {{ form_label(formcontact.subject, null, {'label_attr':  {'class': 'form-label'}}) }}
+                                </p>
+                                <p>
+                                    {{ form_widget(formcontact.subject, {'attr': {'class': 'form-control'}}) }}
+                                </p>
+                                <p>
+                                    {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                                    {{ form_errors(formcontact.message) }}
+                                    {{ form_label(formcontact.message, null, {'label_attr':  {'class': 'form-label'}}) }}
+                                </p>
+                                <p>
+                                    {{ form_widget(formcontact.message, {'attr': {'class': 'form-control'}}) }}
+                                </p>
+                                <p>
+                                    {{ form_widget(formcontact.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </p>
+                                <p>
                                     {# génération du champ CSRF - _token  (Cross Site Request Forgeries en champ caché #}
                                     {{ form_rest(formcontact) }}
 
                                     {{ form_end(formcontact) }}
-                                        RGPD - en envoyant ce message je reconnais autoriser lePremiermOt à me contacter par e-mail *
-                                    </p>
-                                </div>
+                                    RGPD - en envoyant ce message je reconnais autoriser lePremiermOt à me contacter par e-mail *
+                                </p>
                             </div>
-
                         </div>
                     </div>
                 </main>
