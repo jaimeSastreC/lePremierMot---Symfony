@@ -17,6 +17,6 @@ class ImageGallerieRepository extends \Doctrine\ORM\EntityRepository
     public function findGallerie(){
         //requête limitant l'affichage à 50 images,
         // Intéressant : le findBy permet findBy(array $column =[ 'name' => $column, array $orderBy = ['nomSalle' => 'ASC'], $limit, $offset)
-        return $this->findBy([], [], 50);
+        return $this->findBy([], ['id' => 'DESC'], 50);
     }
 }

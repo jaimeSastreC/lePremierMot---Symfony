@@ -5,52 +5,111 @@
 
 {% block head_js %}
     <!-- liens/link js pour gallerie -->
-    href="{{ asset('assets/scss/main.css') }}"
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <script type='text/javascript' src={{ asset('asstes/unitegallery/js/unitegallery.min.js') }}></script>
-
-    <link rel='stylesheet' href={{ asset('attets/unitegallery/css/unite-gallery.css') }} type='text/css' />
-    <script type='text/javascript' src={{ asset('assets/unitegallery/themes/default/ug-theme-default.js') }}></script>
-    <link rel='stylesheet' href={{ asset('assets/unitegallery/themes/default/ug-theme-default.css') }} type='text/css' />
+    <link rel='stylesheet' href={{ asset('unitegallery/css/unite-gallery.css') }} type='text/css' />
+    <link rel='stylesheet' href={{ asset('unitegallery/themes/default/ug-theme-default.css') }} type='text/css' />
 {% endblock %}
 
 {% block contenu %}
     <main class="main">
         <section class="premiere">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
-                    <div class="col-5">
-                        Commentaire
-                        <div id="gallery" style="display:none;">
-
-                            <img alt="Image 1 Title" src="thumbs/image1.jpg"
-                                 data-image="images/image1.jpg"
-                                 data-description="Image 1 Description">
-
-                            <img alt="Image 2 Title" src="thumbs/image2.jpg"
-                                 data-image="images/image02.jpg"
-                                 data-description="Image 2 Description">
-
-                        </div>
+                    <div class="col-2">
+                        <h1 class="mt-md-5 mt-2">Gallerie </h1>
                     </div>
-                    <div class="col-7">
-                        <h1 class="change">Gallerie :</h1>
-                        {% for imageGallerie in imageGalleries %}
-                            <div class="affiche"><a href="{{ path('admin_gallerie', {'id': imageGallerie.id}) }}">
 
-                                    <p>
-                                        {% if imageGallerie.nomImage %}<br>
-                                            <img src="{{ asset('uploads/img/' ~ imageGallerie.nomImage) }}" alt="{{ imageGallerie.altImage }}" height="auto" width="300">
-                                            <br>légende image : {{ imageGallerie.legendeImage}}
-                                        {% else %}
-                                            emplacement image
-                                        {% endif %}
-                                    </p>
-                                    <hr>
-                                </a>
-                            </div>
+                    <div class="col">
+                        <div id="gallery" style="display:none;">
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/1T.jpg') }}
+                                     data-image={{ asset('img/gallerie_rendu/1.jpg') }}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
 
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/2T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/2.jpg') }}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/3T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/3.jpg') }}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/4T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/4.jpg') }}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/5T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/5.jpg')}}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/6T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/6.jpg')}}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/7T.jpg') }}
+                                     data-image={{ asset('img/gallerie_rendu/7.jpg')}}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/8T.jpg')  }}
+                                     data-image={{ asset('img/gallerie_rendu/8.jpg')}}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+
+                            <a href="http://unitegallery.net">
+                                <img alt="Extrait de pièce de théatre"
+                                     src={{ asset('img/gallerie_rendu/9T.jpg') }}
+                                     data-image={{ asset('img/gallerie_rendu/9.jpg')}}
+                                     data-description="Extrait de pièce de théatre"
+                                     style="display:none">
+                            </a>
+                            {% for imageGallerie in imageGalleries %}
+
+                                {% if imageGallerie.nomImage %}
+
+
+
+
+                                    <a href="http://unitegallery.net">
+                                        <img alt="{{ imageGallerie.altImage }}"
+                                             src="{{ asset('uploads/img/' ~ imageGallerie.thumbnailImage) }}"
+                                             data-image="{{ asset('uploads/img/' ~ imageGallerie.nomImage) }}"
+                                             data-description="{{ imageGallerie.legendeImage}}"
+                                             style="display:none">
+                                    </a>
+                                {% else %}
+
+                            {% endif %}
                         {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,23 +120,34 @@
 
 {% block foot_js %}
     <!-- jquery pour gallerie-->
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous">
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("div.affiche").hide();
-            $("h1.change").click(function () {
-                $("div.affiche").slideDown(300);
-            })
-        })
-    </script>
+    {#JQuery#}
+
     <!-- js pour gallerie-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type='text/javascript' src={{ asset('unitegallery/js/unitegallery.min.js') }}></script>
+    <script type='text/javascript' src={{ asset('unitegallery/themes/tiles/ug-theme-tiles.js') }}></script>
     <script>
-        document.write("hello");
-        alert("Hello");
+
+        jQuery(document).ready(function(){
+
+            jQuery("#gallery").unitegallery({
+                tile_enable_image_effect:true,
+                tile_image_effect_type: "sepia",
+                tile_enable_overlay:false,
+                tile_enable_icons:false,
+                tiles_type:"justified"
+            });
+
+        });
+
+        /* tile_enable_image_effect:true,
+                tile_image_effect_type: "sepia",
+                tile_enable_overlay:false,
+                tile_enable_icons:false,*/
     </script>
+    {#<script>
+        /*check Javascript*/
+        alert("Hello");
+    </script>#}
 {% endblock %}
 

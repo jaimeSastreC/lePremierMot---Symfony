@@ -2,7 +2,7 @@
 
 {% block contenu %}
     <p>
-        <a href="{{ path('admin_gallerie_form') }}"><em> Ajouter une Image</em></a>
+        <a href="{{ path('admin_gallerie_form') }}"><strong><em> Ajouter une Image</em></strong></a>
     </p>
 
     <div class="text-align-center">
@@ -11,6 +11,7 @@
         {% for imageGallerie in imageGalleries %}
             <div><a href="{{ path('admin_gallerie', {'id': imageGallerie.id}) }}">
                 <p>
+                    id: {{ imageGallerie.id }}&nbsp&nbsp
                     <strong>alt image : {{ imageGallerie.altImage }}</strong>&nbsp&nbsp
 
                     légende image : {{ imageGallerie.legendeImage}}

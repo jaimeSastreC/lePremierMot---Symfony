@@ -83,4 +83,12 @@ class PublicController extends Controller
         return $this->render("@App/Pages/page_mentions_legales.html.twig");
     }
 
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        return $this->render("@App/Pages/test.html.twig");
+    }
+
 }

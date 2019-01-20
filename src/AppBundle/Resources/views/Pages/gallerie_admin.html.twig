@@ -9,13 +9,13 @@
 
          {#Liste les images avec une boucle for#}
         {% if imageGallerie%}
-            {{ dump(imageGallerie) }}
+{#            {{ dump(imageGallerie) }}#}
             <div>
                 <p>
+                    id: {{ imageGallerie.id }}<br>
                     <strong>alt image : {{ imageGallerie.altImage }}</strong><br>
                     <strong><em>légende image : </em></strong>{{ imageGallerie.legendeImage}}<br>
                     <strong><em>reférence image : </em></strong>{{ imageGallerie.nomImage}}<br>
-                    <strong>alt image : {{ imageGallerie.altImage }}</strong>
                 </p>
                 <p>
                     {% if imageGallerie.nomImage %}<br>
