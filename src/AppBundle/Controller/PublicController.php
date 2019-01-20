@@ -2,8 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ImageGallerie;
+use AppBundle\Repository\ImageGallerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -14,17 +15,25 @@ class PublicController extends Controller
      */
     public function indexAction()
     {
-        // replace this example code with whatever you need
         return $this->render("@App/Pages/index.html.twig");
     }
 
     /**
      * @Route("/gallerie", name="gallerie")
      */
-    public function gallerieAction()
-    {
-        // replace this example code with whatever you need
-        return $this->render("@App/Pages/pageGallerie.html.twig");
+    public function gallerieAction(){
+        // je genère le Repository de Doctrine
+        /** @var $$imageGallerieRepository ImageGallerieRepository*/
+        $imageGallerieRepository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        //requete sur l'ensemble des catégories
+        $imageGalleries = $imageGallerieRepository->findGallerie();
+
+        return $this->render("@App/Pages/pageGallerie.html.twig",
+                [
+                    'imageGalleries' => $imageGalleries,
+                ]
+            );
     }
 
     /**
@@ -32,7 +41,6 @@ class PublicController extends Controller
      */
     public function spectaclesAction()
     {
-        // replace this example code with whatever you need
         return $this->render("@App/Pages/pageSpectacles.html.twig");
     }
 
@@ -41,7 +49,6 @@ class PublicController extends Controller
      */
     public function spectacleAction($id)
     {
-        // replace this example code with whatever you need
         return $this->render("@App/Pages/pageSpectacle.html.twig");
     }
 
@@ -65,7 +72,6 @@ class PublicController extends Controller
      */
     public function contactAction()
     {
-        // replace this example code with whatever you need
         return $this->render("@App/Pages/pageContact.html.twig");
     }
 
@@ -74,7 +80,6 @@ class PublicController extends Controller
      */
     public function mentionsLegalesAction()
     {
-        // replace this example code with whatever you need
         return $this->render("@App/Pages/page_mentions_legales.html.twig");
     }
 

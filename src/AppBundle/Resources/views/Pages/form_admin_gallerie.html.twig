@@ -16,6 +16,14 @@
             </p>
             <p>
                 {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formgallerie.thumbnailImage) }}
+                {{ form_label(formgallerie.thumbnailImage, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formgallerie.thumbnailImage, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
                 {{ form_errors(formgallerie.altImage) }}
                 {{ form_label(formgallerie.altImage, null, {'label_attr':  {'class': 'form-label'}}) }}
             </p>

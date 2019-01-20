@@ -5,6 +5,13 @@
 
 {% block head_js %}
     <!-- liens/link js pour gallerie -->
+    href="{{ asset('assets/scss/main.css') }}"
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script type='text/javascript' src={{ asset('asstes/unitegallery/js/unitegallery.min.js') }}></script>
+
+    <link rel='stylesheet' href={{ asset('attets/unitegallery/css/unite-gallery.css') }} type='text/css' />
+    <script type='text/javascript' src={{ asset('assets/unitegallery/themes/default/ug-theme-default.js') }}></script>
+    <link rel='stylesheet' href={{ asset('assets/unitegallery/themes/default/ug-theme-default.css') }} type='text/css' />
 {% endblock %}
 
 {% block contenu %}
@@ -13,10 +20,37 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-5">
-                        gauche
+                        Commentaire
+                        <div id="gallery" style="display:none;">
+
+                            <img alt="Image 1 Title" src="thumbs/image1.jpg"
+                                 data-image="images/image1.jpg"
+                                 data-description="Image 1 Description">
+
+                            <img alt="Image 2 Title" src="thumbs/image2.jpg"
+                                 data-image="images/image02.jpg"
+                                 data-description="Image 2 Description">
+
+                        </div>
                     </div>
                     <div class="col-7">
-                        Gallerie
+                        <h1 class="change">Gallerie :</h1>
+                        {% for imageGallerie in imageGalleries %}
+                            <div class="affiche"><a href="{{ path('admin_gallerie', {'id': imageGallerie.id}) }}">
+
+                                    <p>
+                                        {% if imageGallerie.nomImage %}<br>
+                                            <img src="{{ asset('uploads/img/' ~ imageGallerie.nomImage) }}" alt="{{ imageGallerie.altImage }}" height="auto" width="300">
+                                            <br>légende image : {{ imageGallerie.legendeImage}}
+                                        {% else %}
+                                            emplacement image
+                                        {% endif %}
+                                    </p>
+                                    <hr>
+                                </a>
+                            </div>
+
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -26,7 +60,24 @@
 {% endblock %}
 
 {% block foot_js %}
+    <!-- jquery pour gallerie-->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("div.affiche").hide();
+            $("h1.change").click(function () {
+                $("div.affiche").slideDown(300);
+            })
+        })
+    </script>
     <!-- js pour gallerie-->
+    <script>
+        document.write("hello");
+        alert("Hello");
+    </script>
 {% endblock %}
 
-{% block isasideBlock %}Asideblock{% endblock %}

@@ -14,11 +14,12 @@
                     <strong>alt image : {{ imageGallerie.altImage }}</strong>&nbsp&nbsp
 
                     légende image : {{ imageGallerie.legendeImage}}
-                </p>
 
-                {#<a href="{{ path('admin_supp_imageGallerie',  {'id': imageGallerie.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>#}
+
+                    <a href="{{ path('admin_supp_imageGallerie',  {'id': imageGallerie.id}) }}">
+                        <button class="supprimer" type="submit">Supprimer</button>
+                    </a>
+                </p>
                 <hr>
                 </a>
             </div>

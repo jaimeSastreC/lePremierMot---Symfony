@@ -31,6 +31,13 @@ class ImageGallerie
     /**
      * @var string
      *
+     * @ORM\Column(name="thumbnail_image", type="string", length=255)
+     */
+    private $thumbnailImage;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="alt_image", type="string", length=255)
      */
     private $altImage;
@@ -89,6 +96,22 @@ class ImageGallerie
         $this->altImage = $altImage;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailImage()
+    {
+        return $this->thumbnailImage;
+    }
+
+    /**
+     * @param string $thumbnailImage
+     */
+    public function setThumbnailImage($thumbnailImage)
+    {
+        $this->thumbnailImage = $thumbnailImage;
     }
 
     /**

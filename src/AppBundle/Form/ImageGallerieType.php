@@ -20,8 +20,14 @@ class ImageGallerieType extends AbstractType
             ->add('nomImage', FileType::class, [
                     'required' => false ]
             ) // chargement image
+
+            ->add('thumbnailImage', FileType::class, [
+                'required' => false ]
+            )
             ->add('altImage')
-            ->add('legendeImage')
+            ->add('legendeImage', TextType::class, [
+            'required' => false ]
+            )
             ->add('save', SubmitType::class, [
                     'label' => 'ajouter/modifier une image'
                 ]

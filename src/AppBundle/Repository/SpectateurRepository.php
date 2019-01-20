@@ -15,6 +15,6 @@ class SpectateurRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findAll(){
         //requête en alphabétique
-        return $this->findBy(array(), array('nomSpectateur' => 'ASC'));
+        return $this->findBy(array(), ['nomSpectateur' => 'ASC']);
     }
 }

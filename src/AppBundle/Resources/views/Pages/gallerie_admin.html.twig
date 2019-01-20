@@ -9,6 +9,7 @@
 
          {#Liste les images avec une boucle for#}
         {% if imageGallerie%}
+            {{ dump(imageGallerie) }}
             <div>
                 <p>
                     <strong>alt image : {{ imageGallerie.altImage }}</strong><br>
@@ -18,6 +19,7 @@
                 </p>
                 <p>
                     {% if imageGallerie.nomImage %}<br>
+                        <img src="{{ asset('uploads/img/' ~ imageGallerie.thumbnailImage) }}"  height="auto" width="200">
                         <img src="{{ asset('uploads/img/' ~ imageGallerie.nomImage) }}" alt="{{ imageGallerie.altImage }}" height="auto" width="300">
                     {% else %}
                         emplacement image
