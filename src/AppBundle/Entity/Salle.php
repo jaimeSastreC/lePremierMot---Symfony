@@ -162,7 +162,7 @@ class Salle
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getLongitude()
     {
@@ -170,15 +170,15 @@ class Salle
     }
 
     /**
-     * @param int $longitude
+     * @param float $longitude
      */
-    public function setLongitude(int $longitude)
+    public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getLatitude()
     {
@@ -186,9 +186,9 @@ class Salle
     }
 
     /**
-     * @param int $latitude
+     * @param float $latitude
      */
-    public function setLatitude(int $latitude)
+    public function setLatitude( $latitude)
     {
         $this->latitude = $latitude;
     }

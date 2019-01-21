@@ -692,12 +692,17 @@ class AdminModifierControler extends Controller
 
                     //génère nom unique pour le fichier image
                     $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $fileName2 = md5(uniqid()).'.'.$file->guessExtension();
 
 
                     try {
                         $file->move(
                             $this->getParameter('img_directory'),
                             $fileName
+                        );
+                        $file->move(
+                            $this->getParameter('img_directory'),
+                            $fileName2
                         );
 
                     } catch (FileException $e) {
@@ -711,10 +716,14 @@ class AdminModifierControler extends Controller
                     $piece->setImage(
                         $fileName
                     );
+                    $piece->setImageThumbnail(
+                        $fileName2
+                    );
 
                 } else {
                     // si pas de changement on recupère l'ancien nom et setImage
                     $piece->setImage($oldImageName);
+                    $piece->setImageThumbnail($oldThumbnail);
                 }
 
 
