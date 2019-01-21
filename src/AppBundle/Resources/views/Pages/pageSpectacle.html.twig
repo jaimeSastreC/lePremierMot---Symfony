@@ -1,21 +1,20 @@
 {% extends "@App/basePublic.html.twig" %}
 {% block active3 %}active{% endblock %}
 
-{% block head_js %}{% endblock %}
-
 {% block contenu %}
-    <div class="container-fluid image_spectacle ">
+    {#<div class="container-fluid image_spectacle ">#}
+    <section class="haut_spectacle">
+        <div class="haut_titre_spectacle">
+            <h1>Titre de la pièce: {{ piece.titre}}</h1>
+        </div>
         {% if piece.image %}<br>
-            <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}" height="auto" width="100%">
+            <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}"class="haut_image_spectacle">
         {% else %}
             emplacement image
         {% endif %}
-        <div class="row  d-block">
-            <div class="offset-md-5 col-6">
-            <h1>Titre de la pièce: {{ piece.titre}}</h1>
-            </div>
-        </div>
-    </div>
+
+    </section>
+    {# </div>#}
     <div class="container-fluid texte_spectacle">
 
         <div class="row">
@@ -43,6 +42,7 @@
                                 <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
                                 <strong><em>Dates :<br></em></strong>{{ piece.dates|nl2br}}<br>
                                 <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
+                                {{ piece.salle.latitude }}{{ piece.salle.longitude }}
                                 </p>
                                 <p>
                                     <strong><em>Résumé : <br></em></strong>{{ piece.resume|nl2br}}<br>
@@ -62,12 +62,8 @@
     {#********************************#}
 
     <div style="width: 100%">
-        <iframe scrolling="no" width="100%" height="200" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=%7B%7B {#course.ville.nom#} }}&amp;q={#{{ course.adresseDepart }}#}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+        <iframe scrolling="no" width="100%" height="200"  src="https://maps.google.com/maps?q= {{ piece.salle.latitude }},{{ piece.salle.longitude }}&hl=es;z=14&amp;output=embed"></iframe>
     </div><br />
-{#
-    <div style="width: 100%">
-        <iframe scrolling="no" width="100%" height="200" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=%7B%7B course.ville.nom }}&amp;q={{ course.adresseDepart }}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" marginheight="0" marginwidth="0"></iframe></div><br />
-#}
 {% endblock %}
 
 {% block foot_js %}

@@ -5243,32 +5243,19 @@ h3 {
   font-size: 1.2em;
   letter-spacing: .2em; }
 
-.spectacle_body_font {
-  font-size: 1.2rem;
-  font-weight: 500; }
-  .spectacle_body_font .title {
-    color: #e23400;
-    margin-top: 35px;
-    margin-bottom: 20px; }
-    .spectacle_body_font .title::before, .spectacle_body_font .title::after {
-      content: '';
-      background: #fff;
-      display: block;
-      height: 3px; }
-  .spectacle_body_font .etape {
-    color: #1b636f; }
+.haut_spectacle {
+  position: relative; }
 
-.image_spectacle {
-  background-image: url(../../img/gallerie/contact_fond.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-height: 100%;
-  height: 80vh;
-  opacity: 0.5; }
+.haut_titre_spectacle {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3); }
 
-.alert {
-  z-index: 100; }
+.haut_image_spectacle {
+  position: absolute;
+  margin-top: 48px;
+  width: 100%;
+  height: auto;
+  z-index: -1; }
 
 .client_body_font {
   font-size: 1.2rem;

@@ -655,12 +655,16 @@ class AdminModifierControler extends Controller
         $piece = $repository->find($id);
 
         $oldImageName = $piece->getImage();
+        $oldThumbnail = $piece->getImageThumbnail();
 
         // tester si image existe, alors récupère entité piece puis ajoute attribut Image qui est un string
-        if ($piece->getImage()) {
+        if ($piece->getImage() and $piece->getImageThumbnail()) {
             //redifinit Image
             $piece->setImage(
                 new File($this->getParameter('img_directory').'/'.$piece->getImage())
+            );
+            $piece->setImageThumbnail(
+                new File($this->getParameter('img_directory').'/'.$piece->getImageThumbnail())
             );
         }
 

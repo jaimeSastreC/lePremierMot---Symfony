@@ -49,16 +49,16 @@ class Salle
     private $spectacle;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="longitude_salle", type="smallint", nullable=true)
+     * @ORM\Column(name="longitude_salle", type="float", nullable=true)
      */
     private $longitude;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="latitude_salle", type="smallint", nullable=true)
+     * @ORM\Column(name="latitude_salle", type="float", nullable=true)
      */
     private $latitude;
 
