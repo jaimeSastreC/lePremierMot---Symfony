@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\DBAL\Types\FloatType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -31,8 +32,8 @@ class SalleType extends AbstractType
                     'label' => 'Nombre de Places'
                 ]
             )
-            ->add('longitude', NumberType::class)
-            ->add('latitude', NumberType::class)
+            ->add('longitude', FloatType::class)
+            ->add('latitude', FloatType::class)
             ->add('save', SubmitType::class, [
                     'label' => 'Ajouter/Modifier une Salle'
                 ]

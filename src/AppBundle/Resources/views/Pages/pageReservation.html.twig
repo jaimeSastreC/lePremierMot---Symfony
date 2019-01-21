@@ -22,8 +22,8 @@
                         <div class="row d-block">
                             <div class="offset-md-1 col">
                                 <header >
-                                    <h2 class="title d-none d-md-flex">Espace Réservation&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('form_reservation') }}">Réserver directement (identifié)</a></span></h2>
-                                    <h2 class="title d-md-none">Espace Réservation</h2>
+                                    <h2 class="title d-none d-md-block">Espace Réservation&nbsp&nbsp&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('form_reservation') }}">Réserver directement (identifié)</a></span></h2>
+                                    <h2 class="title d-md-none">Espace Réservation&nbsp&nbsp&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('form_reservation') }}">Réserver directement (identifié)</a></span></h2>
                                     </h2>{% if client_name %}<em>ref: {{ client_name }}</em>{% endif %}
                                 </header>
                                 <p><em>Bienvenue dans l'espace de Réservation. <br>
@@ -40,4 +40,8 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block foot_js %}
+    <!-- js -->
 {% endblock %}

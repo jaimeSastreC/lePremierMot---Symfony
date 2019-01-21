@@ -2,72 +2,56 @@
 {% block active3 %}active{% endblock %}
 
 {% block contenu %}
-    {#<div class="container-fluid image_spectacle ">#}
-    <section class="haut_spectacle">
-        <div class="haut_titre_spectacle">
-            <h1>Titre de la pièce: {{ piece.titre}}</h1>
-        </div>
-        {% if piece.image %}<br>
-            <img src="{{ asset('uploads/img/' ~ piece.image) }}" alt="{{ piece.titre }}"class="haut_image_spectacle">
-        {% else %}
-            emplacement image
-        {% endif %}
+    <div class="haut"></div>
+    <main class="container_spectacle">
+        <section class="haut_spectacle">
 
-    </section>
-    {# </div>#}
-    <div class="container-fluid texte_spectacle">
-
-        <div class="row">
-            <div class="col-5 col-md-3 border-right counters">
-                <aside>
-
-                </aside>
+                {% if piece.image %}<br>
+                    <img src="{{ asset('uploads/img/' ~ piece.image) }}"
+                         alt="{{ piece.titre }}"
+                         class="haut_image_spectacle">
+                {% else %}
+                    emplacement image
+                {% endif %}
+            <div class="haut_titre_spectacle">
+                <header >
+                    <h1 class="title">pièce: {{ piece.titre}}</h1>
+                </header>
             </div>
-            <div class="col-5 col-md-7">
-                <main>
-                    <div class="container ">
-                        <div class="row d-block">
-                            <div class="offset-md-1 col">
-                                <header >
-                                    <h2 class="title">Page Spectacle</h2>
-                                </header>
-                                <p><em>un texte <br>
-                                        <a href="{{ path('page_reservation')}}">Reservez </a></em>
-                                    {% if piece%}
-                                    <div>
-                                <p>
-                                <h1><strong><em>Titre : </em>{{ piece.titre}}</strong></h1><br>
-                                <strong><em>Accroche : </em></strong>{{ piece.accroche }}<br>
-                                <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
-                                <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
-                                <strong><em>Dates :<br></em></strong>{{ piece.dates|nl2br}}<br>
-                                <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
-                                {{ piece.salle.latitude }}{{ piece.salle.longitude }}
-                                </p>
-                                <p>
-                                    <strong><em>Résumé : <br></em></strong>{{ piece.resume|nl2br}}<br>
-                                </p>
+        </section>
+        <section class="article_spectacle">
+                {% if piece%}
+                    <p>
+                        <strong><em><a href="{{ path('page_reservation')}}">Réservez !</a></em></strong><br>
+                        <strong><em>{{ piece.accroche }}</em></strong><br>
+                    </p>
+                    <p>
+                        <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
+                        <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
+                    </p>
+                    <p>
+                        <strong><em>Dates :<br></em></strong>{{ piece.dates|nl2br}}<br>
+                    </p>
+                    <p>
+                        <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
+                    </p>
+                    <p class="resume_spectacle">
+                        <strong><em>Résumé : <br></em></strong>{{ piece.resume|nl2br}}<br>
+                    </p>
 
-                            </div>
-
-                            {% endif %}
-                            </p>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-
-    </div>
+                    {% endif %}
+        </section>
+    </main>
     {#********************************#}
 
-    <div style="width: 100%">
+    <div class="maps_spectacle" style="width: 100%">
         <iframe scrolling="no" width="100%" height="200"  src="https://maps.google.com/maps?q= {{ piece.salle.latitude }},{{ piece.salle.longitude }}&hl=es;z=14&amp;output=embed"></iframe>
     </div><br />
 {% endblock %}
 
 {% block foot_js %}
-    <!-- js pour gallerie-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 {% endblock %}
 
 {% block isasideBlock %}Asideblock{% endblock %}
