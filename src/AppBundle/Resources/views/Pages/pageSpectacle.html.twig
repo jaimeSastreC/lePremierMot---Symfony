@@ -2,7 +2,6 @@
 {% block active3 %}active{% endblock %}
 
 {% block contenu %}
-    <div class="haut"></div>
     <main class="container_spectacle">
         <section class="haut_spectacle">
 
@@ -45,13 +44,15 @@
     {#********************************#}
 
     <div class="maps_spectacle" style="width: 100%">
+        <div class="salle_spectacle">
+            {{ piece.salle.nomSalle }} - {{ piece.salle.villeSalle }}
+        </div>
         <iframe scrolling="no" width="100%" height="200"  src="https://maps.google.com/maps?q= {{ piece.salle.latitude }},{{ piece.salle.longitude }}&hl=es;z=14&amp;output=embed"></iframe>
     </div><br />
 {% endblock %}
 
 {% block foot_js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 {% endblock %}
 
 {% block isasideBlock %}Asideblock{% endblock %}

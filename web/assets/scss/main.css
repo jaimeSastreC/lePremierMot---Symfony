@@ -9,7 +9,7 @@
   src: url("../../fonts/norty.ttf"); }
 @font-face {
   font-family: "DSGabriele";
-  src: url("../../DSGabriele.ttf"); }
+  src: url("../../DSGabriele.tff"); }
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -5224,7 +5224,7 @@ h3 {
   font-weight: 700 !important; }
 
 .navbar-brand {
-  font-family: "DSGabriele", cursive, "norty";
+  font-family: cursive, "norty";
   color: #e23400;
   font-size: 2rem;
   font-weight: 300; }
@@ -5285,6 +5285,14 @@ haut_spectacle {
 .maps_spectacle {
   transform: translateY(30px);
   width: 100%; }
+
+.image_spectacles {
+  background-image: url(../../img/gallerie/spectacles.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-height: 100%;
+  height: 40vh; }
 
 @media screen and (max-width: 1200px) {
   .haut_spectacle {

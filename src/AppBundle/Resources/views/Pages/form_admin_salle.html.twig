@@ -31,14 +31,7 @@
             <p>
                 {{ form_widget(formsalle.placesSalle, {'attr': {'class': 'form-control'}}) }}
             </p>
-            <p>
-                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-                {{ form_errors(formsalle.longitude) }}
-                {{ form_label(formsalle.longitude, null, {'label_attr':  {'class': 'form-label'}}) }}
-            </p>
-            <p>
-                {{ form_widget(formsalle.longitude, {'attr': {'class': 'form-control'}}) }}
-            </p>
+
             <p>
                 {#retourne message erreur si besoin après méthode isValid dans Controleur #}
                 {{ form_errors(formsalle.latitude) }}
@@ -46,6 +39,14 @@
             </p>
             <p>
                 {{ form_widget(formsalle.latitude, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.longitude) }}
+                {{ form_label(formsalle.longitude, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formsalle.longitude, {'attr': {'class': 'form-control'}}) }}
             </p>
 
             <p>

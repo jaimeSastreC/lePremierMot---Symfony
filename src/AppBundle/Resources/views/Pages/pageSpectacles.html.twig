@@ -1,56 +1,113 @@
 {% extends "@App/basePublic.html.twig" %}
 {% block active3 %}active{% endblock %}
 
-{% block head_js %}{% endblock %}
 
 {% block contenu %}
-    <aside>
 
-    </aside>
-    <main class="main">
-        <section class="premiere">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-5 border-right">
-                        gauche
+    <div class="container-fluid resa_body_font ">
+        <div class="row image_spectacles d-block">
+        </div>
+        <div class="row">
+            <div class="col-5 col-md-3 border-right d-none d-md-flex mt-md-5">
+                <aside>
+                    <em><h1>Une Pièce ?</h1></em>
+                    <em><h1>Un Auteur ?</h1></em>
+                    <em><h1>une mise</h1></em>
+                    <em><h1>en scène!</h1></em>
+                    <em><h2>Visitez notre </h2></em>
+                    <em><h2>Programme! </h2></em>
+                </aside>
+            </div>
+            <div class="col-12 col-md-9">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block align-items-center">
+                            <div class="offset-md-2 col-12 col-md-8 mb-md-5 titre_spectacles">
+                                <header >
+                                    <h2 class="title text-center">Espace Spectacles</h2>
+                                </header>
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center justify-content-center">
+                            {% for piece in pieces %}
+                            <div class="col-12 col-md-6 mb-4">
+                                <p class="date">{{ piece.dates}}</p>
+                                <div class="card border-0 ">
+                                    <div class="card-img-overlay">
+
+                                    </div>
+                                    <a href="{{ path('spectacle', {'id': piece.id}) }}" class="btn-primary">
+                                    <div>
+
+                                        {% if piece.imageThumbnail%}<br>
+                                            <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
+                                                 alt="{{ piece.titre }}"
+                                                 class="card-img">
+                                        {% else %}
+                                            emplacement image
+                                        {% endif %}
+                                    </div>
+                                        <h2 class="text-center">{{ piece.titre}}</h2>
+                                        <p class="text-center">en savoir plus</p></a>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                            <div class="col-12 col-md-6 mb-4">
+                                <p class="date">du 19 au 22 mars 2019</p>
+                                <div class="card border-0 ">
+                                    <a href="{{ path('page_reservation')}}" class="btn-primary">
+                                        <img src={{ asset("img/affiche_fauxFuyants.jpg")}} alt="futur spectacle: faux fuyants" class="card-img">
+                                        <div class="card-img-overlay">
+                                            <h2 class="bande">faux-fuyants</h2>
+                                        </div>
+                                            <p>en savoir plus</p></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-7">
-                        Spectacles
+                    <div class="col">
                         {% for piece in pieces %}
                             <div><a href="{{ path('spectacle', {'id': piece.id}) }}">
+                                    {% if piece.image %}<br>
+                                        <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
+                                             alt="{{ piece.titre }}"
+                                             class="haut_image_spectacle">
+                                    {% else %}
+                                        emplacement image
+                                    {% endif %}
                                     <p>
                                         <strong>titre : {{ piece.titre}}</strong><br>
                                         accroche : {{ piece.accroche }}<br>
                                         auteur : {{ piece.auteur}}&nbsp
                                         genre : {{ piece.genre}}<br>
                                         dates : {{ piece.dates}}<br>
-                                        participants : {{ piece.participants }}<br>
-                                        {#Résumé : {{ piece.resume}}<br>#}{#résumé accessible en page individuelle#}
-                                        <em>résumé accessible en page individuelle</em><br>
-                                        <em>image accessible en page individuelle</em><br>
-                                    </p>
 
-                                    <a href="{{ path('admin_supp_piece',  {'id': piece.id}) }}">
-                                        <button class="supprimer" type="submit">Supprimer</button>
-                                    </a>
-                                    <a href="{{ path('admin_form_modif_piece',  {'id': piece.id}) }}">
-                                        <button class="modifier" type="submit">Modifier</button>
-                                    </a>
+                                    </p>
                                     <hr>
                                 </a>
                             </div>
 
                         {% endfor %}
                     </div>
-                </div>
+                </main>
             </div>
-        </section>
-    </main>
 
-{% endblock %}
+        </div>
+        {#<main class="main">
+            <section class="premiere">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-5 border-right">
+                            gauche
+                        </div>
 
-{% block foot_js %}
-    <!-- js pour gallerie-->
-{% endblock %}
+                    </div>
+                </div>
+            </section>
+        </main>#}
 
-{% block isasideBlock %}Asideblock{% endblock %}
+        {% endblock %}
+
+
+        {% block isasideBlock %}Asideblock{% endblock %}

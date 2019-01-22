@@ -630,6 +630,8 @@ class FormController extends Controller
                 }
                 // important alimente nouveau nom fichier image
                 $piece->setImage($fileName);
+                $piece->setImageThumbnail($fileName);
+
 
                 // je récupère l'entity manager de doctrine
                 $entityManager = $this->getDoctrine()->getManager();
