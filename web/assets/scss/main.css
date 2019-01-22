@@ -5335,10 +5335,6 @@ haut_spectacle {
   .client_body_font .etape {
     color: #1b636f; }
 
-@media (max-width: 991.98px) {
-  .contact-titre {
-    font-size: 1rem; } }
-
 .image_contact {
   background-image: url(../../img/gallerie/contact_fond.jpg);
   background-size: cover;
@@ -5402,7 +5398,8 @@ haut_spectacle {
   font-style: italic; }
 
 .main {
-  margin-top: 71px; }
+  margin-top: 71px;
+  min-height: 81vh; }
 
 .spectacle {
   background-image: url(../../img/couverture2.jpg);

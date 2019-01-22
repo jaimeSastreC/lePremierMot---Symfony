@@ -1,18 +1,20 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-    <div class="row">
-        <div class="offset-lg-1 col-lg-8 ">
-            <a href="{{ path('admin_form_salle') }}">Ajouter une Salle</a>
-
-            <div class="text-align-center ">
-
+    <div class="container">
+        <div class="row">
+            <div class="offset-lg-1 col-lg-8 mb-3">
+                <a href="{{ path('admin_form_salle') }}"><em>Ajouter une Salle</em></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col offset-1">
                 {#Liste les salles avec une boucle for#}
                 {% for salle in salles %}
-
-                        <p><a href="{{ path('admin_salle', {'id': salle.id}) }}">
-                            Salle : {{ salle.nomSalle}}<br>
-                            Ville : {{ salle.villeSalle|nl2br}}&nbsp
+                        <p>
+                            <a href="{{ path('admin_salle', {'id': salle.id}) }}">
+                                Salle : {{ salle.nomSalle}}<br>
+                                Ville : {{ salle.villeSalle|nl2br}}&nbsp
                                 Places : {{ salle.placesSalle}}</a>
                         </p>
 
@@ -23,9 +25,9 @@
                             <button class="modifier" type="submit">Modifier</button>
                         </a>
                         <hr>
-
                 {% endfor %}
             </div>
         </div>
     </div>
+
 {% endblock %}

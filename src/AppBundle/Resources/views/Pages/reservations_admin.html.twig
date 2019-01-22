@@ -1,47 +1,56 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
 {% block contenu %}
-
+    <div class="container">
         <div class="row ">
-            <div class="offset-1 col">
-                <a href="{{ path('admin_form_reservation') }}"><strong>Ajouter une Reservation</strong></a>
+            <div class="offset-lg-1 col-lg mb-3">
+                <a href="{{ path('admin_form_reservation') }}"><strong>Ajouter une Reservation</strong></a>&nbsp&nbsp date S = "Date Spectacle"	date R = "Date Réservation"
             </div>
         </div>
         <div class="row ">
-        {# Liste les reservations avec une boucle for #}
-        {% for reservation in reservations %}
-            <div class="offset-1 col_12">
-                <a href="{{ path('admin_reservation',  {'id': reservation.id}) }}">
-                    <p>
-                        n° de réservation : {{ reservation.id}}<br>
-                        spectacle : <em><strong>"{{ reservation.spectacle.nomSpectacle}}" </strong><br>
-                        {% if reservation.client %}
-                            client : <strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong><br>
-                        {% endif %}
-                        date: {{ reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em><br>
-                        date de réservation : {{ reservation.dateReservation|date("d/m/Y")  }}<br>
-                        montant total de la réservation: <strong>{{ reservation.montantReservation}}</strong> &euro;<br>
-                        payement validé : {{ reservation.valideReservation }} <br>
-                    </p>
-                    {# Liste les spectaurs avec une boucle for #}
-                    <p>
-                        Spectateur/s: <br>
-                        {% for spectateur in reservation.spectateurs%}
-                            nom : {{ spectateur.nomSpectateur}}&nbsp n° billet {{ spectateur.id}}<br>
-                        {% endfor %}
-                    </p>
-
-                </a>
-                <a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
-                    <button class="supprimer" type="submit">Supprimer</button>
-                </a>
-                <a href="{{ path('admin_modif_reservation',  {'id': reservation.id}) }}">
-                    <button class="modifier" type="submit">Modifier</button>
-                </a>
-
+            <div class="offset-lg-1 col-lg bg-light">
+                <table class="table table-hover" id="table">
+                    <thead>
+                    <tr>
+                        <th >n°</th>
+                        <th >spectacle</th>
+                        <th >client</th>
+                        <th >date S</th>
+                        <th >date R</th>
+                        <th >Total</th>
+                        <th >Validé</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# Liste les reservations avec une boucle for #}
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td><a href="{{ path('admin_reservation',  {'id': reservation.id}) }}">{{ reservation.id}}</a></td>
+                            <td><em><strong>"{{ reservation.spectacle.nomSpectacle}}"</strong></em></td>
+                                {% if reservation.client %}
+                                    <td><strong>{{ reservation.client.nomClient}}&nbsp{{ reservation.client.prenomClient}}</strong></td>
+                                {% endif %}
+                             <td><em>{{  reservation.spectacle.dateSpectacle|date("d/m/Y") }} séance de: {{ reservation.spectacle.heureDebutSpectacle|date("H:i") }}</em></td>
+                            <td>{{ reservation.dateReservation|date("d/m/Y")  }}</td>
+                            <td><strong>{{ reservation.montantReservation}}</strong> &euro;</td>
+                            <td>{{ reservation.valideReservation }}</td>
+                            <td>
+                                <a href="{{ path('admin_supp_reservation',  {'id': reservation.id}) }}">
+                                    <button class="supprimer" type="submit">Supprimer</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_modif_reservation',  {'id': reservation.id}) }}">
+                                    <button class="modifier" type="submit">Modifier</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        {% endfor %}
         </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
     {#JQuery - Bootstrap#}

@@ -10,7 +10,6 @@ namespace AppBundle\Repository;
  */
 class ImageGallerieRepository extends \Doctrine\ORM\EntityRepository
 {
-
     /**
      * @return array
      */

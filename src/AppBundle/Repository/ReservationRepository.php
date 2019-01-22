@@ -15,7 +15,8 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      * @param $client
      * @return array
      */
-    public function getReservationByClient($client){
+    public function getReservationByClient($client)
+    {
         // recherche par client
         $queryBuilder = $this->createQueryBuilder('r');
 
@@ -34,19 +35,20 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      * @param $name
      * @return array
      */
-    public function getClientReservation($name){
+    public function getClientReservation($name)
+    {
         //recherche par nom client approximatif dans Client pour Administrateur !!!!!!!!!!!!!!
         //crée objet constructeur de requete sur table r
         $queryBuilder = $this->createQueryBuilder('r');
         // utilisation du LIKE avec contrôle entrée setParameter;
         $query = $queryBuilder
             ->select('r')
-           /* jointure table client*/
+            /* jointure table client*/
             ->leftJoin('r.client', 'c')
             /* requete ciblée sur nom client, avec Like qui permet de retourner une liste de réservations
             à partir des premières lettres d'un nom de Client */
             ->where('c.nomClient LIKE :nomClient')
-            ->setParameter('nomClient', '%'.$name.'%') // sécurité injection !!!
+            ->setParameter('nomClient', '%' . $name . '%')// sécurité injection !!!
             ->orderBy('r.dateReservation', 'DESC')
             ->getQuery();
         $results = $query->getResult();
@@ -56,8 +58,9 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @return array
      */
-    public function findAll(){
-    //requête en commençant par la dernière date de réservation
+    public function findAll()
+    {
+        //requête en commençant par la dernière date de réservation
         return $this->findBy(array(), array('dateReservation' => 'DESC'));
     }
 
@@ -65,7 +68,8 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      * @param $spectacle
      * @return array
      */
-    public function getReservationBySpectacle($spectacle){
+    public function getReservationBySpectacle($spectacle)
+    {
         //requête par spectacle, ordre commence par la dernière date de réservation
         $queryBuilder = $this->createQueryBuilder('r');
 
@@ -77,5 +81,15 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery();
         $results = $query->getResult();
         return $results;
+    }
+
+    /**
+     * @return array
+     */
+    public function findLimitedList($offset, $limit=50 )
+    {
+        // Intéressant : le findBy permet findBy(array $column =[ 'name' => $column, array $orderBy = ['nomSalle' => 'ASC'], $limit, $offset)
+        //return $this->findBy([], ['id' => 'DESC'], 50);
+        return $this->findBy(array(), array('dateReservation' => 'DESC'), $limit, $offset);
     }
 }

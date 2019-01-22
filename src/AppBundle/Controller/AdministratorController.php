@@ -133,6 +133,31 @@ class AdministratorController extends Controller
     }
 
     /**
+     * @Route("/admin/reservations/by_page" , name="admin_reservations_by_page", defaults={"offset"= 1 })
+     */
+    public function listAdminFirstReservationsAction(Request $request){
+        //prends une aprtie de la lsite
+        // je genère le Repository de Doctrine
+        //récupère dans le Form le GET.
+
+        $offset = $request->query->get('searchPage');
+        $page = ($offset-1)*50+1 ;
+
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur l'ensemble des reservations
+        $reservations = $reservationRepository->findLimitedList($page);
+
+
+        //retourne la page html spectacles en utilisant le twig reservations
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
+    /**
      * @Route("/admin/reservations_spectacle/{spectacle}" , name="admin_reservations_spectacle")
      */
     public function listAdminReservationsSpectacleAction($spectacle){
