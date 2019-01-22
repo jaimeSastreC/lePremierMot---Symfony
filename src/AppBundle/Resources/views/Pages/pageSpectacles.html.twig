@@ -50,62 +50,18 @@
                                         <h2 class="text-center">{{ piece.titre}}</h2>
                                         <p class="text-center">en savoir plus</p></a>
                                 </div>
-
+                                <p>{{ piece.accroche }}</p>
                             </div>
                             {% endfor %}
-                            <div class="col-12 col-md-6 mb-4">
-                                <p class="date">du 19 au 22 mars 2019</p>
-                                <div class="card border-0 ">
-                                    <a href="{{ path('page_reservation')}}" class="btn-primary">
-                                        <img src={{ asset("img/affiche_fauxFuyants.jpg")}} alt="futur spectacle: faux fuyants" class="card-img">
-                                        <div class="card-img-overlay">
-                                            <h2 class="bande">faux-fuyants</h2>
-                                        </div>
-                                            <p>en savoir plus</p></a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
-                    <div class="col">
-                        {% for piece in pieces %}
-                            <div><a href="{{ path('spectacle', {'id': piece.id}) }}">
-                                    {% if piece.image %}<br>
-                                        <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
-                                             alt="{{ piece.titre }}"
-                                             class="haut_image_spectacle">
-                                    {% else %}
-                                        emplacement image
-                                    {% endif %}
-                                    <p>
-                                        <strong>titre : {{ piece.titre}}</strong><br>
-                                        accroche : {{ piece.accroche }}<br>
-                                        auteur : {{ piece.auteur}}&nbsp
-                                        genre : {{ piece.genre}}<br>
-                                        dates : {{ piece.dates}}<br>
 
-                                    </p>
-                                    <hr>
-                                </a>
-                            </div>
-
-                        {% endfor %}
-                    </div>
                 </main>
             </div>
 
         </div>
-        {#<main class="main">
-            <section class="premiere">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-5 border-right">
-                            gauche
-                        </div>
 
-                    </div>
-                </div>
-            </section>
-        </main>#}
 
         {% endblock %}
 
