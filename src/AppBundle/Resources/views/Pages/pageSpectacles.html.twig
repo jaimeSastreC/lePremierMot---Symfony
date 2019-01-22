@@ -31,27 +31,25 @@
                         <div class="row d-flex align-items-center justify-content-center">
                             {% for piece in pieces %}
                             <div class="col-12 col-md-6 mb-4">
-                                <p class="date">{{ piece.dates}}</p>
-                                <div class="card border-0 ">
-                                    <div class="card-img-overlay">
-
-                                    </div>
-                                    <a href="{{ path('spectacle', {'id': piece.id}) }}" class="btn-primary">
-                                    <div>
-
-                                        {% if piece.imageThumbnail%}<br>
-                                            <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
-                                                 alt="{{ piece.titre }}"
-                                                 class="card-img">
-                                        {% else %}
-                                            emplacement image
-                                        {% endif %}
-                                    </div>
+                                <a href="{{ path('spectacle', {'id': piece.id}) }}" class="btn-primary">
+                                    <p class="date">{{ piece.dates}}</p>
+                                    <div class="card border-0 ">
+                                        <div>
+                                            {% if piece.imageThumbnail%}<br>
+                                                <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
+                                                     alt="{{ piece.titre }}"
+                                                     class="card-img">
+                                            {% else %}
+                                                emplacement image
+                                            {% endif %}
+                                        </div>
                                         <h2 class="text-center">{{ piece.titre}}</h2>
-                                        <p class="text-center">en savoir plus</p></a>
-                                </div>
-                                <p>{{ piece.accroche }}</p>
+                                        <p class="text-center">en savoir plus</p>
+                                </a>
                             </div>
+                            <p>{{ piece.accroche }}</p>
+
+                        </div>
                             {% endfor %}
 
                         </div>
@@ -59,11 +57,5 @@
 
                 </main>
             </div>
-
         </div>
-
-
         {% endblock %}
-
-
-        {% block isasideBlock %}Asideblock{% endblock %}
