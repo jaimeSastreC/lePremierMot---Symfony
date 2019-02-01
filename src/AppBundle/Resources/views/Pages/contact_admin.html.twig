@@ -1,0 +1,29 @@
+{% extends "@App/baseAdmin.html.twig" %}
+
+{% block contenu %}
+<div class="row">
+    <div class="offset-lg-1 col-lg-8 bg-light">
+
+        {% if contact  %}
+            <div>
+                <p>
+                    <strong>titre : {{ contact.name}}</strong><br>
+                    email : {{ contact.email }}<br>
+                    objet : {{ contact.subject}}<br>
+                    message : {{ contact.message}}<br>
+                </p>
+
+                <a href="{{ path('admin_supp_contact',  {'id': contact.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>
+                <a href="{{ path('admin_modif_contact',  {'id': contact.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+
+            </div>
+
+        {% endif%}
+    </div>
+</div>
+{% endblock %}

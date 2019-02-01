@@ -1,11 +1,212 @@
+{% extends "@App/basePublic.html.twig" %}
+{% block active1 %}active{% endblock %}
 
-{% block contenu %}Main section
-<p>
-    <a href="{{ path('gallerie')}}">Lien vers gallerie</a>
-</p>
-<p>
-    <a href="{{ path('admin')}}">Lien vers Administrateur</a>
-</p>
+{% block contenu %}
 
-{% endblock %}
+        <main class="main">
+            <!--header du site : Spectacle : container bootstrap : margin top 5 -->
+            <!--  W3C:The section element represents a generic section of a document or application-->
+            <section>
+                <div class="container spectacle text-center">
+                    <!--           titre de la page et nome de la troupe pour référencement Header-->
+                    <header class="header">
+                        <!--               display 1 agrandit titre -->
+                        <h1 class="d-none d-lg-block display-1 titre_troupe">
+                            la Compagnie du <br>
+                            premier m<img src="{{ asset('img/O.png')}}" alt="logo" width="40px">t
+                        </h1>
+                        <h1 class="d-block d-lg-none titre">
+                            la Compagnie du <br>
+                            premier m<img src="{{ asset('img/O.png')}}" alt="logo" width="30vw">t
+                        </h1>
+                    </header>
+                    <div class="row justify-content-center">
+                        <!-- six colonnes : largeur du contenu (sur 12) pour small screen-->
+                        <div class="col-md-8 d-block ">
+                            <!-- partie article détaillant le contenu: la troupe de théâtre-->
+                            <!-- W3C:The article element represents a self-contained composition in a document, page,...-->
+                            <article>
+                                <header>
+                                    <h2>encore une troupe de comédiens amateurs?</h2>
+                                </header>
+                                <p class="lead">
+                                    oui! sans prétention, c'est ce que nous sommes.<br>
+                                    du plaisir, c'est ce que nous recherchons.<br>
+                                    du plaisir à prendre.<br>
+                                    du plaisir à donner.<br>
+                                    du plaisir à partager.<br>
+                                    on vous invite simplement à venir<br>
+                                    en prendre en notre compagnie...</p>
+                                <div>
+                                    <a href="https://www.youtube.com" target="_blank" class=" btn btn-primary ">Découvrez un extrait</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--premiere section : à propos de nous : container bootstrap fluid pour pleine page : en deux parties droite, gauche-->
+            <section>
+                <div class="container">
+                    <!-- article : détaillant origine et comment la troupe se définit -->
+                    <article>
+                        <div class="row  align-self-stretch">
+                            <!--  partie gauche : notre histoire + photo de fond : six colonnes : largeur du contenu (sur 12) pour small screen-->
+                            <div class="col-md-6  text-center about" >
+                                <header>
+                                    <h1 >notre histoire ...</h1>
+                                </header>
+                            </div>
+                            <!-- partie de droite texte : origines et motivation : six colonnes : largeur du contenu (sur 12) pour small screen -->
+                            <div class="col-md-6 m-0 p-1 p-lg-3 p-lg-3 p-lx-5 us lead">
+                                <p >créée en janvier 2012, la compagnie du premier mOt rassemble quelques comédiens amateurs s'étant avanturé sur les planches,
+                                    <br>parfois dans divers pièces, mais souvent ensemble.
+                                </p>
+                                <p >nombreux sont nos projet, variées nos idées, <br> mais toujours l'envie et motivation reste foisonnante.
+                                </p>
+                                <p>
+                                    le premier mOt ayant pour base un noyau d'acteurs, elle s'articule cependant ensuite de manière ouverte avec toute personne motivée et motivante souhaitant partager son intérêt et amour du théâtre.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- articl :partie administrateurs de la compagnie de théâtre -->
+                <!--  traitement avec 3 'cartes' : (titre image texte) bootstrap -->
+                <div class="container administrateurs text-center">
+                    <article>
+                        <div class="row justify-content-center">
+                            <div class="col-8 offset-md-0 col-md-3">
+                                <div class="card bg-dark border-0 membre pt-3">
+                                    <img class="card-img-top" src={{ asset("img/Coralie.png")}} alt="nos administrateurs">
+                                    <div class="card-block">
+                                        <h3 class="card-title text-primary">Coralie<br>Duys</h3>
+                                        <p class="card-text mb-3">secrétaire</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8 offset-md-0 col-md-3">
+                                <div class="card bg-dark border-0 membre pt-3">
+                                    <img class="card-img-top" src={{ asset("img/Kai.png")}} alt="nos administrateurs">
+                                    <div class="card-block">
+                                        <h3 class="card-title text-primary">Kai<br> Stolzenburg</h3>
+                                        <p class="card-text mb-3">trésorière</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8 offset-md-0 col-md-3">
+                                <div class="card bg-dark border-0 membre pt-3">
+                                    <img class="card-img-top" src={{ asset("img/Joel.png")}} alt="nos administrateurs">
+                                    <div class="card-block">
+                                        <h3 class="card-title text-primary">Joël<br>Wilmot</h3>
+                                        <p class="card-text mb-3">président</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!--            <div class="parallax"></div>-->
+
+            <!-- deuxième section : Spectacles à venir et en cours ; bootstrap container -->
+            <section class="enCours">
+                <div class="container text-center d-flex  mt-5 bg-dark p-3">
+                    <!-- article : partie Spectacles à venir -->
+                    <article>
+                        <div class="row block align-items-center">
+                            <div class="col-12 p-3">
+                                <header>
+                                    <h1 >Spectacles en cours et à venir :</h1>
+                                </header>
+                            </div>
+
+                            <div class="col-12 col-md-4 mb-4">
+                                <p class="date">du 19 au 22 mars 2019</p>
+                                <div class="card border-0 ">
+                                    <a href="{{ path('page_reservation')}}" class="btn-primary">
+                                        <img src={{ asset("uploads/img/2d67fd6f5e9f73b342891c22ca041e81.jpeg")}} alt="futur spectacle: faux fuyants" class="card-img">
+                                        <div class="card-img-overlay">
+                                            <h2 class="bande">faux-fuyants</h2>
+                                        </div>réservez</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mb-4">
+                                <p class="date">du 23 au 27 mai 2018</p>
+                                <div class="card border-0 ">
+                                    <a href="{{ path('page_reservation')}}" class="btn-primary">
+                                        <img src={{ asset("uploads/img/ed33ba0155ae11f521ed8c586bee1525.jpeg")}} alt="futur spectacle: le Bal des Voleurs" class="card-img">
+                                        <div class="card-img-overlay">
+                                            <h2 style="color:black">Le Bal des Voleurs</h2>
+                                        </div>réservez</a>
+                                </div>
+                            </div>
+                            <div class="col col-md-4 mb-4">
+                                <p class="date">à venir 2020</p>
+                                <div class="card border-0 ">
+                                    <a href="{{ path('page_reservation')}}" class="btn-primary">
+                                        <img src={{ asset("img/affiche_AinsiSoient.jpg")}} alt="futur spectacle: ainsi soient-elles" class="card-img">
+                                        <div class="card-img-overlay">
+                                            <h2 class="bande">ainsi soient-elles</h2>
+                                        </div>réservez</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+
+            <!--   troisième section : spectacles affiches : bootstrap -> container  -->
+
+            <section class="affiches text-center d-none d-md-block mt-5">
+                <!-- article : partie Affiches spectacle -->
+                <div class="container">
+                    <article>
+                        <div class="row justify-content-center">
+                            <div class="col-12"></div>
+                            <header>
+                                <h1>Souvenirs de Spectacles</h1>
+                            </header>
+                        </div>
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-sm-3">
+                                <!--       class fluid adapte image au container        -->
+                                <img src={{ asset("img/leBalDVoleurs1.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                            <div class="col-sm-3">
+                                <img src={{ asset("img/leBalDVoleurs2.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                            <div class="col-sm-3">
+                                <img src={{ asset("img/leBalDVoleurs3.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-sm-3">
+                                <img src={{ asset("img/leBalDVoleurs4.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                            <div class="col-sm-3">
+                                <img src={{ asset("img/leBalDVoleurs5.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                            <div class="col-sm-3">
+                                <img src={{ asset("img/leBalDVoleurs6.jpg")}} alt="le bal des voleurs" class="img-fluid">
+                            </div>
+                        </div>
+
+                        <!--            lien vers autre page galerie -->
+                        <footer>
+                            <p>
+                                <a href="{{ path('gallerie')}}" class="btn btn-primary align-items-center">
+                                    Visitez la Galerie</a>
+                            </p>
+                        </footer>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+    {% endblock %}
+
 

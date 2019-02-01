@@ -1,0 +1,66 @@
+.resa_body_font {
+    font-size: 1.2rem;
+    font-weight: $normal_font;
+    .title {
+        color:$brand-primary;
+        margin-top: 35px;
+        margin-bottom: 20px;
+        
+        &::before, &::after {
+        content: '';
+        background: $white;
+        display:block;
+        height:3px;
+        }
+    }
+    .counters {
+        counter-reset: counter-name;
+        margin:20px;
+    }
+    .section {
+        position:relative;
+        
+        &::before {
+        counter-increment: counter-name;
+        content: counter(counter-name); //' ';
+        font-size: 0.9em;
+        position: absolute;
+        top:0.1em;
+        left: -1.8em;
+        background: $turquoise;
+        width: 1.4em;
+        height: 1.4em;
+        border-radius: 50%;
+        border: 1px dashed $white;
+        display: flex;
+        justify-content: center;
+        //align-items: center; 
+        }
+    }
+    
+    .etape {
+        color:$secondary;
+    }    
+}
+
+.image {
+    background: {
+        image: url(../../img/gallerie/mot_ensemble_fond.jpg);
+        size: cover;
+        repeat: no-repeat;
+        position: top center;
+        height: 100%;
+    }
+    
+    height: 80vh;
+    opacity: 0.5;
+}
+
+.alert {
+    z-index: 100;
+}
+
+.lien {
+    font-size: 0.7em;
+    font-style: italic;
+}

@@ -1,0 +1,62 @@
+{% extends "@App/basePublic.html.twig" %}
+{% block active3 %}active{% endblock %}
+
+
+{% block contenu %}
+
+    <div class="container-fluid resa_body_font ">
+        <div class="row image_spectacles d-block">
+        </div>
+        <div class="row mb-md-5">
+            <div class="col-5 col-md-3 border-right d-none d-md-flex mt-md-5">
+                <aside>
+                    <em><h1>Une Pièce ?</h1></em>
+                    <em><h1>Un Auteur ?</h1></em>
+                    <em><h1>une mise</h1></em>
+                    <em><h1>en scène!</h1></em>
+                    <em><h2>Visitez notre </h2></em>
+                    <em><h2>Programme! </h2></em>
+                </aside>
+            </div>
+            <div class="col-12 col-md-9">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block align-items-center">
+                            <div class="offset-md-2 col-12 col-md-8 mb-md-5 titre_spectacles">
+                                <header >
+                                    <h2 class="title text-center">Espace Spectacles</h2>
+                                </header>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            {% for piece in pieces %}
+                                <div class="col-12 col-md-6 mb-4">
+                                    <p class="date">{{ piece.dates}}</p>
+                                    <div class="card border-0 ">
+                                        <a href="{{ path('spectacle', {'id': piece.id}) }}" class="btn-primary">
+                                            <div>
+                                                {% if piece.imageThumbnail%}<br>
+                                                    <img src="{{ asset('uploads/img/' ~ piece.imageThumbnail)}}"
+                                                         alt="{{ piece.titre }}"
+                                                         class="card-img">
+                                                {% else %}
+                                                    emplacement image
+                                                {% endif %}
+                                            </div>
+                                            <h2 class="text-center">{{ piece.titre}}</h2>
+                                            <p class="text-center">en savoir plus</p>
+                                        </a>
+                                    </div>
+                                    <p>{{ piece.accroche }}</p>
+
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+{% endblock %}

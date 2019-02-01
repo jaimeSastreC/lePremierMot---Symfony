@@ -1,47 +1,64 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-
-
 {% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formsalle, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.nomSalle) }}
+                {{ form_label(formsalle.nomSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formsalle.nomSalle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-    {#{{ dump(formsalle) }}#}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.villeSalle) }}
+                {{ form_label(formsalle.villeSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formsalle.villeSalle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-    <div>
-        {{ form_start(formsalle, {'attr': {'class': 'form'}}) }}
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formsalle.nomSalle) }}
-            {{ form_label(formsalle.nomSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formsalle.nomSalle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.placesSalle) }}
+                {{ form_label(formsalle.placesSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formsalle.villeSalle) }}
-            {{ form_label(formsalle.villeSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formsalle.villeSalle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {{ form_widget(formsalle.placesSalle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formsalle.placesSalle) }}
-            {{ form_label(formsalle.placesSalle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formsalle.placesSalle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.latitude) }}
+                {{ form_label(formsalle.latitude, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formsalle.latitude, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formsalle.longitude) }}
+                {{ form_label(formsalle.longitude, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formsalle.longitude, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
+            <p>
+                {{ form_widget(formsalle.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </p>
 
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formsalle) }}
 
-        <p>
-            {{ form_widget(formsalle.save, {'attr': {'class': 'btn btn-primary'}}) }}
-        </p>
-
-        {{ form_end(formsalle) }}
+            {{ form_end(formsalle) }}
+        </div>
     </div>
+
 
 {% endblock %}

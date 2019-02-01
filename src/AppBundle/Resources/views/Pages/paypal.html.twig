@@ -1,0 +1,52 @@
+{% extends "@App/basePublic.html.twig" %}
+{#navbar sur Réservation#}
+{% block active4 %}active{% endblock %}
+
+{% block head_js %}{% endblock %}
+
+{% block contenu %}
+
+    {#{{ dump(formreservation) }}#}
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col-5 col-md-3 border-right counters">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <div class="counters">
+                        <p class="section"><em>inscription ou identification</em></p>
+                        <p class="section">création d'une réservation</p>
+                        <p class="section">création des places de spectateur</p>
+                        <p class="section">validation de la réservation </p>
+                        <p class="section">règlement de la réservation</p>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-5 col-md-7">
+                <div class="container ">
+                    <div class="row d-block">
+
+                        <div class="offset-md-1 col">
+                            <header >
+                                <h2 class="title">Espace de Payement</h2>
+                            </header>
+                            <p><em>Ici se fait le lien vers paypal qui sera géré par l'association <br>
+                                    en lien avec la banque concernée<br></em>
+                                nous supposons ici que le payement a été validé.
+                            </p>
+                            <p>
+                                <a href="{{ path('reservations_client') }}">Retour reservations</a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row image d-block">
+    </div>
+
+
+{% endblock %}

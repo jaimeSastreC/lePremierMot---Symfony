@@ -41,6 +41,24 @@ class Reservation
     private $montantReservation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="mode_payement_reservation", type="string", length=10)
+     * @Assert\Choice({"cheque", "sur place", "paypal"})
+     *
+     */
+    private $modePayementReservation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valide_reservation", type="string", length=10)
+     * @Assert\Choice({"oui", "en attente"})
+     *
+     */
+    private $valideReservation;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Spectacle", inversedBy="reservation")
      */
@@ -56,21 +74,38 @@ class Reservation
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectateur", mappedBy="reservation", cascade={"persist"})
      */
-    private $spectateur;
+    private $spectateurs;
 
-    //***************************************Getter Setter*************************************************
-
+    //***************************************Constructor*************************************************
 
     public function __construct()
     {
         $this->dateReservation = new \DateTime('now');
 
-        $this->spectateur = new ArrayCollection();
+        $this->spectateurs = new ArrayCollection();
+        $this->updateMontantReservation();
     }
+
+    //***************************************methode calcul montant total des réservations*************************************************
+
+    private function calculMontant(){
+        $spectateurs = $this->getSpectateurs();
+        $PrixPlaces = 0;
+        foreach ($spectateurs as $spectateur){
+            $PrixPlace = $spectateur
+                ->getCategorie()
+                ->getTarif()
+                ->getPrixPlace();
+            $PrixPlaces += $PrixPlace;
+            //utilise getter pour ajouter le montant calculé à la $reservation
+            return $PrixPlaces;
+        }
+    }
+    //***************************************Getter Setter*************************************************
 
     /**
      * Get id
-     *
+     * @ORM\PostPersist
      * @return int
      */
     public function getId()
@@ -103,29 +138,66 @@ class Reservation
     }
 
     /**
-     * Set montantReservation
-     *
-     * @param string $montantReservation
-     *
-     * @return Reservation
+     * @return int
      */
-    //TODO fonction qui récupère total Entity Spectateur
-    public function setMontantReservation($montantReservation)
-    {
-        $this->montantReservation = $montantReservation;
-
-        return $this;
-    }
-
-    /**
-     * Get montantReservation
-     *
-     * @return string
-     */
-    public function getMontantReservation()
+    public function getMontantReservation(): int
     {
         return $this->montantReservation;
     }
+
+
+
+    /**
+     * @return int
+     */
+    public function setMontantReservation($montantReservation): void
+    {
+        $this->montantReservation = $montantReservation;
+    }
+
+    /**
+     * @return int
+     */
+    public function updateMontantReservation(): void
+    {
+        $this->montantReservation = $this->calculMontant();
+    }
+
+    /**
+     * @return string
+     */
+    public function getModePayementReservation()
+    {
+        return $this->modePayementReservation;
+    }
+
+    /**
+     * @param string $modePayementReservation
+     */
+    public function setModePayementReservation(string $modePayementReservation)
+    {
+        $this->modePayementReservation = $modePayementReservation;
+        return $this;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getValideReservation()
+    {
+        return $this->valideReservation;
+    }
+
+    /**
+     * @param string $valideReservation
+     */
+    public function setValideReservation(string $valideReservation)
+    {
+        $this->valideReservation = $valideReservation;
+    }
+
+
 
     /**
      * @return mixed
@@ -141,6 +213,7 @@ class Reservation
     public function setSpectacle($spectacle)
     {
         $this->spectacle = $spectacle;
+
     }
 
     /**
@@ -161,14 +234,14 @@ class Reservation
 
     public function addSpectacteur(Spectateur $spectateur)
     {
-        $this->spectateur[] = $spectateur;
-        return $this;
+        $spectateur->setReservation($this);
+        $this->spectateurs->add($spectateur);
     }
 
 
     public function removeSpectateur(Spectateur $spectateur)
     {
-        $this->spectateur->removeElement($spectateur);
+        $this->spectateurs->removeElement($spectateur);
     }
 
     /**
@@ -176,15 +249,15 @@ class Reservation
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSpectateur()
+    public function getSpectateurs()
     {
-        return $this->spectateur;
+        return $this->spectateurs;
     }
 
 
-    public function setSpectateur(ArrayCollection $spectateur)
+    public function setSpectateurs(\Doctrine\Common\Collections\Collection $spectateurs)
     {
-        $this->spectateur = $spectateur;
+        $this->spectateurs = $spectateurs;
     }
 
 }

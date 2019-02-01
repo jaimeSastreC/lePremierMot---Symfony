@@ -1,0 +1,21 @@
+{% block subject %}
+    Confirmation d'enregistrement de réservation
+{% endblock %}
+
+{%  block body_text %}
+    {% autoescape false %}
+        A l'attention de {{ contact.name}}<br>
+        sujet: {{ contact.subject }}<br>
+
+        Bonjour,<br>
+
+        Merci de nous contacter<br>
+        Nous allons traiter votre courrier dans les prochains jours<br>
+        En vous donnerons une réponse<br>
+        <br>
+        En vous souhaitant une belle journée,<br>
+        Cordialement,<br><br>
+
+        <em>Le Premier mOt</em>
+    {% endautoescape %}
+{% endblock %}

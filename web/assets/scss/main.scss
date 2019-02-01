@@ -1,0 +1,29 @@
+// imports all variables
+@import 'abstracts/variables';
+
+// Bring in Bootstrap
+@import 'vendor/bootstrap';
+
+// typo : body etc...
+@import 'base/typography';
+
+// Bring in components
+@import 'components/navigation';
+
+// pages : specifications for each page
+@import 'pages/spectacles';
+
+// pages : specifications for each page
+@import 'pages/contact';
+
+// pages : specifications for each page
+@import 'pages/gallerie';
+
+// pages : specifications for each page
+@import 'pages/reservation';
+ 
+// pages : specifications for each page
+@import 'pages/home';
+
+
+//plus d'informations sur : https://getbootstrap.com/docs/4.0/getting-started/theming/

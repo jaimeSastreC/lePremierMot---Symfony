@@ -10,5 +10,11 @@ namespace AppBundle\Repository;
  */
 class SalleRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    /**
+     * @return array
+     */
+    public function findAll(){
+        //requête en alphabétique
+        return $this->findBy(array(), ['nomSalle' => 'ASC']);
+    }
 }

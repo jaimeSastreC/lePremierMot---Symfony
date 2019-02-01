@@ -1,0 +1,37 @@
+{% extends "@App/baseAdminPages.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('admin_gallerie_form') }}">Ajouter une image à la Gallerie</a>
+    </p>
+
+    <div class="text-align-center">
+
+         {#Liste les images avec une boucle for#}
+        {% if imageGallerie%}
+{#            {{ dump(imageGallerie) }}#}
+            <div>
+                <p>
+                    id: {{ imageGallerie.id }}<br>
+                    <strong>alt image : {{ imageGallerie.altImage }}</strong><br>
+                    <strong><em>légende image : </em></strong>{{ imageGallerie.legendeImage}}<br>
+                    <strong><em>reférence image : </em></strong>{{ imageGallerie.nomImage}}<br>
+                </p>
+                <p>
+                    {% if imageGallerie.nomImage %}<br>
+                        <img src="{{ asset('uploads/img/' ~ imageGallerie.thumbnailImage) }}"  height="auto" width="200">
+                        <img src="{{ asset('uploads/img/' ~ imageGallerie.nomImage) }}" alt="{{ imageGallerie.altImage }}" height="auto" width="300">
+                    {% else %}
+                        emplacement image
+                    {% endif %}
+                </p>
+
+                <a href="{{ path('admin_supp_imageGallerie',  {'id': imageGallerie.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

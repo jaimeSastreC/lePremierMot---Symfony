@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class SpectateurRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function findAll(){
+        //requête en alphabétique
+        return $this->findBy(array(), ['nomSpectateur' => 'ASC']);
+    }
 }

@@ -1,0 +1,25 @@
+//@import '../abstracts/variables';
+
+// fonts for navigation bar:
+.navbar-brand {
+    font-family: $decorative_font;
+    color: $brand-primary;
+    font-size: 2rem;
+    font-weight: $light_font;
+}
+
+.navbar-default {
+    color:green;
+}
+
+.nav-item {
+    margin-left: 1.8em;
+    font-size: 1.2rem;
+    letter-spacing: .2em;
+}
+.active  {
+    font-family:$Sansation_Regular;
+    font-weight: 900;
+    font-size: 1.2em;
+    letter-spacing: .2em;
+}

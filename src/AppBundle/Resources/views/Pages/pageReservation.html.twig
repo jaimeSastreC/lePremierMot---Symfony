@@ -1,0 +1,47 @@
+{% extends "@App/basePublic.html.twig" %}
+{% block active4 %}active{% endblock %}
+
+{% block contenu %}
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col col-md-3 border-right counters">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <div class="counters">
+                        <p class="section">inscription ou identification</p>
+                        <p class="section">création d'une réservation</p>
+                        <p class="section">création des places de spectateur</p>
+                        <p class="section">validation de la réservation </p>
+                        <p class="section">règlement de la réservation</p>
+                    </div>
+                </aside>
+            </div>
+            <div class="col col-md-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
+                            <div class="offset-md-1 col">
+                                <header >
+                                    <h2 class="title d-none d-md-block">Espace Réservation&nbsp&nbsp&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('form_reservation') }}">Réserver directement (identifié)</a></span></h2>
+                                    <h2 class="title d-md-none">Espace Réservation&nbsp&nbsp&nbsp&nbsp<span class="lien ml-5"><a href="{{ path('form_reservation') }}">Réserver directement (identifié)</a></span></h2>
+                                    </h2>{% if client_name %}<em>ref: {{ client_name }}</em>{% endif %}
+                                </header>
+                                <p><em>Bienvenue dans l'espace de Réservation. <br>
+                                        Veuillez vous <a href="{{ path('form_login_client')}}"><strong>identifier</strong></a><br>
+                                        ou vous <a href="{{ path('form_client')}}"><strong>inscrire.</strong></a></em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="row image d-block">
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+    <!-- js -->
+{% endblock %}

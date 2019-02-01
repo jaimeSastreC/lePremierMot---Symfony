@@ -6,9 +6,21 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
+use AppBundle\Entity\ImageGallerie;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Spectacle;
+use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
+use AppBundle\Repository\CategorieRepository;
+use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ContactRepository;
+use AppBundle\Repository\ImageGallerieRepository;
+use AppBundle\Repository\PieceRepository;
+use AppBundle\Repository\ReservationRepository;
+use AppBundle\Repository\SalleRepository;
+use AppBundle\Repository\SpectacleRepository;
 use AppBundle\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +55,7 @@ class AdminSupprimerControler extends Controller
      */
     public function categorieSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository CategorieRepository*/
         $repository = $this->getDoctrine()->getRepository(Categorie::class);
 
         // je récupère l'entity manager de doctrine
@@ -66,7 +78,7 @@ class AdminSupprimerControler extends Controller
      */
     public function spectateurSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SpectacleRepository */
         $repository = $this->getDoctrine()->getRepository(Spectateur::class);
 
         // je récupère l'entity manager de doctrine
@@ -89,7 +101,7 @@ class AdminSupprimerControler extends Controller
      */
     public function salleSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SalleRepository */
         $repository = $this->getDoctrine()->getRepository(Salle::class);
 
         // je récupère l'entity manager de doctrine
@@ -112,7 +124,7 @@ class AdminSupprimerControler extends Controller
      */
     public function spectacleSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository SpectacleRepository */
         $repository = $this->getDoctrine()->getRepository(Spectacle::class);
 
         // je récupère l'entity manager de doctrine
@@ -135,7 +147,7 @@ class AdminSupprimerControler extends Controller
      */
     public function reservationSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository ReservationRepository */
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
         // je récupère l'entity manager de doctrine
@@ -158,7 +170,7 @@ class AdminSupprimerControler extends Controller
      */
     public function clientSuppAction($id){
         // je genère le Repository de Doctrine
-        /** @var $repository TarifRepository */
+        /** @var $repository ClientRepository */
         $repository = $this->getDoctrine()->getRepository(Client::class);
 
         // je récupère l'entity manager de doctrine
@@ -174,5 +186,74 @@ class AdminSupprimerControler extends Controller
 
         // Important : redirige vers la route demandée, avec name = 'admin_client'
         return $this->redirectToRoute('admin_clients');
+    }
+
+    /**
+     * @Route("/admin/piece_supprimmer/{id}", name="admin_supp_piece")
+     */
+    public function pieceSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository PieceRepository */
+        $repository = $this->getDoctrine()->getRepository(Piece::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $piece = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($piece);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_piece'
+        return $this->redirectToRoute('admin_pieces');
+    }
+
+    /**
+     * @Route("/admin/imageGallerie_supprimmer/{id}", name="admin_supp_imageGallerie")
+     */
+    public function imageGallerieSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository ImageGallerieRepository */
+        $repository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $imageGallerie = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($imageGallerie);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_imageGallerie'
+        return $this->redirectToRoute('admin_galleries');
+    }
+
+    /**
+     * @Route("/admin/contact_supprimmer/{id}", name="admin_supp_contact")
+     */
+    public function contactSuppAction($id){
+        // je genère le Repository de Doctrine
+        /** @var $repository ContactRepository */
+        $repository = $this->getDoctrine()->getRepository(Contact::class);
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        //avec le repository je récupère dans la BD l'auteur sous forme d'Identity (instance)
+        $contact = $repository->find($id);
+
+        // j'utilise la méthode remove du Manager pour effacer l'Entity
+        $entityManager->remove($contact);
+        // j'enregistre en base de donnée
+        $entityManager->flush();
+
+        // Important : redirige vers la route demandée, avec name = 'admin_contact'
+        return $this->redirectToRoute('admin_contacts');
     }
 }

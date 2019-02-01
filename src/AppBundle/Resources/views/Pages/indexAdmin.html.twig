@@ -1,11 +1,44 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
-{% block contenu %}Administrator
-    <p>
-        <a href="{{ path('accueil')}}">Lien accueil</a>
-    </p>
-    <p>
-        <a href="{{ path('admin_tarifs') }}">lien Tarifs</a>
-    </p>
+{% block title %}Admin Premier mOt{% endblock %}
 
+{% block contenu %}
+    <div class="container">
+        <div class="row ">
+            <div class="col ">
+                <h2 >Espace Administration :</h2>
+                <p>
+                    Outils de gestion des "réservations" dans cet espace. <br>
+
+                    Le menu du haut donne accès à toutes les tables pour visualisatione et modification
+                    ou suppression des informations contenues dans chaque table:<br>
+                    Réservations, Spectacles, Spectateurs, Salles,Catégories, Taris et Clients<br>
+
+                    Vous pouvez définir un nouveau "spectacle",
+                    choisir la "salle" si elle existe déjà ou en créer une nouvelle,
+                    et donner le nombre de places disponibles en salle. <br>
+
+                    Ensuite définissez les "tarifs" correspondant à ce spectacle si ils ne sont pas encore existants.
+                    N'effacez des tarifs que en phase de création car sinon cela affecterait des réservations en cours.
+
+                    Définissez les "catégories" de spectateurs/places en choisissant le spectacle et le tarif de la place.
+
+                    Et voilà, à partir de là vous pouvez ouvrir les réservations.
+
+                    Le client qui veut réserver peut créer un profil client provisoire ou être membre.
+                    Ensuite il doit aller dans l'espace réservation, y choisir le spectacle,
+                    réserver pour des spectateurs selon la catégorie du spectateur,
+                    et valider sa réservation. Puis choisir pour le règlement de la réservation entre:
+                    Paiement sur place si membre, <br>
+                    Paiement par chèque envoyé par courrier, <br>
+                    ou payer en ligne par Paypal. ( ce moyen de paiement sera mis en place
+                    avec un membre de l'association, avec création de compte)
+                </p>
+            </div>
+            <h1></h1>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
 {% endblock %}

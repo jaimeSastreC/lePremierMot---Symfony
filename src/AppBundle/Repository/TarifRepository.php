@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class TarifRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function findAll(){
+        //requête en commençant par plus petit prix
+        return $this->findBy(array(), array('prix_place' => 'ASC'));
+    }
 }

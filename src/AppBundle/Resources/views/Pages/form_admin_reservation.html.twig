@@ -1,55 +1,62 @@
 {% extends "@App/baseAdmin.html.twig" %}
 
+
 {% block contenu %}
-    {#{{   dump(formreservation) }}#}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            Date : {{ "now"|date("d/m/Y") }}
+            {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
 
-{#{{ form(formreservation) }}#}
-    <div> Date : {{ "now"|date("m/d/Y") }}
-        {{ form_start(formreservation, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formreservation.spectacle) }}
+                {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }} :
 
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur#}
-            {{ form_errors(formreservation.spectacle) }}
-            {{ form_label(formreservation.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+                {{ form_widget(formreservation.spectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
+            <p>
+                {{ form_label(formreservation.spectateurs, null, {'label_attr':  {'class': 'form-label'}}) }}
+            <ul class="spectateur" data-prototype="{{ form_widget(formreservation.spectateurs.vars.prototype)|e('html_attr') }}">
+            </ul>
+            </p>
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur#}
+                {{ form_errors(formreservation.client) }}
+                {{ form_label(formreservation.client, null, {'label_attr':  {'class': 'form-label'}}) }} :
 
-        <ul class="specateurs">
-            {% for spectateurField in formreservation.spectateur %}
-                <li>
-                    {{ form_errors(spectateurField) }}
-                    {{ form_label(spectateurField) }}
-                    {{ form_widget(spectateurField) }}
-                </li>
-            {% endfor %}
-        </ul>
+                {{ form_widget(formreservation.client, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-        {{ form_widget(formreservation.client) }}
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formreservation) }}
 
-        {{ form_end(formreservation) }}
+            {{ form_end(formreservation) }}
+        </div>
     </div>
-
+    {# Partie JavaScript #}
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-
+            crossorigin="anonymous">
+    </script>
     <script>
-
 
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addTagButton = $('<button type="button" class="add_tag_link">Add a spectateur</button>');
+        var $addTagButton = $('<button type="button" class="add_tag_link">Ajoutez un spectateur</button>');
         var $newLinkLi = $('<li></li>').append($addTagButton);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
-            $collectionHolder = $('#appbundle_reservation_spectateur');
+            var $collectionHolder = $('ul.spectateur');
 
+            // add a delete link to all of the existing tag form li elements
+            //inutile pour le moment, ajoute un bouton qui créé la confusion
+            /* $collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });*/
 
             // add the "add a tag" anchor and li to the tags ul
             $collectionHolder.append($newLinkLi);
@@ -60,6 +67,7 @@
 
             $addTagButton.on('click', function(e) {
                 // add a new tag form (see next code block)
+                e.preventDefault();
                 addTagForm($collectionHolder, $newLinkLi);
             });
         });
@@ -67,30 +75,37 @@
 
         function addTagForm($collectionHolder, $newLinkLi) {
             // Get the data-prototype explained earlier
-            console.log($collectionHolder);
+            //console.log($collectionHolder);
             var prototype = $collectionHolder.data('prototype');
 
-
-            console
+            //console
             // get the new index
             var index = $collectionHolder.data('index');
 
             var newForm = prototype;
-            // You need this only if you didn't set 'label' => false in your tags field in TaskType
-            // Replace '__name__label__' in the prototype's HTML to
-            // instead be a number based on how many items we have
-            // newForm = newForm.replace(/__name__label__/g, index);
 
-            // Replace '__name__' in the prototype's HTML to
-            // instead be a number based on how many items we have
             newForm = newForm.replace(/__name__/g, index);
 
             // increase the index with one for the next item
-            $collectionHolder.data('index', index + 1);
+            $collectionHolder.data('index', index + 1 );
 
             // Display the form in the page in an li, before the "Add a tag" link li
             var $newFormLi = $('<li></li>').append(newForm);
             $newLinkLi.before($newFormLi);
+
+            // add a delete link to the new form
+            addTagFormDeleteLink($newFormLi);
+        }
+
+        function addTagFormDeleteLink($tagFormLi) {
+            var $removeFormButton = $('<button type="button">enlever ce spectateur</button><br>');
+            $tagFormLi.append($removeFormButton);
+
+            $removeFormButton.on('click', function(e) {
+                // remove the li for the tag form
+                e.preventDefault();
+                $tagFormLi.remove();
+            });
         }
     </script>
 

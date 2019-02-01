@@ -4,11 +4,16 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Contact;
+use AppBundle\Entity\ImageGallerie;
+use AppBundle\Entity\Piece;
 use AppBundle\Entity\Reservation;
 use AppBundle\Entity\Salle;
 use AppBundle\Entity\Spectacle;
 use AppBundle\Entity\Spectateur;
 use AppBundle\Entity\Tarif;
+use AppBundle\Repository\ClientRepository;
+use AppBundle\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +24,22 @@ class AdministratorController extends Controller
     /**
      * @Route("/admin", name="admin")
      */
-    public function indexAdminAction(Request $request)
+    public function indexAdminAction()
     {
         // méthode retourant la page Index
         return $this->render("@App/Pages/indexAdmin.html.twig");
     }
 
 
-//****************************************Listes********************************************************
+    /**
+     * @Route("/admin_front", name="admin_front")
+     */
+    public function indexAdminFrontAction()
+    {
+        // méthode retourant la page Index
+        return $this->render("@App/Pages/indexAdminPages.html.twig");
+    }
+//**************************************** Requetes Listes ********************************************************
 
     /**
      * @Route("/admin/tarifs" , name="admin_tarifs")
@@ -90,7 +103,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
 
-        //requete sur l'ensemble des salle
+        //requete sur l'ensemble des salles
         $salles = $salleRepository->findAll();
 
         //retourne la page html spectacles en utilisant le twig salles
@@ -106,10 +119,11 @@ class AdministratorController extends Controller
     public function listAdminReservationsAction(){
 
         // je genère le Repository de Doctrine
-        $salleRepository = $this->getDoctrine()->getRepository(Reservation::class);
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        //requete sur l'ensemble des salle
-        $reservations = $salleRepository->findAll();
+        //requete sur l'ensemble des reservations
+        $reservations = $reservationRepository->findAll();
+
 
         //retourne la page html spectacles en utilisant le twig reservations
         return $this->render("@App/Pages/reservations_admin.html.twig",
@@ -117,6 +131,51 @@ class AdministratorController extends Controller
                 'reservations' => $reservations
             ]);
     }
+
+    /**
+     * @Route("/admin/reservations/by_page" , name="admin_reservations_by_page", defaults={"offset"= 1 })
+     */
+    public function listAdminFirstReservationsAction(Request $request){
+        //prends une aprtie de la lsite
+        // je genère le Repository de Doctrine
+        //récupère dans le Form le GET.
+
+        $offset = $request->query->get('searchPage');
+        $page = ($offset-1)*50+1 ;
+
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur l'ensemble des reservations
+        $reservations = $reservationRepository->findLimitedList($page);
+
+
+        //retourne la page html spectacles en utilisant le twig reservations
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
+    /**
+     * @Route("/admin/reservations_spectacle/{spectacle}" , name="admin_reservations_spectacle")
+     */
+    public function listAdminReservationsSpectacleAction($spectacle){
+
+        // je genère le Repository de Doctrine
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        /** @var $reservationRepository ReservationRepository */ // je génère une requête par spectacle
+        $reservations = $reservationRepository->getReservationBySpectacle($spectacle);
+
+
+        //retourne la page html spectacles en utilisant le twig reservations
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
 
     /**
      * @Route("/admin/spectacles" , name="admin_spectacles")
@@ -154,7 +213,63 @@ class AdministratorController extends Controller
             ]);
     }
 
-//**************************************** Unique ********************************************************
+    /**
+     * @Route("/admin/galleries" , name="admin_galleries")
+     */
+    public function listAdminGalleriesAction(){
+
+        // je genère le Repository de Doctrine
+        $imageGallerieRepository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        //requete sur l'ensemble des catégories
+        $imageGalleries = $imageGallerieRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig gallerie
+        return $this->render("@App/Pages/galleries_admin.html.twig",
+            [
+                'imageGalleries' => $imageGalleries
+            ]);
+    }
+
+    /**
+     * @Route("/admin/pieces" , name="admin_pieces")
+     */
+    public function listAdminPiecesAction(){
+
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $pieces = $pieceRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/pieces_admin.html.twig",
+            [
+                'pieces' => $pieces
+            ]);
+    }
+
+
+    /**
+     * @Route("/admin/contacts" , name="admin_contacts")
+     */
+    public function listAdminContactsAction(){
+
+        // je genère le Repository de Doctrine
+        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
+
+        //requete sur l'ensemble des catégories
+        $contacts = $contactRepository->findAll();
+
+        //retourne la page html reservations en utilisant le twig contacts
+        return $this->render("@App/Pages/contacts_admin.html.twig",
+            [
+                'contacts' => $contacts
+            ]);
+    }
+
+
+//**************************************** Requete Unique ********************************************************
     /**
      * @Route("/admin/tarif/{id}" , name="admin_tarif", defaults={"id"= 1 })
      */
@@ -181,7 +296,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Categorie::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Categorie avec $id
         $categorie = $repository->find($id);
 
         //retourne la page html categorie en utiliasnt le twig categorie
@@ -217,7 +332,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Salle::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Salle avec $id
         $salle = $repository->find($id);
 
         //retourne la page html salle en utiliasnt le twig salle
@@ -235,7 +350,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Spectacle::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Spectacle avec $id
         $spectacle = $repository->find($id);
 
         //retourne la page html spectacle en utiliasnt le twig spectacle
@@ -253,7 +368,7 @@ class AdministratorController extends Controller
         // je genère le Repository de Doctrine
         $repository = $this->getDoctrine()->getRepository(Reservation::class);
 
-        //requete sur Entity Tarif avec $id
+        //requete sur Entity Reservation avec $id
         $reservation = $repository->find($id);
 
         //retourne la page html reservation en utiliasnt le twig reservation
@@ -263,5 +378,167 @@ class AdministratorController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/admin/gallerie/{id}" , name="admin_gallerie", defaults={"id"= 1 })
+     */
+    public function listAdminGallerieAction($id){
+
+        // je genère le Repository de Doctrine
+        $imageGallerieRepository = $this->getDoctrine()->getRepository(ImageGallerie::class);
+
+        //requete sur l'ensemble des catégories
+        $imageGallerie = $imageGallerieRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig gallerie
+        return $this->render("@App/Pages/gallerie_admin.html.twig",
+            [
+                'imageGallerie' => $imageGallerie
+            ]);
+    }
+
+    /**
+     * @Route("/admin/piece/{id}" , name="admin_piece", defaults={"id"= 1 })
+     */
+    public function listAdminPieceAction($id){
+
+        // je genère le Repository de Doctrine
+        $pieceRepository = $this->getDoctrine()->getRepository(Piece::class);
+
+        //requete sur l'ensemble des catégories
+        $piece = $pieceRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig pieces
+        return $this->render("@App/Pages/piece_admin.html.twig",
+            [
+                'piece' => $piece
+            ]);
+    }
+
+
+
+    /**
+     * @Route("/admin/contact/{id}" , name="admin_contact", defaults={"id"= 1 })
+     */
+    public function listAdminContactAction($id){
+
+        // je genère le Repository de Doctrine
+        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
+
+        //requete sur l'ensemble des catégories
+        $contact = $contactRepository->find($id);
+
+        //retourne la page html reservations en utilisant le twig contacts
+        return $this->render("@App/Pages/contact_admin.html.twig",
+            [
+                'contact' => $contact
+            ]);
+    }
+
+    //************************************** Requetes ciblées ex: nom client , id reservation ********************************************
+    /**
+     * @Route("/reservation" , name="reservation")
+     */
+    public function ReservationAction(){
+
+        //Récupération de reservation_id de la session
+        $reservation_id = $this->get('session')->get('reservation_id');
+
+        // je genère le Repository de Doctrine
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //requete sur Entity Reservation avec $id
+        $reservation = $repository->find($reservation_id);
+        $client_id = $reservation->getClient()->getId();
+
+        //retourne la page html reservation en utiliasnt le twig reservation
+        return $this->render("@App/Pages/reservation.html.twig",
+            [
+                'reservation' => $reservation,
+                'id' => $reservation_id,
+                'client' => $client_id,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/reservations", name="reservations_client")
+     */
+    public function requeteReservationsAction(){
+
+        //Récupération de client_id de la session
+        $client_id = $this->get('session')->get('client_id');
+
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        /*création d'une méthode spécifique pour une requête ciblé sur le client -> voir Repository*/
+        $reservations = $reservationRepository->getReservationByClient($client_id);
+
+        //retourne la page html auteurs en utiliasnt le twig reservations_admin.html.twig
+        return $this->render("@App/Pages/reservations.html.twig",
+            [
+                'reservations' => $reservations,
+                'client' => $client_id,
+            ]);
+    }
+
+    //méthode puissante qui fait une recherche à partir d'un mot clé sur Twig> Form > name -> requete get
+    /**
+     * @Route("/admin/client_reservations/searchName", name="client_reservation_search_name")
+     */
+    public function requeteReservationsClientAction(Request $request){
+        //Request $request crée l'objet, géré par Symfony
+        //récupère dans le Form le GET.
+
+        $name = $request->query->get('searchName');
+
+        /** @var $reservationRepository ReservationRepository */
+        $reservationRepository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        // méthode crée puissante => voir repository!!
+        $reservations = $reservationRepository->getClientReservation($name);
+
+        //dump($reservations);die;
+        //retourne la page html reservations en utiliasnt le twig reservations.html.twig
+        return $this->render("@App/Pages/reservations_admin.html.twig",
+            [
+                'reservations' => $reservations
+            ]);
+    }
+
+    /**
+     * @Route("/payement",name="payer_reservation")
+     */
+    public function payerReservationAction(){
+        /*méthode en construction , car doit être vue avec le client; Ici je valide automatiquement
+        pour montrer le changement de statut, mais il ne se fera que après contrôle de payement.*/
+
+        //récupération id réservation
+        $reservation_id = $this->get('session')->get('reservation_id');
+
+
+        // je genère le Repository de Doctrine
+        /** @var $repository ReservationRepository*/
+        $repository = $this->getDoctrine()->getRepository(Reservation::class);
+
+        //avec le repository je récupère dans la BD reservation sous forme d'Identity (instance)
+        $reservation = $repository->find($reservation_id);
+
+        //changement de statut de validation de payement simplifié pour le moment
+        //IL doit faire l'objet d'un contrôle de Banque et un retour validé ou non de celle-ci
+        $reservation->setValideReservation('oui');
+        $reservation->setModePayementReservation('paypal');
+
+        // je récupère l'entity manager de doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // j'enregistre en base de donnée, persist met dans zone tampon provisoire de l'unité de travail
+        $entityManager->persist($reservation);
+
+        //mise à jour BD, envoy à bd
+        $entityManager->flush();
+
+        return $this->render("@App/Pages/paypal.html.twig");
+    }
 
 }

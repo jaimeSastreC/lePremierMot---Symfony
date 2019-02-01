@@ -5,11 +5,118 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    {# FavIcon#}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicon/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicon/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('favicon/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('favicon/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('favicon/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('favicon/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('favicon/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ asset('favicon/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    {#bootstrap#}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    {% block bootstrapcss %}{% endblock %}
+    {#mon css#}
+    <link rel="stylesheet" href="{{ asset('assets/scss/admin.css') }}">
+    <title>{% block title %}Admin Premier mOt{% endblock %}</title>
 </head>
 <body>
-    {% block contenu %}
-        contenu
+    <header>
+        <nav class="navbar navbar-light bg-light nav-pills ">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin')}}">Administration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('accueil')}}">Lien accueil</a>
+                </li>
+
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_reservations') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Réservations</a>
+                </li >
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_spectateurs') }}" class="btn btn-secondary  active " role="button" aria-pressed="true">Spectateurs</a>
+                </li >
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_spectacles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Spectacles</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_salles') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Salles</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_categories') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Catégories</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="{{ path('admin_tarifs') }}" class="btn btn-secondary active " role="button" aria-pressed="true">Tarifs</a>
+                </li>
+                <li class="nav-item pr-3 ml-3">
+                    <a href="{{ path('admin_clients') }}" class="btn btn-primary active px-3" role="button" aria-pressed="true">Clients</a>
+                </li>
+                <li class="nav-item pr-3 ml-1">
+                    <a href="{{ path('admin_contacts') }}" class="btn btn-success active px-3" role="button" aria-pressed="true">Contacts</a>
+                </li>
+                <li class="nav-item pr-3 ml-2">
+                    <a href="{{ path('admin_front') }}" class="btn btn-success active px-3" role="button" aria-pressed="true">Pages</a>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="alert alert-info text-center" role="alert">
+            {# ...or you can read and display every flash message available #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-3 border-right ">
+                    {% block sidebar %}
+                        <aside>
+                            <div>
+                                <h2 class="recherche">Reservation par Client</h2>
+                                <form class="form-inline" method="get" action="{{ path('client_reservation_search_name') }}">
+                                    <input class="form-control input-sm" type="search" placeholder="nom Client" aria-label="Search" name="searchName">
+                                    <button class="btn btn-outline-success " type="submit">chercher</button>
+                                </form>
+                            </div>
+                            <div>
+                                <h2 class="recherche mt-3">Pages Reservation</h2>
+                                <form class="form-inline" method="get" action="{{ path('admin_reservations_by_page' ) }}">
+                                    <input class="form-control input-sm" type="number" min="1" max="1000" value="1" aria-label="Search" name="searchPage">
+                                    <button class="btn btn-outline-success " type="submit">chercher</button>
+                                </form>
+                            </div>
+                        </aside>
+                    {% endblock %}
+                </div>
+                <div class="col-12 col-md-8 mt-5 mt-md-0">
+                    {% block contenu %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+    {% block javascripts %}
+        {#code javascript#}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     {% endblock %}
 </body>
 </html>

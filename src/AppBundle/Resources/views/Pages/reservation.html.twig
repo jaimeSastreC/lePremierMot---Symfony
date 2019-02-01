@@ -1,0 +1,84 @@
+{% extends "@App/basePublic.html.twig" %}
+{#navbar sur Réservation#}
+{% block active4 %}active{% endblock %}
+
+{% block head_js %}{% endblock %}
+
+{% block contenu %}
+
+    {#{{ dump(formreservation) }}#}
+    <div class="container-fluid main resa_body_font ">
+        <div class="row">
+            <div class="col-5 col-md-3 border-right counters">
+                <aside>
+                    <p class="m-3"><em><u>déroulement de la réservation</u></em></p>
+                    <div class="counters">
+                        <p class="section"><em>inscription ou identification</em></p>
+                        <p class="section">création d'une réservation</p>
+                        <p class="section">création des places de spectateur</p>
+                        <p class="section">validation de la réservation </p>
+                        <p class="section">règlement de la réservation</p>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-5 col-md-7">
+                <main>
+                    <div class="container ">
+                        <div class="row d-block">
+                            <div class="offset-md-1 col">
+                                <header >
+                                    <h2 class="title">Espace Réservation</h2>
+                                </header>
+                                <p><em>Votre réservation a été enregistrée :   <br></em>
+                                </p>
+                                <p>
+                                    <a href="{{ path('form_reservation') }}">Ajouter une Réservation</a><br>
+                                    <a href="{{ path('reservations_client') }}">Voir toutes vos Réservation</a>
+                                </p>
+
+                            </div>
+                            <div class="row">
+
+
+                                <div class="offset-md-2 col-7 mt-3">
+                                    {# Liste les spectaurs avec une boucle for #}
+                                    {% if reservation %}
+
+                                        <div>
+                                            <p>
+                                                n° de réservation : {{ reservation.id}}<br>
+                                                date de reservation: {{ reservation.dateReservation|date("d/m/Y")  }}<br>
+                                                montant total de reservation: {{ reservation.montantReservation}} €<br> {#TODO calcul montant#}
+                                                spectacle : {{ reservation.spectacle.nomSpectacle}}<br>
+                                            </p>
+                                            <p>
+                                                {% for spectateur in reservation.spectateurs%}
+                                                    nom : {{ spectateur.nomSpectateur}}&nbsp n° billet {{ spectateur.id}}<br>
+
+                                                {% endfor %}
+                                            </p>
+
+                                            <a href="{{ path('modif_reservation')}}">
+                                                <button class="modifier" type="submit">Modifier</button>
+                                            </a>
+                                            <a href="{{ path('payer_reservation')}}">
+                                                <button class="modifier btn-outline-success" type="submit">Régler par carte bancaire (paypal)</button>
+                                            </a>
+                                            <hr>
+
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="row image d-block">
+        </div>
+    </div>
+
+{% endblock %}
+

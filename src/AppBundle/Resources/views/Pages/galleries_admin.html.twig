@@ -1,0 +1,31 @@
+{% extends "@App/baseAdminPages.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('admin_gallerie_form') }}"><strong><em> Ajouter une Image</em></strong></a>
+    </p>
+
+    <div class="text-align-center">
+
+         {#Liste les imageGalleries avec une boucle for#}
+        {% for imageGallerie in imageGalleries %}
+            <div><a href="{{ path('admin_gallerie', {'id': imageGallerie.id}) }}">
+                <p>
+                    id: {{ imageGallerie.id }}&nbsp&nbsp
+                    <strong>alt image : {{ imageGallerie.altImage }}</strong>&nbsp&nbsp
+
+                    légende image : {{ imageGallerie.legendeImage}}
+
+
+                    <a href="{{ path('admin_supp_imageGallerie',  {'id': imageGallerie.id}) }}">
+                        <button class="supprimer" type="submit">Supprimer</button>
+                    </a>
+                </p>
+                <hr>
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

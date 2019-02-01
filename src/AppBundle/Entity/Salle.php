@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Salle
@@ -48,6 +47,20 @@ class Salle
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Spectacle", mappedBy="salle")
      */
     private $spectacle;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude_salle", type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude_salle", type="float", nullable=true)
+     */
+    private $latitude;
 
     //***************************************Getter Setter*************************************************
     /**
@@ -146,6 +159,38 @@ class Salle
     public function setSpectacle($spectacle)
     {
         $this->spectacle = $spectacle;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude( $latitude)
+    {
+        $this->latitude = $latitude;
     }
 
 

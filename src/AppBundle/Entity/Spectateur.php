@@ -60,7 +60,7 @@ Spectateur
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateur")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="spectateurs")
      */
     private $reservation;
 
@@ -174,13 +174,9 @@ Spectateur
 
     public function addReservation(Reservation $reservation)
     {
-        $this->reservation->add($reservation);
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation)
-    {
-        $this->reservation->removeElement($reservation) ;
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation->add($reservation);
+        }
     }
 
 }

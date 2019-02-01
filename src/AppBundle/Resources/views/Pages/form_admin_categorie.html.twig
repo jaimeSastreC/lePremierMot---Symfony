@@ -3,38 +3,42 @@
 
 
 {% block contenu %}
+    <div class="row">
+        <div class="offset-lg-1 col-lg-4 bg-light">
+            {{ form_start(formcategorie, {'attr': {'class': 'form'}}) }}
+            <p>
+                {#retourne message erreur si besoin après méthode isValid dans Controleur #}
+                {{ form_errors(formcategorie.libelle) }}
+                {{ form_label(formcategorie.libelle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formcategorie.libelle, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formcategorie.tarif) }}
+                {{ form_label(formcategorie.tarif, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formcategorie.tarif, {'attr': {'class': 'form-control'}}) }}
+            </p>
+            <p>
+                {{ form_errors(formcategorie.spectacle) }}
+                {{ form_label(formcategorie.spectacle, null, {'label_attr':  {'class': 'form-label'}}) }}
+            </p>
+            <p>
+                {{ form_widget(formcategorie.spectacle, {'attr': {'class': 'form-control'}}) }}
+            </p>
 
-    {#{{ dump(formcategorie) }}#}
+            <p>
+                {{ form_widget(formcategorie.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </p>
 
-    <div>
-        {{ form_start(formcategorie, {'attr': {'class': 'form'}}) }}
-        <p>
-            {#retourne message erreur si besoin après méthode isValid dans Controleur #}
-            {{ form_errors(formcategorie.libelle) }}
-            {{ form_label(formcategorie.libelle, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {{ form_widget(formcategorie.libelle, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {{ form_errors(formcategorie.tarif) }}
-            {{ form_label(formcategorie.tarif, null, {'label_attr':  {'class': 'form-label'}}) }}
-        </p>
-        <p>
-            {#prendre ma méthode tarif de Categorie#}
-            {{ form_widget(formcategorie.tarif, {'attr': {'class': 'form-control'}}) }}
-        </p>
-        <p>
-            {#prendre ma méthode tarif de Categorie#}
-            {{ form_widget(formcategorie.spectacle, {'attr': {'class': 'form-control'}}) }}
-        </p>
+            {# génération du champ CSRF - _token#  (Cross Site Request Forgeries en champ caché #}
+            {{ form_rest(formcategorie) }}
 
-        <p>
-            {{ form_widget(formcategorie.save, {'attr': {'class': 'btn btn-primary'}}) }}
-        </p>
-
-
-        {{ form_end(formcategorie) }}
+            {{ form_end(formcategorie) }}
+        </div>
     </div>
+
 
 {% endblock %}

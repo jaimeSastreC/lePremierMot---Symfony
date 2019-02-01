@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,22 +18,24 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Client
 {
+
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="civilite_client", type="string", length=4, nullable=true)
-     * @Assert\Choice({"Mlle", "Mme", "M"})
-     *
-     */
+ * @var string
+ *
+ * @ORM\Column(name="civilite_client", type="string", length=4, nullable=true)
+ * @Assert\Choice({"Mlle", "Mme", "M"})
+ *
+ */
     private $civiliteClient;
 
     /**
@@ -72,9 +75,10 @@ class Client
      * @var string
      *
      * @ORM\Column(name="cp_client", type="integer", length=15, nullable=true)
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
+     * min = 5,
+     *  max = 10,
+     * minMessage = "Votre code postal doit avoir au moins {{ limit }} caractères",
+     * maxMessage = "Votre code postal doit avoir au plus {{ limit }} caractères"
      * )
      */
     private $cpClient;
@@ -82,11 +86,15 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="ville_client", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ville_client", type="string", length=10, nullable=true)
      */
     private $villeClient;
 
-
+    /**
+     * @ORM\Column(name="pays_client", type="string", length=50, nullable=true)
+     *
+     */
+    private $paysClient;
 
     /**
      * @var string
@@ -120,10 +128,18 @@ class Client
      */
     private $reservation;
 
+    //***************************************Constructor*************************************************
+
+    public function __construct()
+    {
+
+        $this->reservation = new ArrayCollection();
+    }
+
     //***************************************Getter Setter*************************************************
     /**
      * Get id
-     *
+     * @ORM\PostPersist
      * @return int
      */
     public function getId()
@@ -282,6 +298,23 @@ class Client
     }
 
     /**
+     * @return mixed
+     */
+    public function getPaysClient()
+    {
+        return $this->paysClient;
+    }
+
+    /**
+     * @param mixed $paysClient
+     */
+    public function setPaysClient($paysClient)
+    {
+        $this->paysClient = $paysClient;
+    }
+
+
+    /**
      * Get telClient
      *
      * @return string
@@ -328,11 +361,15 @@ class Client
     /**
      * @param mixed $reservation
      */
-    public function setReservation($reservation)
+    public function addReservation(Reservation $reservation)
+    {
+        $this->reservation[] = $reservation;
+    }
+
+    //option remove reservation, ne sera pas utilisé pour raison de sécurité
+
+    public function setReservation(\Doctrine\Common\Collections\Collection $reservation)
     {
         $this->reservation = $reservation;
     }
-
-
 }
-

@@ -1,0 +1,38 @@
+{% extends "@App/baseAdminPages.html.twig" %}
+
+{% block contenu %}
+    <p>
+        <a href="{{ path('admin_form_ajout_piece') }}"><em> Ajouter une Pièce</em></a>
+    </p>
+
+    <div class="text-align-center">
+
+         {#Liste les pieces avec une boucle for#}
+        {% for piece in pieces %}
+            <div><a href="{{ path('admin_piece', {'id': piece.id}) }}">
+                <p>
+                    <strong>titre : {{ piece.titre}}</strong><br>
+                    accroche : {{ piece.accroche }}<br>
+                    auteur : {{ piece.auteur}}&nbsp
+                    genre : {{ piece.genre}}<br>
+                    dates : {{ piece.dates}}<br>
+                    participants : {{ piece.participants }}<br>
+                    {#Résumé : {{ piece.resume}}<br>#}{#résumé accessible en page individuelle#}
+                    <em>résumé accessible en page individuelle</em><br>
+                    <em>image accessible en page individuelle</em><br>
+                </p>
+
+                <a href="{{ path('admin_supp_piece',  {'id': piece.id}) }}">
+                    <button class="supprimer" type="submit">Supprimer</button>
+                </a>
+                <a href="{{ path('admin_form_modif_piece',  {'id': piece.id}) }}">
+                    <button class="modifier" type="submit">Modifier</button>
+                </a>
+                <hr>
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

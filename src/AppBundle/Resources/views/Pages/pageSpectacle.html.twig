@@ -1,0 +1,58 @@
+{% extends "@App/basePublic.html.twig" %}
+{% block active3 %}active{% endblock %}
+
+{% block contenu %}
+    <main class="container_spectacle">
+        <section class="haut_spectacle">
+
+                {% if piece.image %}<br>
+                    <img src="{{ asset('uploads/img/' ~ piece.image) }}"
+                         alt="{{ piece.titre }}"
+                         class="haut_image_spectacle">
+                {% else %}
+                    emplacement image
+                {% endif %}
+            <div class="haut_titre_spectacle">
+                <header >
+                    <h1 class="title">pièce: {{ piece.titre}}</h1>
+                </header>
+            </div>
+        </section>
+        <section class="article_spectacle">
+                {% if piece%}
+                    <p>
+                        <strong><em><a href="{{ path('page_reservation')}}">Réservez !</a></em></strong><br>
+                        <strong><em>{{ piece.accroche }}</em></strong><br>
+                    </p>
+                    <p>
+                        <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
+                        <strong><em>Genre : </em></strong>{{ piece.genre}}<br>
+                    </p>
+                    <p>
+                        <strong><em>Dates :<br></em></strong>{{ piece.dates|nl2br}}<br>
+                    </p>
+                    <p>
+                        <strong><em>Participants : </em></strong>{{ piece.participants }}<br>
+                    </p>
+                    <p class="resume_spectacle">
+                        <strong><em>Résumé : <br></em></strong>{{ piece.resume|nl2br}}<br>
+                    </p>
+
+                    {% endif %}
+        </section>
+    </main>
+    {#********************************#}
+
+    <div class="maps_spectacle" style="width: 100%">
+        <div class="salle_spectacle">
+            {{ piece.salle.nomSalle }} - {{ piece.salle.villeSalle }}
+        </div>
+        <iframe scrolling="no" width="100%" height="200"  src="https://maps.google.com/maps?q= {{ piece.salle.latitude }},{{ piece.salle.longitude }}&hl=es;z=14&amp;output=embed"></iframe>
+    </div><br />
+{% endblock %}
+
+{% block foot_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block isasideBlock %}Asideblock{% endblock %}
