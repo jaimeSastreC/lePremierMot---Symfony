@@ -33,7 +33,7 @@ class Reservation
     private $dateReservation;
 
     /**
-     * @var int
+     * @var float
      *
      * @ORM\Column(name="montant_reservation", type="decimal", precision=7, scale=2)
      *
