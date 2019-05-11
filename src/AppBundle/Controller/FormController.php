@@ -630,7 +630,10 @@ class FormController extends Controller
                 }
                 // important alimente nouveau nom fichier image
                 $piece->setImage($fileName);
-                $piece->setImageThumbnail($fileName);
+                $piece->setImageThumbnail($fileNameThumb);
+                // autre option:
+                //$setImg = 'setImg' . $i;
+                //$piece->$setImgage($filename);
 
 
                 // je récupère l'entity manager de doctrine
