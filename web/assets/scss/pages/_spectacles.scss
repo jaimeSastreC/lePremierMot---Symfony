@@ -1,0 +1,108 @@
+.container_spectacle {
+    display: block;
+    transform: translateY(45px);
+}
+
+haut_spectacle {
+    position: relative;
+    display: block;
+    transform: translateY(200px);
+    padding: 0;
+    margin: 0;
+    }
+
+.haut_titre_spectacle {
+    background: rgba(0,0,0,0.3);
+    display: grid;
+    place-items: center; // justify and align center
+
+    .title {
+        margin-top: 5px;
+        color:$brand-primary;
+        font-size: 2em;
+
+        &::before, &::after {
+        content: '';
+        background: $white;
+        display:block;
+        height:3px;
+        }
+    }
+}
+
+.haut_image_spectacle {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.article_spectacle {
+    position: relative;
+    margin: 40vh auto;
+    margin-bottom: 7%;
+    width: 60%;
+    background: rgba(0,0,0,0.5);
+    clip-path: polygon(0 0, 80% 0, 100% calc(100%-20vw), 50% 100%,0 calc(100%-20vw));
+}
+
+.maps_spectacle {
+    transform: translateY(30px);
+    width: 100%;
+}
+
+//******************** partie spectacles ************************
+.image_spectacles {
+    background: {
+        image: url(../../img/gallerie/spectacles.jpg);
+        size: cover;
+        repeat: no-repeat;
+        position: top center;
+        height: 100%;
+    }
+    height: 40vh;
+}
+
+
+//*********************** media queries ***********************
+@media screen and (max-width: 1200px) {
+   .haut_spectacle {
+        padding:0;
+        transform: translateY(25px);
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .haut_spectacle {
+        padding:0;
+        transform: translateY(-70px);
+        margin-bottom: 0;
+    }
+
+    .haut_titre_spectacle {
+        display: grid;
+        place-items: center; // justify and align center
+
+    }
+    
+    .article_spectacle {
+        transform: translateY(-70px);
+        margin: 0 auto ;
+        padding: 5%;
+        width: 100%;
+        
+        
+    }
+    
+    .haut_image_spectacle {
+        position: relative;
+    }
+    
+.resume_spectacle {
+        display: bloc;
+    }
+}
+
+
+

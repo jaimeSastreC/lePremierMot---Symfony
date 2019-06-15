@@ -18,13 +18,13 @@
 
 @font-face {
     font-family:"DSGabriele";
-    src:url('../../DSGabriele.tff');
+    src:url('../../DSGabriele.ttf');
 }
 
 // header and decorative font are separated for more liberty in using it;
 // so header can be more classic or easely changed in case.
 $decorative_font: cursive, "norty";
-$compagnie_font: "DSGabriele", cursive ;
+$compagnie_font: cursive, "norty" ;
 
 $modern_sans: "ModernSans-Light", sans-serif;
 $Sansation_Regular: "Sansation_Regular";

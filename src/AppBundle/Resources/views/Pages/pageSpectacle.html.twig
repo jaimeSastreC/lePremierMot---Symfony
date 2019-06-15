@@ -18,12 +18,12 @@
                 </header>
             </div>
         </section>
+        <p>
+            <strong><em><a href="{{ path('page_reservation')}}">Réservez !</a></em></strong><br>
+            <strong><em>{{ piece.accroche }}</em></strong><br>
+        </p>
         <section class="article_spectacle">
                 {% if piece%}
-                    <p>
-                        <strong><em><a href="{{ path('page_reservation')}}">Réservez !</a></em></strong><br>
-                        <strong><em>{{ piece.accroche }}</em></strong><br>
-                    </p>
                     <p>
                         <strong><em>Auteur : </em></strong>{{ piece.auteur}}<br>
                         <strong><em>Genre : </em></strong>{{ piece.genre}}<br>

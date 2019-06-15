@@ -24,7 +24,9 @@ class Tarif
 
     /**
      * @var int
-     *
+     * @Assert\GreaterThan(
+     *     value = 0
+     * )
      * @ORM\Column(name="prix_place", type="decimal", precision=7, scale=2)
      */
     private $prix_place;

@@ -60,12 +60,12 @@ class FormController extends Controller
             if ($form->isValid()){
                 // je récupère les données de l’instance Form
                 $tarif = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($tarif);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_tarifs');
@@ -99,12 +99,12 @@ class FormController extends Controller
             if ($form->isValid()){
                 // je récupère les données de l’instance Form
                 $categorie = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($categorie);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_categories');
@@ -138,12 +138,12 @@ class FormController extends Controller
             if ($form->isValid()){
                 // je récupère les données de l’instance Form
                 $spectateur = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($spectateur);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_spectateurs');
@@ -178,12 +178,12 @@ class FormController extends Controller
             if ($form->isValid()){
                 // je récupère les données de l’instance Form
                 $spectacle = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($spectacle);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_spectacles');
@@ -217,12 +217,12 @@ class FormController extends Controller
             if ($form->isValid()){
                 // je récupère les données de l’instance Form
                 $salle = $form->getData();
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($salle);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_salles');
@@ -237,7 +237,7 @@ class FormController extends Controller
             ]
         );
     }
-
+//******************************** RESERVATION *****************************************************
     /**
      * @Route("/admin/form_reservation", name="admin_form_reservation")
      */
@@ -257,7 +257,7 @@ class FormController extends Controller
                 // récupère données dans Objet/Entité
                 $reservation = $form->getData();
                 //dump($reservation);die;
-                //calcul de contrôle du montant des réservations
+                //calcul de mise à jour du montant des réservations
                 $spectateurs = $reservation->getSpectateurs();
                 $PrixPlaces = 0;
                 foreach ($spectateurs as $spectateur){
@@ -269,12 +269,12 @@ class FormController extends Controller
                 }
                 $reservation->setMontantReservation($PrixPlaces);
 
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($reservation);
-                // enregistre en BD
+                // enregistre en BDDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_reservations');
@@ -308,7 +308,7 @@ class FormController extends Controller
         $client_id = $this->get('session')->get('client_id');
 
         //si le client n'est pas identifié => retour page reservation
-        if(empty($client_id) or $client_id==-1){
+        if (empty($client_id) or $client_id==-1){
             return $this->redirectToRoute('page_reservation');
         }
 
@@ -355,12 +355,12 @@ class FormController extends Controller
                     }
                     $reservation->setMontantReservation($PrixPlaces);
 
-                    // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                    // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                     $entityManager = $this->getDoctrine()->getManager();
 
                     // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                     $entityManager->persist($reservation);
-                    // premier enregistrement en BD créant l'Id nécessaire aux spectateurs
+                    // premier enregistrement en BDD créant l'Id nécessaire aux spectateurs
                     $entityManager->flush();
 
                     // l’id de la réservation vient d’être créé
@@ -371,7 +371,7 @@ class FormController extends Controller
 
                     // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                     $entityManager->persist($reservation);
-                    // enregistre en BD avec prise en compte de l'id Reservation dans la table spectateur
+                    // enregistre en BDD avec prise en compte de l'id Reservation dans la table spectateur
                     $entityManager->flush();
 
                     // Renvoi de confirmation d'enregistrement Message flash
@@ -422,7 +422,7 @@ class FormController extends Controller
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($client);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 return $this->redirectToRoute('admin_clients');
@@ -462,12 +462,12 @@ class FormController extends Controller
                 // je récupère les données de l’instance Form
                 $client = $form->getData();
 
-                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BD
+                // récupère l'entity manager de Doctrine, qui gère les Entités <=> BDD
                 $entityManager = $this->getDoctrine()->getManager();
 
                 // rend persistant (préparé et stocké dans Unité de Travail, espace tampon)
                 $entityManager->persist($client);
-                // enregistre en BD
+                // enregistre en BDD
                 $entityManager->flush();
 
                 //récupération de l'Id crée au flush()
