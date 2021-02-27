@@ -1,4 +1,4 @@
-le Premier Mot -- Complete Symfony project
+#le Premier Mot -- Complete Symfony project
 ============
-
-A Symfony project created on November 27, 2018, 5:34 pm.
+Webpage for the theater troup "Le premier mot" - including reservation and client list.
+A Symfony project created on Janouary 2019.
